@@ -1,0 +1,32 @@
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,300);
+
+$font-family-sans-serif: 			'Open Sans', Helvetica, sans-serif;
+$body-bg:											#f8f8f8;
+$body-border:									#eeeeee;
+$secondary-bg:								#fafafa;
+$brand-primary: 							rgba(73,12,127,.7); //purple
+$brand-font:									rgba(0,0,0,0.8); //#333333;
+$brand-font-gray:							rgba(0,0,0,0.4); //#999999;
+$navbar-height:								55px;
+$navbar-default-bg: 					white;
+$navbar-default-brand-color: 	white;
+
+@import 'bootstrap';
+
+.navbar {
+	border-radius: 0;
+	box-shadow: 0 0px 10px $body-border;
+}
+.navbar-brand { padding: 11px 15px; }
+
+.navbar-nav > li > .dropdown-menu {
+	border-radius: 0;
+	border: 1px solid $body-border;
+	box-shadow: 0 5px 10px $body-border;
+}
+.navbar-default .navbar-nav > li > a { color: $brand-font; }
+.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus { color: $brand-font; }
+.navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
+	color: $brand-font;
+	background-color: $body-bg;
+}
