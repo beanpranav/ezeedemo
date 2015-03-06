@@ -1,2 +1,17 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
+<div class="col-sm-12 col-md-3" style="padding:0px;">
+	<div class="secondary-nav">
+		<h1>Welcome <b>Shivam!</b></h1>
+		<h3>8th CBSE</h3>
+	</div>
+</div>
+
+<div class="col-sm-12 col-md-9">
+	<% @subjects.each do |subject| %>
+		<a href="<%= subject_path(subject) %>" class="supress-a">
+			<div class="subject-card">
+				<h2><b><%= subject.name %></b></h2>
+				<h3><%= subject.chapters.count %> Chapters</h3>
+			</div>
+		</a>
+	<% end %>
+</div>

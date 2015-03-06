@@ -1,0 +1,53 @@
+
+	<div class="col-sm-12 col-md-3" style="padding:0px;">
+		<a href="<%= root_path %>" class="supress-a">
+			<div class="secondary-nav">
+				<i class="fa fa-2x fa-home secondary-nav-icon pull-left"></i>
+				<h3>8th CBSE</h3>
+				<h2>All Subjects</h2>
+			</div>
+		</a>
+
+<!-- 		<div class="secondary-nav">
+			<h3>Progress</h3>
+			<h2><%= @subject.name %></h2>
+		</div> -->
+	</div>
+
+	<div class="col-sm-12 col-md-9">
+		<div class="secondary-nav">
+			
+			<h1><b><%= @subject.name %></b> Textbook</h1>
+<!-- 			<h3>Textbook</h3>
+			<h2><b><%= @subject.name %></b></h2>
+		</div>
+
+
+		<div class="content-container"> -->
+
+			<ul class="content-list">
+				<% @subject.chapters.each do |chapter| %>
+					<% if chapter.status == "Paid" %>
+						
+						<li class="content-list-item-lock">
+							<i class="fa fa-2x fa-lock content-list-lock pull-left"></i>
+							<h3>Chapter <%= chapter.chapterNumber%></h3>
+							<h2><%= chapter.name %></h2>
+						</li>
+
+					<% else %>
+					
+						<a href="<%= chapter_path(chapter) %>" class="supress-a">
+							<li class="content-list-item">
+								<image src="/images/progress-<%= rand(4) %>.png" class="content-list-icon pull-left">
+								<h3>Chapter <%= chapter.chapterNumber%></h3>
+								<h2><%= chapter.name %></h2>
+							</li>
+						</a>
+						
+					<% end %>
+					
+				<% end %>
+			</ul>
+		</div>
+	</div>

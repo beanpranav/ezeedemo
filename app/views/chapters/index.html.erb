@@ -1,0 +1,34 @@
+<h1>Listing chapters</h1>
+
+<%= link_to 'New Chapter', new_chapter_path %>
+<br><br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Subject</th>
+      <th>#</th>
+      <th>Name</th>
+      <th>Term</th>
+      <th>Status</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @chapters.each do |chapter| %>
+      <tr>
+        <td><%= chapter.subject.name %></td>
+        <td><%= chapter.chapterNumber %></td>
+        <td><%= chapter.name %></td>
+        <td><%= chapter.term %></td>
+        <td><%= chapter.status %></td>
+        <td><%= link_to 'Show', chapter %></td>
+        <td><%= link_to 'Edit', edit_chapter_path(chapter) %></td>
+        <td><%= link_to 'Destroy', chapter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
