@@ -9,4 +9,5 @@ class Chapter < ActiveRecord::Base
   end
 
   belongs_to :subject
+  has_many :study_materials, dependent: :destroy
 end

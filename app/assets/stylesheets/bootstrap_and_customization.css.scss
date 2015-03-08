@@ -4,7 +4,7 @@ $font-family-sans-serif: 			'Open Sans', Helvetica, sans-serif;
 $body-bg:											#f8f8f8;
 $body-border:									#eeeeee;
 $secondary-bg:								#fafafa;
-$brand-primary: 							rgba(73,12,127,.7); //purple
+$brand-primary: 							rgba(0,0,0,0.8); //black
 $brand-font:									rgba(0,0,0,0.8); //#333333;
 $brand-font-gray:							rgba(0,0,0,0.4); //#999999;
 $brand-green:									#62CB43;
@@ -20,7 +20,7 @@ h1 {
 	font-size: 29px;
 	font-weight: lighter;
 	color: $brand-font;
-	margin: 15px 10px 31px;
+	margin: 10px 10px 11px;
 }
 
 h2 {
@@ -44,17 +44,27 @@ h3 {
 }
 .navbar-brand { padding: 11px 0px; }
 
-.navbar-nav > li > .dropdown-menu {
+.dropdown-menu, .navbar-nav > li > .dropdown-menu {
 	border-radius: 0;
 	border: 1px solid $body-border;
-	box-shadow: 0 5px 10px $body-border;
+	// box-shadow: 0 5px 10px $body-border;
 }
-.navbar-default .navbar-nav > li > a { color: $brand-font; }
-.navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus { color: $brand-font; }
+.navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus { color: $brand-font; }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
 	color: $brand-font;
 	background-color: $body-bg;
 }
+.nav-dropdown > li > a {
+	display: block;
+	padding: 3px 20px;
+	clear: both;
+	font-weight: normal;
+	line-height: 1.428571429;
+	color: #333333;
+	white-space: nowrap;
+}
+
+
 
 .secondary-nav {
 	min-height: 74px;
@@ -65,57 +75,17 @@ h3 {
 	box-shadow: 0 0px 10px $body-border;
 }
 .secondary-nav-icon { padding: 12px 5px 12px 0px; min-width: 20px; }
+.secondary-nav-invert { background-color: $brand-primary; border: 2px solid white; }
+.font-invert { color: white; }
+.secondary-nav-actions { margin-top: -3px; }
 
-
-
+.center { text-align: center; }
 .supress-a { color: $brand-font; text-decoration: none; }
-.supress-a:hover { color: $brand-font; text-decoration: none; }
-.supress-a:focus { color: $brand-font; text-decoration: none; }
-
-
-.content-list { list-style-type: none; padding-left: 0; border-bottom: 1px solid $body-border; }
-.content-list-item {
-	padding: 10px;
-	border-top: 1px solid $body-border;
-}
-.content-list-item:hover {
-	// border-left: 10px solid $body-border;
-	background-color: $body-bg;
-}
-.content-list-item-lock {
-	padding: 10px;
-	border-top: 1px solid darken($body-border,7%);
-	opacity: 0.5;
-}
-.content-list-icon { padding: 11px 17px 0px 0px; min-width: 50px; }
-.content-list-lock { padding: 12px 15px 12px 10px; min-width: 30px; color: $brand-font-gray; }
+.supress-a:hover, .supress-a:focus { color: $brand-font; text-decoration: none; }
 
 
 
-.content-container {
-	min-height: 74px;
-	margin: 0 0 15px 0;
-	padding: 2px;
-	background-color: $navbar-default-bg;
-	border: 1px solid $body-border;
-	box-shadow: 0 0px 10px $body-border;
-}
-
-.panel-group .panel + .panel { margin-top: 2px; }
-.panel {
-	border: 0;
-	box-shadow: none;
-}
-.panel-group .panel { border-radius: 0; }
-// .panel-default > .panel-heading { border-radius: 0; border-color: $navbar-default-bg; background-color: transparent; }
-.panel-green { padding: 10px 15px; background-color: $brand-green; }
-.panel-orange { padding: 10px 15px; background-color: $brand-orange; }
-.panel-red { padding: 10px 15px; background-color: $brand-red; }
-.panel-title { 
-	font-size: 14px;
-	font-weight: bold;
-	color: white;
-}
+// Subject Display
 
 .subject-card {
 	min-height: 74px;
@@ -129,4 +99,100 @@ h3 {
 .subject-card:hover {
 	background-color: $brand-green;
 	// border-left: 10px solid $brand-green;
+}
+
+.content-list { list-style-type: none; padding-left: 0; border-bottom: 1px solid $body-border; }
+.content-list-item { padding: 10px; border-top: 1px solid $body-border; }
+.content-list-item:hover { background-color: $body-bg; }
+.content-list-item-lock {
+	padding: 10px;
+	border-top: 1px solid darken($body-border,7%);
+	opacity: 0.5;
+}
+.content-list-icon { padding: 11px 17px 10px 0px; min-width: 50px; }
+.content-list-lock { padding: 12px 15px 12px 10px; min-width: 30px; color: $brand-font-gray; }
+
+
+.content-container {
+	min-height: 74px;
+	margin: 0 0 15px 0;
+	padding: 2px;
+	background-color: $navbar-default-bg;
+	border: 1px solid $body-border;
+	box-shadow: 0 0px 10px $body-border;
+}
+
+// Chapter Display
+.panel-group .panel + .panel { margin-top: 2px; }
+.panel {
+	border: 0;
+	box-shadow: none;
+}
+.panel-group .panel { border-radius: 0; }
+// .panel-default > .panel-heading { border-radius: 0; border-color: $navbar-default-bg; background-color: transparent; }
+.panel-primary, .panel-green, .panel-orange, .panel-red { padding: 10px 15px; }
+.panel-primary { background-color: $brand-primary;}
+.panel-green { background-color: $brand-green; }
+.panel-orange { background-color: $brand-orange; }
+.panel-red { background-color: $brand-red; }
+.panel-title { 
+	font-size: 14px;
+	font-weight: bold;
+	color: white;
+}
+
+
+
+// Content Display
+.modal-backdrop.in { opacity: 0.8; }
+.modal-dialog { width: 95%; margin-top: 55px; }
+.modal-body { padding: 15px; }
+.modal-content {
+	border-radius: 0;
+}
+.modal-actions { margin-top: -5px; }
+.btn-sm { padding: 4px 9px; }
+.btn-modal, .btn-modal-red, .btn-modal-orange, .btn-modal-green { 
+	border-radius: 0;
+	border: 2px solid white;
+	font-weight: bold; 
+}
+.btn-modal { background-color: transparent; color: white; }
+.btn-modal:hover, .btn-modal:focus { color: white; }
+.btn-modal-red { background-color: white;	color: $brand-red; }
+.btn-modal-red:hover, .btn-modal-red:focus { color: $brand-red; }
+.btn-modal-orange { background-color: white;	color: $brand-orange; }
+.btn-modal-orange:hover, .btn-modal-orange:focus { color: $brand-orange }
+.btn-modal-green { background-color: white;	color: $brand-green; }
+.btn-modal-green:hover, .btn-modal-green:focus { color: $brand-green }
+.btn-modal:hover, .btn-modal:focus, .btn-modal-red:hover, .btn-modal-red:focus, .btn-modal-orange:hover, .btn-modal-orange:focus, .btn-modal-green:hover, .btn-modal-green:focus { outline: 5px auto white; outline-offset: -2px; }
+
+//  autosizing iframes for videos - youtube and vimeo
+.videoWrapper {
+	position: relative;
+	padding-bottom: 56.25%; /* 16:9 */
+	height: 0;
+	background-color: black; 
+}
+.videoWrapper iframe {
+	position: absolute;
+	padding: 20px;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+.mapWrapper {
+	position: relative;
+	padding-bottom: 45%; /* 10:4.5 */
+	height: 0;
+	background-color: black; 
+}
+.mapWrapper iframe {
+	position: absolute;
+	padding: 20px;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 }

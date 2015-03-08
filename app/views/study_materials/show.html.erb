@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @study_material.name %>
+</p>
+
+<p>
+  <strong>Video source:</strong>
+  <%= @study_material.video_source %>
+</p>
+
+<p>
+  <strong>Video duration:</strong>
+  <%= @study_material.video_duration %>
+</p>
+
+<p>
+  <strong>Model source:</strong>
+  <%= @study_material.model_source %>
+</p>
+
+<p>
+  <strong>Chapter:</strong>
+  <%= @study_material.chapter_id %>
+</p>
+
+<%= link_to 'Edit', edit_study_material_path(@study_material) %> |
+<%= link_to 'Back', study_materials_path %>

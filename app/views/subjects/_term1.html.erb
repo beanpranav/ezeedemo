@@ -1,0 +1,22 @@
+
+<div class="panel-primary">
+    <div class="panel-title">
+	   Term 1
+    </div>
+</div>
+
+<div class="panel-body">
+	<ul class="content-list">
+		<% @subject.chapters.sort_by(&:chapterNumber).each do |chapter| %>
+			<% if chapter.term == 1 %>
+				<a href="<%= chapter_path(chapter) %>" class="supress-a">
+					<li class="content-list-item">
+						<image src="/images/progress-<%= rand(4) %>.png" class="content-list-icon pull-left">
+						<h3>Chapter <%= chapter.chapterNumber%></h3>
+						<h2><%= chapter.name %></h2>
+					</li>
+				</a>
+			<% end %>
+		<% end %>
+	</ul>
+</div>
