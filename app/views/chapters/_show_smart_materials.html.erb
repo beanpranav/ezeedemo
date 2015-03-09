@@ -2,7 +2,8 @@
 		<!-- TEMPORARY -->
 		<% @chapter.study_materials.each do |study_material| %>
 			
-			<% if study_material.model_source? %>
+			<% if study_material.material_type == "Learn Smart" %>
+
 				<% if @chapter.status == "Paid" %>
 					
 					<li class="content-list-item-lock">
@@ -33,7 +34,7 @@
 			    	      </div>
 
 			    	      <div class="modal-body"> 
-		    	      		<div class="mapWrapper"><%= study_material.model_source.html_safe %></div>
+		    	      		<div class="mapWrapper"><iframe src="<%= study_material.video_source.html_safe %>" frameborder="0" allowfullscreen></iframe></div>
 			    	      </div>
 
 			    	    </div>
@@ -41,6 +42,7 @@
 			    	</div>
 
 				<% end %>
+				
 			<% end %>
 			
 		<% end %>

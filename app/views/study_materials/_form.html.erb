@@ -12,11 +12,20 @@
   <% end %>
 
   <div class="field">
+    <%= f.label :material_type %><br>
+    <%= f.radio_button(:material_type, "Quick Concepts") %>
+    <%= label_tag(:material_type_quick_concepts, "Quick Concepts") %>
+    <%= f.radio_button(:material_type, "Learn Smart") %>
+    <%= label_tag(:material_type_learn_smart, "Learn Smart") %>
+    <%= f.radio_button(:material_type, "Exam Prep") %>
+    <%= label_tag(:material_type_exam_prep, "Exam Prep") %>
+  </div>
+  <div class="field">
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :video_source %><br>
+    <%= f.label :material_source %><br>
     <%= f.text_area :video_source %>
   </div>
   <div class="field">

@@ -1,76 +1,80 @@
 	<ul class="content-list">
 		
 		<% @chapter.study_materials.each do |study_material| %>
-			<% if @chapter.status == "Paid" %>
-				
-				<li class="content-list-item-lock">
-					<i class="fa fa-2x fa-lock content-list-lock pull-left"></i>
-					<h3><%= study_material.video_duration%> min Video <%= "& 3D Model" if study_material.model_source? %></h3>
-					<h2><%= study_material.name %></h2>
-				</li>
 
-			<% else %>
-			
-					<li class="content-list-item" data-toggle="modal" data-target="#show-study-material-<%= study_material.id %>">
-						<i class="fa fa-2x fa-circle content-list-lock pull-left"></i>
+			<% if study_material.material_type == "Quick Concepts" %>
+
+				<% if @chapter.status == "Paid" %>
+					
+					<li class="content-list-item-lock">
+						<i class="fa fa-2x fa-lock content-list-lock pull-left"></i>
 						<h3><%= study_material.video_duration%> min Video <%= "& 3D Model" if study_material.model_source? %></h3>
 						<h2><%= study_material.name %></h2>
 					</li>
 
-					<% if study_material.model_source? %>
-			    	
-			    	<div class="modal" id="show-study-material-<%= study_material.id %>" tabindex="-1" role="dialog" aria-hidden="true">
-			    	  <div class="modal-dialog">
-			    	    <div class="modal-content">
-			    	      
-			    	      <div class="panel-red panel-title">
-			    	      	<%= study_material.name %>
-			    	      	<div class="modal-actions pull-right">
-				    	      	<button type="button" class="btn btn-sm btn-modal-red">Mark as Complete</button>
-				    	      	<button type="button" class="btn btn-sm btn-modal" data-dismiss="modal"><i class="fa fa-times"></i></button>
+				<% else %>
+				
+						<li class="content-list-item" data-toggle="modal" data-target="#show-study-material-<%= study_material.id %>">
+							<i class="fa fa-2x fa-circle content-list-lock pull-left"></i>
+							<h3><%= study_material.video_duration%> min Video <%= "& 3D Model" if study_material.model_source? %></h3>
+							<h2><%= study_material.name %></h2>
+						</li>
+
+						<% if study_material.model_source? %>
+				    	
+				    	<div class="modal" id="show-study-material-<%= study_material.id %>" tabindex="-1" role="dialog" aria-hidden="true">
+				    	  <div class="modal-dialog">
+				    	    <div class="modal-content">
+				    	      
+				    	      <div class="panel-red panel-title">
+				    	      	<%= study_material.name %>
+				    	      	<div class="modal-actions pull-right">
+					    	      	<button type="button" class="btn btn-sm btn-modal-red">Mark as Complete</button>
+					    	      	<button type="button" class="btn btn-sm btn-modal" data-dismiss="modal"><i class="fa fa-times"></i></button>
+					    	      </div>
 				    	      </div>
-			    	      </div>
 
-			    	      <div class="modal-body">
-			    	      	<div class="row">
-				    	      	<div class="col-sm-12 col-md-6">  
-				    	      		<div class="videoWrapper"><%= study_material.video_source.html_safe %></div>
-				    	      	</div>
-				    	      	<div class="col-sm-12 col-md-6">  
-				    	      		<div class="videoWrapper"><%= study_material.model_source.html_safe %></div>
-				    	      	</div>
+				    	      <div class="modal-body">
+				    	      	<div class="row">
+					    	      	<div class="col-sm-12 col-md-6">  
+					    	      		<div class="videoWrapper"><iframe src="<%= study_material.video_source.html_safe %>" frameborder="0" allowfullscreen></iframe></div>
+					    	      	</div>
+					    	      	<div class="col-sm-12 col-md-6">  
+					    	      		<div class="videoWrapper"><iframe src="<%= study_material.model_source.html_safe %>" frameborder="0" allowfullscreen></iframe></div>
+					    	      	</div>
+					    	      </div>
 				    	      </div>
-			    	      </div>
 
-			    	    </div>
-			    	  </div>
-			    	</div>
+				    	    </div>
+				    	  </div>
+				    	</div>
 
-		    	<% else %>
+			    	<% else %>
 
-			    	<div class="row col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 modal" id="show-study-material-<%= study_material.id %>" tabindex="-1" role="dialog" aria-hidden="true">
-			    	  <div class="modal-dialog">
-			    	    <div class="modal-content">
-			    	      
-			    	      <div class="panel-red panel-title">
-			    	      	<%= study_material.name %>
-    	    	      	<div class="modal-actions pull-right">
-    		    	      	<button type="button" class="btn btn-sm btn-modal-red">Mark as Complete</button>
-    		    	      	<button type="button" class="btn btn-sm btn-modal" data-dismiss="modal">X<i class="fa fa-times"></i></button>
-    		    	      </div>
-			    	      </div>
+				    	<div class="row col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 modal" id="show-study-material-<%= study_material.id %>" tabindex="-1" role="dialog" aria-hidden="true">
+				    	  <div class="modal-dialog">
+				    	    <div class="modal-content">
+				    	      
+				    	      <div class="panel-red panel-title">
+				    	      	<%= study_material.name %>
+	    	    	      	<div class="modal-actions pull-right">
+	    		    	      	<button type="button" class="btn btn-sm btn-modal-red">Mark as Complete</button>
+	    		    	      	<button type="button" class="btn btn-sm btn-modal" data-dismiss="modal"><i class="fa fa-times"></i></button>
+	    		    	      </div>
+				    	      </div>
 
-			    	      <div class="modal-body">
-		    	      		<div class="videoWrapper"><%= study_material.video_source.html_safe %></div>
-			    	      </div>
+				    	      <div class="modal-body">
+			    	      		<div class="videoWrapper"><iframe src="<%= study_material.video_source.html_safe %>" frameborder="0" allowfullscreen></iframe></div>
+				    	      </div>
 
-			    	    </div>
-			    	  </div>
-			    	</div>
+				    	    </div>
+				    	  </div>
+				    	</div>
 
-					<% end %>
+						<% end %>
 
+				<% end %>
 			<% end %>
-			
+
 		<% end %>
 	</ul>

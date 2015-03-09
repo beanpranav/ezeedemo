@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150308113759) do
+ActiveRecord::Schema.define(version: 20150309072714) do
 
   create_table "chapters", force: true do |t|
     t.string   "name"
@@ -35,12 +35,15 @@ ActiveRecord::Schema.define(version: 20150308113759) do
     t.integer  "chapter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "material_type"
   end
 
   create_table "subjects", force: true do |t|
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "board"
+    t.integer  "standard"
   end
 
 end

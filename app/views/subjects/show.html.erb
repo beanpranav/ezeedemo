@@ -1,8 +1,8 @@
 <div class="col-xs-12 col-sm-3" style="padding:0px;">
-	<a href="<%= root_path %>" class="supress-a">
+	<a href="<%= dashboard_path %>" class="supress-a">
 		<div class="secondary-nav">
 			<i class="fa fa-2x fa-home secondary-nav-icon pull-left"></i>
-			<h3>8th CBSE</h3>
+			<h3><%= @subject.standard %>th <%= @subject.board %></h3>
 			<h2>All Subjects</h2>
 		</div>
 	</a>
@@ -12,7 +12,10 @@
 	
 	<div class="secondary-nav secondary-nav-invert">
 		
-		<h1 class="font-invert"><i class="fa fa-fw fa-book"></i> <b><%= @subject.name %></b>
+			<h1 class="font-invert pull-left"><i class="fa fa-fw fa-book"></i></h1>
+			<h2 class="font-invert"><b><%= @subject.name %></b></h2>
+			<h3 class="font-invert">0 / 75 Goals</h3>
+		
     	<div class="secondary-nav-actions pull-right dropdown">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
       		<button type="button" class="btn btn-sm btn-modal">view<i class="fa fa-fw fa-caret-down"></i></button>

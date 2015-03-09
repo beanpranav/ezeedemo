@@ -15,6 +15,17 @@
     <%= f.label :name %><br>
     <%= f.text_field :name %>
   </div>
+  <div class="field">
+    <%= f.label :standard %><br>
+    <%= f.number_field :standard %>
+  </div>
+  <div class="field">
+    <%= f.label :board %><br>
+    <%= f.radio_button(:board, "CBSE") %>
+    <%= label_tag(:board_cbse, "CBSE") %>
+    <%= f.radio_button(:board, "ICSE") %>
+    <%= label_tag(:board_icse, "ICSE") %>
+  </div>
   <div class="actions">
     <%= f.submit %>
   </div>

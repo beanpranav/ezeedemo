@@ -1,17 +1,107 @@
-<div class="col-xs-12 col-sm-3" style="padding:0px;">
-	<div class="secondary-nav">
-		<h1>Welcome <b>Shivam!</b></h1>
-		<h3>8th CBSE</h3>
-	</div>
+<div class="secondary-nav home-screen center">
+
+		<br><br><br><br>
+		<image src="/images/home-icon-2.png" class="">
+		<br><br>
+		<h1 class="font-invert"><b>Study Material that makes a difference.<b></h1>
+		<h3 class="font-invert" style="line-height: 1.65em;">
+			Concepts, Techniques and Assessments designed specifically for easy learning.
+			<br>Only for CBSE & ICSE students, Standard 6 -10.
+		</h3>
+		<br><br>
+
+		<button type="button" class="btn btn-modal" data-toggle="modal" data-target="#choose-class">Start Now</button>
+    	
+  	<div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 modal" id="choose-class" tabindex="-1" role="dialog" aria-hidden="true">
+  	  <div class="modal-dialog">
+  	    <div class="modal-content">
+  	      
+  	      <div class="panel-primary panel-title">
+  	      	Start Now
+  	      </div>
+
+  	      <div class="modal-body"> 
+	      		<br>
+	      		<h2><b>Select a Course</b><br><br></h2>
+	      		<div class= "row">
+
+	      			<div class="col-sm-12 col-md-5 col-md-offset-1">
+	      				<div class="panel-orange">
+	      				    <div class="panel-title">
+	      					   CBSE
+	      				    </div>
+	      				</div>
+
+	      				<div class="panel-body">
+	      					<%= link_to "Class 6", dashboard_path, class: "btn btn-lg btn-modal-orange", disabled: "disabled" %>
+	      					<%= link_to "Class 7", dashboard_path, class: "btn btn-lg btn-modal-orange", disabled: "disabled" %>
+	      					<%= link_to "Class 8", dashboard_path, class: "btn btn-lg btn-modal-orange" %>
+	      					<br>
+	      					<%= link_to "Class 9", dashboard_path, class: "btn btn-lg btn-modal-orange", disabled: "disabled" %>
+	      					<%= link_to "Class 10", dashboard_path, class: "btn btn-lg btn-modal-orange", disabled: "disabled" %>
+	      				</div>
+	      			</div>
+
+	      			<div class="col-sm-12 col-md-5">
+	      				<div class="panel-green">
+	      				    <div class="panel-title">
+	      					   ICSE
+	      				    </div>
+	      				</div>
+
+	      				<div class="panel-body">
+	      					<%= link_to "Class 6", dashboard_path, class: "btn btn-lg btn-modal-green", disabled: "disabled" %>
+	      					<%= link_to "Class 7", dashboard_path, class: "btn btn-lg btn-modal-green", disabled: "disabled"%>
+	      					<%= link_to "Class 8", dashboard_path, class: "btn btn-lg btn-modal-green", disabled: "disabled" %>
+	      					<br>
+	      					<%= link_to "Class 9", dashboard_path, class: "btn btn-lg btn-modal-green", disabled: "disabled" %>
+	      					<%= link_to "Class 10", dashboard_path, class: "btn btn-lg btn-modal-green", disabled: "disabled" %>
+	      				</div>
+	      			</div>
+	      		</div>
+	      		
+  	      </div>
+
+  	    </div>
+  	  </div>
+  	</div>
+
+		<br><br><br><br>
 </div>
 
-<div class="col-xs-12 col-sm-9">
-	<% @subjects.each do |subject| %>
-		<a href="<%= subject_path(subject) %>" class="supress-a">
-			<div class="subject-card">
-				<h2><b><%= subject.name %></b></h2>
-				<h3><%= subject.chapters.count %> Chapters</h3>
-			</div>
-		</a>
-	<% end %>
+
+<div class="secondary-nav center">
+	<div class= "row">
+
+		<div class="col-xs-12 col-sm-4">
+			<image src="/images/study-fast.png" class="home-icon">
+				<h2><b>Study Fast</b></h2>
+				<p>
+					_________________________________________
+					<br>_________________________________________
+					<br>_________________________________________
+				</p>
+		</div>
+
+		<div class="col-xs-12 col-sm-4">
+			<image src="/images/learn-smart.png" class="home-icon">
+				<h2><b>Learn Smart</b></h2>
+				<p>
+					_________________________________________
+					<br>_________________________________________
+					<br>_________________________________________
+				</p>
+		</div>
+		
+		<div class="col-xs-12 col-sm-4">
+			<image src="/images/score-better.png" class="home-icon" style="padding:7px 0 10px;">
+				<h2><b>Score Better</b></h2>				
+				<p>
+					_________________________________________
+					<br>_________________________________________
+					<br>_________________________________________
+				</p>
+		</div>
+
+	</div>
 </div>

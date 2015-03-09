@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   resources :subjects
 
   root 'pages#home'
-  # get "about" => "pages#about"
+  get "dashboard" => "pages#dashboard"
 
 end
