@@ -75,6 +75,7 @@ h3 {
 	border: 1px solid $body-border;
 	box-shadow: 0 0px 10px $body-border;
 }
+.secondary-nav-button:hover { background: $body-bg; }
 .secondary-nav-icon { padding: 12px 5px 12px 0px; min-width: 20px; }
 .secondary-nav-invert { background-color: $brand-primary; border: 2px solid white; padding: 10px; }
 .font-invert { color: white; font-weight: lighter; }
