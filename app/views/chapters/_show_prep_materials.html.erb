@@ -28,13 +28,16 @@
 			    	      <div class="panel-green panel-title">
 			    	      	<%= study_material.name %>
 			    	      	<div class="modal-actions pull-right">
-				    	      	<button type="button" class="btn btn-sm btn-modal-green">Mark as Complete</button>
+				    	      	<button type="button" class="btn btn-sm btn-modal-green" disabled="disabled">Incomplete</button>
 				    	      	<button type="button" class="btn btn-sm btn-modal" data-dismiss="modal"><i class="fa fa-times"></i></button>
 				    	      </div>
 			    	      </div>
 
 			    	      <div class="modal-body"> 
-		    	      		<div class="docWrapper"><iframe src="<%= study_material.video_source.html_safe %>" frameborder="0" allowfullscreen></iframe></div>
+		    	      		<div class="docWrapper">
+		    	      			<image src="/images/assessment-sample.png" class="img-responsive" style="padding:2px;">
+		    	      			<!-- 	<iframe src="<%= study_material.video_source.html_safe %>" frameborder="0" allowfullscreen></iframe> -->
+		    	      		</div>
 			    	      </div>
 
 			    	    </div>
