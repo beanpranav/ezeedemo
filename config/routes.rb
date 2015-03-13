@@ -7,5 +7,6 @@ Rails.application.routes.draw do
 
   root 'pages#home'
   get "dashboard" => "pages#dashboard"
+  get "dashboard_parents" => "pages#dashboard_parents"
 
 end

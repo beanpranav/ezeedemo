@@ -1,0 +1,132 @@
+	<div class="secondary-nav secondary-nav-invert">
+			
+		<i class="fa fa-2x fa-trophy content-list-icon-primary pull-left"></i>
+		<h2 class="font-invert"><b>Report Card</b></h2>
+		<h3 class="font-invert">Shivam Gupta - 8th CBSE</h3>
+	
+  	<div class="secondary-nav-actions pull-right dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+    		<button type="button" class="btn btn-sm btn-modal">subject <i class="fa fa-fw fa-caret-down"></i></button>
+    	</a>
+    	<ul class="dropdown-menu">
+    		<li>
+    			<ul class="nav nav-pill nav-dropdown">
+    					<li><a href="#overall" data-toggle="pill">Overall</a></li>
+    					<li class="divider"></li>
+    				<% @subjects.each do |subject| %>
+    					<% if subject.chapters.count == 0 %>
+    						<li class="disabled"><a href="#"><%= subject.name %></a></li>
+    					<% else %>
+		      	  	<li><a href="#<%= subject.id %>" data-toggle="pill"><%= subject.name %></a></li>
+		      	  <% end %>
+    				<% end %>
+      		</ul>
+      	</li>
+      </ul>
+    </div>
+
+	</div>
+
+	<div class="content-container">
+
+		<div class="tab-content">
+			
+				<div class="tab-pane active" id="overall">
+				<!-- Overall report card -->
+					<div class="panel-primary">
+				    <div class="panel-title">
+					   	All Subjects
+				    </div>
+					</div>
+
+					<div class="panel-body">
+						<ul class="content-list">
+
+							
+							<% @subjects.each do |subject| %>
+
+								<% if subject.chapters.count == 0 %>
+
+									<li class="content-list-item">
+										<h2><b><%= subject.name %></b></h2>
+										<h3>Locked</h3>
+									</li>
+
+								<% else %>
+
+									<a href="#<%= subject.id %>" data-toggle="pill" class="supress-a">
+										<li class="content-list-item">
+											<h2><b><%= subject.name %></b></h2>
+											<h3><%= subject.chapters.count %> Chapters</h3>
+										</li>
+									</a>
+
+								<% end %>
+
+							<% end %>
+						
+						</ul>
+
+					</div>
+
+				</div>
+
+			<% @subjects.each do |subject| %>
+
+				<div class="tab-pane" id="<%= subject.id %>">
+
+					<div class="panel-primary">
+				    <div class="panel-title">
+					   	<%= subject.name %>
+				    </div>
+					</div>
+
+					<% unless subject.chapters.count == 0 %>
+
+						<div class="panel-body">
+							<ul class="content-list">
+
+								<li class="content-list-item">
+
+									<h3>
+										<span class="report-card-icon-item pull-left" style="margin-left: -15px;">Progress</span>
+										<span >Chapter</span>
+										<span class="report-card-icon-item pull-right">Top Score</span>
+										<span class="report-card-icon-item pull-right">Practice #</span>
+										<span class="report-card-icon-item pull-right">Goals</span>
+									</h3>
+
+								</li>
+
+								<% subject.chapters.sort_by(&:chapterNumber).each do |chapter| %>
+
+									<a href="<%= chapter_path(chapter) %>" class="supress-a">
+										<li class="content-list-item">
+											<% if chapter.status == "Paid" %>
+													<i class="fa fa-2x fa-lock content-list-icon-default report-card-icon pull-left"></i>
+											<% else %>
+												<i class="fa fa-2x fa-check content-list-icon-<%= ["default", "primary", "green", "orange", "red"].sample %> report-card-icon pull-left"></i>
+											<% end %>
+											<h2>
+												<%= chapter.chapterNumber%>. <%= chapter.name %>
+												<span class="font-green report-card-icon-item pull-right"><%= rand(101) %> %</span>
+												<span class="font-orange report-card-icon-item pull-right"><%= rand(4) %></span>
+												<span class="font-red report-card-icon-item pull-right">0 / <%= chapter.study_materials.count %></span>
+											</h2>
+
+										</li>
+									</a>
+									
+								<% end %>
+							</ul>
+						</div>
+
+					<% end %>
+
+				</div>
+
+			<% end %>
+
+		</div>
+
+	</div>

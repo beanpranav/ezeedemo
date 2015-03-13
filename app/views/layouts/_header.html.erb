@@ -24,10 +24,13 @@
               <b>Shivam</b> Gupta <i class="fa fa-fw fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu">
+              <li><%= link_to "All Subjects", dashboard_path %></li>
+              <li><%= link_to "Report Card", dashboard_parents_path %></li>
+              <li class="divider"></li>
               <li><%= link_to "My Profile", "#" %></li>
               <li><%= link_to "Upgrade", "#" %></li>
               <li><%= link_to "Referrals", "#" %></li>
-              <li><%= link_to "Settings", "#" %></li>
+              <li class="divider"></li>
               <li><%= link_to "Logout", "#" %></li>
             </ul>
           </li>

@@ -11,7 +11,7 @@
 			<% if chapter.term == 2 %>
 				<a href="<%= chapter_path(chapter) %>" class="supress-a">
 					<li class="content-list-item">
-						<image src="/images/progress-<%= rand(4) %>.png" class="content-list-icon pull-left">
+						<i class="fa fa-2x fa-check content-list-icon-<%= ["default", "primary", "green", "orange", "red"].sample %> pull-left"></i>
 						<h3>Chapter <%= chapter.chapterNumber%></h3>
 						<h2><%= chapter.name %></h2>
 					</li>

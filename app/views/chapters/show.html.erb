@@ -12,7 +12,12 @@
 <div class="col-xs-12 col-sm-9">
 	<div class="secondary-nav secondary-nav-invert">
 		
-		<image src="/images/progress-2.png" class="content-list-icon pull-left">
+		<% if @chapter.status == "Paid" %>
+			<i class="fa fa-2x fa-lock content-list-icon-primary pull-left"></i>
+		<% else %>
+			<i class="fa fa-2x fa-check content-list-icon-<%= ["default", "primary", "green", "orange", "red"].sample %> pull-left"></i>
+		<% end %>
+
 		<h2 class="font-invert"><b><%= @chapter.name %></b></h2>
 		<h3 class="font-invert">0 / <%= @chapter.study_materials.count %> Goals</h3>
 

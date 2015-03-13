@@ -7,7 +7,7 @@
 				<% if @chapter.status == "Paid" %>
 					
 					<li class="content-list-item-lock">
-						<i class="fa fa-2x fa-lock content-list-lock pull-left"></i>
+						<i class="fa fa-2x fa-lock content-list-icon-green pull-left"></i>
 						<h3>Multiple Choice Assessment</h3>
 						<h2><%= study_material.name %></h2>
 					</li>
@@ -15,7 +15,7 @@
 				<% else %>
 				
 						<li class="content-list-item" data-toggle="modal" data-target="#show-prep-material-<%= study_material.id %>">
-							<i class="fa fa-2x fa-check-square content-list-lock pull-left"></i>
+							<i class="fa fa-2x fa-check content-list-icon-<%= ["default", "green"].sample %> pull-left"></i>
 							<h3>Multiple Choice Assessment</h3>
 							<h2><%= study_material.name %></h2>
 						</li>

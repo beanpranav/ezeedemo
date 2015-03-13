@@ -38,6 +38,11 @@ h3 {
 	margin: 5px;
 }
 
+.font-invert { color: white; font-weight: lighter; }
+.font-green { color: $brand-green; font-weight: lighter; }
+.font-orange { color: $brand-orange; font-weight: lighter; }
+.font-red { color: $brand-red; font-weight: lighter; }
+
 .navbar {
 	border-radius: 0;
 	box-shadow: 0 0px 10px $body-border;
@@ -50,6 +55,7 @@ h3 {
 	border: 1px solid $body-border;
 	// box-shadow: 0 5px 10px $body-border;
 }
+.dropdown-menu .divider { margin: 6px 0; background-color: $body-border; }
 .navbar-default .navbar-nav > li > a, .navbar-default .navbar-nav > li > a:hover, .navbar-default .navbar-nav > li > a:focus { color: $brand-font; }
 .navbar-default .navbar-nav > .open > a, .navbar-default .navbar-nav > .open > a:hover, .navbar-default .navbar-nav > .open > a:focus {
 	color: $brand-font;
@@ -75,10 +81,9 @@ h3 {
 	border: 1px solid $body-border;
 	box-shadow: 0 0px 10px $body-border;
 }
-.secondary-nav-button:hover { background: $body-bg; }
+.secondary-nav-button:hover { outline: 2px solid white; outline-offset: -2px; background-color: $body-bg; }
 .secondary-nav-icon { padding: 12px 5px 12px 0px; min-width: 20px; }
-.secondary-nav-invert { background-color: $brand-primary; border: 2px solid white; padding: 10px; }
-.font-invert { color: white; font-weight: lighter; }
+.secondary-nav-invert { background-color: $brand-primary; outline: 2px solid white; outline-offset: -2px; padding: 10px; }
 .secondary-nav-actions { margin: -41px 10px; }
 
 .center { text-align: center; }
@@ -102,17 +107,11 @@ h3 {
 	background-color: $brand-orange;
 	border: 2px solid white;
 }
-
-.content-list { list-style-type: none; padding-left: 0; border-bottom: 1px solid $body-border; }
-.content-list-item { padding: 10px; border-top: 1px solid $body-border; }
-.content-list-item:hover { background-color: $body-bg; }
-.content-list-item-lock {
-	padding: 10px;
-	border-top: 1px solid darken($body-border,7%);
-	opacity: 0.5;
+.subject-card-locked { opacity: 0.5; }
+.subject-card-locked:hover {
+	background-color: white;
+	border: 0px;
 }
-.content-list-icon { padding: 11px 17px 10px 10px; min-width: 50px; }
-.content-list-lock { padding: 12px 15px 12px 10px; min-width: 30px; color: $brand-font-gray; }
 
 
 .content-container {
@@ -124,7 +123,34 @@ h3 {
 	box-shadow: 0 0px 10px $body-border;
 }
 
+.content-list { list-style-type: none; padding-left: 0; border-bottom: 1px solid $body-border; }
+.content-list-item { padding: 10px; border-top: 1px solid $body-border; }
+.content-list-item:hover { background-color: $body-bg; cursor: pointer; }
+.content-list-item-lock {
+	padding: 10px;
+	border-top: 1px solid darken($body-border,7%);
+	opacity: 0.5;
+	cursor: default;
+}
+.content-list-icon-default, .content-list-icon-primary, .content-list-icon-green, .content-list-icon-orange, .content-list-icon-red { 
+	width: 52px; 
+	height:52px; 
+	margin-right: 15px!important; 
+	text-align: center; 
+	color: white; 
+	line-height: 1.85em!important;
+}
+.content-list-icon-default { background-color: $body-border; }
+.content-list-icon-primary { background-color: $brand-primary; color: $brand-orange; outline: 2px solid $brand-orange; outline-offset: -2px; }
+.content-list-icon-green { background-color: $brand-green; }
+.content-list-icon-orange { background-color: $brand-orange; }
+.content-list-icon-red { background-color: $brand-red; }
+
+.report-card-icon { margin-top: -10px; }
+.report-card-icon-item { width: 75px; margin: 0 5px; text-align: center; }
+
 // Chapter Display
+.panel-group { margin-bottom: 0; }
 .panel-group .panel + .panel { margin-top: 2px; }
 .panel {
 	border: 0;
