@@ -9,10 +9,12 @@ class ChaptersController < ApplicationController
   end
 
   def new
-    @chapter = Chapter.new
+    @chapter = Chapter.new(subject_id: params[:subject_id])
+    @subject = Subject.find_by(id: params[:subject_id])
   end
 
   def edit
+    @subject = @chapter.subject
   end
 
   def create

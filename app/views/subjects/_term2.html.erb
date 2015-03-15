@@ -11,7 +11,11 @@
 			<% if chapter.term == 2 %>
 				<a href="<%= chapter_path(chapter) %>" class="supress-a">
 					<li class="content-list-item">
-						<i class="fa fa-2x fa-check content-list-icon-<%= ["default", "primary", "green", "orange", "red"].sample %> pull-left"></i>
+						<% if chapter.status == "Paid" %>
+							<i class="fa fa-2x fa-lock content-list-icon-lock pull-left"></i>
+						<% else %>
+							<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "primary", "green", "orange", "red"].sample %> pull-left"></i>
+						<% end %>
 						<h3>Chapter <%= chapter.chapterNumber%></h3>
 						<h2><%= chapter.name %></h2>
 					</li>

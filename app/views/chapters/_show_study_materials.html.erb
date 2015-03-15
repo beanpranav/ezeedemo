@@ -15,7 +15,7 @@
 				<% else %>
 				
 						<li class="content-list-item" data-toggle="modal" data-target="#show-study-material-<%= study_material.id %>">
-							<i class="fa fa-2x fa-check content-list-icon-<%= ["default", "red"].sample %> pull-left"></i>
+							<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "red"].sample %> pull-left"></i>
 							<h3><%= study_material.video_duration%> min Video <%= "& 3D Model" if study_material.model_source? %></h3>
 							<h2><%= study_material.name %></h2>
 						</li>
@@ -67,7 +67,11 @@
 				    	      </div>
 
 				    	      <div class="modal-body">
-			    	      		<div class="videoWrapper"><iframe src="<%= study_material.video_source.html_safe %>" frameborder="0" allowfullscreen></iframe></div>
+
+			    	      		<div class="videoWrapper">	
+			    	      			<!-- <video autobuffer="autobuffer" controls="controls" src="/videos/demo.mp4" /> -->
+			    	      			<iframe src="<%= study_material.video_source.html_safe %>" frameborder="0" allowfullscreen></iframe>
+			    	      		</div>
 				    	      </div>
 
 				    	    </div>

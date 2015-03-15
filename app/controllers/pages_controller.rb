@@ -1,13 +1,19 @@
 class PagesController < ApplicationController
 
   def home
+  	@subjects = Subject.all
+
+  	def go_to_dashboard
+  		redirect_to dashboard_path
+  	end
+
   end
 
-  def dashboard
+  def common_dashboard
   	@subjects = Subject.all
   end
 
-  def dashboard_parents
+  def report_card
   	@subjects = Subject.all
   end
 

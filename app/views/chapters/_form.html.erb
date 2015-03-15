@@ -1,3 +1,9 @@
+
+<h3><%= @subject.standard %>th <%= @subject.board %></h3>
+<h2><b><%= @subject.name %></b></h2>
+<br>
+
+
 <%= form_for(@chapter) do |f| %>
   <% if @chapter.errors.any? %>
     <div id="error_explanation">
@@ -11,32 +17,31 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :chapterNumber %><br>
-    <%= f.number_field :chapterNumber %>
-  </div>
-  <div class="field">
-    <%= f.label :term %><br>
-    <%= f.number_field :term %>
-  </div>
-  <div class="field">
-    <%= f.label :subject_id %><br>
-    <%= f.number_field :subject_id %>
-  </div>
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.radio_button(:status, "Free") %>
-    <%= label_tag(:status_free, "Free") %>
-    <%= f.radio_button(:status, "Paid") %>
-    <%= label_tag(:status_paid, "Paid") %>
+  <%= f.hidden_field :subject_id %>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-3">
+      <p class="form-label">Chapter No.</p>
+      <p class="form-label">Chapter Name</p>
+      <p class="form-label">Term No.</p>
+      <p class="form-label">Status</p>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      <p><%= f.number_field :chapterNumber, placeholder: "Chapter No.", class: "form-control" %></p>
+      <p><%= f.text_field :name, placeholder: "Chapter Name", class: "form-control" %></p>
+      <p><%= f.number_field :term, placeholder: "Term No.", class: "form-control" %></p>
+      <p class="form-radio">
+        <%= f.radio_button(:status, "Free") %>
+        <%= label_tag(:status_free, "Free") %> &nbsp; &nbsp;
+        <%= f.radio_button(:status, "Paid") %>
+        <%= label_tag(:status_paid, "Paid") %>
+      </p>
+    </div>
   </div>
 
-  <br>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+  <p><%= f.submit class: "btn btn-block btn-primary" %></p>
 <% end %>
+
+
+    
+

@@ -7,15 +7,19 @@
 			<h2><%= @chapter.subject.name %></h2>
 		</div>
 	</a>
+
+	<% if user_signed_in? && current_user.role == "Admin" %>
+    <%= link_to "Edit Chapter", edit_chapter_path(@chapter) %>
+	<% end %>
 </div>
 
 <div class="col-xs-12 col-sm-9">
 	<div class="secondary-nav secondary-nav-invert">
 		
 		<% if @chapter.status == "Paid" %>
-			<i class="fa fa-2x fa-lock content-list-icon-primary pull-left"></i>
+			<i class="fa fa-2x fa-lock content-list-icon-lock pull-left"></i>
 		<% else %>
-			<i class="fa fa-2x fa-check content-list-icon-<%= ["default", "primary", "green", "orange", "red"].sample %> pull-left"></i>
+			<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "primary", "green", "orange", "red"].sample %> pull-left"></i>
 		<% end %>
 
 		<h2 class="font-invert"><b><%= @chapter.name %></b></h2>

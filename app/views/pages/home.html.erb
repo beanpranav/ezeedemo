@@ -1,4 +1,8 @@
-<div class="secondary-nav home-screen center">
+<% if user_signed_in? %>
+	<%= render "pages/dashboard" %>
+<% else %>
+
+	<div class="secondary-nav home-screen center">
 
 		<br><br><br><br>
 		<image src="/images/home-icon-2.png" class="">
@@ -6,11 +10,13 @@
 		<h1 class="font-invert"><b>Study Material that makes a difference.<b></h1>
 		<h3 class="font-invert" style="line-height: 1.65em;">
 			Concepts, Techniques and Assessments designed specifically for easy learning.
-			<br>Only for CBSE & ICSE students, Standard 6 -10.
+			<br>Only for 10th CBSE students.
 		</h3>
 		<br><br>
 
-		<button type="button" class="btn btn-modal" data-toggle="modal" data-target="#choose-class">Start Now</button>
+		<%= link_to "Start Now", common_dashboard_path, class: "btn btn-modal" %>
+	      					
+		<!-- <button type="button" class="btn btn-modal" data-toggle="modal" data-target="#choose-class">Start Now</button>
     	
   	<div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 modal" id="choose-class" tabindex="-1" role="dialog" aria-hidden="true">
   	  <div class="modal-dialog">
@@ -33,12 +39,12 @@
 	      				</div>
 
 	      				<div class="panel-body">
-	      					<%= link_to "Class 6", dashboard_path, class: "btn btn-lg btn-modal-orange", disabled: "disabled" %>
-	      					<%= link_to "Class 7", dashboard_path, class: "btn btn-lg btn-modal-orange", disabled: "disabled" %>
-	      					<%= link_to "Class 8", dashboard_path, class: "btn btn-lg btn-modal-orange" %>
+	      					<%= link_to "Class 6", "#", class: "btn btn-lg btn-modal-orange", disabled: "disabled" %>
+	      					<%= link_to "Class 7", "#", class: "btn btn-lg btn-modal-orange", disabled: "disabled" %>
+	      					<%= link_to "Class 8", common_dashboard_path, class: "btn btn-lg btn-modal-orange" %>
 	      					<br>
-	      					<%= link_to "Class 9", dashboard_path, class: "btn btn-lg btn-modal-orange", disabled: "disabled" %>
-	      					<%= link_to "Class 10", dashboard_path, class: "btn btn-lg btn-modal-orange", disabled: "disabled" %>
+	      					<%= link_to "Class 9", "#", class: "btn btn-lg btn-modal-orange", disabled: "disabled" %>
+	      					<%= link_to "Class 10", "#", class: "btn btn-lg btn-modal-orange", disabled: "disabled" %>
 	      				</div>
 	      			</div>
 
@@ -50,12 +56,12 @@
 	      				</div>
 
 	      				<div class="panel-body">
-	      					<%= link_to "Class 6", dashboard_path, class: "btn btn-lg btn-modal-green", disabled: "disabled" %>
-	      					<%= link_to "Class 7", dashboard_path, class: "btn btn-lg btn-modal-green", disabled: "disabled"%>
-	      					<%= link_to "Class 8", dashboard_path, class: "btn btn-lg btn-modal-green", disabled: "disabled" %>
+	      					<%= link_to "Class 6", "#", class: "btn btn-lg btn-modal-green", disabled: "disabled" %>
+	      					<%= link_to "Class 7", "#", class: "btn btn-lg btn-modal-green", disabled: "disabled"%>
+	      					<%= link_to "Class 8", "#", class: "btn btn-lg btn-modal-green", disabled: "disabled" %>
 	      					<br>
-	      					<%= link_to "Class 9", dashboard_path, class: "btn btn-lg btn-modal-green", disabled: "disabled" %>
-	      					<%= link_to "Class 10", dashboard_path, class: "btn btn-lg btn-modal-green", disabled: "disabled" %>
+	      					<%= link_to "Class 9", "#", class: "btn btn-lg btn-modal-green", disabled: "disabled" %>
+	      					<%= link_to "Class 10", "#", class: "btn btn-lg btn-modal-green", disabled: "disabled" %>
 	      				</div>
 	      			</div>
 	      		</div>
@@ -64,7 +70,7 @@
 
   	    </div>
   	  </div>
-  	</div>
+  	</div> -->
 
 		<br><br><br><br>
 </div>
@@ -105,3 +111,5 @@
 
 	</div>
 </div>
+
+<% end %>

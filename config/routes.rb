@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   resources :study_materials
 
   resources :chapters
@@ -6,7 +7,7 @@ Rails.application.routes.draw do
   resources :subjects
 
   root 'pages#home'
-  get "dashboard" => "pages#dashboard"
-  get "dashboard_parents" => "pages#dashboard_parents"
+  get "common_dashboard" => "pages#common_dashboard"
+  get "report_card" => "pages#report_card"
 
 end

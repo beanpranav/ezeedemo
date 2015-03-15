@@ -1,0 +1,36 @@
+<div class="col-sm-6 col-sm-offset-3 center">
+	
+	<div class="content-container">
+		
+		<div class="panel-primary">
+		    <div class="panel-title">
+			   Sign in
+		    </div>
+		</div>
+
+		<div class="panel-body form-container">
+
+				<image src="/images/home-icon-2.png" style="height:40px; margin-bottom:7px;">
+				<p>Study Fast. &nbsp; Learn Smart. &nbsp; Score Better.</p>
+				<br>
+
+		    <%= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+	      
+	        <p><%= f.email_field :email, placeholder: "email", class: "form-control", :autofocus => true %></p>
+	        <p><%= f.password_field :password, placeholder: "password", class: "form-control" %></p>
+	        <% if devise_mapping.rememberable? -%>
+				    <div><%= f.check_box :remember_me %>&nbsp;&nbsp;Remember me</div>
+				  <% end -%>
+				  <br>
+				  
+				  <%= devise_error_messages! %>
+		      <p><%= f.submit "LET'S BEGIN", class: "btn btn-block btn-green" %></p>
+		    <% end %>
+
+		</div>
+
+	</div>
+
+  <%= render "devise/shared/links" %>
+
+</div>

@@ -1,0 +1,43 @@
+<div class="col-sm-6 col-sm-offset-3 center">
+	
+	<div class="content-container">
+		
+		<div class="panel-primary">
+		    <div class="panel-title">
+			   Creating Your Personal Account
+		    </div>
+		</div>
+
+		<div class="panel-body form-container">
+
+				<image src="/images/home-icon-2.png" style="height:40px; margin-bottom:7px;">
+				<p> 
+					Study Fast. &nbsp; Learn Smart. &nbsp; Score Better.
+					<br><br>
+					<b>10th CBSE</b>
+					<br>Study Material for
+				</p>
+
+				<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name)) do |f| %>
+					
+					<%= devise_error_messages! %>
+
+	       	<p><%= f.text_field :name, placeholder: "full name", class: "form-control", :autofocus => true %></p>
+
+	        <p><%= f.email_field :email, placeholder: "email", class: "form-control" %></p>
+	        <p><%= f.text_field :phone_number, placeholder: "mobile", class: "form-control" %></p>
+
+				  <p><%= f.password_field :password, placeholder: "password (min. 8 characters)", class: "form-control" %></p>
+				  <p><%= f.password_field :password_confirmation, placeholder: "re-type password", class: "form-control" %></p>
+				  
+		      <p><%= f.submit "LET'S BEGIN", class: "btn btn-block btn-green" %></p>
+				<% end %>
+
+		</div>
+
+	</div>
+
+  <%= render "devise/shared/links" %>
+
+</div>
+
