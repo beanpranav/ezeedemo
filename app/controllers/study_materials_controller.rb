@@ -9,10 +9,12 @@ class StudyMaterialsController < ApplicationController
   end
 
   def new
-    @study_material = StudyMaterial.new
+    @study_material = StudyMaterial.new(material_type: "Quick Concepts", chapter_id: params[:chapter_id])
+    @chapter = Chapter.find_by(id: params[:chapter_id])
   end
 
   def edit
+    @chapter = @study_material.chapter
   end
 
   def create

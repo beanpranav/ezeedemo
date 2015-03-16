@@ -1,20 +1,15 @@
 class PagesController < ApplicationController
 
   def home
-  	@subjects = Subject.all
-
-  	def go_to_dashboard
-  		redirect_to dashboard_path
-  	end
-
+  	@subjects = Subject.where(standard: 10)
   end
 
   def common_dashboard
-  	@subjects = Subject.all
+  	@subjects = Subject.where(standard: 10)
   end
 
   def report_card
-  	@subjects = Subject.all
+  	@subjects = Subject.where(standard: 10)
   end
 
 end

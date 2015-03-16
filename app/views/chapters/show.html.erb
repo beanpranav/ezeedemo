@@ -9,7 +9,8 @@
 	</a>
 
 	<% if user_signed_in? && current_user.role == "Admin" %>
-    <%= link_to "Edit Chapter", edit_chapter_path(@chapter) %>
+    <%= link_to "Edit Chapter", edit_chapter_path(@chapter) %><br>
+    <%= link_to "Add New Study Material", controller: "study_materials", action: "new", chapter_id: @chapter.id %>
 	<% end %>
 </div>
 

@@ -9,7 +9,7 @@ class ChaptersController < ApplicationController
   end
 
   def new
-    @chapter = Chapter.new(subject_id: params[:subject_id])
+    @chapter = Chapter.new(subject_id: params[:subject_id], status: "Paid")
     @subject = Subject.find_by(id: params[:subject_id])
   end
 

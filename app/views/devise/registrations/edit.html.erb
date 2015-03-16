@@ -48,7 +48,7 @@
             <p><%= f.text_field :phone_number, placeholder: "mobile", class: "form-control" %></p>
 
             <% if current_user.role == "Admin" %>
-              <p><%= f.email_field :role, placeholder: "role", disabled: "disabled", class: "form-control" %></p>
+              <p><%= f.text_field :role, placeholder: "role", disabled: "disabled", class: "form-control" %></p>
             <% end %>
 
             <p><%= f.password_field :password, placeholder: "leave blank if you don't want to change it", :autocomplete => "off", class: "form-control" %></p>

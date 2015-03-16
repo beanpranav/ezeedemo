@@ -1,3 +1,8 @@
+<h3><%= @chapter.subject.standard %>th <%= @chapter.subject.board %>: <%= @chapter.subject.name %></h3>
+<h2><b><%= @chapter.chapterNumber %>. <%= @chapter.name %></b></h2>
+<br>
+
+
 <%= form_for(@study_material) do |f| %>
   <% if @study_material.errors.any? %>
     <div id="error_explanation">
@@ -11,36 +16,42 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :material_type %><br>
-    <%= f.radio_button(:material_type, "Quick Concepts") %>
-    <%= label_tag(:material_type_quick_concepts, "Quick Concepts") %>
-    <%= f.radio_button(:material_type, "Learn Smart") %>
-    <%= label_tag(:material_type_learn_smart, "Learn Smart") %>
-    <%= f.radio_button(:material_type, "Exam Prep") %>
-    <%= label_tag(:material_type_exam_prep, "Exam Prep") %>
+  <%= f.hidden_field :chapter_id %>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-3">
+      <p class="form-label">Material Type</p>
+      <p class="form-label">Material No.</p>
+      <p class="form-label">Material Name</p>
+      <br>
+      <p class="form-radio">.</p>
+      <p class="form-label">Video</p>
+      <p class="form-label">Interactive</p>
+      <br>
+      <p class="form-label">Content Status</p>
+      <p class="form-label">Next Admin</p>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      <p class="form-radio">
+        <%= f.radio_button(:material_type, "Quick Concepts") %>
+        <%= label_tag(:material_type_1, "Quick Concepts") %> &nbsp; &nbsp;
+        <%= f.radio_button(:material_type, "Learn Smart") %>
+        <%= label_tag(:material_type_2, "Learn Smart") %> &nbsp; &nbsp;
+        <%= f.radio_button(:material_type, "Exam Prep") %>
+        <%= label_tag(:material_type_3, "Exam Prep") %>
+      </p>
+      <p><%= f.number_field :video_duration, placeholder: "Material No.", class: "form-control" %></p>
+      <p><%= f.text_field :name, placeholder: "Material Name", class: "form-control" %></p>
+      <br>
+      <p class="form-radio"><em>Ezee Content (Choose One)</em></p>
+      <p><%= f.number_field :video_duration, placeholder: "Dropdown", class: "form-control" %></p>
+      <p><%= f.number_field :video_duration, placeholder: "Dropdown", class: "form-control" %></p>
+      <br>
+      <p><%= f.select :video_source, options_for_select([["Under Review"], ["Review Done"]]) %></p>
+      <p><%= f.select :model_source, options_for_select([["Archie"], ["Deepak"], ["Ashwini"], ["Pranav"], ["Alok"]]) %></p>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :material_source %><br>
-    <%= f.text_area :video_source %>
-  </div>
-  <div class="field">
-    <%= f.label :video_duration %><br>
-    <%= f.number_field :video_duration %>
-  </div>
-  <div class="field">
-    <%= f.label :model_source %><br>
-    <%= f.text_area :model_source %>
-  </div>
-  <div class="field">
-    <%= f.label :chapter_id %><br>
-    <%= f.number_field :chapter_id %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+  <br>
+  <p><%= f.submit class: "btn btn-block btn-green" %></p>
 <% end %>

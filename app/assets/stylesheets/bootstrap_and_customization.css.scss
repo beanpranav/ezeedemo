@@ -89,7 +89,7 @@ h3 {
 .secondary-nav-button:hover { 
 	outline: 2px solid white; 
 	outline-offset: -3px; 
-	// background-color: $body-bg;
+	border: 0;
 	box-shadow: 0 5px 30px $body-border;
 }
 .secondary-nav-icon { padding: 12px 5px 12px 0px; min-width: 20px; }
@@ -121,8 +121,9 @@ h3 {
 }
 .subject-card:hover {
 	outline: 2px solid white; 
-	outline-offset: -3px; 
-	background-color: $brand-orange;
+	outline-offset: -2px; 
+	background-color: white;
+	border: 0;
 	box-shadow: 0 5px 30px $body-border;
 }
 .subject-card-locked { opacity: 0.5; }
@@ -283,3 +284,12 @@ h3 {
 	box-shadow: inset 0px 0px 50px $body-border;
 }
 .form-control:focus { box-shadow: inset 0px 0px 2px $body-border; } 
+select { 
+	width: 100%;
+	border-radius: 0px; 
+	border: 0; 
+	height: 34px;
+	box-shadow: inset 0px 0px 50px $body-border;
+	background-color: white;
+}
+select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0 }
