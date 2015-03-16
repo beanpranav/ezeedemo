@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150315100013) do
+ActiveRecord::Schema.define(version: 20150316173625) do
 
   create_table "chapters", force: true do |t|
     t.string   "name"
@@ -29,13 +29,15 @@ ActiveRecord::Schema.define(version: 20150315100013) do
 
   create_table "study_materials", force: true do |t|
     t.string   "name"
-    t.text     "video_source"
-    t.integer  "video_duration"
-    t.text     "model_source"
+    t.string   "next_step"
+    t.integer  "material_no"
+    t.string   "admin_incharge"
     t.integer  "chapter_id"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "material_type"
+    t.integer  "video_content_id"
+    t.integer  "interactive_content_id"
   end
 
   create_table "subjects", force: true do |t|

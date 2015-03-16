@@ -1,6 +1,6 @@
 	<ul class="content-list">
 		<!-- TEMPORARY -->
-		<% @chapter.study_materials.each do |study_material| %>
+		<% @chapter.study_materials.sort_by(&:material_no).each do |study_material| %>
 			
 			<% if study_material.material_type == "Exam Prep" %>
 
@@ -36,7 +36,7 @@
 			    	      <div class="modal-body"> 
 		    	      		<div class="docWrapper">
 		    	      			<image src="/images/assessment-sample.png" class="img-responsive" style="padding:2px;">
-		    	      			<!-- 	<iframe src="<%= study_material.video_source.html_safe %>" frameborder="0" allowfullscreen></iframe> -->
+		    	      			<!-- 	<iframe src="<%= study_material.video_content_id %>" frameborder="0" allowfullscreen></iframe> -->
 		    	      		</div>
 			    	      </div>
 

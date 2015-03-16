@@ -1,6 +1,6 @@
 	<ul class="content-list">
 		
-		<% @chapter.study_materials.each do |study_material| %>
+		<% @chapter.study_materials.sort_by(&:material_no).each do |study_material| %>
 
 			<% if study_material.material_type == "Quick Concepts" %>
 
@@ -8,7 +8,7 @@
 					
 					<li class="content-list-item-lock">
 						<i class="fa fa-2x fa-lock content-list-icon-red pull-left"></i>
-						<h3><%= study_material.video_duration%> min Video <%= "& 3D Model" if study_material.model_source? %></h3>
+						<h3><%= study_material.material_no %> min Video <%= "& 3D Model" if study_material.interactive_content_id? %></h3>
 						<h2><%= study_material.name %></h2>
 					</li>
 
@@ -16,11 +16,11 @@
 				
 						<li class="content-list-item" data-toggle="modal" data-target="#show-study-material-<%= study_material.id %>">
 							<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "red"].sample %> pull-left"></i>
-							<h3><%= study_material.video_duration%> min Video <%= "& 3D Model" if study_material.model_source? %></h3>
+							<h3><!-- [<%= @chapter.chapterNumber %>.<%= study_material.material_no %>]  -->min Video <%= "& 3D Model" if study_material.interactive_content_id? %></h3>
 							<h2><%= study_material.name %></h2>
 						</li>
 
-						<% if study_material.model_source? %>
+						<% if study_material.interactive_content_id? %>
 				    	
 				    	<div class="modal" id="show-study-material-<%= study_material.id %>" tabindex="-1" role="dialog" aria-hidden="true">
 				    	  <div class="modal-dialog">
@@ -37,12 +37,12 @@
 				    	      <div class="modal-body">
 				    	      	<div class="row">
 					    	      	<div class="col-sm-12 col-md-6">  
-					    	      		<div class="videoWrapper"><iframe src="<%= study_material.video_source.html_safe %>" frameborder="0" allowfullscreen></iframe></div>
+					    	      		<div class="videoWrapper"><iframe src="<%= study_material.video_content_id %>" frameborder="0" allowfullscreen></iframe></div>
 					    	      	</div>
 					    	      	<div class="col-sm-12 col-md-6">  
 					    	      		<div class="videoWrapper">
 					    	      			<image src="/images/model-sample.png" class="img-responsive" style="padding:2px;">
-					    	      			<!-- <iframe src="<%= study_material.model_source.html_safe %>" frameborder="0" allowfullscreen></iframe> -->
+					    	      			<!-- <iframe src="<%= study_material.interactive_content_id %>" frameborder="0" allowfullscreen></iframe> -->
 					    	      		</div>
 					    	      	</div>
 					    	      </div>
@@ -70,7 +70,7 @@
 
 			    	      		<div class="videoWrapper">	
 			    	      			<!-- <video autobuffer="autobuffer" controls="controls" src="/videos/demo.mp4" /> -->
-			    	      			<iframe src="<%= study_material.video_source.html_safe %>" frameborder="0" allowfullscreen></iframe>
+			    	      			<iframe src="<%= study_material.video_content_id %>" frameborder="0" allowfullscreen></iframe>
 			    	      		</div>
 				    	      </div>
 

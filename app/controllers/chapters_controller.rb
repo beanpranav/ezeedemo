@@ -22,7 +22,7 @@ class ChaptersController < ApplicationController
 
     respond_to do |format|
       if @chapter.save
-        format.html { redirect_to chapters_url, notice: 'Chapter was successfully created.' }
+        format.html { redirect_to chapter_path(@chapter), notice: 'Chapter was successfully created.' }
       else
         format.html { render action: 'new' }
       end
@@ -30,9 +30,11 @@ class ChaptersController < ApplicationController
   end
 
   def update
+    @subject = @chapter.subject
+
     respond_to do |format|
       if @chapter.update(chapter_params)
-        format.html { redirect_to chapters_url, notice: 'Chapter was successfully updated.' }
+        format.html { redirect_to chapter_path(@chapter), notice: 'Chapter was successfully updated.' }
       else
         format.html { render action: 'edit' }
       end

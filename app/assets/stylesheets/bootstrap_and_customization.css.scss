@@ -178,7 +178,8 @@ h3 {
 }
 .panel-group .panel { border-radius: 0; }
 // .panel-default > .panel-heading { border-radius: 0; border-color: $navbar-default-bg; background-color: transparent; }
-.panel-primary, .panel-green, .panel-orange, .panel-red { padding: 10px 15px; }
+.panel-secondary, .panel-primary, .panel-green, .panel-orange, .panel-red { padding: 10px 15px; }
+.panel-secondary { background-color: $brand-font-gray; }
 .panel-primary { background-color: $brand-primary;}
 .panel-green { background-color: $brand-green; }
 .panel-orange { background-color: $brand-orange; }
@@ -199,23 +200,6 @@ h3 {
 	border-radius: 0;
 }
 .modal-actions { margin-top: -5px; }
-.btn-sm { padding: 4px 9px; }
-.btn-modal, .btn-modal-red, .btn-modal-orange, .btn-modal-green { 
-	border-radius: 0;
-	border: 2px solid white;
-	font-weight: bold; 
-}
-.btn-modal { background-color: transparent; color: white; }
-.btn-modal:hover, .btn-modal:focus { color: white; }
-.btn-modal-primary { background-color: white;	color: $brand-primary; }
-.btn-modal-primary:hover, .btn-modal-primary:focus { color: white; background-color: $brand-primary; }
-.btn-modal-red { background-color: white;	color: $brand-red; }
-.btn-modal-red:hover, .btn-modal-red:focus { color: white; background-color: $brand-red; }
-.btn-modal-orange { background-color: white;	color: $brand-orange; }
-.btn-modal-orange:hover, .btn-modal-orange:focus { color: white; background-color: $brand-orange }
-.btn-modal-green { background-color: white;	color: $brand-green; }
-.btn-modal-green:hover, .btn-modal-green:focus { color: white; background-color: $brand-green }
-.btn-modal:hover, .btn-modal:focus, .btn-modal-red:hover, .btn-modal-red:focus, .btn-modal-orange:hover, .btn-modal-orange:focus, .btn-modal-green:hover, .btn-modal-green:focus { outline: 5px auto white; outline-offset: -2px; }
 
 //  autosizing iframes for videos - youtube and vimeo
 .videoWrapper {
@@ -260,8 +244,8 @@ h3 {
 
 
 // BUTTONS
-.btn { padding: 5px 12px; }
-.btn-primary, .btn-green, .btn-red {
+.btn { 
+	padding: 5px 12px; 
 	border-radius: 0;
 	font-weight: bold; 
 	background-color: white;
@@ -272,6 +256,24 @@ h3 {
 .btn-green:hover, .btn-green:focus { background-color: $brand-green; color: white; }
 .btn-red { color: $brand-red; border: 2px solid $brand-red; }
 .btn-red:hover, .btn-red:focus { background-color: $brand-red; color: white; }
+
+.btn-sm { padding: 4px 9px; }
+.btn-modal, .btn-modal-red, .btn-modal-orange, .btn-modal-green { 
+	border-radius: 0;
+	border: 2px solid white;
+	font-weight: bold; 
+}
+.btn-modal { background-color: transparent; color: white; }
+.btn-modal:hover, .btn-modal:focus { color: white; }
+.btn-modal-primary { background-color: white;	color: $brand-primary; }
+.btn-modal-primary:hover, .btn-modal-primary:focus { color: white; background-color: $brand-primary; }
+.btn-modal-red { background-color: white;	color: $brand-red; }
+.btn-modal-red:hover, .btn-modal-red:focus { color: white; background-color: $brand-red; }
+.btn-modal-orange { background-color: white;	color: $brand-orange; }
+.btn-modal-orange:hover, .btn-modal-orange:focus { color: white; background-color: $brand-orange }
+.btn-modal-green { background-color: white;	color: $brand-green; }
+.btn-modal-green:hover, .btn-modal-green:focus { color: white; background-color: $brand-green }
+.btn-modal:hover, .btn-modal:focus, .btn-modal-red:hover, .btn-modal-red:focus, .btn-modal-orange:hover, .btn-modal-orange:focus, .btn-modal-green:hover, .btn-modal-green:focus { outline: 5px auto white; outline-offset: -2px; }
 
 
 // FORMS
@@ -291,5 +293,6 @@ select {
 	height: 34px;
 	box-shadow: inset 0px 0px 50px $body-border;
 	background-color: white;
+	color: $brand-primary;
 }
-select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0 }
+select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }

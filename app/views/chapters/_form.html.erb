@@ -1,8 +1,8 @@
-
-<h3><%= @subject.standard %>th <%= @subject.board %></h3>
-<h2><b><%= @subject.name %></b></h2>
-<br>
-
+<% unless params[:action] == "create" %>
+  <h3><%= @subject.standard %>th <%= @subject.board %></h3>
+  <h2><b><%= @subject.name %></b></h2>
+  <br>
+<% end %>
 
 <%= form_for(@chapter) do |f| %>
   <% if @chapter.errors.any? %>

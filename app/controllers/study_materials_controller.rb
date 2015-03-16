@@ -22,7 +22,7 @@ class StudyMaterialsController < ApplicationController
 
     respond_to do |format|
       if @study_material.save
-        format.html { redirect_to study_materials_url, notice: 'Study material was successfully created.' }
+        format.html { redirect_to chapter_path(@study_material.chapter), notice: 'Study material was successfully created.' }
       else
         format.html { render action: 'new' }
       end
@@ -30,9 +30,11 @@ class StudyMaterialsController < ApplicationController
   end
 
   def update
+    @chapter = @study_material.chapter
+
     respond_to do |format|
       if @study_material.update(study_material_params)
-        format.html { redirect_to study_materials_url, notice: 'Study material was successfully updated.' }
+        format.html { redirect_to chapter_path(@study_material.chapter), notice: 'Study material was successfully updated.' }
       else
         format.html { render action: 'edit' }
       end
@@ -54,6 +56,6 @@ class StudyMaterialsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def study_material_params
-      params.require(:study_material).permit(:material_type, :name, :video_source, :video_duration, :model_source, :chapter_id)
+      params.require(:study_material).permit(:chapter_id, :material_type, :material_no, :name, :next_step, :admin_incharge, :video_content_id, :interactive_content_id)
     end
 end

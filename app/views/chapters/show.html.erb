@@ -10,7 +10,11 @@
 
 	<% if user_signed_in? && current_user.role == "Admin" %>
     <%= link_to "Edit Chapter", edit_chapter_path(@chapter) %><br>
-    <%= link_to "Add New Study Material", controller: "study_materials", action: "new", chapter_id: @chapter.id %>
+    <%= link_to "Add New Study Material", controller: "study_materials", action: "new", chapter_id: @chapter.id %><br>
+    <% @chapter.study_materials.sort_by(&:material_no).each do |study_material| %>
+    	<br>
+    	<%= link_to "Edit #{study_material.name}", edit_study_material_path(study_material) %>
+    <% end %>
 	<% end %>
 </div>
 
@@ -23,7 +27,7 @@
 			<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "primary", "green", "orange", "red"].sample %> pull-left"></i>
 		<% end %>
 
-		<h2 class="font-invert"><b><%= @chapter.name %></b></h2>
+		<h2 class="font-invert"><b><%= @chapter.chapterNumber %>. <%= @chapter.name %></b></h2>
 		<h3 class="font-invert">0 / <%= @chapter.study_materials.count %> Goals</h3>
 
 	</div>
