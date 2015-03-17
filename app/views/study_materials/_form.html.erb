@@ -48,7 +48,7 @@
       <p><%= f.number_field :video_content_id, placeholder: "Dropdown", class: "form-control" %></p>
       <p><%= f.number_field :interactive_content_id, placeholder: "Dropdown", class: "form-control" %></p>
       <br>
-      <p><%= f.select :next_step, options_for_select([["Upload & Assign"], ["Content Review"], ["Content Work in Progress"], ["Content Sign-off"], ["User Review"], ["Completed"]]) %></p>
+      <p><%= f.select :next_step, options_for_select([["Upload & Assign"], ["Content Review-Refine"], ["Content Sign-off"], ["User Review"], ["Completed"]]) %></p>
       <p><%= f.select :admin_incharge, options_for_select([["Archie"], ["Deepak"], ["Ashwini"], ["Pranav"], ["Alok"]]), :include_blank => true %></p>
     </div>
   </div>

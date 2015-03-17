@@ -102,7 +102,7 @@
 
             <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-              <% subject.chapters.each do |chapter| %>
+              <% subject.chapters.sort_by(&:chapterNumber).each do |chapter| %>
 
                 <div class="panel panel-default">
                   <a class="collapsed supress-a" data-toggle="collapse" data-parent="#accordion" href="#<%= subject.id %>-<%=chapter.id %>" aria-expanded="false" aria-controls="<%= subject.id %>-<%=chapter.id %>">
