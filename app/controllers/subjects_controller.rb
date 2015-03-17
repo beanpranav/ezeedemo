@@ -15,6 +15,10 @@ class SubjectsController < ApplicationController
   def edit
   end
 
+  def subject_admin
+    @subject = Subject.find_by(id:params[:id])
+  end
+
   def create
     @subject = Subject.new(subject_params)
 

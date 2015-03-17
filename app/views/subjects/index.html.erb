@@ -1,166 +1,37 @@
 
-  <div class="secondary-nav secondary-nav-invert">
-      
-    <i class="fa fa-2x fa-laptop content-list-icon-primary pull-left"></i>
-    <h2 class="font-invert"><b>Admin Dashboard</b></h2>
-    <h3 class="font-invert"><%= current_user.name %></h3>
+<div class="secondary-nav secondary-nav-invert">
+    
+  <i class="fa fa-2x fa-laptop content-list-icon-primary pull-left"></i>
+  <h2 class="font-invert"><b>Admin Dashboard</b></h2>
+  <h3 class="font-invert"><%= current_user.name %></h3>
 
+  <div class="secondary-nav-actions pull-right dropdown">
+    <%= link_to 'Add New Subject', new_subject_path, class: "btn btn-sm btn-modal" %>
   </div>
 
+</div>
 
-  <div class="tab-content">
-      
-      <div class="tab-pane active" id="overall">
-
-        <div class="secondary-nav">
-            
-          <i class="fa fa-2x fa-book secondary-nav-icon pull-left"></i>
-          <h2><b>All Subjects</b></h2>
-          <h3>Ezee Learning</h3>
-        
-          <div class="secondary-nav-actions pull-right dropdown">
-            <%= link_to 'Add New Subject', new_subject_path, class: "btn btn-sm btn-primary" %>
-          </div>
-
-        </div>
-
-        <div class="content-container">
-          
-          <div class="panel-secondary">
-            <div class="panel-title">
-
-            </div>
-          </div>
-
-          <div class="panel-body">
-            <ul class="content-list">
-              
-              <% @subjects.each do |subject| %>
-
-                <% if subject.chapters.count == 0 %>
-
-                  <li class="content-list-item">
-                    <h2><b><%= subject.name %></b></h2>
-                    <h3>Locked</h3>
-                  </li>
-
-                <% else %>
-
-                  <a href="#<%= subject.id %>" data-toggle="pill" class="supress-a">
-                    <li class="content-list-item">
-                      <h2><b><%= subject.name %></b></h2>
-                      <h3><%= subject.standard %>th <%= subject.board %>: <%= subject.chapters.count %> Chapters</h3>
-                    </li>
-                  </a>
-
-                <% end %>
-
-              <% end %>
-            
-            </ul>
-
-          </div>
-
-        </div>
-
-      </div>
-
-
-<!-- Individual subject Loop -->
-    <% @subjects.each do |subject| %>
-
-      <div class="tab-pane" id="<%= subject.id %>">
-
-        <div class="secondary-nav">
-            
-          <a href="#overall" data-toggle="pill"><i class="fa fa-2x fa-arrow-left secondary-nav-icon pull-left"></i></a>
-          <h2><b><%= subject.name %></b></h2>
-          <h3><%= subject.standard %>th <%= subject.board %>: <%= subject.chapters.count %> Chapters</h3>
-        
-          <div class="secondary-nav-actions pull-right dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <button type="button" class="btn btn-sm btn-primary">actions <i class="fa fa-fw fa-caret-down"></i></button>
-            </a>
-
-            <ul class="dropdown-menu">
-              <li>
-                <ul class="nav nav-pill nav-dropdown">
-                  <li><%= link_to 'Show', subject %></li>
-                  <li><%= link_to 'Edit', edit_subject_path(subject) %></li>
-                  <li><%= link_to 'Delete', subject, method: :delete, data: { confirm: 'Are you sure?' } %></li>
-                </ul>
-              </li>
-            </ul>
-          </div>
-
-        </div>
-
-
-        <div class="content-container">
-
-          <% unless subject.chapters.count == 0 %>
-
-            <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-
-              <% subject.chapters.sort_by(&:chapterNumber).each do |chapter| %>
-
-                <div class="panel panel-default">
-                  <a class="collapsed supress-a" data-toggle="collapse" data-parent="#accordion" href="#<%= subject.id %>-<%=chapter.id %>" aria-expanded="false" aria-controls="<%= subject.id %>-<%=chapter.id %>">
-                    <div class="panel-secondary" role="tab" id="headingTwo">
-                      <div class="panel-title">
-                        <%= chapter.chapterNumber %>. <%= chapter.name %>
-                        <i class="fa fa-fw fa-sort pull-right" style="margin: 3px -5px 0 0;"></i>
-                      </div>
-                    </div>
-                   </a>
-                  <div id="<%= subject.id %>-<%=chapter.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
-                    <div class="panel-body">
-                      
-                      <table class="table table-hover">
-                        <thead>
-                          <tr>
-                            <th colspan="1"></th>
-                            <th>Goal Name</th>
-                            <th>Video</th>
-                            <th>Interactive</th>
-                            <th>Next Step</th>
-                            <th>Admin Incharge</th>
-                            <th colspan="1"></th>
-                          </tr>
-                        </thead>
-
-                        <tbody>
-                          <% chapter.study_materials.sort_by(&:material_no).each do |study_material| %>
-                            <tr>
-                              <td class=<%= if study_material.material_type == "Quick Concepts" then "font-red" elsif study_material.material_type == "Learn Smart" then "font-orange" else "font-green" end %>>
-                                <b><%= study_material.material_no %></b>
-                              </td>
-                              <td><%= study_material.name %></td>
-                              <td><%= if study_material.video_content_id? then "YES" else "-" end %></td>
-                              <td><%= if study_material.interactive_content_id? then "YES" else "-" end %></td>
-                              <td><%= study_material.next_step %></td>
-                              <td><%= study_material.admin_incharge %></td>
-                              <td><%= link_to '<i class="fa fa-arrow-right"></a>'.html_safe, edit_study_material_path(study_material) %></td>
-                            </tr>
-                          <% end %>
-                        </tbody>
-                      </table>
-
-
-                    </div>
-                  </div>
-                </div>
-
-              <% end %>
-
-            </div>
-
-          <% end %>
-
-        </div>
-
-      </div>
-
-    <% end %>
-
+<div class="content-container">
+  
+  <div class="panel-primary">
+    <div class="panel-title">
+      All Subjects
+    </div>
   </div>
+
+  <div class="panel-body">
+    <ul class="content-list">
+      
+      <% @subjects.sort_by(&:standard).reverse!.each do |subject| %>
+          <a href="<%= subject_admin_subject_path(subject) %>" class="supress-a">
+            <li class="content-list-item">
+              <h2><b><%= subject.standard %>th <%= subject.board %>: <%= subject.name %></b></h2>
+              <h3> <%= subject.chapters.count %> Chapters</h3>
+            </li>
+          </a>
+      <% end %>
+    
+    </ul>
+  </div>
+
+</div>

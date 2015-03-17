@@ -1,10 +1,15 @@
 Rails.application.routes.draw do
+
   devise_for :users
   resources :study_materials
 
   resources :chapters
 
-  resources :subjects
+  resources :subjects do
+	  member do
+	    get :subject_admin
+	  end
+	end
 
   root 'pages#home'
   get "common_dashboard" => "pages#common_dashboard"
