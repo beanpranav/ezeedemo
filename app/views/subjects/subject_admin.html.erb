@@ -58,7 +58,7 @@
                   <th>Video</th>
                   <th>Interactive</th>
                   <th>Next Step</th>
-                  <th>Admin Incharge</th>
+                  <th class="one-line-cell">Admin Incharge</th>
                   <th colspan="1"></th>
                 </tr>
               </thead>
@@ -72,7 +72,7 @@
                     <td><%= study_material.name %></td>
                     <td><%= if study_material.video_content_id? then "YES" else "-" end %></td>
                     <td><%= if study_material.interactive_content_id? then "YES" else "-" end %></td>
-                    <td><%= study_material.next_step %></td>
+                    <td class="one-line-cell"><%= study_material.next_step %></td>
                     <td><%= study_material.admin_incharge %></td>
                     <td><%= link_to '<i class="fa fa-arrow-right"></a>'.html_safe, edit_study_material_path(study_material) %></td>
                   </tr>
