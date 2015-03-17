@@ -28,10 +28,18 @@ GEM
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
     arel (5.0.1.20140414130214)
+    aws-sdk (1.20.0)
+      json (~> 1.4)
+      nokogiri (>= 1.4.4, < 1.6.0)
+      uuidtools (~> 2.1)
     bcrypt-ruby (3.1.2)
     bootstrap-sass (3.1.1.0)
       sass (~> 3.2)
     builder (3.2.2)
+    climate_control (0.0.3)
+      activesupport (>= 3.0)
+    cocaine (0.5.7)
+      climate_control (>= 0.0.3, < 1.0)
     coffee-rails (4.0.1)
       coffee-script (>= 2.2.0)
       railties (>= 4.0.0, < 5.0)
@@ -70,7 +78,13 @@ GEM
     mime-types (1.25.1)
     minitest (5.5.1)
     multi_json (1.11.0)
+    nokogiri (1.5.11)
     orm_adapter (0.5.0)
+    paperclip (4.2.1)
+      activemodel (>= 3.0.0)
+      activesupport (>= 3.0.0)
+      cocaine (~> 0.5.3)
+      mime-types
     pg (0.17.1)
     polyglot (0.3.5)
     rack (1.5.2)
@@ -139,6 +153,7 @@ GEM
       raindrops (~> 0.7)
     unicorn-worker-killer (0.4.2)
       unicorn (~> 4)
+    uuidtools (2.1.4)
     warden (1.2.3)
       rack (>= 1.0)
 
@@ -146,6 +161,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  aws-sdk (< 2.0)
   bootstrap-sass (~> 3.1.1.0)
   coffee-rails (~> 4.0.0)
   devise (~> 3.2.2)
@@ -154,6 +170,7 @@ DEPENDENCIES
   jbuilder (~> 1.2)
   jquery-rails
   masonry-rails (~> 0.2.0)
+  paperclip (~> 4.2)
   pg
   rails (= 4.1.4)
   rails_12factor

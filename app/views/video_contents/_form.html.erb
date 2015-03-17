@@ -1,0 +1,45 @@
+<%= form_for @video_content, html: { multipart: true } do |f| %>
+  <% if @video_content.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@video_content.errors.count, "error") %> prohibited this video_content from being saved:</h2>
+
+      <ul>
+      <% @video_content.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :content_type %><br>
+    <%= f.text_field :content_type %>
+  </div>
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_field :name %>
+  </div>
+  <div class="form-group">
+    <%= f.label :content %>
+    <%= f.file_field :content, class: "form-control" %>
+  </div>
+  <div class="field">
+    <%= f.label :video_duration %><br>
+    <%= f.number_field :video_duration %>
+  </div>
+  <div class="field">
+    <%= f.label :production_date %><br>
+    <%= f.date_select :production_date %>
+  </div>
+  <div class="field">
+    <%= f.label :producer_name %><br>
+    <%= f.text_field :producer_name %>
+  </div>
+  <div class="field">
+    <%= f.label :admin_note %><br>
+    <%= f.text_field :admin_note %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

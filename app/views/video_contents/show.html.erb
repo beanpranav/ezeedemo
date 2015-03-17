@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Content type:</strong>
+  <%= @video_content.content_type %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @video_content.name %>
+</p>
+
+<p>
+  <strong>Video:</strong>
+  <div class="videoWrapper">  
+    <%= video_tag(@video_content.content.url, controls: true, autobuffer: true) %>
+  </div>
+</p>
+
+<p>
+  <strong>Video duration:</strong>
+  <%= @video_content.video_duration %>
+</p>
+
+<p>
+  <strong>Production date:</strong>
+  <%= @video_content.production_date %>
+</p>
+
+<p>
+  <strong>Producer name:</strong>
+  <%= @video_content.producer_name %>
+</p>
+
+<p>
+  <strong>Admin note:</strong>
+  <%= @video_content.admin_note %>
+</p>
+
+<%= link_to 'Edit', edit_video_content_path(@video_content) %> |
+<%= link_to 'Back', video_contents_path %>

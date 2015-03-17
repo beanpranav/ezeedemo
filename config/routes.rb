@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :video_contents
+
   devise_for :users
   resources :study_materials
 

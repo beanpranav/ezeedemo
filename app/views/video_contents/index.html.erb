@@ -1,0 +1,35 @@
+<h1>Listing video_contents</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Content type</th>
+      <th>Name</th>
+      <th>Video duration</th>
+      <th>Production date</th>
+      <th>Producer name</th>
+      <th>Admin note</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @video_contents.each do |video_content| %>
+      <tr>
+        <td><%= video_content.content_type %></td>
+        <td><%= video_content.name %></td>
+        <td><%= video_content.video_duration %></td>
+        <td><%= video_content.production_date %></td>
+        <td><%= video_content.producer_name %></td>
+        <td><%= video_content.admin_note %></td>
+        <td><%= link_to 'Show', video_content %></td>
+        <td><%= link_to 'Edit', edit_video_content_path(video_content) %></td>
+        <td><%= link_to 'Destroy', video_content, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Video content', new_video_content_path %>

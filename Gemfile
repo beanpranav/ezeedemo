@@ -34,11 +34,11 @@ gem 'secure_headers'
 # Bootstrap for styling
 gem "bootstrap-sass", "~> 3.1.1.0"
 
-# # for image uploads with ImageMagick
-# gem 'paperclip', '~> 3.0'
+# for image uploads with ImageMagick
+gem 'paperclip', '~> 4.2'
 
 # # for amazon s3 file storage
-# gem 'aws-sdk', '~> 1.20.0'
+gem 'aws-sdk', '< 2.0'
 
 # jQuery include file
 gem 'masonry-rails', '~> 0.2.0'

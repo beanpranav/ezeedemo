@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content_type: MyString
+  name: MyString
+  video_duration: 1
+  production_date: 2015-03-17
+  producer_name: MyString
+  admin_note: MyString
+
+two:
+  content_type: MyString
+  name: MyString
+  video_duration: 1
+  production_date: 2015-03-17
+  producer_name: MyString
+  admin_note: MyString
