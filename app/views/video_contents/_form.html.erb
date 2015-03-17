@@ -11,35 +11,37 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :content_type %><br>
-    <%= f.text_field :content_type %>
+
+  <div class="row">
+    <div class="col-xs-12 col-sm-3">
+      <p class="form-label">Content Type</p>
+      <p class="form-label">Video Name</p>
+      <p class="form-label">File</p>
+      <br>
+      <p class="form-label">Video Duration</p>
+      <p class="form-label">Dev date</p>
+      <p class="form-label">Developer</p>
+      <p class="form-label">Admin Notes</p>
+    </div>
+    <div class="col-xs-12 col-sm-9">
+      <p class="form-radio">
+        <%= f.radio_button(:content_type, "Concept") %>
+        <%= label_tag(:content_type_1, "Concept") %> &nbsp; &nbsp;
+        <%= f.radio_button(:content_type, "Experiment") %>
+        <%= label_tag(:content_type_2, "Experiment") %> &nbsp; &nbsp;
+        <%= f.radio_button(:content_type, "Numerical") %>
+        <%= label_tag(:content_type_3, "Numerical") %>
+      </p>
+      <p><%= f.text_field :name, placeholder: "Material Name", class: "form-control" %></p>
+      <p><%= f.file_field :content, class: "form-control" %></p>
+      <br>
+      <p><%= f.number_field :video_duration, placeholder: "Video Duration", class: "form-control" %></p>
+      <p><%= f.date_field :production_date, class: "form-control" %></p>
+      <p><%= f.text_field :producer_name, placeholder: "Developer Name", class: "form-control" %></p>
+      <p><%= f.text_area :admin_note, placeholder: "Comments", class: "form-control" %></p>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_field :name %>
-  </div>
-  <div class="form-group">
-    <%= f.label :content %>
-    <%= f.file_field :content, class: "form-control" %>
-  </div>
-  <div class="field">
-    <%= f.label :video_duration %><br>
-    <%= f.number_field :video_duration %>
-  </div>
-  <div class="field">
-    <%= f.label :production_date %><br>
-    <%= f.date_select :production_date %>
-  </div>
-  <div class="field">
-    <%= f.label :producer_name %><br>
-    <%= f.text_field :producer_name %>
-  </div>
-  <div class="field">
-    <%= f.label :admin_note %><br>
-    <%= f.text_field :admin_note %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+
+  <br>
+  <p><%= f.submit class: "btn btn-block btn-green" %></p>
 <% end %>
