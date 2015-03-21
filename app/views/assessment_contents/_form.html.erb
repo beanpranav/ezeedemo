@@ -1,0 +1,53 @@
+<%= form_for(@assessment_content) do |f| %>
+  <% if @assessment_content.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@assessment_content.errors.count, "error") %> prohibited this assessment_content from being saved:</h2>
+
+      <ul>
+      <% @assessment_content.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :video_content_id %><br>
+    <%= f.number_field :video_content_id %>
+  </div>
+  <div class="field">
+    <%= f.label :question %><br>
+    <%= f.text_area :question %>
+  </div>
+  <div class="field">
+    <%= f.label :choice_a %><br>
+    <%= f.text_area :choice_a %>
+  </div>
+  <div class="field">
+    <%= f.label :choice_b %><br>
+    <%= f.text_area :choice_b %>
+  </div>
+  <div class="field">
+    <%= f.label :choice_c %><br>
+    <%= f.text_area :choice_c %>
+  </div>
+  <div class="field">
+    <%= f.label :choice_d %><br>
+    <%= f.text_area :choice_d %>
+  </div>
+  <div class="field">
+    <%= f.label :answer %><br>
+    <%= f.text_field :answer %>
+  </div>
+  <div class="field">
+    <%= f.label :difficulty_level %><br>
+    <%= f.text_field :difficulty_level %>
+  </div>
+  <div class="field">
+    <%= f.label :next_step %><br>
+    <%= f.text_field :next_step %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

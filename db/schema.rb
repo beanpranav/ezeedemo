@@ -11,7 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150320114418) do
+ActiveRecord::Schema.define(version: 20150321085442) do
+
+  create_table "assessment_contents", force: true do |t|
+    t.integer  "video_content_id"
+    t.text     "question"
+    t.text     "choice_a"
+    t.text     "choice_b"
+    t.text     "choice_c"
+    t.text     "choice_d"
+    t.string   "answer"
+    t.string   "difficulty_level"
+    t.string   "next_step"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "chapters", force: true do |t|
     t.string   "name"

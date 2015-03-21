@@ -1,0 +1,49 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Video content:</strong>
+  <%= @assessment_content.video_content_id %>
+</p>
+
+<p>
+  <strong>Question:</strong>
+  <%= @assessment_content.question %>
+</p>
+
+<p>
+  <strong>Choice a:</strong>
+  <%= @assessment_content.choice_a %>
+</p>
+
+<p>
+  <strong>Choice b:</strong>
+  <%= @assessment_content.choice_b %>
+</p>
+
+<p>
+  <strong>Choice c:</strong>
+  <%= @assessment_content.choice_c %>
+</p>
+
+<p>
+  <strong>Choice d:</strong>
+  <%= @assessment_content.choice_d %>
+</p>
+
+<p>
+  <strong>Answer:</strong>
+  <%= @assessment_content.answer %>
+</p>
+
+<p>
+  <strong>Difficulty level:</strong>
+  <%= @assessment_content.difficulty_level %>
+</p>
+
+<p>
+  <strong>Next step:</strong>
+  <%= @assessment_content.next_step %>
+</p>
+
+<%= link_to 'Edit', edit_assessment_content_path(@assessment_content) %> |
+<%= link_to 'Back', assessment_contents_path %>

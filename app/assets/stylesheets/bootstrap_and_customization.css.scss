@@ -197,6 +197,7 @@ td { text-align: left; }
 
 
 // Content Display
+.modal { overflow-y: hidden; }
 .modal-backdrop.in { opacity: 0.8; }
 .modal-dialog { width: 95%; margin-top: 55px; }
 .modal-body { padding: 15px; }
@@ -237,6 +238,7 @@ td { text-align: left; }
 // HOME PAGE
 .home-screen {
 	background-image: url("/images/home-backdrop.jpg");
+	background-size: 100%;
 	background-repeat:no-repeat;
 	background-position: center center;
 	border: 5px solid white;

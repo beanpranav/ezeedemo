@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  video_content_id: 1
+  question: MyText
+  choice_a: MyText
+  choice_b: MyText
+  choice_c: MyText
+  choice_d: MyText
+  answer: MyString
+  difficulty_level: MyString
+  next_step: MyString
+
+two:
+  video_content_id: 1
+  question: MyText
+  choice_a: MyText
+  choice_b: MyText
+  choice_c: MyText
+  choice_d: MyText
+  answer: MyString
+  difficulty_level: MyString
+  next_step: MyString

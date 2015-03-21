@@ -59,7 +59,7 @@
         <div class="modal-body"> 
           <div class="row">
             <div class="col-sm-12 col-md-8">  
-              <div class="videoWrapper"><%= @video_content.content.html_safe %></div>
+              <div class="videoWrapper"><%= @video_content.content.html_safe if @video_content.content? %></div>
             </div>
             <div class="col-sm-12 col-md-4">
               <p class="form-radio"><b>Admin Notes</b></p>  
