@@ -1,8 +1,5 @@
 class VideoContent < ActiveRecord::Base
+	validates_presence_of :content_type, :name, :content, :video_duration, :production_date, :producer_name
 
-	has_attached_file :content
-	validates_attachment :content, presence: true, content_type: { content_type: "video/mp4" }
-
-	validates_presence_of :content_type, :name, :video_duration, :production_date, :producer_name
-	
+	has_many :study_materials
 end

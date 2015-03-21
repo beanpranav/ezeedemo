@@ -42,6 +42,8 @@ h3 {
 	margin: 5px;
 }
 
+td { text-align: left; }
+
 .font-invert { color: white!important; font-weight: lighter; }
 .font-green { color: $brand-green; font-weight: lighter; }
 .font-orange { color: $brand-orange; font-weight: lighter; }
@@ -103,6 +105,7 @@ h3 {
 .secondary-nav-actions { margin: -41px 10px; }
 
 .center { text-align: center; }
+.left { text-align: left; }
 .supress-a { color: $brand-font; text-decoration: none; }
 .supress-a:hover, .supress-a:focus { color: $brand-font; text-decoration: none; }
 .one-line-cell { white-space: nowrap; }
@@ -205,7 +208,7 @@ h3 {
 //  autosizing iframes for videos - youtube and vimeo
 .videoWrapper {
 	position: relative;
-	padding-bottom: 66.25%; /* 16:9 */
+	padding-bottom: 73.9%; /* 16:9 */
 	height: 0;
 	background-color: black; 
 }
@@ -257,6 +260,7 @@ h3 {
 .btn-green:hover, .btn-green:focus { background-color: $brand-green; color: white; }
 .btn-red { color: $brand-red; border: 2px solid $brand-red; }
 .btn-red:hover, .btn-red:focus { background-color: $brand-red; color: white; }
+.btn-disabled { color: $body-border; border: 2px solid $body-bg; }
 
 .btn-sm { padding: 4px 9px; }
 .btn-modal, .btn-modal-red, .btn-modal-orange, .btn-modal-green { 
@@ -285,8 +289,11 @@ h3 {
 	border-radius: 0px; 
 	border: 0; 
 	box-shadow: inset 0px 0px 50px $body-border;
+	text-align: left;
 }
-.form-control:focus { box-shadow: inset 0px 0px 2px $body-border; } 
+.form-control:focus { box-shadow: inset 0px 0px 2px $body-border; }
+.form-control-label {	background-color: $body-border; }
+
 select { 
 	width: 100%;
 	border-radius: 0px; 

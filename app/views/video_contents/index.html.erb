@@ -1,35 +1,86 @@
-<h1>Listing video_contents</h1>
+<div class="secondary-nav secondary-nav-invert">
+    
+  <i class="fa fa-2x fa-laptop content-list-icon-primary pull-left"></i>
+  <h2 class="font-invert"><b>Ezee Video Content</b></h2>
+  <h3 class="font-invert"><%= current_user.name %></h3>
 
-<table>
-  <thead>
-    <tr>
-      <th>Content type</th>
-      <th>Name</th>
-      <th>Video duration</th>
-      <th>Production date</th>
-      <th>Producer name</th>
-      <th>Admin note</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+  <div class="secondary-nav-actions pull-right dropdown">
+    <%= link_to 'Add New Video Content', new_video_content_path, class: "btn btn-sm btn-modal" %>
+  </div>
 
-  <tbody>
-    <% @video_contents.each do |video_content| %>
-      <tr>
-        <td><%= video_content.content_type %></td>
-        <td><%= video_content.name %></td>
-        <td><%= video_content.video_duration %></td>
-        <td><%= video_content.production_date %></td>
-        <td><%= video_content.producer_name %></td>
-        <td><%= video_content.admin_note %></td>
-        <td><%= link_to 'Show', video_content %></td>
-        <td><%= link_to 'Edit', edit_video_content_path(video_content) %></td>
-        <td><%= link_to 'Destroy', video_content, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
+</div>
+
+
+<div class="content-container">
+
+  <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+
+    <div class="panel panel-default">
+      <div class="panel-primary">
+        <div class="panel-title">
+          All Videos
+        </div>
+      </div>
+    </div>
+
+    <% @video_contents.sort_by(&:id).each do |video_content| %>
+
+      <div class="panel panel-default">
+        <a class="collapsed supress-a" data-toggle="collapse" data-parent="#accordion" href="#<%= video_content.id %>" aria-expanded="false" aria-controls="<%= video_content.id %>">
+          <div class="panel-secondary" role="tab" id="headingTwo">
+            <div class="panel-title">
+              <%= video_content.content_type %>: <%= video_content.name %> [<%= video_content.id %>]
+              <i class="fa fa-fw fa-sort pull-right" style="margin: 3px -5px 0 0;"></i>
+            </div>
+          </div>
+        </a>
+
+        <div id="<%= video_content.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+          <div class="panel-body">
+            
+            <h3>Used in</h3>
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th colspan="1">#</th>
+                  <th>Course</th>
+                  <th>Chapter</th>
+                  <th>Goal Name</th>
+                  <th colspan="1"></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <% video_content.study_materials.each_with_index do |study_material, i| %>
+                  <tr>
+                    <td><%= i+1 %></td>
+                    <td class="one-line-cell"><%= study_material.chapter.subject.standard %>th <%= study_material.chapter.subject.board %> <%= study_material.chapter.subject.name %></td>
+                    <td class="one-line-cell"><%= study_material.chapter.name %></td>
+                    <td><%= study_material.name %></td>
+                    <td><%= link_to '<i class="fa fa-arrow-right"></a>'.html_safe, edit_study_material_path(study_material) %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+            <div>
+              <p class="pull-left">
+                <b>Admin Notes:</b>
+                <br><%= video_content.admin_note.html_safe %>
+              </p>
+
+              <p class="pull-right">
+                <%= link_to "Delete Video", video_content, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-red" %>
+                <%= link_to "Go to Video", video_content, class: "btn btn-sm btn-green" %>
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
     <% end %>
-  </tbody>
-</table>
 
-<br>
+  </div>
 
-<%= link_to 'New Video content', new_video_content_path %>
+</div>

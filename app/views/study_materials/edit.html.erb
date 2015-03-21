@@ -15,5 +15,10 @@
   </div>
 
   <%= link_to 'Cancel', :back %>
-
+  <% if @study_material.video_content != nil %> | 
+    <%= link_to "Edit Video Content", edit_video_content_path(@study_material.video_content) %>
+  <% end %>
+  <% if false %> | 
+    <%= link_to "Edit Interactive Content", edit_interactive_content_path(@study_material.interactive_content) %>
+  <% end %>  
 </div>

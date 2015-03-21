@@ -44,9 +44,79 @@
       <p><%= f.number_field :material_no, placeholder: "Material No.", class: "form-control" %></p>
       <p><%= f.text_field :name, placeholder: "Material Name", class: "form-control" %></p>
       <br>
-      <p class="form-radio"><em>Ezee Content (Choose One)</em></p>
-      <p><%= f.number_field :video_content_id, placeholder: "Dropdown", class: "form-control" %></p>
-      <p><%= f.number_field :interactive_content_id, placeholder: "Dropdown", class: "form-control" %></p>
+
+      <p class="form-radio"><em>Ezee Content (alteast one)</em></p>
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <p><%= f.number_field :video_content_id, placeholder: "Dropdown", class: "form-control" %></p>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+
+          <% if @study_material.video_content != nil %>
+            <button type="button" class="btn btn-red btn-block" style="margin-bottom: 10px;" data-toggle="modal" data-target="#content">View Video</button>
+
+            <div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 modal" id="content" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+
+                  <div class="panel-red panel-title left">
+                    <%= @study_material.video_content.name %>
+                    <div class="modal-actions pull-right">
+                      <button type="button" class="btn btn-sm btn-modal" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                    </div>
+                  </div>
+
+                  <div class="modal-body">          
+                    <div class="videoWrapper">  
+                      <%= @study_material.video_content.content.html_safe %>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          <% else %>
+            <button type="button" class="btn btn-disabled btn-block" style="margin-bottom: 10px;" disabled="disabled">View Video</button>
+          <% end %>
+
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-sm-6">
+          <p><%= f.number_field :interactive_content_id, placeholder: "Dropdown", class: "form-control" %></p>
+        </div>
+        <div class="col-xs-12 col-sm-6">
+          <% if false %>
+          <!-- @study_material.interactive_content != nil -->
+            <button type="button" class="btn btn-red btn-block" style="margin-bottom: 10px;" data-toggle="modal" data-target="#content">View Interactive</button>
+
+            <div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 modal" id="content" tabindex="-1" role="dialog" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+
+                  <div class="panel-red panel-title left">
+                    <%= @study_material.interactive_content.name %>
+                    <div class="modal-actions pull-right">
+                      <button type="button" class="btn btn-sm btn-modal" data-dismiss="modal"><i class="fa fa-times"></i></button>
+                    </div>
+                  </div>
+
+                  <div class="modal-body">          
+                    <div class="videoWrapper">  
+                      <%= @study_material.interactive_content.content.html_safe %>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          <% else %>
+            <button type="button" class="btn btn-disabled btn-block" style="margin-bottom: 10px;" disabled="disabled">View Interactive</button>
+          <% end %>
+        </div>
+      </div>
+
       <br>
       <p><%= f.select :next_step, options_for_select([["Upload & Assign"], ["Content Review-Refine"], ["Content Sign-off"], ["User Review"], ["Completed"]]) %></p>
       <p><%= f.select :admin_incharge, options_for_select([["Archie"], ["Deepak"], ["Ashwini"], ["Pranav"], ["Alok"]]), :include_blank => true %></p>

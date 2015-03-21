@@ -25,6 +25,7 @@
             <ul class="dropdown-menu">
               <% if current_user.role == "Admin" %>
                 <li><%= link_to "Admin Dashboard", subjects_path %></li>
+                <li><%= link_to "Video Dashboard", video_contents_path %></li>
                 <li class="divider"></li>
               <% end %>
               <li><%= link_to "All Subjects", root_path %></li>

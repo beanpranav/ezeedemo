@@ -3,24 +3,27 @@
 		<% @chapter.study_materials.sort_by(&:material_no).each do |study_material| %>
 
 			<% if study_material.material_type == "Quick Concepts" %>
-
+			<!-- Only Quick Concepts -->
 				<% if @chapter.status == "Paid" %>
+				<!-- lock paid chapters -->
 					
 					<li class="content-list-item-lock">
 						<i class="fa fa-2x fa-lock content-list-icon-red pull-left"></i>
-						<h3><%= study_material.material_no %> min Video <%= "& 3D Model" if study_material.interactive_content_id? %></h3>
+						<h3><%= if study_material.video_content != nil then study_material.video_content.video_duration else "***MISSING***" end %> min Video <%= "& 3D Model" if study_material.interactive_content_id? %></h3>
 						<h2><%= study_material.name %></h2>
 					</li>
 
 				<% else %>
+				<!-- Display Free chapters -->
 				
 						<li class="content-list-item" data-toggle="modal" data-target="#show-study-material-<%= study_material.id %>">
 							<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "red"].sample %> pull-left"></i>
-							<h3><!-- [<%= @chapter.chapterNumber %>.<%= study_material.material_no %>]  -->min Video <%= "& 3D Model" if study_material.interactive_content_id? %></h3>
+							<h3><%= if study_material.video_content != nil then study_material.video_content.video_duration else "***MISSING***" end %> min Video <%= "& 3D Model" if study_material.interactive_content_id? %></h3>
 							<h2><%= study_material.name %></h2>
 						</li>
 
 						<% if study_material.interactive_content_id? %>
+						<!-- Show both video and interactive content -->
 				    	
 				    	<div class="modal" id="show-study-material-<%= study_material.id %>" tabindex="-1" role="dialog" aria-hidden="true">
 				    	  <div class="modal-dialog">
@@ -37,7 +40,7 @@
 				    	      <div class="modal-body">
 				    	      	<div class="row">
 					    	      	<div class="col-sm-12 col-md-6">  
-					    	      		<div class="videoWrapper"><iframe src="<%= study_material.video_content_id %>" frameborder="0" allowfullscreen></iframe></div>
+					    	      		<div class="videoWrapper"><%= if study_material.video_content != nil then study_material.video_content.content.html_safe else "***MISSING***" end %></div>
 					    	      	</div>
 					    	      	<div class="col-sm-12 col-md-6">  
 					    	      		<div class="videoWrapper">
@@ -53,6 +56,7 @@
 				    	</div>
 
 			    	<% else %>
+			    	<!-- Show only video content -->
 
 				    	<div class="row col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 modal" id="show-study-material-<%= study_material.id %>" tabindex="-1" role="dialog" aria-hidden="true">
 				    	  <div class="modal-dialog">
@@ -67,11 +71,7 @@
 				    	      </div>
 
 				    	      <div class="modal-body">
-
-			    	      		<div class="videoWrapper">	
-			    	      			<!-- <video autobuffer="autobuffer" controls="controls" src="/videos/demo.mp4" /> -->
-			    	      			<iframe src="<%= study_material.video_content_id %>" frameborder="0" allowfullscreen></iframe>
-			    	      		</div>
+											<div class="videoWrapper"><%= if study_material.video_content != nil then study_material.video_content.content.html_safe else "***MISSING***" end %></div>
 				    	      </div>
 
 				    	    </div>

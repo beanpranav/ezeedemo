@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317104046) do
+ActiveRecord::Schema.define(version: 20150320114418) do
 
   create_table "chapters", force: true do |t|
     t.string   "name"
@@ -79,10 +79,7 @@ ActiveRecord::Schema.define(version: 20150317104046) do
     t.string   "admin_note"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "content_file_name"
-    t.string   "content_content_type"
-    t.integer  "content_file_size"
-    t.datetime "content_updated_at"
+    t.text     "content"
   end
 
 end
