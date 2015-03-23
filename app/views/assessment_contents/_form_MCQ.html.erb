@@ -1,0 +1,44 @@
+<% unless params[:action] == "create" %>
+  <h3><%= @video_content.name %></h3>
+  <h2><b>Multiple Choice Question (1 Mark)</b></h2>
+  <br>
+<% end %>
+
+<%= form_for(@assessment_content) do |f| %>
+  <% if @assessment_content.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@assessment_content.errors.count, "error") %> prohibited this assessment_content from being saved:</h2>
+
+      <ul>
+      <% @assessment_content.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :video_content_id %>
+  <%= f.hidden_field :content_type %>
+  <%= f.hidden_field :teacher_name %>
+
+  <p class="form-radio"><b>Question:</b><p>
+  <p><%= f.text_area :question, placeholder: "Question", rows: "3", class: "form-control" %></p>
+
+  <p class="form-radio"><b>Answer Options:</b><p>
+  <p><%= f.text_area :answer_a, placeholder: "Option A", rows: "1", class: "form-control" %></p>
+  <p><%= f.text_area :answer_b, placeholder: "Option B", rows: "1", class: "form-control" %></p>
+  <p><%= f.text_area :answer_c, placeholder: "Option C", rows: "1", class: "form-control" %> </p>
+  <p><%= f.text_area :answer_d, placeholder: "Option D", rows: "1", class: "form-control" %></p>
+  <br>
+  <p class="form-radio">
+    <b>Correct Answer:</b> &nbsp; &nbsp;
+    <%= f.radio_button(:mcq_answer, "A") %> Option A &nbsp; &nbsp;
+    <%= f.radio_button(:mcq_answer, "B") %> Option B &nbsp; &nbsp;
+    <%= f.radio_button(:mcq_answer, "C") %> Option C &nbsp; &nbsp;
+    <%= f.radio_button(:mcq_answer, "D") %> Option D &nbsp; &nbsp;
+  <p>
+  <p><%= f.text_area :mcq_explanation, placeholder: "Answer Explanation", rows: "2", class: "form-control" %></p>
+
+  <p class="form-radio"><b>Submitted by:</b> &nbsp; &nbsp;<%= current_user.name %><p>
+  <p><%= f.submit class: "btn btn-block btn-green" %></p>
+<% end %>

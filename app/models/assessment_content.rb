@@ -1,5 +1,5 @@
 class AssessmentContent < ActiveRecord::Base
-	validates_presence_of :video_content_id, :question, :choice_a, :choice_b, :choice_c, :choice_d, :answer, :difficulty_level, :next_step
+	validates_presence_of :video_content_id, :content_type, :question, :answer_a, :teacher_name
 	
 	belongs_to :video_content
 end

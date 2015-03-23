@@ -1,0 +1,19 @@
+<b>Question <%= if @assessment_content.answer_c.length >10 then "(3m)" else "(2m)" end %>:</b>
+<p class="assessment-question"><%= @assessment_content.question %></p>
+
+<b>Answer:</b>
+<div class="assessment-answer">
+  <div class="answer-icon-mark">1m</div>
+  <div class="explanation-text"><%= @assessment_content.answer_a.html_safe %></div>
+</div>
+<div class="assessment-answer">
+  <div class="answer-icon-mark">1m</div>
+  <div class="explanation-text"><%= @assessment_content.answer_b.html_safe %></div>
+</div>
+
+<% if @assessment_content.answer_c.length >10 %>
+  <div class="assessment-answer">
+    <div class="answer-icon-mark">1m</div>
+    <div class="explanation-text"><%= @assessment_content.answer_c.html_safe %></div>
+  </div>
+<% end %>

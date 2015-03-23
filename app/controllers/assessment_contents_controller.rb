@@ -9,10 +9,12 @@ class AssessmentContentsController < ApplicationController
   end
 
   def new
-    @assessment_content = AssessmentContent.new
+    @assessment_content = AssessmentContent.new(video_content_id: params[:video_content_id], content_type: params[:content_type], teacher_name: current_user.name)
+    @video_content = VideoContent.find_by(id: params[:video_content_id])
   end
 
   def edit
+    @video_content = @assessment_content.video_content
   end
 
   def create
@@ -28,6 +30,9 @@ class AssessmentContentsController < ApplicationController
   end
 
   def update
+    @video_content = @assessment_content.video_content
+    # raise params
+
     respond_to do |format|
       if @assessment_content.update(assessment_content_params)
         format.html { redirect_to @assessment_content, notice: 'Assessment content was successfully updated.' }
@@ -52,6 +57,6 @@ class AssessmentContentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def assessment_content_params
-      params.require(:assessment_content).permit(:video_content_id, :question, :choice_a, :choice_b, :choice_c, :choice_d, :answer, :difficulty_level, :next_step)
+      params.require(:assessment_content).permit(:video_content_id, :content_type, :question, :answer_a, :answer_b, :answer_c, :answer_d, :mcq_answer, :mcq_explanation, :teacher_name)
     end
 end

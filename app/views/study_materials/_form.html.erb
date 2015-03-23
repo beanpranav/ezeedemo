@@ -21,34 +21,34 @@
 
   <div class="row">
     <div class="col-xs-12 col-sm-3">
-      <p class="form-label">Material Type</p>
-      <p class="form-label">Material No.</p>
-      <p class="form-label">Material Name</p>
+      <div class="form-label">Material Type</div>
+      <div class="form-label">Material No.</div>
+      <div class="form-label">Material Name</div>
       <br>
-      <p class="form-radio">.</p>
-      <p class="form-label">Video</p>
-      <p class="form-label">Interactive</p>
+      <div class="form-radio">.</div>
+      <div class="form-label">Video</div>
+      <div class="form-label">Interactive</div>
       <br>
-      <p class="form-label">Next Step</p>
-      <p class="form-label">Admin Incharge</p>
+      <div class="form-label">Next Step</div>
+      <div class="form-label">Admin Incharge</div>
     </div>
     <div class="col-xs-12 col-sm-9">
-      <p class="form-radio">
+      <div class="form-radio">
         <%= f.radio_button(:material_type, "Quick Concepts") %>
         <%= label_tag(:material_type_1, "Quick Concepts") %> &nbsp; &nbsp;
         <%= f.radio_button(:material_type, "Learn Smart") %>
         <%= label_tag(:material_type_2, "Learn Smart") %> &nbsp; &nbsp;
         <%= f.radio_button(:material_type, "Exam Prep") %>
         <%= label_tag(:material_type_3, "Exam Prep") %>
-      </p>
-      <p><%= f.number_field :material_no, placeholder: "Material No.", class: "form-control" %></p>
-      <p><%= f.text_field :name, placeholder: "Material Name", class: "form-control" %></p>
+      </div>
+      <%= f.number_field :material_no, placeholder: "Material No.", class: "form-control" %> 
+      <%= f.text_field :name, placeholder: "Material Name", class: "form-control" %> 
       <br>
 
-      <p class="form-radio"><em>Ezee Content (alteast one)</em></p>
+      <div class="form-radio"><em>Ezee Content (alteast one)</em></div>
       <div class="row">
         <div class="col-xs-12 col-sm-6">
-          <p><%= f.number_field :video_content_id, placeholder: "Dropdown", class: "form-control" %></p>
+          <%= f.number_field :video_content_id, placeholder: "Video ID", class: "form-control" %>  
         </div>
         <div class="col-xs-12 col-sm-6">
 
@@ -84,7 +84,7 @@
 
       <div class="row">
         <div class="col-xs-12 col-sm-6">
-          <p><%= f.number_field :interactive_content_id, placeholder: "Dropdown", class: "form-control" %></p>
+          <%= f.number_field :interactive_content_id, placeholder: "Interactive ID", class: "form-control" %>  
         </div>
         <div class="col-xs-12 col-sm-6">
           <% if false %>
@@ -124,5 +124,5 @@
   </div>
 
   <br>
-  <p><%= f.submit class: "btn btn-block btn-green" %></p>
+  <%= f.submit class: "btn btn-block btn-green" %> 
 <% end %>

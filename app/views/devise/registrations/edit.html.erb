@@ -33,32 +33,34 @@
 
         <div class="row">
           <div class="col-xs-12 col-sm-3">
-            <p class="form-label">Name</p>
-            <p class="form-label">Email</p>
-            <p class="form-label">Mobile</p>
+            <div class="form-label">Name</div>
+            <div class="form-label">Email</div>
+            <div class="form-label">Mobile</div>
             <% if current_user.role == "Admin" %>
-              <p class="form-label">Role</p>
+              <div class="form-label">Role</div>
             <% end %>
-            <p class="form-label">New Password</p>
-            <p class="form-label">Current Password</p>
+            <div class="form-label">New Password</div>
+            <br>
+            <div class="form-label">Current Password</div>
           </div>
           <div class="col-xs-12 col-sm-9">
-            <p><%= f.text_field :name, placeholder: "full name", class: "form-control" %></p>
-            <p><%= f.email_field :email, placeholder: "email", disabled: "disabled", class: "form-control" %></p>
-            <p><%= f.text_field :phone_number, placeholder: "mobile", class: "form-control" %></p>
+            <%= f.text_field :name, placeholder: "full name", class: "form-control" %> 
+            <%= f.email_field :email, placeholder: "email", disabled: "disabled", class: "form-control" %> 
+            <%= f.text_field :phone_number, placeholder: "mobile", class: "form-control" %>  
 
             <% if current_user.role == "Admin" %>
-              <p><%= f.text_field :role, placeholder: "role", disabled: "disabled", class: "form-control" %></p>
+              <%= f.text_field :role, placeholder: "role", disabled: "disabled", class: "form-control" %>  
             <% end %>
 
-            <p><%= f.password_field :password, placeholder: "leave blank if you don't want to change it", :autocomplete => "off", class: "form-control" %></p>
-            <p><%= f.password_field :current_password, placeholder: "* we need this to confirm your changes", class: "form-control" %></p>
+            <%= f.password_field :password, placeholder: "leave blank if you don't want to change it", :autocomplete => "off", class: "form-control" %>  
+            <br>
+            <%= f.password_field :current_password, placeholder: "* we need this to confirm your changes", class: "form-control" %>  
             
             <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
               <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
             <% end %>
 
-            <p><%= f.submit "SAVE CHANGES", class: "btn btn-block btn-green" %></p>
+            <%= f.submit "SAVE CHANGES", class: "btn btn-block btn-green" %> 
           </div>
         </div>
 
@@ -80,7 +82,7 @@
 
       <div class="row">
         <div class="col-xs-12 col-sm-3">
-          <p class="form-label">Unhappy?</p>
+          <div class="form-label">Unhappy?</div>
         </div>
         <div class="col-xs-12 col-sm-9">
           <%= link_to "DELETE MY PROFILE", registration_path(resource_name), :data => { :confirm => "Are you sure? All your progress will be lost. And this step cannot be reversed." }, :method => :delete, class: "btn btn-block btn-red" %>

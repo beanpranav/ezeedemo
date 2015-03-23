@@ -1,0 +1,34 @@
+<% unless params[:action] == "create" %>
+  <h3><%= @video_content.name %></h3>
+  <h2><b>Short Question (2-3 Marks)</b></h2>
+  <br>
+<% end %>
+
+<%= form_for(@assessment_content) do |f| %>
+  <% if @assessment_content.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@assessment_content.errors.count, "error") %> prohibited this assessment_content from being saved:</h2>
+
+      <ul>
+      <% @assessment_content.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <%= f.hidden_field :video_content_id %>
+  <%= f.hidden_field :content_type %>
+  <%= f.hidden_field :teacher_name %>
+
+  <p class="form-radio"><b>Question:</b><p>
+  <p><%= f.text_area :question, placeholder: "Question", rows: "3", class: "form-control" %></p>
+
+  <p class="form-radio"><b>Answer (parts based on marking scheme):</b><p>
+  <p><%= f.text_area :answer_a, placeholder: "Part A (1 mark)", rows: "3", class: "form-control" %></p>
+  <p><%= f.text_area :answer_b, placeholder: "Part B (1 mark)", rows: "3", class: "form-control" %></p>
+  <p><%= f.text_area :answer_c, placeholder: "Part C (1 mark)", rows: "3", class: "form-control" %> </p>
+  <br>
+  <p class="form-radio"><b>Submitted by:</b> &nbsp; &nbsp;<%= current_user.name %><p>
+  <p><%= f.submit class: "btn btn-block btn-green" %></p>
+<% end %>
