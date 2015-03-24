@@ -39,6 +39,6 @@
   <p>
   <p><%= f.text_area :mcq_explanation, placeholder: "Answer Explanation", rows: "2", class: "form-control" %></p>
 
-  <p class="form-radio"><b>Submitted by:</b> &nbsp; &nbsp;<%= current_user.name %><p>
+  <p class="form-radio"><b>Submitted by:</b> &nbsp; &nbsp;<%= if params[:action] == "create" then current_user.name else @assessment_content.teacher_name end %><p>
   <p><%= f.submit class: "btn btn-block btn-green" %></p>
 <% end %>

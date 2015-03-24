@@ -13,8 +13,8 @@
   <div class="answer-icon<%= "-green" if @assessment_content.mcq_answer == "C" %>">C</div>
   <div class="answer-text"><%= @assessment_content.answer_c.html_safe %></div>
 </div>
-<div class="mcq-option<%= "-green" if @assessment_content.mcq_answer == "D" %>">
-  <div class="answer-icon">D</div>
+<div class="mcq-option">
+  <div class="answer-icon<%= "-green" if @assessment_content.mcq_answer == "D" %>">D</div>
   <div class="answer-text"><%= @assessment_content.answer_d.html_safe %></div>
 </div>
 
