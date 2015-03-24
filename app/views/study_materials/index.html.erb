@@ -8,23 +8,23 @@
   <table class="table table-hover table-condensed table-responsive">
     <thead>
       <tr>
-        <th>Chapter</th>
+        <th>ID</th>
         <th>Type</th>
         <th>Name</th>
-        <th>Material source</th>
-        <th>Model source</th>
+        <th>Video</th>
+        <th>Interactive</th>
         <th colspan="2"></th>
       </tr>
     </thead>
 
     <tbody>
-      <% @study_materials.each do |study_material| %>
+      <% @study_materials.sort_by(&:id).each do |study_material| %>
         <tr>
-          <td><%= study_material.chapter.name %></td>
+          <td><%= study_material.id %></td>
           <td><%= study_material.material_type %></td>
           <td><%= study_material.name %></td>
-          <td><%= if study_material.video_source.length > 10 then "YES" else "MISSING" end %></td>
-          <td><%= "YES" if study_material.model_source? %></td>
+          <td><%= if study_material.video_content_id? then "YES" else "-" end %></td>
+          <td><%= if study_material.interactive_content_id? then "YES" else "-" end %></td>
           <td><%= link_to 'Edit', edit_study_material_path(study_material) %></td>
           <td><%= link_to 'Delete', study_material, method: :delete, data: { confirm: 'Are you sure?' } %></td>
         </tr>
