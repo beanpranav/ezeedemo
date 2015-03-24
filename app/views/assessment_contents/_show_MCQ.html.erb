@@ -3,7 +3,7 @@
 
 <div class="mcq-option">
   <div class="answer-icon<%= "-green" if @assessment_content.mcq_answer == "A" %>">A</div>
-  <div class="answer-text"><%= @assessment_content.answer_a.html_safe %></div>
+  <div class="answer-text"><%= @assessment_content.answer_a %></div>
 </div>
 <div class="mcq-option">
   <div class="answer-icon<%= "-green" if @assessment_content.mcq_answer == "B" %>">B</div>

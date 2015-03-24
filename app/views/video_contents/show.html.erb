@@ -138,7 +138,7 @@
           </thead>
 
           <tbody>
-            <% @video_content.assessment_contents.sort_by(&:content_type).each_with_index do |assessment_content, i| %>
+            <% @video_content.assessment_contents.sort_by(&:id).each_with_index do |assessment_content, i| %>
               <tr>
                 <td colspan="1"><%= i+1 %></td>
                 <td class="one-line-cell"><%= assessment_content.content_type %></td>

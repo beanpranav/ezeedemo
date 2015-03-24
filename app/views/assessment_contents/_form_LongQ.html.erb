@@ -27,7 +27,9 @@
   <p class="form-radio"><b>Answer (parts based on marking scheme):</b><p>
   <p><%= f.text_area :answer_a, placeholder: "Part A (1 mark)", rows: "3", class: "form-control" %></p>
   <p><%= f.text_area :answer_b, placeholder: "Part B (1 mark)", rows: "3", class: "form-control" %></p>
-  <p><%= f.text_area :answer_c, placeholder: "Part C (1 mark)", rows: "3", class: "form-control" %> </p>
+  <p><%= f.text_area :answer_c, placeholder: "Part C (1 mark)", rows: "3", class: "form-control" %></p>
+  <p><%= f.text_area :answer_d, placeholder: "Part D (1 mark)", rows: "3", class: "form-control" %></p>
+  <p><%= f.text_area :mcq_explanation, placeholder: "Part E (1 mark)", rows: "3", class: "form-control" %></p>
   <br>
   <p class="form-radio"><b>Submitted by:</b> &nbsp; &nbsp;<%= current_user.name %><p>
   <p><%= f.submit class: "btn btn-block btn-green" %></p>
