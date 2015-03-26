@@ -31,6 +31,7 @@
       <br>
       <div class="form-label">Next Step</div>
       <div class="form-label">Admin Incharge</div>
+      <div class="form-label">Admin Notes</div>
     </div>
     <div class="col-xs-12 col-sm-9">
       <div class="form-radio">
@@ -118,8 +119,9 @@
       </div>
 
       <br>
-      <p><%= f.select :next_step, options_for_select([["Upload & Assign"], ["Content Review-Refine"], ["Content Sign-off"], ["User Review"], ["Completed"]]) %></p>
-      <p><%= f.select :admin_incharge, options_for_select([["Archie"], ["Deepak"], ["Ashwini"], ["Pranav"], ["Alok"]]), :include_blank => true %></p>
+      <p><%= f.select :next_step, options_for_select([["Not Available"], ["Content Review-Refine"], ["Upload & Assign"], ["Content Sign-off"], ["User Review"], ["Completed"]], f.object.next_step) %></p>
+      <p><%= f.select :admin_incharge, options_for_select([["Archi"], ["Deepak"], ["Ashwini"], ["Pranav"], ["Alok"]], f.object.admin_incharge), include_blank: true %></p>
+      <p><%= f.text_area :admin_notes, placeholder: "Comments", rows: "3", class: "form-control" %></p>
     </div>
   </div>
 

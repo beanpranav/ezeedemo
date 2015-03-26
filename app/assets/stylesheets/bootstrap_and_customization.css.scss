@@ -199,7 +199,7 @@ td { text-align: left; }
 
 
 // Content Display
-// .modal { overflow-y: hidden; }
+.modal { overflow-y: auto; }
 .modal-backdrop.in { opacity: 0.8; }
 .modal-dialog { width: 95%; margin-top: 55px; }
 .modal-body { padding: 15px; }
@@ -227,7 +227,7 @@ td { text-align: left; }
 	height: 0;
 	background-color: black; 
 }
-.videoWrapper iframe, .videoWrapper video, .mapWrapper iframe, .docWrapper iframe {
+.videoWrapper iframe, .videoWrapper video, .mapWrapper div, .docWrapper iframe {
 	position: absolute;
 	padding: 2px;
 	top: 0;

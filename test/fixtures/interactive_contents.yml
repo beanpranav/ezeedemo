@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  content_type: MyString
+  name: MyString
+  production_date: 2015-03-26
+  producer_name: MyString
+  admin_note: MyString
+
+two:
+  content_type: MyString
+  name: MyString
+  production_date: 2015-03-26
+  producer_name: MyString
+  admin_note: MyString

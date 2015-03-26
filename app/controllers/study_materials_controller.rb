@@ -56,6 +56,6 @@ class StudyMaterialsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def study_material_params
-      params.require(:study_material).permit(:chapter_id, :material_type, :material_no, :name, :next_step, :admin_incharge, :video_content_id, :interactive_content_id)
+      params.require(:study_material).permit(:chapter_id, :material_type, :material_no, :name, :next_step, :admin_incharge, :admin_notes, :video_content_id, :interactive_content_id)
     end
 end

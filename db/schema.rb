@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323053252) do
+ActiveRecord::Schema.define(version: 20150326170504) do
 
   create_table "assessment_contents", force: true do |t|
     t.integer  "video_content_id"
@@ -42,6 +42,20 @@ ActiveRecord::Schema.define(version: 20150323053252) do
   add_index "chapters", ["slug"], name: "index_chapters_on_slug", unique: true
   add_index "chapters", ["subject_id"], name: "index_chapters_on_subject_id"
 
+  create_table "interactive_contents", force: true do |t|
+    t.string   "content_type"
+    t.string   "name"
+    t.date     "production_date"
+    t.string   "producer_name"
+    t.string   "admin_note"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "content_file_name"
+    t.string   "content_content_type"
+    t.integer  "content_file_size"
+    t.datetime "content_updated_at"
+  end
+
   create_table "study_materials", force: true do |t|
     t.string   "name"
     t.string   "next_step"
@@ -53,6 +67,7 @@ ActiveRecord::Schema.define(version: 20150323053252) do
     t.string   "material_type"
     t.integer  "video_content_id"
     t.integer  "interactive_content_id"
+    t.text     "admin_notes"
   end
 
   create_table "subjects", force: true do |t|

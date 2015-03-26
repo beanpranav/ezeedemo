@@ -1,52 +1,65 @@
-	<ul class="content-list">
+<ul class="content-list">
 
-		<% @chapter.study_materials.sort_by(&:material_no).each do |study_material| %>
+	<% @chapter.study_materials.sort_by(&:material_no).each do |study_material| %>
+		
+		<% if study_material.material_type == "Learn Smart" %>
+
+			<% if @chapter.status == "Paid" %>
+				
+				<li class="content-list-item-lock">
+					<i class="fa fa-2x fa-lock content-list-icon-orange pull-left"></i>
+					<h3>Chapter Map</h3>
+					<h2><%= study_material.name %></h2>
+				</li>
+
+			<% else %>
 			
-			<% if study_material.material_type == "Learn Smart" %>
-
-				<% if @chapter.status == "Paid" %>
-					
-					<li class="content-list-item-lock">
-						<i class="fa fa-2x fa-lock content-list-icon-orange pull-left"></i>
-						<h3>Chapter Map</h3>
+					<li class="content-list-item" data-toggle="modal" data-target="#show-smart-material-<%= study_material.id %>">
+						<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "orange"].sample %> pull-left"></i>
+						<h3>Visual Notes</h3>
 						<h2><%= study_material.name %></h2>
 					</li>
 
-				<% else %>
-				
-						<li class="content-list-item" data-toggle="modal" data-target="#show-smart-material-<%= study_material.id %>">
-							<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "orange"].sample %> pull-left"></i>
-							<h3>Visual Notes</h3>
-							<h2><%= study_material.name %></h2>
-						</li>
-
-				    	
-			    	<div class="modal" id="show-smart-material-<%= study_material.id %>" tabindex="-1" role="dialog" aria-hidden="true">
-			    	  <div class="modal-dialog">
-			    	    <div class="modal-content">
-			    	      
-			    	      <div class="panel-orange panel-title">
-			    	      	<%= study_material.name %>
-			    	      	<div class="modal-actions pull-right">
-				    	      	<button type="button" class="btn btn-sm btn-modal-orange">Mark as Complete</button>
-				    	      	<button type="button" class="btn btn-sm btn-modal" data-dismiss="modal"><i class="fa fa-times"></i></button>
-				    	      </div>
+			    	
+		    	<div class="modal" id="show-smart-material-<%= study_material.id %>" tabindex="-1" role="dialog" aria-hidden="true">
+		    	  <div class="modal-dialog">
+		    	    <div class="modal-content">
+		    	      
+		    	      <div class="panel-orange panel-title">
+		    	      	<%= study_material.name %>
+		    	      	<div class="modal-actions pull-right">
+			    	      	<button type="button" class="btn btn-sm btn-modal-orange">Mark as Complete</button>
+			    	      	<button type="button" class="btn btn-sm btn-modal" data-dismiss="modal"><i class="fa fa-times"></i></button>
 			    	      </div>
+		    	      </div>
 
-			    	      <div class="modal-body"> 
-		    	      		<div class="mapWrapper">
-		    	      			<image src="/images/mindmap-sample.png" class="img-responsive" style="padding:2px;">
-		    	      			<!-- <iframe src="<%= study_material.video_content_id %>" frameborder="0" allowfullscreen></iframe> -->
-		    	      		</div>
-			    	      </div>
+		    	      <div class="modal-body"> 
+	    	      		<div class="mapWrapper">
+	    	      			<div id="flashcontent">
+	    	      				Flash not working!
+	    	      			</div>
+	    	      		</div>
+		    	      </div>
 
-			    	    </div>
-			    	  </div>
-			    	</div>
-
-				<% end %>
-				
+		    	    </div>
+		    	  </div>
+		    	</div>
+	
+					<!-- For setting MindMap Path -->
+					<script type="text/javascript">
+						var fo = new FlashObject("<%= asset_path("visorFreeplane.swf") %>", "visorFreeplane", "100%", "100%", 4);
+						fo.addParam("quality", "high");
+						fo.addVariable("bgcolor", 0xfffffff);
+						fo.addVariable("openUrl", "_blank");
+						fo.addVariable("initLoadFile", "<%= study_material.interactive_content.content.url %>"); 
+						fo.addVariable("startCollapsedToLevel","1");
+						fo.write("flashcontent");
+					</script>
+					
 			<% end %>
-			
+
 		<% end %>
-	</ul>
+		
+	<% end %>
+</ul>
+

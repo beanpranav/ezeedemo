@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :interactive_contents
+
   resources :assessment_contents
 
   resources :video_contents

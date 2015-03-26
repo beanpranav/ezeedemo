@@ -3,5 +3,5 @@ class StudyMaterial < ActiveRecord::Base
 
 	belongs_to :chapter
 	belongs_to :video_content
-	
+	belongs_to :interactive_content
 end

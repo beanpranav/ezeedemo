@@ -38,19 +38,16 @@
     <% @subject.chapters.sort_by(&:chapterNumber).each do |chapter| %>
 
       <div class="panel panel-default">
-        <a class="collapsed supress-a" data-toggle="collapse" data-parent="#accordion" href="#<%= @subject.id %>-<%=chapter.id %>" aria-expanded="false" aria-controls="<%= @subject.id %>-<%=chapter.id %>">
+
           <div class="panel-secondary" role="tab" id="headingTwo">
             <div class="panel-title">
               <%= chapter.chapterNumber %>. <%= chapter.name %>
-              <i class="fa fa-fw fa-sort pull-right" style="margin: 3px -5px 0 0;"></i>
             </div>
           </div>
-        </a>
 
-        <div id="<%= @subject.id %>-<%=chapter.id %>" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
           <div class="panel-body">
             
-            <table class="table table-hover">
+            <table class="table table-condensed">
               <thead>
                 <tr>
                   <th colspan="1"></th>
@@ -58,7 +55,8 @@
                   <th>Video</th>
                   <th>Interactive</th>
                   <th>Next Step</th>
-                  <th class="one-line-cell">Admin Incharge</th>
+                  <th class="one-line-cell">Incharge</th>
+                  <th class="one-line-cell">Admin Notes</th>
                   <th colspan="1"></th>
                 </tr>
               </thead>
@@ -72,8 +70,9 @@
                     <td><%= study_material.name %></td>
                     <td><%= if study_material.video_content_id? then "YES" else "-" end %></td>
                     <td><%= if study_material.interactive_content_id? then "YES" else "-" end %></td>
-                    <td class="one-line-cell"><%= study_material.next_step %></td>
+                    <td class="one-line-cell <%= if study_material.next_step == "Not Available" then "panel-red" elsif study_material.next_step == "Content Review-Refine" || study_material.next_step == "Upload & Assign" then "panel-orange" else "panel-green" end %>"><%= study_material.next_step %></td>
                     <td><%= study_material.admin_incharge %></td>
+                    <td><%= study_material.admin_notes %></td>
                     <td><%= link_to '<i class="fa fa-arrow-right"></a>'.html_safe, edit_study_material_path(study_material) %></td>
                   </tr>
                 <% end %>
@@ -81,7 +80,6 @@
             </table>
 
           </div>
-        </div>
 
       </div>
 

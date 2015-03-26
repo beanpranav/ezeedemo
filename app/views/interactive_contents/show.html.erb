@@ -1,0 +1,30 @@
+<p id="notice"><%= notice %></p>
+
+<%= @interactive_content.content %>
+<p>
+  <strong>Content type:</strong>
+  <%= @interactive_content.content_type %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @interactive_content.name %>
+</p>
+
+<p>
+  <strong>Production date:</strong>
+  <%= @interactive_content.production_date %>
+</p>
+
+<p>
+  <strong>Producer name:</strong>
+  <%= @interactive_content.producer_name %>
+</p>
+
+<p>
+  <strong>Admin note:</strong>
+  <%= @interactive_content.admin_note %>
+</p>
+
+<%= link_to 'Edit', edit_interactive_content_path(@interactive_content) %> |
+<%= link_to 'Back', interactive_contents_path %>

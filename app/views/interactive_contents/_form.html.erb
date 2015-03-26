@@ -1,43 +1,38 @@
-<%= form_for @video_content do |f| %>
-  <% if @video_content.errors.any? %>
+<%= form_for @interactive_content, html: { multipart: true } do |f| %>
+  <% if @interactive_content.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@video_content.errors.count, "error") %> prohibited this video_content from being saved:</h2>
+      <h2><%= pluralize(@interactive_content.errors.count, "error") %> prohibited this interactive_content from being saved:</h2>
 
       <ul>
-      <% @video_content.errors.full_messages.each do |message| %>
+      <% @interactive_content.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
     </div>
   <% end %>
 
-
   <div class="row">
     <div class="col-xs-12 col-sm-3">
       <div class="form-label">Content Type</div>
-      <div class="form-label">Video Name</div>
-      <div class="form-label">Video Link</div>
-      <div class="form-label">Video Duration</div>
+      <div class="form-label">Name</div>
+      <div class="form-label">Upload</div>
       <div class="form-label">Dev date</div>
       <div class="form-label">Developer</div>
     </div>
     <div class="col-xs-12 col-sm-9">
       <div class="form-radio">
-        <%= f.radio_button(:content_type, "Concept") %>
-        <%= label_tag(:content_type_1, "Concept") %> &nbsp; &nbsp;
-        <%= f.radio_button(:content_type, "Experiment") %>
-        <%= label_tag(:content_type_2, "Experiment") %> &nbsp; &nbsp;
-        <%= f.radio_button(:content_type, "Numerical") %>
-        <%= label_tag(:content_type_3, "Numerical") %>
+        <%= f.radio_button(:content_type, "Mind Map") %>
+        <%= label_tag(:content_type_1, "Mind Map") %> &nbsp; &nbsp;
+        <%= f.radio_button(:content_type, "3D Model") %>
+        <%= label_tag(:content_type_2, "3D Model") %>
       </div>
       <%= f.text_field :name, placeholder: "Material Name", class: "form-control" %> 
-      <%= f.text_field :content, class: "form-control" %>  
-      <%= f.number_field :video_duration, placeholder: "Video Duration", class: "form-control" %>  
+      <%= f.file_field :content, class: "form-control" %>  
       <%= f.date_field :production_date, class: "form-control" %>  
       <%= f.text_field :producer_name, placeholder: "Developer Name", class: "form-control" %> 
 
-      <% if @video_content.content? %>
-        <button type="button" class="btn btn-red btn-block" style="margin-bottom: 10px;" data-toggle="modal" data-target="#content">View Video</button>
+      <% if @interactive_content.content? %>
+        <button type="button" class="btn btn-red btn-block" style="margin-bottom: 10px;" data-toggle="modal" data-target="#content">View Interactive</button>
       <% end %>
     </div>
   </div>
@@ -50,7 +45,7 @@
       <div class="modal-content">
 
         <div class="panel-red panel-title left">
-          <%= @video_content.name %>
+          <%= @interactive_content.name %>
           <div class="modal-actions pull-right">
             <button type="button" class="btn btn-sm btn-modal" data-dismiss="modal"><i class="fa fa-times"></i></button>
           </div>
@@ -59,7 +54,7 @@
         <div class="modal-body"> 
           <div class="row">
             <div class="col-sm-12 col-md-8">  
-              <div class="videoWrapper"><%= @video_content.content.html_safe if @video_content.content? %></div>
+              <div class="videoWrapper"><%= @interactive_content.content if @interactive_content.content? %></div>
             </div>
             <div class="col-sm-12 col-md-4">
               <p class="form-radio"><b>Admin Notes</b></p>  
@@ -71,5 +66,5 @@
       </div>
     </div>
   </div>
-  
+
 <% end %>

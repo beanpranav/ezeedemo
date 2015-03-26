@@ -1,0 +1,35 @@
+<h1>Listing interactive_contents</h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th>ID</th>
+      <th>Content type</th>
+      <th>Name</th>
+      <th>Production date</th>
+      <th>Producer name</th>
+      <th>Admin note</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @interactive_contents.each do |interactive_content| %>
+      <tr>
+        <td><%= interactive_content.id %></td>
+        <td><%= interactive_content.content_type %></td>
+        <td><%= interactive_content.name %></td>
+        <td><%= interactive_content.production_date %></td>
+        <td><%= interactive_content.producer_name %></td>
+        <td><%= interactive_content.admin_note %></td>
+        <td><%= link_to 'Show', interactive_content %></td>
+        <td><%= link_to 'Edit', edit_interactive_content_path(interactive_content) %></td>
+        <td><%= link_to 'Destroy', interactive_content, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Interactive content', new_interactive_content_path %>
