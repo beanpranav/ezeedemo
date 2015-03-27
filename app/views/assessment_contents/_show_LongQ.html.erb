@@ -5,35 +5,35 @@
   <b>Answer:</b>
   <div class="assessment-answer">
     <div class="answer-icon-mark"><%= if @assessment_content.answer_c.length >10 then "2m" else "3m" end %></div>
-    <div class="explanation-text">Render Diagram Here</div>
+    <div class="assessment-text">Render Diagram Here</div>
   </div>
   <div class="assessment-answer">
     <div class="answer-icon-mark">1m</div>
-    <div class="explanation-text"><%= @assessment_content.answer_a.html_safe %></div>
+    <div class="assessment-text"><%= @assessment_content.answer_a.html_safe %></div>
   </div>
   <div class="assessment-answer">
     <div class="answer-icon-mark">1m</div>
-    <div class="explanation-text"><%= @assessment_content.answer_b.html_safe %></div>
+    <div class="assessment-text"><%= @assessment_content.answer_b.html_safe %></div>
   </div>
 
   <% if @assessment_content.answer_c.length >10 %>
     <div class="assessment-answer">
       <div class="answer-icon-mark">1m</div>
-      <div class="explanation-text"><%= @assessment_content.answer_c.html_safe %></div>
+      <div class="assessment-text"><%= @assessment_content.answer_c.html_safe %></div>
     </div>
   <% end %>
 
   <% if @assessment_content.answer_d.length >10 %>
     <div class="assessment-answer">
       <div class="answer-icon-mark">1m</div>
-      <div class="explanation-text"><%= @assessment_content.answer_d.html_safe %></div>
+      <div class="assessment-text"><%= @assessment_content.answer_d.html_safe %></div>
     </div>
   <% end %>
 
   <% if @assessment_content.mcq_explanation.length >10 %>
     <div class="assessment-answer">
       <div class="answer-icon-mark">1m</div>
-      <div class="explanation-text"><%= @assessment_content.mcq_explanation.html_safe %></div>
+      <div class="assessment-text"><%= @assessment_content.mcq_explanation.html_safe %></div>
     </div>
   <% end %>
 </div>

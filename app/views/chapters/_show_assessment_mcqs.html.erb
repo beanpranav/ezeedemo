@@ -13,21 +13,22 @@
   			
   			<div class="tab-content">
 
-				<div class="tab-pane active" id="all">
+				<div class="tab-pane active" id="mcq-all">
 
 					<div class="assessmentWrapper">
 
 						<div class="assessment-container">
-							<br><br>
+							<br>
 							<h2 class="center"><b>Prepare for 1 mark MCQs</b></h2>
 							<h3 class="center">choose one to begin</h3>
 							<div class="assessment-questions-container"> 
-			      	  <% @mcqs.each_with_index do |assessment_content, i| %>
-				      	  <a href="#assessment_content-<%= i %>" data-toggle="pill">
-				      	  	<div class="question-icon-<%= ["default", "green"].sample %>"><%= i+1 %></div>
+			      	  <% @mcqs.each.with_index(1) do |assessment_content, i| %>
+				      	  <a href="#mcq-<%= i %>" data-toggle="pill">
+				      	  	<div class="question-icon-<%= ["default", "green", "red"].sample %>"><%= i %></div>
 				      	  </a>
 				      	<% end %>
 							</div>
+							<br><br>
 
 			      						      		
 		      	</div>
@@ -35,16 +36,16 @@
 		      </div>
 
     			<div class="assessmentAction center">
-    	    	<a href="#all" data-toggle="pill">
+    	    	<a href="#mcq-all" data-toggle="pill">
     	    		<button type="button" class="btn btn-sm btn-modal-green">All Questions</button>
     	    	</a>
     	    </div>
 
 				</div>
 				
-				<% @mcqs.each_with_index do |assessment_content, i| %>
+				<% @mcqs.each.with_index(1) do |assessment_content, i| %>
 					
-					<div class="tab-pane" id="assessment_content-<%= i %>">
+					<div class="tab-pane" id="mcq-<%= i %>">
 						
 						<div class="assessmentWrapper">
 
@@ -89,22 +90,22 @@
 						</div>													
 
 						<div class="assessmentAction center">
-				      <% if i == 0 %>
+				      <% if i == 1 %>
 				      	<button type="button" class="btn btn-sm btn-modal pull-left" disabled="diabled" style="margin-right: -1px;"><i class="fa fa-fw fa-arrow-left"></i> Previous</button>
 				    	<% else %>
-					      <a href="#assessment_content-<%= i-1 %>" data-toggle="pill">
+					      <a href="#mcq-<%= i-1 %>" data-toggle="pill">
 					    		<button type="button" class="btn btn-sm btn-modal-green pull-left"><i class="fa fa-fw fa-arrow-left"></i> Previous</button>
 					    	</a>
 					    <% end %>
 
-				    	<a href="#all" data-toggle="pill">
+				    	<a href="#mcq-all" data-toggle="pill">
 				    		<button type="button" class="btn btn-sm btn-modal-green">All Questions</button>
 				    	</a>
 
-				    	<% if i == @mcqs.count-1 %>
+				    	<% if i == @mcqs.count %>
 								<button type="button" class="btn btn-sm btn-modal pull-right" disabled="diabled" style="margin-left: 22px;">Next <i class="fa fa-fw fa-arrow-right"></i></button>
 				    	<% else %>
-					    	<a href="#assessment_content-<%= i+1 %>" data-toggle="pill">
+					    	<a href="#mcq-<%= i+1 %>" data-toggle="pill">
 					    		<button type="button" class="btn btn-sm btn-modal-green pull-right" style="margin-left: 22px;">Next <i class="fa fa-fw fa-arrow-right"></i></button>
 					    	</a>
 					    <% end %>

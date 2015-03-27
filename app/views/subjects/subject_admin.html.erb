@@ -23,68 +23,68 @@
 </div>
 
 
-<div class="content-container">
+
 
   <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
 
-  	<div class="panel panel-default">
+<!--   	<div class="panel panel-default">
   		<div class="panel-primary">
   			<div class="panel-title">
   				All Chapters
   			</div>
   		</div>
-  	</div>
+  	</div> -->
 
     <% @subject.chapters.sort_by(&:chapterNumber).each do |chapter| %>
 
-      <div class="panel panel-default">
+      <div class="content-container">
+        <div class="panel panel-default">
 
-          <div class="panel-secondary" role="tab" id="headingTwo">
-            <div class="panel-title">
-              <%= chapter.chapterNumber %>. <%= chapter.name %>
+            <div class="panel-secondary" role="tab" id="headingTwo">
+              <div class="panel-title">
+                <%= chapter.chapterNumber %>. <%= chapter.name %>
+              </div>
             </div>
-          </div>
 
-          <div class="panel-body">
-            
-            <table class="table table-condensed">
-              <thead>
-                <tr>
-                  <th colspan="1"></th>
-                  <th>Goal Name</th>
-                  <th>Video</th>
-                  <th>Interactive</th>
-                  <th>Next Step</th>
-                  <th class="one-line-cell">Incharge</th>
-                  <th class="one-line-cell">Admin Notes</th>
-                  <th colspan="1"></th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <% chapter.study_materials.sort_by(&:material_no).each do |study_material| %>
+            <div class="panel-body">
+              
+              <table class="table table-condensed" style="margin-bottom: 0px">
+                <thead>
                   <tr>
-                    <td class=<%= if study_material.material_type == "Quick Concepts" then "font-red" elsif study_material.material_type == "Learn Smart" then "font-orange" else "font-green" end %>>
-                      <b><%= study_material.material_no %></b>
-                    </td>
-                    <td><%= study_material.name %></td>
-                    <td><%= if study_material.video_content_id? then "YES" else "-" end %></td>
-                    <td><%= if study_material.interactive_content_id? then "YES" else "-" end %></td>
-                    <td class="one-line-cell <%= if study_material.next_step == "Not Available" then "panel-red" elsif study_material.next_step == "Content Review-Refine" || study_material.next_step == "Upload & Assign" then "panel-orange" else "panel-green" end %>"><%= study_material.next_step %></td>
-                    <td><%= study_material.admin_incharge %></td>
-                    <td><%= study_material.admin_notes %></td>
-                    <td><%= link_to '<i class="fa fa-arrow-right"></a>'.html_safe, edit_study_material_path(study_material) %></td>
+                    <th colspan="1"></th>
+                    <th>Goal Name</th>
+                    <th>Video</th>
+                    <th>Interactive</th>
+                    <th>Next Step</th>
+                    <th class="one-line-cell">Incharge</th>
+                    <th class="one-line-cell">Admin Notes</th>
+                    <th colspan="1"></th>
                   </tr>
-                <% end %>
-              </tbody>
-            </table>
+                </thead>
 
-          </div>
+                <tbody>
+                  <% chapter.study_materials.sort_by(&:material_no).each do |study_material| %>
+                    <tr>
+                      <td class=<%= if study_material.material_type == "Quick Concepts" then "font-red" elsif study_material.material_type == "Learn Smart" then "font-orange" else "font-green" end %>>
+                        <b><%= study_material.material_no %></b>
+                      </td>
+                      <td><%= study_material.name %></td>
+                      <td><%= if study_material.video_content_id? then "YES" else "-" end %></td>
+                      <td><%= if study_material.interactive_content_id? then "YES" else "-" end %></td>
+                      <td class="one-line-cell <%= if study_material.next_step == "Not Available" then "panel-red" elsif study_material.next_step == "Content Review-Refine" || study_material.next_step == "Upload & Assign" then "panel-orange" else "panel-green" end %>"><%= study_material.next_step %></td>
+                      <td><%= study_material.admin_incharge %></td>
+                      <td><%= study_material.admin_notes %></td>
+                      <td><%= link_to '<i class="fa fa-arrow-right"></a>'.html_safe, edit_study_material_path(study_material) %></td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
 
+            </div>
+
+        </div>
       </div>
 
     <% end %>
 
   </div>
-
-</div>
