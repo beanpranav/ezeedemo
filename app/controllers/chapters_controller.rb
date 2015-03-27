@@ -6,6 +6,7 @@ class ChaptersController < ApplicationController
   end
 
   def show
+    @study_materials = @chapter.study_materials.sort_by(&:material_no)
   end
 
   def new

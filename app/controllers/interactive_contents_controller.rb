@@ -20,7 +20,7 @@ class InteractiveContentsController < ApplicationController
 
     respond_to do |format|
       if @interactive_content.save
-        format.html { redirect_to @interactive_content, notice: 'Interactive content was successfully created.' }
+        format.html { redirect_to interactive_contents_url, notice: 'Interactive content was successfully created.' }
       else
         format.html { render action: 'new' }
       end
@@ -30,7 +30,7 @@ class InteractiveContentsController < ApplicationController
   def update
     respond_to do |format|
       if @interactive_content.update(interactive_content_params)
-        format.html { redirect_to @interactive_content, notice: 'Interactive content was successfully updated.' }
+        format.html { redirect_to interactive_contents_url, notice: 'Interactive content was successfully updated.' }
       else
         format.html { render action: 'edit' }
       end

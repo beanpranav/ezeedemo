@@ -32,7 +32,7 @@
       <%= f.text_field :producer_name, placeholder: "Developer Name", class: "form-control" %> 
 
       <% if @interactive_content.content? %>
-        <button type="button" class="btn btn-red btn-block" style="margin-bottom: 10px;" data-toggle="modal" data-target="#content">View Interactive</button>
+        <button type="button" class="btn btn-orange btn-block" style="margin-bottom: 10px;" data-toggle="modal" data-target="#content">View Interactive</button>
       <% end %>
     </div>
   </div>
@@ -40,11 +40,11 @@
   <br>
   <p><%= f.submit class: "btn btn-block btn-green" %></p>
 
-  <div class="col-md-10 col-md-offset-1 modal" id="content" tabindex="-1" role="dialog" aria-hidden="true">
+  <div class="modal" id="content" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog">
       <div class="modal-content">
 
-        <div class="panel-red panel-title left">
+        <div class="panel-orange panel-title left">
           <%= @interactive_content.name %>
           <div class="modal-actions pull-right">
             <button type="button" class="btn btn-sm btn-modal" data-dismiss="modal"><i class="fa fa-times"></i></button>
@@ -54,10 +54,15 @@
         <div class="modal-body"> 
           <div class="row">
             <div class="col-sm-12 col-md-8">  
-              <div class="videoWrapper"><%= @interactive_content.content if @interactive_content.content? %></div>
+              <div class="mapWrapper">
+                <div id="flashcontent">
+                  Flash not working!
+                </div>
+                
+              </div>
             </div>
             <div class="col-sm-12 col-md-4">
-              <p class="form-radio"><b>Admin Notes</b></p>  
+              <p class="form-radio"><b>Ezee Content Notes</b></p>  
               <p><%= f.text_area :admin_note, placeholder: "Comments", rows: "10", class: "form-control" %></p>
             </div>
           </div>
@@ -66,5 +71,16 @@
       </div>
     </div>
   </div>
+
+  <!-- For setting MindMap Path -->
+  <script type="text/javascript">
+    var fo = new FlashObject("<%= asset_path("visorFreeplane.swf") %>", "visorFreeplane", "100%", "100%", 4);
+    fo.addParam("quality", "high");
+    fo.addVariable("bgcolor", 0xfffffff);
+    fo.addVariable("openUrl", "_blank");
+    fo.addVariable("initLoadFile", "<%= @interactive_content.content.url if @interactive_content.content? %>"); 
+    fo.addVariable("startCollapsedToLevel","1");
+    fo.write("flashcontent");
+  </script>
 
 <% end %>
