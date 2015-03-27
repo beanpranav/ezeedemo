@@ -1,9 +1,7 @@
 	<ul class="content-list">
 		
-		<% @chapter.study_materials.sort_by(&:material_no).each do |study_material| %>
+		<% @concept_materials.each do |study_material| %>
 
-			<% if study_material.material_type == "Quick Concepts" %>
-			<!-- Only Quick Concepts -->
 				<% if @chapter.status == "Paid" %>
 				<!-- lock paid chapters -->
 					
@@ -40,7 +38,9 @@
 				    	      <div class="modal-body">
 				    	      	<div class="row">
 					    	      	<div class="col-sm-12 col-md-6">  
-					    	      		<div class="videoWrapper"><%= if study_material.video_content != nil then study_material.video_content.content.html_safe else "***MISSING***" end %></div>
+					    	      		<div class="videoWrapper">
+					    	      			<%= if study_material.video_content != nil then study_material.video_content.content.html_safe else "***MISSING***" end %>
+					    	      		</div>
 					    	      	</div>
 					    	      	<div class="col-sm-12 col-md-6">  
 					    	      		<div class="videoWrapper">
@@ -71,17 +71,18 @@
 				    	      </div>
 
 				    	      <div class="modal-body">
-											<div class="videoWrapper"><%= if study_material.video_content != nil then study_material.video_content.content.html_safe else "***MISSING***" end %></div>
+											<div class="videoWrapper">
+												<%= if study_material.video_content != nil then study_material.video_content.content.html_safe else "***MISSING***" end %>
+											</div>
 				    	      </div>
 
 				    	    </div>
 				    	  </div>
 				    	</div>
 
-						<% end %>
+						<% end %> <!-- If Interactive -->
 
-				<% end %>
-			<% end %>
+				<% end %> <!-- If Paid -->
 
 		<% end %>
 	</ul>

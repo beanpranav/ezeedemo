@@ -7,6 +7,19 @@ class ChaptersController < ApplicationController
 
   def show
     @study_materials = @chapter.study_materials.sort_by(&:material_no)
+    @concept_materials = @study_materials.select { |x| x["material_type"] == "Quick Concepts" }
+    @smart_materials = @study_materials.select { |x| x["material_type"] == "Learn Smart" }
+
+    @all_assessments = []
+    @concept_materials.each do |material| 
+      if material.video_content != nil && material.video_content.assessment_contents != nil
+        @all_assessments += material.video_content.assessment_contents
+      end
+    end
+
+    @mcqs = @all_assessments.select { |x| x["content_type"] == "MCQ" }
+    @shortqs = @all_assessments.select { |x| x["content_type"] == "ShortQ" }
+    @longqs = @all_assessments.select { |x| x["content_type"] == "LongQ" }
   end
 
   def new

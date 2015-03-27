@@ -1,8 +1,6 @@
 <ul class="content-list">
 
-	<% @chapter.study_materials.sort_by(&:material_no).each do |study_material| %>
-		
-		<% if study_material.material_type == "Learn Smart" %>
+	<% @smart_materials.each do |study_material| %>
 
 			<% if @chapter.status == "Paid" %>
 				
@@ -57,8 +55,6 @@
 					</script>
 					
 			<% end %>
-
-		<% end %>
 		
 	<% end %>
 </ul>
