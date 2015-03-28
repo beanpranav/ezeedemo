@@ -28,6 +28,15 @@
   <p><%= f.text_area :answer_a, placeholder: "Part A (1 mark)", rows: "3", class: "form-control" %></p>
   <p><%= f.text_area :answer_b, placeholder: "Part B (1 mark)", rows: "3", class: "form-control" %></p>
   <p><%= f.text_area :answer_c, placeholder: "Part C (1 mark)", rows: "3", class: "form-control" %> </p>
+    
+  <br>
+  <p class="form-radio"><b>Assessment Images:</b><p>
+  <!-- Nested form for Assessment Images -->
+  <%= f.fields_for :assessment_images do |builder| %>
+    <%= render partial: 'assessment_image_fields', object: builder, as: 'f' %>
+  <% end %>
+  <p class="form-radio"><%= link_to_add_fields "Add Image", f, :assessment_images %></p>
+  
   <br>
   <p class="form-radio"><b>Submitted by:</b> &nbsp; &nbsp;<%= current_user.name %><p>
   <p><%= f.submit class: "btn btn-block btn-green" %></p>

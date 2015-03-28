@@ -1,0 +1,12 @@
+<fieldset class="row">
+	<div class="col-sm-1">
+		<%= f.hidden_field :_destroy %>
+		<%= link_to '<i class="fa fa-fw fa-lg fa-times-circle form-remove-icon"></i>'.html_safe, '#', class: "remove_fields" %>
+	</div>
+	<div class="col-sm-5">
+		<%= f.select :image_type, options_for_select([["Question Image"], ["Answer Image"], ["Answer Map"], ["Part-A Image"], ["Part-B Image"], ["Part-C Image"], ["Part-D Image"], ["Explanation Image"]], f.object.image_type), include_blank: "--- image type ---" %>
+	</div>
+	<div class="col-sm-6">
+		<%= f.file_field :image, class: "form-control" %>
+	</div>
+</fieldset>

@@ -31,14 +31,23 @@
   <p><%= f.text_area :answer_d, placeholder: "Option D", rows: "1", class: "form-control" %></p>
   <br>
   <p class="form-radio">
-    <b>Correct Answer:</b> &nbsp; &nbsp;
+    <b>Correct Answer:</b><br>
     <%= f.radio_button(:mcq_answer, "A") %> Option A &nbsp; &nbsp;
     <%= f.radio_button(:mcq_answer, "B") %> Option B &nbsp; &nbsp;
     <%= f.radio_button(:mcq_answer, "C") %> Option C &nbsp; &nbsp;
     <%= f.radio_button(:mcq_answer, "D") %> Option D &nbsp; &nbsp;
   <p>
   <p><%= f.text_area :mcq_explanation, placeholder: "Answer Explanation", rows: "2", class: "form-control" %></p>
-
+  
+  <br>
+  <p class="form-radio"><b>Assessment Images:</b><p>
+  <!-- Nested form for Assessment Images -->
+  <%= f.fields_for :assessment_images do |builder| %>
+    <%= render partial: 'assessment_image_fields', object: builder, as: 'f' %>
+  <% end %>
+  <p class="form-radio"><%= link_to_add_fields "Add Image", f, :assessment_images %></p>
+  
+  <br>
   <p class="form-radio"><b>Submitted by:</b> &nbsp; &nbsp;<%= if params[:action] == "create" then current_user.name else @assessment_content.teacher_name end %><p>
   <p><%= f.submit class: "btn btn-block btn-green" %></p>
 <% end %>

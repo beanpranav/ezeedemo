@@ -10,14 +10,18 @@
     <div class="answer-icon<%= "-green" if @assessment_content.mcq_answer == "B" %>">B</div>
     <div class="answer-text"><%= @assessment_content.answer_b.html_safe %></div>
   </div>
-  <div class="mcq-option">
-    <div class="answer-icon<%= "-green" if @assessment_content.mcq_answer == "C" %>">C</div>
-    <div class="answer-text"><%= @assessment_content.answer_c.html_safe %></div>
-  </div>
-  <div class="mcq-option">
-    <div class="answer-icon<%= "-green" if @assessment_content.mcq_answer == "D" %>">D</div>
-    <div class="answer-text"><%= @assessment_content.answer_d.html_safe %></div>
-  </div>
+  <% if @assessment_content.answer_c.length >2 %>
+    <div class="mcq-option">
+      <div class="answer-icon<%= "-green" if @assessment_content.mcq_answer == "C" %>">C</div>
+      <div class="answer-text"><%= @assessment_content.answer_c.html_safe %></div>
+    </div>
+  <% end %>
+  <% if @assessment_content.answer_d.length >2 %>
+    <div class="mcq-option">
+      <div class="answer-icon<%= "-green" if @assessment_content.mcq_answer == "D" %>">D</div>
+      <div class="answer-text"><%= @assessment_content.answer_d.html_safe %></div>
+    </div>
+  <% end %>
 
   <br><br>
 

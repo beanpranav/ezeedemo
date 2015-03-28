@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150326170504) do
+ActiveRecord::Schema.define(version: 20150328053603) do
 
   create_table "assessment_contents", force: true do |t|
     t.integer  "video_content_id"
@@ -27,6 +27,19 @@ ActiveRecord::Schema.define(version: 20150326170504) do
     t.datetime "updated_at"
     t.text     "mcq_explanation"
   end
+
+  create_table "assessment_images", force: true do |t|
+    t.integer  "assessment_content_id"
+    t.string   "image_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "assessment_images", ["assessment_content_id"], name: "index_assessment_images_on_assessment_content_id"
 
   create_table "chapters", force: true do |t|
     t.string   "name"

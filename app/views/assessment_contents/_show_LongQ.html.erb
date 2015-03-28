@@ -5,7 +5,7 @@
   <b>Answer:</b>
   <div class="assessment-answer">
     <div class="answer-icon-mark"><%= if @assessment_content.answer_c.length >10 then "2m" else "3m" end %></div>
-    <div class="assessment-text">Render Diagram Here</div>
+    <div class="assessment-text"><%= image_tag @assessment_content.assessment_images.first.image, class: "img-responsive" %></div>
   </div>
   <div class="assessment-answer">
     <div class="answer-icon-mark">1m</div>

@@ -252,6 +252,7 @@ td { text-align: left; }
 	padding: 2px;
 	background-color: white;
   border: 2px solid black;
+  border-top: 1px dotted $brand-font-gray;
 }
 
 // HOME PAGE
@@ -308,6 +309,8 @@ td { text-align: left; }
 .form-container {	padding: 30px 40px; }
 .form-label { text-align: right;  padding: 10px 0 4px; margin-bottom: 10px; }
 .form-radio { text-align: left; padding: 7px 0 3px; margin-bottom: 10px;  }
+.form-remove-icon { margin: 13px 5px; color: $brand-font-gray; }
+.form-remove-icon:hover { color: $brand-red; }
 .form-control { 
 	border-radius: 0px; 
 	border: 0; 
