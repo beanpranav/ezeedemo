@@ -41,11 +41,7 @@
   <p>
     <%= link_to 'All Videos', video_contents_path %> |
     <a href="#" data-toggle="modal" data-target="#usage">View Usage (<%= @video_content.study_materials.count %>)</a> |
-    <a href="#" data-toggle="modal" data-target="#assessments">View Assessments (<%= @video_content.assessment_contents.count %>)</a>
-    <br>
-    <%= link_to "Add MCQ", controller: "assessment_contents", action: "new", video_content_id: @video_content.id, content_type: "MCQ" %> |
-    <%= link_to "Add ShortQ", controller: "assessment_contents", action: "new", video_content_id: @video_content.id, content_type: "ShortQ" %> |
-    <%= link_to "Add LongQ", controller: "assessment_contents", action: "new", video_content_id: @video_content.id, content_type: "LongQ" %>
+    <%= link_to 'View Assessments', assessment_admin_video_content_path(@video_content) %>
   </p>
 
 </div>

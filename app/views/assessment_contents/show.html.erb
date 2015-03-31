@@ -3,5 +3,6 @@
     <%= render "show_#{@assessment_content.content_type}" %>
   </div>
   <%= link_to 'Edit', edit_assessment_content_path(@assessment_content) %> |
-  <%= link_to 'Back to Ezee Video', video_content_path(@assessment_content.video_content) %>
+  <%= link_to 'Back to Ezee Video', video_content_path(@assessment_content.video_content) %> |
+  <%= link_to 'Back to Assessments', assessment_admin_video_content_path(@assessment_content.video_content) %>
 </div>

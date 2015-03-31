@@ -10,7 +10,10 @@ class VideoContentsController < ApplicationController
 
   def assessment_admin
     @video_content = VideoContent.find_by(id:params[:id])
-    @all_assessments = @video_content.assessment_contents      
+    @all_assessments = @video_content.assessment_contents 
+    @mcqs = @all_assessments.select { |x| x["content_type"] == "MCQ" }
+    @shortqs = @all_assessments.select { |x| x["content_type"] == "ShortQ" }
+    @longqs = @all_assessments.select { |x| x["content_type"] == "LongQ" }  
   end
 
   def new

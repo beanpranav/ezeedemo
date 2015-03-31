@@ -2,35 +2,117 @@
     
   <%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-invert pull-left">'.html_safe, video_content_path(@video_content) %></i>
   <h2 class="font-invert"><b><%= @video_content.name %></b></h2>
+  <h3 class="font-invert"><%= @all_assessments.count %> Assessments</h3>
+	
+	<div class="secondary-nav-actions pull-right dropdown">
+    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <button type="button" class="btn btn-sm btn-modal">Add New <i class="fa fa-fw fa-caret-down"></i></button>
+    </a>
+
+    <ul class="dropdown-menu">
+      <li>
+        <ul class="nav nav-pill nav-dropdown">
+          <li><%= link_to "New MCQ", controller: "assessment_contents", action: "new", video_content_id: @video_content.id, content_type: "MCQ" %></li>
+          <li><%= link_to "New ShortQ", controller: "assessment_contents", action: "new", video_content_id: @video_content.id, content_type: "ShortQ" %></li>
+          <li><%= link_to "New LongQ", controller: "assessment_contents", action: "new", video_content_id: @video_content.id, content_type: "LongQ" %></li>
+        </ul>
+      </li>
+    </ul>
+  </div>
 
 </div>
 
 <div class="content-container">
-	<div class="panel-primary">
-	    <div class="panel-title">
-		   All Assessments
-	    </div>
+	
+	<div class="panel-secondary">
+	  <div class="panel-title">
+		  <%= @mcqs.count %> MCQs
+	  </div>
 	</div>
 
 	<div class="panel-body">
 		<table class="table table-condensed">
 		  <thead>
 		    <tr>
-		      <th colspan="1">#</th>
-		      <th>Type</th>
+		      <th colspan="1"></th>
 		      <th>Question</th>
+		      <th>By</th>
 		      <th>Next Step</th>
 		      <th colspan="1"></th>
 		    </tr>
 		  </thead>
 
 		  <tbody>
-		    <% @all_assessments.sort_by(&:id).each_with_index do |assessment_content, i| %>
+		    <% @mcqs.sort_by(&:id).each_with_index do |assessment_content, i| %>
 		      <tr>
 		        <td colspan="1"><%= i+1 %></td>
-		        <td class="one-line-cell"><%= assessment_content.content_type %></td>
 		        <td><%= assessment_content.question.html_safe %></td>
-		        <td class="one-line-cell <%= if assessment_content.next_step == "Content Rework" then "panel-red" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-green" end %>"><%= assessment_content.next_step %></td>
+		        <td class="one-line-cell"><%= assessment_content.teacher_name %></td>
+		        <td class="one-line-cell <%= if assessment_content.next_step == "Completed" then "panel-green" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-red" end %>"><%= assessment_content.next_step %></td>
+		        <td><%= link_to '<i class="fa fa-arrow-right"></a>'.html_safe, edit_assessment_content_path(assessment_content) %></td>
+		      </tr>
+		    <% end %>
+		  </tbody>
+		</table>
+	</div>
+
+	<div class="panel-secondary">
+	  <div class="panel-title">
+		  <%= @shortqs.count %> Short Questions
+	  </div>
+	</div>
+
+	<div class="panel-body">
+		<table class="table table-condensed">
+		  <thead>
+		    <tr>
+		      <th colspan="1"></th>
+		      <th>Question</th>
+		      <th>By</th>
+		      <th>Next Step</th>
+		      <th colspan="1"></th>
+		    </tr>
+		  </thead>
+
+		  <tbody>
+		    <% @shortqs.sort_by(&:id).each_with_index do |assessment_content, i| %>
+		      <tr>
+		        <td colspan="1"><%= i+1 %></td>
+		        <td><%= assessment_content.question.html_safe %></td>
+		        <td class="one-line-cell"><%= assessment_content.teacher_name %></td>
+		        <td class="one-line-cell <%= if assessment_content.next_step == "Completed" then "panel-green" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-red" end %>"><%= assessment_content.next_step %></td>
+		        <td><%= link_to '<i class="fa fa-arrow-right"></a>'.html_safe, edit_assessment_content_path(assessment_content) %></td>
+		      </tr>
+		    <% end %>
+		  </tbody>
+		</table>
+	</div>
+
+	<div class="panel-secondary">
+	  <div class="panel-title">
+		  <%= @longqs.count %> Long Questions
+	  </div>
+	</div>
+
+	<div class="panel-body">
+		<table class="table table-condensed">
+		  <thead>
+		    <tr>
+		      <th colspan="1"></th>
+		      <th>Question</th>
+		      <th>By</th>
+		      <th>Next Step</th>
+		      <th colspan="1"></th>
+		    </tr>
+		  </thead>
+
+		  <tbody>
+		    <% @longqs.sort_by(&:id).each_with_index do |assessment_content, i| %>
+		      <tr>
+		        <td colspan="1"><%= i+1 %></td>
+		        <td><%= assessment_content.question.html_safe %></td>
+		        <td class="one-line-cell"><%= assessment_content.teacher_name %></td>
+		        <td class="one-line-cell <%= if assessment_content.next_step == "Completed" then "panel-green" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-red" end %>"><%= assessment_content.next_step %></td>
 		        <td><%= link_to '<i class="fa fa-arrow-right"></a>'.html_safe, edit_assessment_content_path(assessment_content) %></td>
 		      </tr>
 		    <% end %>
