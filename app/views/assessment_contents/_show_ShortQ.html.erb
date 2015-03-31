@@ -1,21 +1,25 @@
 <div class="assessment-container">
-	<b>Question <%= if @assessment_content.answer_c.length >10 then "(3m)" else "(2m)" end %>:</b>
-	<p class="assessment-question"><%= @assessment_content.question.html_safe %></p>
+  
+  <div class="assessment-question">
+  	<div class="question-icon">Q</div>
+  	<div class="assessment-text"><b><%= @assessment_content.question.html_safe %></b></div>
+  </div>
 
-	<b>Answer:</b>
-	<div class="assessment-answer">
-	  <div class="answer-icon-mark">1m</div>
-	  <div class="assessment-text"><%= @assessment_content.answer_a.html_safe %></div>
-	</div>
-	<div class="assessment-answer">
-	  <div class="answer-icon-mark">1m</div>
-	  <div class="assessment-text"><%= @assessment_content.answer_b.html_safe %></div>
-	</div>
+  <b>Answer:</b>
+  <div class="assessment-answer">
+    <div class="answer-icon-mark">1m</div>
+    <div class="assessment-text"><%= @assessment_content.answer_a.html_safe %></div>
+  </div>
+  <div class="assessment-answer">
+    <div class="answer-icon-mark">1m</div>
+    <div class="assessment-text"><%= @assessment_content.answer_b.html_safe %></div>
+  </div>
 
-	<% if @assessment_content.answer_c.length >10 %>
-	  <div class="assessment-answer">
-	    <div class="answer-icon-mark">1m</div>
-	    <div class="assessment-text"><%= @assessment_content.answer_c.html_safe %></div>
-	  </div>
-	<% end %>
+  <% if @assessment_content.answer_c.length >10 %>
+    <div class="assessment-answer">
+      <div class="answer-icon-mark">1m</div>
+      <div class="assessment-text"><%= @assessment_content.answer_c.html_safe %></div>
+    </div>
+  <% end %>
+
 </div>

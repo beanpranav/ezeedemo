@@ -1,12 +1,11 @@
 <div class="assessment-container">
-  <b>Question (5m):</b>
-  <p class="assessment-question"><%= @assessment_content.question %></p>
+  
+  <div class="assessment-question">
+    <div class="question-icon">Q</div>
+    <div class="assessment-text"><b><%= @assessment_content.question.html_safe %></b></div>
+  </div>
 
   <b>Answer:</b>
-  <div class="assessment-answer">
-    <div class="answer-icon-mark"><%= if @assessment_content.answer_c.length >10 then "2m" else "3m" end %></div>
-    <div class="assessment-text"><%= image_tag @assessment_content.assessment_images.count, class: "img-responsive" %></div>
-  </div>
   <div class="assessment-answer">
     <div class="answer-icon-mark">1m</div>
     <div class="assessment-text"><%= @assessment_content.answer_a.html_safe %></div>
@@ -36,4 +35,6 @@
       <div class="assessment-text"><%= @assessment_content.mcq_explanation.html_safe %></div>
     </div>
   <% end %>
+
+  <div class="assessment-text"><%= image_tag @assessment_content.assessment_images.count, class: "img-responsive" %>
 </div>
