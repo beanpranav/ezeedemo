@@ -48,6 +48,14 @@
   <p class="form-radio"><%= link_to_add_fields "Add Image", f, :assessment_images %></p>
   
   <br>
-  <p class="form-radio"><b>Submitted by:</b> &nbsp; &nbsp;<%= if params[:action] == "create" then current_user.name else @assessment_content.teacher_name end %><p>
+  <div class="row">
+    <div class="col-sm-6">
+      <p class="form-radio"><b>Submitted by:</b> &nbsp; &nbsp;<%= if params[:action] == "create" then current_user.name else @assessment_content.teacher_name end %><p>
+    </div>
+    <div class="col-sm-6">
+      <%= f.select :next_step, options_for_select([["Content Review-Refine"], ["Content Rework"], ["Completed"]], f.object.next_step), include_blank: "--- Next Step ---" %>    
+    </div>
+  </div>
+
   <p><%= f.submit class: "btn btn-block btn-green" %></p>
 <% end %>

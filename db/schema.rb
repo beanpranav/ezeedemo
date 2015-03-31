@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150328053603) do
+ActiveRecord::Schema.define(version: 20150331133109) do
 
   create_table "assessment_contents", force: true do |t|
     t.integer  "video_content_id"
@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20150328053603) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "mcq_explanation"
+    t.string   "next_step"
   end
 
   create_table "assessment_images", force: true do |t|

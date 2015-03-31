@@ -1,0 +1,41 @@
+<div class="secondary-nav secondary-nav-invert">
+    
+  <%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-invert pull-left">'.html_safe, video_content_path(@video_content) %></i>
+  <h2 class="font-invert"><b><%= @video_content.name %></b></h2>
+
+</div>
+
+<div class="content-container">
+	<div class="panel-primary">
+	    <div class="panel-title">
+		   All Assessments
+	    </div>
+	</div>
+
+	<div class="panel-body">
+		<table class="table table-condensed">
+		  <thead>
+		    <tr>
+		      <th colspan="1">#</th>
+		      <th>Type</th>
+		      <th>Question</th>
+		      <th>Next Step</th>
+		      <th colspan="1"></th>
+		    </tr>
+		  </thead>
+
+		  <tbody>
+		    <% @all_assessments.sort_by(&:id).each_with_index do |assessment_content, i| %>
+		      <tr>
+		        <td colspan="1"><%= i+1 %></td>
+		        <td class="one-line-cell"><%= assessment_content.content_type %></td>
+		        <td><%= assessment_content.question.html_safe %></td>
+		        <td class="one-line-cell <%= if assessment_content.next_step == "Content Rework" then "panel-red" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-green" end %>"><%= assessment_content.next_step %></td>
+		        <td><%= link_to '<i class="fa fa-arrow-right"></a>'.html_safe, edit_assessment_content_path(assessment_content) %></td>
+		      </tr>
+		    <% end %>
+		  </tbody>
+		</table>
+	</div>
+
+</div>

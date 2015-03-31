@@ -8,6 +8,11 @@ class VideoContentsController < ApplicationController
   def show
   end
 
+  def assessment_admin
+    @video_content = VideoContent.find_by(id:params[:id])
+    @all_assessments = @video_content.assessment_contents      
+  end
+
   def new
     @video_content = VideoContent.new
   end

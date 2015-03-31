@@ -4,7 +4,11 @@ Rails.application.routes.draw do
 
   resources :assessment_contents
 
-  resources :video_contents
+  resources :video_contents do
+    member do
+      get :assessment_admin
+    end
+  end
 
   devise_for :users
   resources :study_materials

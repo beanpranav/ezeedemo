@@ -57,6 +57,6 @@ class AssessmentContentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def assessment_content_params
-      params.require(:assessment_content).permit(:video_content_id, :content_type, :question, :answer_a, :answer_b, :answer_c, :answer_d, :mcq_answer, :mcq_explanation, :teacher_name, assessment_images_attributes: [:id, :image_type, :image, :_destroy])
+      params.require(:assessment_content).permit(:video_content_id, :content_type, :question, :answer_a, :answer_b, :answer_c, :answer_d, :mcq_answer, :mcq_explanation, :teacher_name, :next_step, assessment_images_attributes: [:id, :image_type, :image, :_destroy])
     end
 end
