@@ -4,7 +4,7 @@
   <br>
 <% end %>
 
-<%= form_for(@assessment_content) do |f| %>
+<%= form_for @assessment_content , html: { multipart: true } do |f| %>
   <% if @assessment_content.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@assessment_content.errors.count, "error") %> prohibited this assessment_content from being saved:</h2>
@@ -22,7 +22,7 @@
   <%= f.hidden_field :teacher_name %>
 
   <p class="form-radio"><b>Question:</b><p>
-  <p><%= f.text_area :question, placeholder: "Question", rows: "3", class: "form-control" %></p>
+  <%= f.text_area :question, placeholder: "Question", rows: "3", class: "form-control" %>
 
   <p class="form-radio"><b>Answer (parts based on marking scheme):</b><p>
   <p><%= f.text_area :answer_a, placeholder: "Part A (1 mark)", rows: "3", class: "form-control" %></p>

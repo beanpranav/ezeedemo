@@ -53,12 +53,12 @@
 							  
 							  <div class="assessment-question">
 							  	<div class="question-icon"><%= i %></div>
-							  	<div class="assessment-text"><b><%= assessment_content.question %></b></div>
+							  	<div class="assessment-text"><b><%= assessment_content.question.html_safe %></b></div>
 							  </div>
 
 							  <div class="mcq-option">
 							    <div class="answer-icon<%= "-green" if assessment_content.mcq_answer == "A" %>">A</div>
-							    <div class="answer-text"><%= assessment_content.answer_a %></div>
+							    <div class="answer-text"><%= assessment_content.answer_a.html_safe %></div>
 							  </div>
 							  <div class="mcq-option">
 							    <div class="answer-icon<%= "-green" if assessment_content.mcq_answer == "B" %>">B</div>

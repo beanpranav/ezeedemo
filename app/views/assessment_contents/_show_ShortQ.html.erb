@@ -1,6 +1,6 @@
 <div class="assessment-container">
 	<b>Question <%= if @assessment_content.answer_c.length >10 then "(3m)" else "(2m)" end %>:</b>
-	<p class="assessment-question"><%= @assessment_content.question %></p>
+	<p class="assessment-question"><%= @assessment_content.question.html_safe %></p>
 
 	<b>Answer:</b>
 	<div class="assessment-answer">
