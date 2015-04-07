@@ -46,7 +46,7 @@
 		    <% @mcqs.sort_by(&:id).each_with_index do |assessment_content, i| %>
 		      <tr>
 		        <td colspan="1"><%= i+1 %></td>
-		        <td><%= assessment_content.question.html_safe %></td>
+		        <td><%= truncate(assessment_content.question.html_safe, length: 70) %></td>
 		        <td class="one-line-cell"><%= assessment_content.teacher_name %></td>
 		        <td class="one-line-cell <%= if assessment_content.next_step == "Completed" then "panel-green" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-red" end %>"><%= assessment_content.next_step %></td>
 		        <td><%= link_to '<i class="fa fa-arrow-right"></a>'.html_safe, edit_assessment_content_path(assessment_content) %></td>
@@ -78,7 +78,7 @@
 		    <% @shortqs.sort_by(&:id).each_with_index do |assessment_content, i| %>
 		      <tr>
 		        <td colspan="1"><%= i+1 %></td>
-		        <td><%= assessment_content.question.html_safe %></td>
+		        <td><%= truncate(assessment_content.question.html_safe, length: 70) %></td>
 		        <td class="one-line-cell"><%= assessment_content.teacher_name %></td>
 		        <td class="one-line-cell <%= if assessment_content.next_step == "Completed" then "panel-green" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-red" end %>"><%= assessment_content.next_step %></td>
 		        <td><%= link_to '<i class="fa fa-arrow-right"></a>'.html_safe, edit_assessment_content_path(assessment_content) %></td>
@@ -110,7 +110,7 @@
 		    <% @longqs.sort_by(&:id).each_with_index do |assessment_content, i| %>
 		      <tr>
 		        <td colspan="1"><%= i+1 %></td>
-		        <td><%= assessment_content.question.html_safe %></td>
+		        <td><%= truncate(assessment_content.question.html_safe, length: 70) %></td>
 		        <td class="one-line-cell"><%= assessment_content.teacher_name %></td>
 		        <td class="one-line-cell <%= if assessment_content.next_step == "Completed" then "panel-green" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-red" end %>"><%= assessment_content.next_step %></td>
 		        <td><%= link_to '<i class="fa fa-arrow-right"></a>'.html_safe, edit_assessment_content_path(assessment_content) %></td>

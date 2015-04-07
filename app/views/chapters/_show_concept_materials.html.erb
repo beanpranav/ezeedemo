@@ -16,7 +16,7 @@
 				
 						<li class="content-list-item" data-toggle="modal" data-target="#show-study-material-<%= study_material.id %>">
 							<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "red"].sample %> pull-left"></i>
-							<h3><%= if study_material.video_content != nil then study_material.video_content.video_duration else "***MISSING***" end %> min Video <%= "& 3D Model" if study_material.interactive_content_id? %></h3>
+							<h3><%= if study_material.video_content != nil then study_material.video_content.video_duration else "***MISSING***" end %> min Video <%= "with 3D Interactive" if study_material.interactive_content_id? %></h3>
 							<h2><%= study_material.name %></h2>
 						</li>
 
@@ -44,8 +44,12 @@
 					    	      	</div>
 					    	      	<div class="col-sm-12 col-md-6">  
 					    	      		<div class="videoWrapper">
-					    	      			<image src="/images/model-sample.png" class="img-responsive" style="padding:2px;">
-					    	      			<!-- <iframe src="<%= study_material.interactive_content_id %>" frameborder="0" allowfullscreen></iframe> -->
+					    	      			<!-- Div ID for setting 3D Interactive -->
+					    	      			<div id="rotateContent">
+															<button class="btn btn-block btn-primary" onclick="getScale()">
+																Click to Show 3D Model 
+															</button>
+														</div>
 					    	      		</div>
 					    	      	</div>
 					    	      </div>
@@ -54,6 +58,30 @@
 				    	    </div>
 				    	  </div>
 				    	</div>
+
+				    	<script type="text/javascript">
+				    		function getScale(){
+				    			var divi = document.getElementById("rotateContent");
+				    				var height = divi.offsetHeight;
+				    				var width = divi.offsetWidth;
+				    				//alert(height + "x" + width);
+				    				if (typeof(RotateTool) == 'undefined') {
+				    					alert('rotate.js not loaded!');
+				    				}
+				    				else
+				    				{
+				    					var jsParams    = {};
+
+				    					jsParams.path   = "<%= study_material.interactive_content.content.url.gsub(/original.*$/,'original/') %>";
+				    					jsParams.target = "rotateContent";
+
+				    					jsParams.targetWidth  = width;
+				    					jsParams.targetHeight = height;
+				    					RotateTool.add(jsParams);
+				    					
+				    				}
+				    			}
+				    	</script>
 
 			    	<% else %>
 			    	<!-- Show only video content -->
@@ -86,3 +114,4 @@
 
 		<% end %>
 	</ul>
+
