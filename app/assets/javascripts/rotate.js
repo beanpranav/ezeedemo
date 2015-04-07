@@ -867,16 +867,18 @@ var YPreloader = function (b) {
     a.style.fontFamily = "arial, sans-serif";
     a.style.lineHeight = "30px";
     a.style.textAlign = "left";
-    a.style.bottom = "0px";
+    a.style.top = "0px";
     a.style.left = "0px";
+    a.style.padding = "5px 10px";
+    a.style.text-decoration = "italic";
     a.innerHTML = "&nbsp; 0%";
     a.setAttribute("id", "preloader_" + b.id);
     b.appendChild(a);
     this.update = function (c) {
-        var d = "";
-        if (c < 10) {
-            d = "loading... &nbsp; "
-        }
+        var d = "&nbsp; loading... &nbsp; ";
+        // if (c < 10) {
+        //     d = "&nbsp; loading... &nbsp; "
+        // }
         a.innerHTML = d + c + "%"
     };
     this.destroy = function () {
