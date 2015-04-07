@@ -53,13 +53,27 @@
 
         <div class="modal-body"> 
           <div class="row">
-            <div class="col-sm-12 col-md-8">  
-              <div class="mapWrapper">
-                <div id="flashcontent">
-                  Flash not working!
+            <div class="col-sm-12 col-md-8">
+
+              <% if @interactive_content.content_type == "Mind Map" %>
+                <div class="mapWrapper">
+                  <div id="flashcontent">
+                    Flash not working!
+                  </div>
                 </div>
-                
-              </div>
+
+              <% else %>
+                <div class="videoWrapper">
+                  <!-- Div ID for setting 3D Interactive -->
+                  <div id="rotateContent">
+                    <button type="button" class="btn btn-block btn-primary" onclick="getScale()">
+                      Click to Show 3D Model 
+                    </button>
+                  </div>
+                </div>
+
+              <% end %>
+
             </div>
             <div class="col-sm-12 col-md-4">
               <p class="form-radio"><b>Ezee Content Notes</b></p>  
@@ -81,6 +95,31 @@
     fo.addVariable("initLoadFile", "<%= @interactive_content.content.url if @interactive_content.content? %>"); 
     fo.addVariable("startCollapsedToLevel","1");
     fo.write("flashcontent");
+  </script>
+
+  <!-- For setting 3D Interactive Path -->
+  <script type="text/javascript">
+    function getScale(){
+      var divi = document.getElementById("rotateContent");
+        var height = divi.offsetHeight;
+        var width = divi.offsetWidth;
+        //alert(height + "x" + width);
+        if (typeof(RotateTool) == 'undefined') {
+          alert('rotate.js not loaded!');
+        }
+        else
+        {
+          var jsParams    = {};
+
+          jsParams.path   = "<%= @interactive_content.content.url.gsub(/original.*$/,'original/') %>";
+          jsParams.target = "rotateContent";
+
+          jsParams.targetWidth  = width;
+          jsParams.targetHeight = height;
+          RotateTool.add(jsParams);
+          
+        }
+      }
   </script>
 
 <% end %>
