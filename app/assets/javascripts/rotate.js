@@ -862,11 +862,12 @@ var YPreloader = function (b) {
         return
     }
     var a = document.createElement("div");
-    a.style.fontSize = "32px";
-    a.style.fontFamily = "verdana, arial, sans-serif";
-    a.style.lineHeight = b.offsetHeight - 30 + "px";
-    a.style.textAlign = "center";
-    a.style.top = "0px";
+    a.style.fontSize = "20px";
+    a.style.color = "#cccccc";
+    a.style.fontFamily = "arial, sans-serif";
+    a.style.lineHeight = "30px";
+    a.style.textAlign = "left";
+    a.style.bottom = "0px";
     a.style.left = "0px";
     a.innerHTML = "&nbsp; 0%";
     a.setAttribute("id", "preloader_" + b.id);
@@ -874,7 +875,7 @@ var YPreloader = function (b) {
     this.update = function (c) {
         var d = "";
         if (c < 10) {
-            d = "&nbsp; "
+            d = "loading... &nbsp; "
         }
         a.innerHTML = d + c + "%"
     };
