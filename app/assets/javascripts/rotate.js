@@ -869,8 +869,8 @@ var YPreloader = function (b) {
     a.style.textAlign = "left";
     a.style.top = "0px";
     a.style.left = "0px";
-    a.style.padding = "5px 10px";
-    a.style.text-decoration = "italic";
+    a.style.paddingLeft = "10px";
+    a.style.paddingTop = "5px";
     a.innerHTML = "&nbsp; 0%";
     a.setAttribute("id", "preloader_" + b.id);
     b.appendChild(a);
