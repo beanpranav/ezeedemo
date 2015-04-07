@@ -111,7 +111,7 @@
         {
           var jsParams    = {};
 
-          jsParams.path   = "<%= @interactive_content.content.url.gsub(/original.*$/,'original/') %>";
+          jsParams.path   = "<%= @interactive_content.content.url.gsub(/original.*$/,'original/').gsub(/http:/,'https:') %>";
           jsParams.target = "rotateContent";
 
           jsParams.targetWidth  = width;

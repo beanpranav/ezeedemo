@@ -72,7 +72,7 @@
 				    				{
 				    					var jsParams    = {};
 
-				    					jsParams.path   = "<%= study_material.interactive_content.content.url.gsub(/original.*$/,'original/') %>";
+				    					jsParams.path   = "<%= study_material.interactive_content.content.url.gsub(/original.*$/,'original/').gsub(/http:/,'https:') %>";
 				    					jsParams.target = "rotateContent";
 
 				    					jsParams.targetWidth  = width;
