@@ -148,7 +148,7 @@
     fo.addParam("quality", "high");
     fo.addVariable("bgcolor", 0xfffffff);
     fo.addVariable("openUrl", "_blank");
-    fo.addVariable("initLoadFile", "<%= @study_material.interactive_content.content.url if @study_material.interactive_content.content? %>"); 
+    fo.addVariable("initLoadFile", "<%= @study_material.interactive_content.content.url %>"); 
     fo.addVariable("startCollapsedToLevel","1");
     fo.write("flashcontent");
   </script>
