@@ -126,6 +126,38 @@
                 </div>
               </div>
             </div>
+
+            <!-- For setting MindMap Path -->
+            <script type="text/javascript">
+              var fo = new FlashObject("<%= asset_path("visorFreeplane.swf") %>", "visorFreeplane", "100%", "100%", 4);
+              fo.addParam("quality", "high");
+              fo.addVariable("bgcolor", 0xfffffff);
+              fo.addVariable("openUrl", "_blank");
+              fo.addVariable("initLoadFile", "<%= @study_material.interactive_content.content.url %>"); 
+              fo.addVariable("startCollapsedToLevel","1");
+              fo.write("flashcontent");
+            </script>
+
+            <!-- For setting 3D Interactive Path -->
+            <script type="text/javascript">
+              function getScale(){
+                var div = document.getElementById("rotateContent");
+                var height = div.offsetHeight;
+                var width = div.offsetWidth;
+                if (typeof(RotateTool) == 'undefined') {
+                  alert('rotate.js not loaded!');
+                }
+                else {
+                  var jsParams    = {};
+                  jsParams.path   = "<%= @study_material.interactive_content.content.url.gsub(/original.*$/,'original/').gsub(/http:/,'https:') %>";
+                  jsParams.target = "rotateContent";
+                  jsParams.targetWidth  = width;
+                  jsParams.targetHeight = height;
+                  RotateTool.add(jsParams);
+                }
+              }
+            </script>
+            
           <% else %>
             <button type="button" class="btn btn-disabled btn-block" style="margin-bottom: 10px;" disabled="disabled">View Interactive</button>
           <% end %>
@@ -142,34 +174,4 @@
   <br>
   <%= f.submit class: "btn btn-block btn-green" %> 
 
-  <!-- For setting MindMap Path -->
-  <script type="text/javascript">
-    var fo = new FlashObject("<%= asset_path("visorFreeplane.swf") %>", "visorFreeplane", "100%", "100%", 4);
-    fo.addParam("quality", "high");
-    fo.addVariable("bgcolor", 0xfffffff);
-    fo.addVariable("openUrl", "_blank");
-    fo.addVariable("initLoadFile", "<%= @study_material.interactive_content.content.url %>"); 
-    fo.addVariable("startCollapsedToLevel","1");
-    fo.write("flashcontent");
-  </script>
-
-  <!-- For setting 3D Interactive Path -->
-  <script type="text/javascript">
-    function getScale(){
-      var div = document.getElementById("rotateContent");
-      var height = div.offsetHeight;
-      var width = div.offsetWidth;
-      if (typeof(RotateTool) == 'undefined') {
-        alert('rotate.js not loaded!');
-      }
-      else {
-        var jsParams    = {};
-        jsParams.path   = "<%= @study_material.interactive_content.content.url.gsub(/original.*$/,'original/').gsub(/http:/,'https:') %>";
-        jsParams.target = "rotateContent";
-        jsParams.targetWidth  = width;
-        jsParams.targetHeight = height;
-        RotateTool.add(jsParams);
-      }
-    }
-  </script>
 <% end %>
