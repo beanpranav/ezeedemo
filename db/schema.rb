@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150331133109) do
+ActiveRecord::Schema.define(version: 20150408095827) do
 
   create_table "assessment_contents", force: true do |t|
     t.integer  "video_content_id"
@@ -91,6 +91,26 @@ ActiveRecord::Schema.define(version: 20150331133109) do
     t.string   "board"
     t.integer  "standard"
   end
+
+  create_table "user_assessment_progresses", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "assessment_content_id"
+    t.string   "response"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_assessment_progresses", ["user_id"], name: "index_user_assessment_progresses_on_user_id"
+
+  create_table "user_study_progresses", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "study_material_id"
+    t.string   "rating"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_study_progresses", ["user_id"], name: "index_user_study_progresses_on_user_id"
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",        null: false
