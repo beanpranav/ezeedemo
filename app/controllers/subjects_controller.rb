@@ -17,6 +17,8 @@ class SubjectsController < ApplicationController
 
   def subject_admin
     @subject = Subject.find_by(id:params[:id])
+    @chapters_term_1 = @subject.chapters.select { |x| x["term"] == 1 }
+    @chapters_term_2 = @subject.chapters.select { |x| x["term"] == 2 }
   end
 
   def create
