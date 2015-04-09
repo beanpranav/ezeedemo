@@ -6,6 +6,20 @@ class SubjectsController < ApplicationController
   end
 
   def show
+    @chapters_all = @subject.chapters.sort_by(&:chapterNumber)
+    @chapters_term_1 = @chapters_all.select { |x| x["term"] == 1 }
+    @chapters_term_2 = @chapters_all.select { |x| x["term"] == 2 }
+
+    @goals_term_1 = 0
+    @chapters_term_1.each do |chapter|
+      @goals_term_1 += chapter.study_materials.count
+    end
+
+    @goals_term_2 = 0
+    @chapters_term_2.each do |chapter|
+      @goals_term_2 += chapter.study_materials.count
+    end
+
   end
 
   def new

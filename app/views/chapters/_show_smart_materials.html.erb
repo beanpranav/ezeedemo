@@ -13,7 +13,11 @@
 			<% else %>
 			
 					<li class="content-list-item" data-toggle="modal" data-target="#show-smart-material-<%= study_material.id %>">
-						<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "orange"].sample %> pull-left"></i>
+						<% if user_signed_in? %>
+							<i class="fa fa-2x fa-trophy content-list-icon-<%= if @user_progresses.find { |x| x["study_material_id"] == study_material.id } then "orange" else "default" end %> pull-left"></i>
+						<% else %>
+							<i class="fa fa-2x fa-trophy content-list-icon-default pull-left"></i>
+						<% end %>
 						<h3>Visual Notes</h3>
 						<h2><%= study_material.name %></h2>
 					</li>
@@ -26,8 +30,79 @@
 		    	      <div class="panel-orange panel-title">
 		    	      	<%= study_material.name %>
 		    	      	<div class="modal-actions pull-right">
-			    	      	<button type="button" class="btn btn-sm btn-modal-orange">Mark as Complete</button>
-			    	      	<button type="button" class="btn btn-sm btn-modal" data-dismiss="modal"><i class="fa fa-times"></i></button>
+			    	      	
+			    	      	<button type="button" class="btn btn-sm btn-modal pull-right" data-dismiss="modal"><i class="fa fa-times"></i></button>
+										
+										<% if user_signed_in? %>
+
+											<% progress = @user_progresses.find { |x| x["study_material_id"] == study_material.id } %>
+
+
+											<%= form_tag "/chapters/#{@chapter.id}/save_user_study_progress", class: "pull-right" do %>
+				    	      		
+									      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									    		<% if progress == nil %>
+									    			<button type="button" class="btn btn-sm btn-modal-orange">Mark as Complete</button>
+									    		<% else %>
+									    			<button type="button" class="btn btn-sm btn-modal">Completed</button> 
+									    		<% end %>
+									    	</a>
+									    	<%= hidden_field_tag :study_material_id, study_material.id %>
+
+												<ul class="dropdown-menu modal-dropdown-menu">
+									    		<% @rating_options.each do |rating| %>
+	  				    	      		<li>
+	  				    	      			<% if progress == nil %>
+
+	  				    	      				<%= button_tag(type: 'submit', name: "rating[#{rating}]", class: "btn btn-sm btn-block btn-link feedback-inactive") do %>
+	  				    	      					<%= rating %>
+																<% end %>
+															
+															<% else %>
+									      				
+									      				<% if progress.rating == rating %>
+										      				<%= button_tag(type: 'submit', name: "rating[#{rating}]", class: "btn btn-sm btn-block btn-link feedback-active") do %>
+		  				    	      					<%= rating %>
+																	<% end %>
+																<% else %>
+																	<%= button_tag(type: 'submit', name: "rating[#{rating}]", class: "btn btn-sm btn-block btn-link feedback-inactive") do %>
+		  				    	      					<%= rating %>
+																	<% end %>
+																<% end %>
+
+															<% end %>
+	  				    	      		</li>
+	  				    	      	<% end %>
+	  				    	      	<li class="divider"></li>
+	  				    	      	<li class="dropdown-footer">
+	  				    	      		Your feedback helps us focus<br>
+	  				    	      		on improving the most difficult <br>
+	  				    	      		concepts for everyone. Thanks!
+	  				    	      	</li>
+									      </ul>
+
+									    <% end %>
+
+									  <% else %>
+
+								      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								    		<button type="button" class="btn btn-sm btn-modal-orange">Mark as Complete</button>
+								    	</a>
+
+											<ul class="dropdown-menu modal-dropdown-menu">
+								    		<% @rating_options.each.with_index(1) do |rating, i| %>
+  				    	      		<li>
+  				    	      			<button type="button" class="btn btn-sm btn-block btn-link feedback-<%= i %>" disabled="disabled"><%= rating %></button>
+  				    	      		</li>
+  				    	      	<% end %>
+  				    	      	<li class="divider"></li>
+  				    	      	<li class="dropdown-footer">Login to save your progress</li>
+
+								      </ul>
+
+			    	      	<% end %>
+
+			    	      	
 			    	      </div>
 		    	      </div>
 

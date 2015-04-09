@@ -24,18 +24,20 @@
 			
 		<h1 class="font-invert pull-left"><i class="fa fa-fw fa-book"></i></h1>
 		<h2 class="font-invert"><b><%= @subject.name %></b></h2>
-		<h3 class="font-invert">0 / 75 Goals</h3>
+		<h3 class="font-invert"><%= @chapters_all.count %> Chapters</h3>
 	
   	<div class="secondary-nav-actions pull-right dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-    		<button type="button" class="btn btn-sm btn-modal">show <i class="fa fa-fw fa-caret-down"></i></button>
+    		<button type="button" class="btn btn-sm btn-modal">filter <i class="fa fa-fw fa-caret-down"></i></button>
     	</a>
     	<ul class="dropdown-menu">
     		<li>
     			<ul class="nav nav-pill nav-dropdown">
-	      	  <li><a href="#textbook" data-toggle="pill">Textbook</a></li>
+						<li class="dropdown-header">CBSE syllabus for</li>
+	      	  <li class="divider"></li>
 	      	  <li><a href="#term1" data-toggle="pill">Term 1</a></li>
 	      	  <li><a href="#term2" data-toggle="pill">Term 2</a></li>
+	      	  <li><a href="#textbook" data-toggle="pill">Full Textbook</a></li>
       		</ul>
       	</li>
       </ul>
@@ -47,11 +49,11 @@
 
 		<div class="tab-content">
 			
-			<div class="tab-pane active" id="textbook">
+			<div class="tab-pane" id="textbook">
 				<%= render "subjects/textbook" %>
 			</div>
 
-			<div class="tab-pane" id="term1">
+			<div class="tab-pane active" id="term1">
 				<%= render "subjects/term1" %>
 			</div>
 

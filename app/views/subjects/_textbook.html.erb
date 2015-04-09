@@ -1,13 +1,14 @@
 
 <div class="panel-primary">
     <div class="panel-title">
-	   Textbook
+	   Full Textbook 
+	  	<div class="panel-right">0 / <%= @goals_term_1 + @goals_term_2 %> Goals</div>
     </div>
 </div>
 
 <div class="panel-body">
 	<ul class="content-list">
-		<% @subject.chapters.sort_by(&:chapterNumber).each do |chapter| %>
+		<% @chapters_all.each do |chapter| %>
 
 			<a href="<%= chapter_path(chapter) %>" class="supress-a">
 				<li class="content-list-item">

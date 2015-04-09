@@ -20,6 +20,13 @@ class ChaptersController < ApplicationController
     @mcqs = @all_assessments.select { |x| x["content_type"] == "MCQ" }
     @shortqs = @all_assessments.select { |x| x["content_type"] == "ShortQ" }
     @longqs = @all_assessments.select { |x| x["content_type"] == "LongQ" }
+
+    @rating_options = ["Clearly understood", "Somewhat understood", "Did not understand"]
+
+    if user_signed_in?
+      @user_progresses = UserStudyProgress.where(user_id: current_user.id)
+    end
+    
   end
 
   def new
@@ -60,6 +67,24 @@ class ChaptersController < ApplicationController
     respond_to do |format|
       format.html { redirect_to chapters_url }
     end
+  end
+
+  # Actions for recording user's progress
+  def save_user_study_progress
+    if (UserStudyProgress.find_by(user_id: current_user.id, study_material_id: params[:study_material_id]) == nil)
+    # Save user's progress
+      p = UserStudyProgress.new user_id: current_user.id, study_material_id: params[:study_material_id], rating: params[:rating].index("")
+      p.save
+    else
+    # Re-save rating
+      p = UserStudyProgress.find_by(user_id: current_user.id, study_material_id: params[:study_material_id])
+      p.rating = params[:rating].index("")
+      p.save
+    end
+  
+    flash[:notice] = 'Good Job! Your progress has been saved.'.html_safe
+    redirect_to chapter_path(params[:id])
+
   end
 
   private

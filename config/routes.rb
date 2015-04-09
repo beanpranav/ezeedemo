@@ -11,9 +11,12 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
+  
   resources :study_materials
 
-  resources :chapters
+  resources :chapters do
+    post 'save_user_study_progress', on: :member
+  end
 
   resources :subjects do
 	  member do
