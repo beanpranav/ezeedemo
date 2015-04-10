@@ -1,7 +1,7 @@
 
 <div class="panel-primary">
     <div class="panel-title">
-	   Term 2 
+	   Term 2<span style="font-weight: normal;">: <%= @chapters_term_2.count %> Chapters</span>
 	  	<div class="panel-right"><%= if user_signed_in? then @user_progresses_term_2.count else "0" end %> / <%= @goals_term_2 %> Goals</div>
     </div>
 </div>
@@ -14,7 +14,7 @@
 					<% if chapter.status == "Paid" %>
 						<i class="fa fa-2x fa-lock content-list-icon-lock pull-left"></i>
 					<% else %>
-						<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "primary", "green", "orange", "red"].sample %> pull-left"></i>
+						<i class="fa fa-2x fa-trophy content-list-icon-default pull-left"></i>
 					<% end %>
 					<h3>Chapter <%= chapter.chapterNumber%></h3>
 					<h2><%= chapter.name %></h2>
