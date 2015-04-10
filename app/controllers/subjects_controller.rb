@@ -9,15 +9,40 @@ class SubjectsController < ApplicationController
     @chapters_all = @subject.chapters.sort_by(&:chapterNumber)
     @chapters_term_1 = @chapters_all.select { |x| x["term"] == 1 }
     @chapters_term_2 = @chapters_all.select { |x| x["term"] == 2 }
+    @user_progresses = UserStudyProgress.where(user_id: current_user.id)
 
     @goals_term_1 = 0
+    @user_progresses_term_1 = []
+
     @chapters_term_1.each do |chapter|
-      @goals_term_1 += chapter.study_materials.count
+      study_materials_count = chapter.study_materials.count
+      @goals_term_1 += study_materials_count
+
+      if user_signed_in? && study_materials_count != 0
+        chapter.study_materials.each do |study_material|
+          progress = @user_progresses.select { |x| x["study_material_id"] == study_material.id }
+          if progress != nil
+            @user_progresses_term_1 += progress
+          end
+        end
+      end
     end
 
     @goals_term_2 = 0
+    @user_progresses_term_2 = []
+
     @chapters_term_2.each do |chapter|
-      @goals_term_2 += chapter.study_materials.count
+      study_materials_count = chapter.study_materials.count
+      @goals_term_2 += study_materials_count
+
+      if user_signed_in? && study_materials_count != 0
+        chapter.study_materials.each do |study_material|
+          progress = @user_progresses.select { |x| x["study_material_id"] == study_material.id }
+          if progress != nil
+            @user_progresses_term_2 += progress
+          end
+        end
+      end
     end
 
   end

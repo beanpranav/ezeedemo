@@ -23,6 +23,8 @@
               <i class="fa fa-fw fa-caret-down"></i>
             </a>
             <ul class="dropdown-menu">
+              <li class="dropdown-footer">Hello! :D</li>
+              <li class="divider"></li>
               <% if current_user.role == "Admin" %>
                 <li><%= link_to "Admin Dashboard", subjects_path %></li>
                 <li><%= link_to "Ezee Videos", video_contents_path %></li>
@@ -34,7 +36,7 @@
               <li class="divider"></li>
               <li><%= link_to "Settings", edit_user_registration_path %></li>
               <li><%= link_to "Upgrade", "#" %></li>
-              <li><%= link_to "Referrals", "#" %></li>
+              <!-- <li><%= link_to "Referrals", "#" %></li> -->
               <li class="divider"></li>
               <li><%= link_to "Logout", destroy_user_session_path, method: :delete %></li>
             </ul>

@@ -6,6 +6,7 @@ class ChaptersController < ApplicationController
   end
 
   def show
+
     @study_materials = @chapter.study_materials.sort_by(&:material_no)
     @concept_materials = @study_materials.select { |x| x["material_type"] == "Quick Concepts" }
     @smart_materials = @study_materials.select { |x| x["material_type"] == "Learn Smart" }
@@ -24,9 +25,14 @@ class ChaptersController < ApplicationController
     @rating_options = ["Clearly understood", "Somewhat understood", "Did not understand"]
 
     if user_signed_in?
-      @user_progresses = UserStudyProgress.where(user_id: current_user.id)
+      @user_progresses = []
+      @study_materials.each do |study_material|
+        if UserStudyProgress.where(user_id: current_user.id, study_material_id: study_material.id) != nil
+          @user_progresses += UserStudyProgress.where(user_id: current_user.id, study_material_id: study_material.id)
+        end
+      end
     end
-    
+
   end
 
   def new
@@ -82,7 +88,7 @@ class ChaptersController < ApplicationController
       p.save
     end
   
-    flash[:notice] = 'Good Job! Your progress has been saved.'.html_safe
+    flash[:notice] = "<b>Good Job!</b> Your progress has been saved."
     redirect_to chapter_path(params[:id])
 
   end
