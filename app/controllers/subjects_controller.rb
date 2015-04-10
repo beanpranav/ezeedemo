@@ -9,7 +9,9 @@ class SubjectsController < ApplicationController
     @chapters_all = @subject.chapters.sort_by(&:chapterNumber)
     @chapters_term_1 = @chapters_all.select { |x| x["term"] == 1 }
     @chapters_term_2 = @chapters_all.select { |x| x["term"] == 2 }
-    @user_progresses = UserStudyProgress.where(user_id: current_user.id)
+    if user_signed_in?
+      @user_progresses = UserStudyProgress.where(user_id: current_user.id)
+    end
 
     @goals_term_1 = 0
     @user_progresses_term_1 = []
