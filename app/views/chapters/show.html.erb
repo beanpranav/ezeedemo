@@ -2,7 +2,7 @@
 <div class="col-xs-12 col-sm-3" style="padding:0px;">
 	<a href="<%= subject_path(@chapter.subject) %>" class="supress-a">
 		<div class="secondary-nav secondary-nav-button">
-			<i class="fa fa-2x fa-book secondary-nav-icon pull-left"></i>
+			<i class="fa fa-2x fa-arrow-left secondary-nav-icon pull-left"></i>
 			<h3>Subject</h3>
 			<h2><%= @chapter.subject.name %></h2>
 
@@ -53,7 +53,7 @@
 				    </div>
 				  </div>
 			  </a>
-			  <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+			  <div id="collapseOne" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingOne">
 			    <div class="panel-body">
 			    	<%= render "chapters/show_concept_materials" %>
 			    </div>
@@ -69,7 +69,7 @@
 				    </div>
 				  </div>
 				 </a>
-			  <div id="collapseTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+			  <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
 			    <div class="panel-body">
 			      <%= render "chapters/show_smart_materials" %>
 			    </div>
