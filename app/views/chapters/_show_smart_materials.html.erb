@@ -16,10 +16,10 @@
 						<% if user_signed_in? %>
 							<i class="fa fa-2x fa-trophy content-list-icon-<%= if @user_progresses.find { |x| x["study_material_id"] == study_material.id } then "orange" else "default" end %> pull-left"></i>
 						<% else %>
-							<i class="fa fa-2x fa-trophy content-list-icon-default pull-left"></i>
+							<i class="fa fa-2x fa-trophy content-list-icon-orange pull-left"></i>
 						<% end %>
-						<h3>Visual Notes</h3>
-						<h2><%= study_material.name %></h2>
+						<h3><%= study_material.name %></h3>
+						<h2>Chapter Summary</h2>
 					</li>
 
 			    	

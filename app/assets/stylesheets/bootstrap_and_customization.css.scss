@@ -42,7 +42,7 @@ h3 {
 	margin: 5px;
 }
 
-p { line-height: 1.65; }
+p { line-height: 1.65; font-weight: normal; }
 
 td { text-align: left; }
 
@@ -276,11 +276,25 @@ td { text-align: left; }
 	background-size: 100%;
 	background-repeat:no-repeat;
 	background-position: center center;
-	border: 5px solid white;
+	border: 6px solid white;
+  outline: 1px solid $body-border;
+  outline-offset: -1px;
 }
+.home-logo { padding: 60px 60px 20px; }
+.btn-title {  margin: 5px 10px 60px; padding: 5px 20px; }
 .home-icon {
 	max-width: 110px;
-	margin: 20px 20px 10px 20px;
+	margin: 15px 20px 10px 20px;
+	opacity: 0.7;
+	// filter: grayscale(1);
+ //  -webkit-filter: grayscale(1);
+}
+.home-nav {
+	margin: 0 0 10px 0;
+	padding: 25px 40px;
+	background-color: $navbar-default-bg;
+	border: 1px solid $body-border;
+	box-shadow: 0 2px 15px $body-border;
 }
 
 

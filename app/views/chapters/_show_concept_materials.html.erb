@@ -18,7 +18,7 @@
 							<% if user_signed_in? %>
 								<i class="fa fa-2x fa-trophy content-list-icon-<%= if @user_progresses.find { |x| x["study_material_id"] == study_material.id } then "red" else "default" end %> pull-left"></i>
 							<% else %>
-								<i class="fa fa-2x fa-trophy content-list-icon-default pull-left"></i>
+								<i class="fa fa-2x fa-trophy content-list-icon-red pull-left"></i>
 							<% end %>
 							<h3><%= if study_material.video_content != nil then study_material.video_content.video_duration else "***MISSING***" end %> min Video <%= "with 3D Interactive" if study_material.interactive_content_id? %></h3>
 							<h2><%= study_material.name %></h2>

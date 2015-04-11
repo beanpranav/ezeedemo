@@ -4,18 +4,104 @@
 
 	<div class="secondary-nav home-screen center">
 
-		<br><br><br><br>
-		<image src="/images/home-icon-2.png" class="">
-		<br><br>
-		<h1 class="font-invert"><b>Study Material that makes a difference.<b></h1>
+		<image src="/images/home-icon-2.png" class="home-logo" \>
+		<h1 class="font-invert"><b>Simplify Studying<b></h1>
 		<h3 class="font-invert" style="line-height: 1.65em;">
-			Concepts, Techniques and Assessments designed specifically for easy learning.
-			<br>Only for 10th CBSE students.
+			Study Material and techniques designed  
+			<br>by experts specifically for you.
+			<br>
+			<br>Join our 10th CBSE student community
 		</h3>
-		<br><br>
 
-		<%= link_to "Start Now", common_dashboard_path, class: "btn btn-modal" %>
-	      					
+		<%= link_to "Start Now", common_dashboard_path, class: "btn btn-modal btn-title" %>
+
+	</div>
+
+
+	<div class="home-nav center">
+		<div class= "row">
+
+			<h1 class="center"><b>How it works?</b></h1>
+
+			<div class="col-xs-12 col-sm-4">
+				<image src="/images/study-fast.png" class="home-icon">
+				<h2 class="font-red"><b>Study Fast</b></h2>
+				<p>
+					Grasp key ideas with <u>Quick Concept</u> 
+					<br>videos & interactive 3D models.
+				</p>
+			</div>
+
+			<div class="col-xs-12 col-sm-4">
+				<image src="/images/learn-smart.png" class="home-icon">
+				<h2 class="font-orange"><b>Learn Smart</b></h2>
+				<p>
+					Make last-minute revisions easy &
+					<br>stress-free with <u>Visual Notes</u>.
+				</p>
+			</div>
+
+			<div class="col-xs-12 col-sm-4">
+				<image src="/images/score-better.png" class="home-icon" style="padding:7px 0 10px;">
+				<h2 class="font-green"><b>Score Better</b></h2>				
+				<p>
+					Discover which key points get you 
+					<br> marks with targeted <u>Exam Prep</u>.
+				</p>
+			</div>
+		</div>
+
+	</div>
+
+	<div class="home-nav">
+		<div class= "row">
+
+			<h1 class="center"><b>Why it works?</b></h1>
+			<h2 class="center" style="line-height: 1.65em;">
+				Simplifying your studies is our primary goal. We give you meaningful content 
+				<br>with specific steps to tackle it until you are comfortably prepared for your exams.
+			</h2>  
+			
+			<div class="col-sm-12 col-md-4">
+			</div>
+			<div class="col-sm-12 col-md-8">
+				<br>
+				<p>
+					<b>Based on a Unique Connected Learning Technique (CLT)</b>
+					<br>Our learning experts know what top student do differently from average students. They boil down a chapter into its most important key ideas and use them to connect both the concepts taught as well as the answers that your teachers want. You don’t even have to understand the techniques, we have done that work for you. You have to simply study it and soon your understanding will match those of the toppers.
+				</p>
+				<br>
+				<p>
+					<b>Follow a stepped study plan</b>
+					<br>There is a lot of material to cover in the textbook and then the amount of effort you have to put in -just to find and study the most important question and answers is pretty insane. We feel this burden is useless and should be removed. For this, we worked extra-hard to breakdown our chapters into small digestible steps (with mock FA/SA tests) so that you don’t have to waste time searching and organizing.
+				</p>
+				<br>
+				<p>
+					<b>Know when you are done!</b>
+					<br>The most difficult task for anyone is to know how much studying is enough. That is why parents tell their kids to study more and study everyday! We have solved this problem. Based on your progress our system calculates your Chapter Preparedness Index (CPI). This will clearly tell you ans your parents which chapter you need to work on and when you are done.
+				</p>
+			</div>
+
+		</div>
+	</div>
+
+	<div class="home-nav center">
+		<div class= "row">
+
+			testimonials x2
+
+		</div>
+	</div>
+
+	<div class="home-nav center">
+		<h1><b>Start your free trial now</b></h1>
+		<h3>knowing what to study is 80% of the game!</h3>
+		<br>
+		<%= link_to "Start Now", common_dashboard_path, class: "btn btn-primary" %>
+	</div>
+
+<% end %>
+
 		<!-- <button type="button" class="btn btn-modal" data-toggle="modal" data-target="#choose-class">Start Now</button>
     	
   	<div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 modal" id="choose-class" tabindex="-1" role="dialog" aria-hidden="true">
@@ -71,45 +157,3 @@
   	    </div>
   	  </div>
   	</div> -->
-
-		<br><br><br><br>
-</div>
-
-
-<div class="secondary-nav center">
-	<div class= "row">
-
-		<div class="col-xs-12 col-sm-4">
-			<image src="/images/study-fast.png" class="home-icon">
-				<h2><b>Study Fast</b></h2>
-				<p>
-					_________________________________________
-					<br>_________________________________________
-					<br>_________________________________________
-				</p>
-		</div>
-
-		<div class="col-xs-12 col-sm-4">
-			<image src="/images/learn-smart.png" class="home-icon">
-				<h2><b>Learn Smart</b></h2>
-				<p>
-					_________________________________________
-					<br>_________________________________________
-					<br>_________________________________________
-				</p>
-		</div>
-		
-		<div class="col-xs-12 col-sm-4">
-			<image src="/images/score-better.png" class="home-icon" style="padding:7px 0 10px;">
-				<h2><b>Score Better</b></h2>				
-				<p>
-					_________________________________________
-					<br>_________________________________________
-					<br>_________________________________________
-				</p>
-		</div>
-
-	</div>
-</div>
-
-<% end %>
