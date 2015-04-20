@@ -24,12 +24,14 @@
       <div class="form-label">Chapter No.</div>
       <div class="form-label">Chapter Name</div>
       <div class="form-label">Term No.</div>
+      <div class="form-label">% Weightage</div>
       <div class="form-label">Status</div>
     </div>
     <div class="col-xs-12 col-sm-9">
       <%= f.number_field :chapterNumber, placeholder: "Chapter No.", class: "form-control" %>  
       <%= f.text_field :name, placeholder: "Chapter Name", class: "form-control" %>  
-      <%= f.number_field :term, placeholder: "Term No.", class: "form-control" %>  
+      <%= f.number_field :term, placeholder: "Term No.", class: "form-control" %> 
+      <%= f.number_field :weightage, placeholder: "% Weightage", class: "form-control" %>  
       <p class="form-radio">
         <%= f.radio_button(:status, "Free") %>
         <%= label_tag(:status_free, "Free") %> &nbsp; &nbsp;

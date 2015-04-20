@@ -1,7 +1,10 @@
-<div class="col-sm-8 col-sm-offset-2 center">
-  <div class="content-container">
+<div class="row content-container">
+	<div class="col-sm-10 col-sm-offset-1 center">
     <%= render "show_#{@assessment_content.content_type}" %>
   </div>
+</div>
+
+<div class="center">
   <%= link_to 'Edit', edit_assessment_content_path(@assessment_content) %> |
   <%= link_to 'Back to Ezee Video', video_content_path(@assessment_content.video_content) %> |
   <%= link_to 'Back to Assessments', assessment_admin_video_content_path(@assessment_content.video_content) %>

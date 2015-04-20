@@ -15,7 +15,12 @@ Rails.application.routes.draw do
   resources :study_materials
 
   resources :chapters do
-    post 'save_user_study_progress', on: :member
+    member do
+      get :show_mcqs
+      get :show_shortqs
+      get :show_longqs
+      post 'save_user_study_progress'
+    end
   end
 
   resources :subjects do

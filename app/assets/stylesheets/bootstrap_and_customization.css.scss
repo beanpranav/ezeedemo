@@ -365,9 +365,14 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
 // ASSESSMENT
 .assessment-container {
 	background-color: white;
-	padding: 30px 40px;
+	padding: 50px 40px;
 	text-align: left;
 }
+.assessment-action {
+	padding: 2px 2px 4px;
+	border-bottom: 1px dotted $body-border;
+}
+
 .assessment-questions-container {
 	max-width: 176px;  // 44 x 4
 	margin: 30px auto;
@@ -382,6 +387,7 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
 }
 
 .mcq-option { margin: 5px 45px; }
+.mcq-option:hover { background-color: $secondary-bg; }
 .answer-text { padding: 5px; }
 
 .answer-icon, .answer-icon-green, .answer-icon-orange, .answer-icon-red, .answer-icon-mark, .question-icon { 

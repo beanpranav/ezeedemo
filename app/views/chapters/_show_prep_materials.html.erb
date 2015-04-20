@@ -22,47 +22,53 @@
 
 		<% else %>
 		
-			<li class="content-list-item" data-toggle="modal" data-target="#mcq">
-				<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "green"].sample %> pull-left"></i>
-				<h3>0 / <%= @mcqs.count %> Completed</h3>
-				<h2>1 mark: MCQs</h2>
-			</li>
+			<a href="<%= show_mcqs_chapter_path(@chapter) %>" class="supress-a">
+				<li class="content-list-item">
+					<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "green"].sample %> pull-left"></i>
+					<h3>0 / <%= @mcqs.count %> Completed</h3>
+					<h2>1 mark: MCQs</h2>
+				</li>
+			</a>
 
-    	<div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 modal" id="mcq" tabindex="-1" role="dialog" aria-hidden="true">
+<!--     	<div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 modal" id="mcq" tabindex="-1" role="dialog" aria-hidden="true">
     	  <div class="modal-dialog">
     	    <div class="modal-content">
-						<%= render "chapters/show_assessment_mcqs" %>
+						render "chapters/show_assessment_mcqs"
     	    </div>
     	  </div>
-    	</div>
+    	</div> -->
 
-			<li class="content-list-item" data-toggle="modal" data-target="#shortq">
-				<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "green"].sample %> pull-left"></i>
-				<h3>0 / <%= @shortqs.count %> Completed</h3>
-				<h2>2 & 3 marks: Short questions</h2>
-			</li>
+			<a href="<%= show_shortqs_chapter_path(@chapter) %>" class="supress-a">
+				<li class="content-list-item">
+					<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "green"].sample %> pull-left"></i>
+					<h3>0 / <%= @shortqs.count %> Completed</h3>
+					<h2>2 & 3 marks: Short questions</h2>
+				</li>
+			</a>
 
-    	<div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 modal" id="shortq" tabindex="-1" role="dialog" aria-hidden="true">
+<!--     	<div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 modal" id="shortq" tabindex="-1" role="dialog" aria-hidden="true">
     	  <div class="modal-dialog">
     	    <div class="modal-content">
-						<%= render "chapters/show_assessment_shortqs" %>
+						render "chapters/show_assessment_shortqs" %>
     	    </div>
     	  </div>
-    	</div>
+    	</div> -->
 
-			<li class="content-list-item" data-toggle="modal" data-target="#longq">
-				<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "green"].sample %> pull-left"></i>
-				<h3>0 / <%= @longqs.count %> Completed</h3>
-				<h2>5 marks: Long questions</h2>
-			</li>
+			<a href="<%= show_longqs_chapter_path(@chapter) %>" class="supress-a">
+				<li class="content-list-item">
+					<i class="fa fa-2x fa-trophy content-list-icon-<%= ["default", "green"].sample %> pull-left"></i>
+					<h3>0 / <%= @longqs.count %> Completed</h3>
+					<h2>5 marks: Long questions</h2>
+				</li>
+			</a>
 
-    	<div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 modal" id="longq" tabindex="-1" role="dialog" aria-hidden="true">
+<!--     	<div class="col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 modal" id="longq" tabindex="-1" role="dialog" aria-hidden="true">
     	  <div class="modal-dialog">
     	    <div class="modal-content">
-						<%= render "chapters/show_assessment_longqs" %>
+						render "chapters/show_assessment_longqs" %>
     	    </div>
     	  </div>
-    	</div>
+    	</div> -->
 
 		<% end %>
 			

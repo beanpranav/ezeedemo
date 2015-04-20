@@ -36,13 +36,24 @@
     <%= render partial: 'assessment_image_fields', object: builder, as: 'f' %>
   <% end %>
   <p class="form-radio"><%= link_to_add_fields "Add Image", f, :assessment_images %></p>
-  
   <br>
+  
   <div class="row">
-    <div class="col-sm-6">
-      <p class="form-radio"><b>Submitted by:</b> &nbsp; &nbsp;<%= if params[:action] == "create" then current_user.name else @assessment_content.teacher_name end %><p>
+    <div class="col-sm-4">
+      <p class="form-radio"><b>Belongs to Practice Group:</b></p>
+      <p class="form-radio"><b>Submitted by:</b></p>
+      <p class="form-radio"><b>Next Step:</b>
+      </p>
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-8">
+      <p class="form-radio">
+        <%= f.radio_button(:practice_level, "Level 1") %> Level 1 &nbsp; &nbsp;
+        <%= f.radio_button(:practice_level, "Level 2") %> Level 2 &nbsp; &nbsp;
+        <%= f.radio_button(:practice_level, "Level 3") %> Level 3 &nbsp; &nbsp;
+      </p>
+      <p class="form-radio">
+        <%= if params[:action] == "create" then current_user.name else @assessment_content.teacher_name end %>
+      </p>
       <%= f.select :next_step, options_for_select([["Content Review-Refine"], ["Content Rework"], ["Completed"]], f.object.next_step), include_blank: "--- Next Step ---" %>    
     </div>
   </div>

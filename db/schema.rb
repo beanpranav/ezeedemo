@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408095827) do
+ActiveRecord::Schema.define(version: 20150420055113) do
 
   create_table "assessment_contents", force: true do |t|
     t.integer  "video_content_id"
@@ -27,6 +27,7 @@ ActiveRecord::Schema.define(version: 20150408095827) do
     t.datetime "updated_at"
     t.text     "mcq_explanation"
     t.string   "next_step"
+    t.string   "practice_level"
   end
 
   create_table "assessment_images", force: true do |t|
@@ -51,6 +52,7 @@ ActiveRecord::Schema.define(version: 20150408095827) do
     t.integer  "subject_id"
     t.string   "slug"
     t.string   "status"
+    t.integer  "weightage"
   end
 
   add_index "chapters", ["slug"], name: "index_chapters_on_slug", unique: true

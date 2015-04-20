@@ -35,6 +35,55 @@ class ChaptersController < ApplicationController
 
   end
 
+# ASSESSMENT CONTROLLERS
+  def show_mcqs
+
+    @chapter = Chapter.friendly.find(params[:id])
+    @concept_materials = @chapter.study_materials.where(:material_type == "Quick Concepts")
+
+    @all_assessments = []
+    @concept_materials.each do |material| 
+      if material.video_content != nil && material.video_content.assessment_contents != nil
+        @all_assessments += material.video_content.assessment_contents
+      end
+    end
+
+    @mcqs = @all_assessments.select { |x| x["content_type"] == "MCQ" }
+
+  end
+
+  def show_shortqs
+
+    @chapter = Chapter.friendly.find(params[:id])
+    @concept_materials = @chapter.study_materials.where(:material_type == "Quick Concepts")
+
+    @all_assessments = []
+    @concept_materials.each do |material| 
+      if material.video_content != nil && material.video_content.assessment_contents != nil
+        @all_assessments += material.video_content.assessment_contents
+      end
+    end
+
+    @shortqs = @all_assessments.select { |x| x["content_type"] == "ShortQ" }
+
+  end
+
+  def show_longqs
+
+    @chapter = Chapter.friendly.find(params[:id])
+    @concept_materials = @chapter.study_materials.where(:material_type == "Quick Concepts")
+
+    @all_assessments = []
+    @concept_materials.each do |material| 
+      if material.video_content != nil && material.video_content.assessment_contents != nil
+        @all_assessments += material.video_content.assessment_contents
+      end
+    end
+
+    @longqs = @all_assessments.select { |x| x["content_type"] == "LongQ" }
+
+  end
+
   def new
     @chapter = Chapter.new(subject_id: params[:subject_id], status: "Paid")
     @subject = Subject.find_by(id: params[:subject_id])
@@ -101,6 +150,6 @@ class ChaptersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chapter_params
-      params.require(:chapter).permit(:name, :chapterNumber, :term, :subject_id, :status, :slug)
+      params.require(:chapter).permit(:name, :chapterNumber, :term, :weightage, :subject_id, :status, :slug)
     end
 end
