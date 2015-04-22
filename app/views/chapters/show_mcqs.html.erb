@@ -2,7 +2,10 @@
 
     <%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-invert pull-left"></i>'.html_safe, chapter_path(@chapter) %></i>
 
-    <i class="font-invert content-list-icon-green pull-right"><b>75%</b></i>
+    <div class="content-list-icon-green pull-right">
+    	<h3 class="font-invert center" style="font-size:12px;">correct</h3>
+    	<h2 class="font-invert center" style="font-size:24px; margin-top:-3px;"><b>5</b></h2>
+    </div>
     <h2 class="font-invert"><b>Prep: <%= @chapter.name %></b></h2>
     <h3 class="font-invert">MCQs: <%= if user_signed_in? then "2" else "0" end %> / <%= @mcqs.count %></h3>
 

@@ -1,8 +1,6 @@
   <div class="secondary-nav secondary-nav-invert">
 
     <%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-invert pull-left">'.html_safe, chapter_path(@chapter) %></i>
-
-    <i class="font-invert content-list-icon-green pull-right"><b>75%</b></i>
     <h2 class="font-invert"><b>Prep: <%= @chapter.name %></b></h2>
     <h3 class="font-invert">Subjective Short Qs: <%= if user_signed_in? then "2" else "0" end %> / <%= @shortqs.count %></h3>
 
@@ -31,11 +29,13 @@
 					<h2 class="center"><b>Prepare for 2 & 3 marks Subjective Short Qs</b></h2>
 					<h3 class="center">choose one to begin</h3>
 					<div class="assessment-questions-container"> 
+						
 	      	  <% @shortqs.each.with_index(1) do |assessment_content, i| %>
 		      	  <a href="#shortq-<%= i %>" data-toggle="pill">
 		      	  	<div class="question-icon-<%= ["default", "green", "orange"].sample %>"><%= i %></div>
 		      	  </a>
 		      	<% end %>
+
 					</div>
 					<br><br>
 	      </div>
@@ -114,8 +114,6 @@
 					  <% end %>
 
 				  	<br><br>
-				  	<%= link_to 'Mark as Complete', "#", class: "btn btn-sm btn-green" %>
-				    <%= link_to 'Mark for Revision', "#", class: "btn btn-sm btn-orange" %>
 					  <% if user_signed_in? && current_user.role == "Admin" %>
 					  	<%= link_to 'Edit Assessment', edit_assessment_content_path(assessment_content), class: "btn btn-sm btn-primary" %>
 					  <% end %>

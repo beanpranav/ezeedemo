@@ -1,8 +1,6 @@
   <div class="secondary-nav secondary-nav-invert">
 
     <%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-invert pull-left">'.html_safe, chapter_path(@chapter) %></i>
-
-    <i class="font-invert content-list-icon-green pull-right"><b>75%</b></i>
     <h2 class="font-invert"><b>Prep: <%= @chapter.name %></b></h2>
     <h3 class="font-invert">Long questions: <%= if user_signed_in? then "2" else "0" end %> / <%= @longqs.count %></h3>
 
@@ -102,8 +100,6 @@
 					  <% end %>
 
 				  	<br><br>
-				  	<%= link_to 'Mark as Complete', "#", class: "btn btn-sm btn-green" %>
-				    <%= link_to 'Mark for Revision', "#", class: "btn btn-sm btn-orange" %>
 					  <% if user_signed_in? && current_user.role == "Admin" %>
 					  	<%= link_to 'Edit Assessment', edit_assessment_content_path(assessment_content), class: "btn btn-sm btn-primary" %>
 					  <% end %>
