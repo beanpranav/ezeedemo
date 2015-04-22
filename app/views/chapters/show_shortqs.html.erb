@@ -4,7 +4,7 @@
 
     <i class="font-invert content-list-icon-green pull-right"><b>75%</b></i>
     <h2 class="font-invert"><b>Prep: <%= @chapter.name %></b></h2>
-    <h3 class="font-invert">Short questions: <%= if user_signed_in? then "2" else "0" end %> / <%= @shortqs.count %></h3>
+    <h3 class="font-invert">Subjective Short Qs: <%= if user_signed_in? then "2" else "0" end %> / <%= @shortqs.count %></h3>
 
   </div>
 
@@ -14,15 +14,21 @@
 
 			<div class="tab-pane active" id="shortq-all">
 
-  			<div class="assessment-action center">
-  	    	<a href="#shortq-all" data-toggle="pill">
-  	    		<button type="button" class="btn btn-sm btn-modal-green">All Questions</button>
-  	    	</a>
+  			<div class="panel-green panel-title">
+						2 & 3 marks prep
+
+						<div class="modal-actions pull-right">
+							<button type="button" class="btn btn-sm btn-modal pull-right" disabled="disabled"><i class="fa fa-arrow-right"></i></button>
+				    	
+					    <button type="button" class="btn btn-sm btn-modal pull-right" disabled="disabled" style="margin-right: -7px;">All Qs</button>
+
+				    	<button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;" disabled="disabled"><i class="fa fa-arrow-left"></i></button>
+  	    		</div>
   	    </div>
 
 				<div class="assessment-container">
 					<br>
-					<h2 class="center"><b>Prepare for 2 & 3 marks Short questions</b></h2>
+					<h2 class="center"><b>Prepare for 2 & 3 marks Subjective Short Qs</b></h2>
 					<h3 class="center">choose one to begin</h3>
 					<div class="assessment-questions-container"> 
 	      	  <% @shortqs.each.with_index(1) do |assessment_content, i| %>
@@ -40,27 +46,48 @@
 				
 				<div class="tab-pane" id="shortq-<%= i %>">
 
-					<div class="assessment-action center">
-			      <% if i == 1 %>
-			      	<button type="button" class="btn btn-sm btn-modal pull-left" disabled="diabled" style="margin-right: -1px;"><i class="fa fa-fw fa-arrow-left"></i> Previous</button>
-			    	<% else %>
-				      <a href="#shortq-<%= i-1 %>" data-toggle="pill">
-				    		<button type="button" class="btn btn-sm btn-modal-green pull-left"><i class="fa fa-fw fa-arrow-left"></i> Previous</button>
-				    	</a>
-				    <% end %>
+					<div class="panel-green panel-title">
+						2 & 3 marks prep
 
-			    	<a href="#shortq-all" data-toggle="pill">
-			    		<button type="button" class="btn btn-sm btn-modal-green">All Questions</button>
-			    	</a>
+						<div class="modal-actions pull-right">
 
-			    	<% if i == @shortqs.count %>
-							<button type="button" class="btn btn-sm btn-modal pull-right" disabled="diabled" style="margin-left: 22px;">Next <i class="fa fa-fw fa-arrow-right"></i></button>
-			    	<% else %>
-				    	<a href="#shortq-<%= i+1 %>" data-toggle="pill">
-				    		<button type="button" class="btn btn-sm btn-modal-green pull-right" style="margin-left: 22px;">Next <i class="fa fa-fw fa-arrow-right"></i></button>
+				      <% if i == @shortqs.count %>
+								<button type="button" class="btn btn-sm btn-modal pull-right" disabled="disabled"><i class="fa fa-arrow-right"></i></button>
+				    	<% else %>
+					    	<a href="#shortq-<%= i+1 %>" data-toggle="pill">
+					    		<button type="button" class="btn btn-sm btn-modal pull-right"><i class="fa fa-arrow-right"></i></button>
+					    	</a>
+					    <% end %>
+
+					    <a href="#shortq-all" data-toggle="pill">
+				    		<button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;">All Qs</button>
 				    	</a>
-				    <% end %>
-			    </div>
+
+				    	<% if i == 1 %>
+				      	<button type="button" class="btn btn-sm btn-modal pull-right"  style="margin-right: -7px;"disabled="disabled"><i class="fa fa-arrow-left"></i></button>
+				    	<% else %>
+					      <a href="#shortq-<%= i-1 %>" data-toggle="pill">
+					    		<button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;"><i class="fa fa-arrow-left"></i></button>
+					    	</a>
+					    <% end %>
+
+
+				      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+			    			<button type="button" class="btn btn-sm btn-modal-green">Mark as</button>
+				    	</a>
+
+							<ul class="dropdown-menu assessment-dropdown-menu">
+				    		<li><a href="#">Revise later</a></li>
+				    		<li><a href="#">Completed</a></li>
+	    	      	<li class="divider"></li>
+	    	      	<li class="dropdown-footer">
+	    	      		This reduces the study time<br>
+	    	      		just before your exam.
+	    	      	</li>
+				      </ul>
+
+						</div>
+					</div>
 
 					<div class="col-sm-10 col-sm-offset-1 assessment-container">
 					  

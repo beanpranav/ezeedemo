@@ -1,6 +1,6 @@
   <div class="secondary-nav secondary-nav-invert">
 
-    <%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-invert pull-left">'.html_safe, chapter_path(@chapter) %></i>
+    <%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-invert pull-left"></i>'.html_safe, chapter_path(@chapter) %></i>
 
     <i class="font-invert content-list-icon-green pull-right"><b>75%</b></i>
     <h2 class="font-invert"><b>Prep: <%= @chapter.name %></b></h2>
@@ -17,7 +17,7 @@
 
     			<div class="assessment-action center">
     	    	<a href="#mcq-all" data-toggle="tab">
-    	    		<button type="button" class="btn btn-sm btn-modal-green" style="margin-right:1px;">All Questions</button>
+    	    		<button type="button" class="btn btn-sm btn-modal-green" style="margin-right:1px;"><i class="fa fa-th"></i></button>
     	    	</a>
     	    </div>
 
@@ -43,22 +43,22 @@
 						
 						<div class="assessment-action center">
 				      <% if i == 1 %>
-				      	<button type="button" class="btn btn-sm btn-modal pull-left" disabled="disabled" style="margin-right: -1px;"><i class="fa fa-fw fa-arrow-left"></i> Previous</button>
+				      	<button type="button" class="btn btn-sm btn-modal" disabled="disabled"><i class="fa fa-fw fa-arrow-left"></i></button>
 				    	<% else %>
 					      <a href="#mcq-<%= i-1 %>" data-toggle="tab">
-					    		<button type="button" class="btn btn-sm btn-modal-green pull-left"><i class="fa fa-fw fa-arrow-left"></i> Previous</button>
+					    		<button type="button" class="btn btn-sm btn-modal-green"><i class="fa fa-fw fa-arrow-left"></i></button>
 					    	</a>
 					    <% end %>
 
 				    	<a href="#mcq-all" data-toggle="tab">
-				    		<button type="button" class="btn btn-sm btn-modal-green">All Questions</button>
+				    		<button type="button" class="btn btn-sm btn-modal-green"><i class="fa fa-th"></i></button>
 				    	</a>
 
 				    	<% if i == @mcqs.count %>
-								<button type="button" class="btn btn-sm btn-modal pull-right" disabled="diabled" style="margin-left: 22px;">Next <i class="fa fa-fw fa-arrow-right"></i></button>
+								<button type="button" class="btn btn-sm btn-modal" disabled="disabled"><i class="fa fa-fw fa-arrow-right"></i></button>
 				    	<% else %>
 					    	<a href="#mcq-<%= i+1 %>" data-toggle="tab">
-					    		<button type="button" class="btn btn-sm btn-modal-green pull-right" style="margin-left: 22px;">Next <i class="fa fa-fw fa-arrow-right"></i></button>
+					    		<button type="button" class="btn btn-sm btn-modal-green"><i class="fa fa-fw fa-arrow-right"></i></button>
 					    	</a>
 					    <% end %>
 				    </div>
