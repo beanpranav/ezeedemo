@@ -7,7 +7,7 @@
 					
 					<li class="content-list-item-lock">
 						<i class="fa fa-2x fa-lock content-list-icon-red pull-left"></i>
-						<h3><%= if study_material.video_content != nil then study_material.video_content.video_duration else "***MISSING***" end %> min Video <%= "& 3D Model" if study_material.interactive_content_id? %></h3>
+						<h3><%= if study_material.video_content != nil then study_material.video_content.video_duration else "***MISSING***" end %> min video <%= "& 3D model" if study_material.interactive_content_id? %></h3>
 						<h2><%= study_material.name %></h2>
 					</li>
 
@@ -20,7 +20,7 @@
 							<% else %>
 								<i class="fa fa-2x fa-trophy content-list-icon-red pull-left"></i>
 							<% end %>
-							<h3><%= if study_material.video_content != nil then study_material.video_content.video_duration else "***MISSING***" end %> min Video <%= "with 3D Interactive" if study_material.interactive_content_id? %></h3>
+							<h3><%= if study_material.video_content != nil then study_material.video_content.video_duration else "***MISSING***" end %> min video <%= "with 3D model" if study_material.interactive_content_id? %></h3>
 							<h2><%= study_material.name %></h2>
 						</li>
 

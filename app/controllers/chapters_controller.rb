@@ -36,7 +36,7 @@ class ChaptersController < ApplicationController
   end
 
 # ASSESSMENT CONTROLLERS
-  def show_mcqs
+  def study_mcqs
 
     @chapter = Chapter.friendly.find(params[:id])
     @concept_materials = @chapter.study_materials.where(:material_type == "Quick Concepts")
@@ -50,9 +50,28 @@ class ChaptersController < ApplicationController
 
     @mcqs = @all_assessments.select { |x| x["content_type"] == "MCQ" }
 
+    if user_signed_in?
+      
+      @user_progresses = []
+      @mcqs.each do |assessment_content|
+        if UserAssessmentProgress.where(user_id: current_user.id, assessment_content_id: assessment_content.id) != nil
+          @user_progresses += UserAssessmentProgress.where(user_id: current_user.id, assessment_content_id: assessment_content.id)
+        end
+      end
+
+      @correct_answer_count = 0;
+      @user_progresses.each do |progress|
+        assessment_content = @mcqs.find { |x| x["id"] == progress.assessment_content_id }
+        if assessment_content.mcq_answer == progress.response
+          @correct_answer_count = @correct_answer_count+1 
+        end 
+      end
+
+    end
+
   end
 
-  def show_shortqs
+  def study_shortqs
 
     @chapter = Chapter.friendly.find(params[:id])
     @concept_materials = @chapter.study_materials.where(:material_type == "Quick Concepts")
@@ -66,9 +85,20 @@ class ChaptersController < ApplicationController
 
     @shortqs = @all_assessments.select { |x| x["content_type"] == "ShortQ" }
 
+    @response_options = ["Revise again", "Completed"]
+
+    if user_signed_in?
+      @user_progresses = []
+      @shortqs.each do |assessment_content|
+        if UserAssessmentProgress.where(user_id: current_user.id, assessment_content_id: assessment_content.id) != nil
+          @user_progresses += UserAssessmentProgress.where(user_id: current_user.id, assessment_content_id: assessment_content.id)
+        end
+      end
+    end
+
   end
 
-  def show_longqs
+  def study_longqs
 
     @chapter = Chapter.friendly.find(params[:id])
     @concept_materials = @chapter.study_materials.where(:material_type == "Quick Concepts")
@@ -82,7 +112,22 @@ class ChaptersController < ApplicationController
 
     @longqs = @all_assessments.select { |x| x["content_type"] == "LongQ" }
 
+    @response_options = ["Revise again", "Completed"]
+
+    if user_signed_in?
+      @user_progresses = []
+      @longqs.each do |assessment_content|
+        if UserAssessmentProgress.where(user_id: current_user.id, assessment_content_id: assessment_content.id) != nil
+          @user_progresses += UserAssessmentProgress.where(user_id: current_user.id, assessment_content_id: assessment_content.id)
+        end
+      end
+    end
+
   end
+
+
+
+
 
   def new
     @chapter = Chapter.new(subject_id: params[:subject_id], status: "Paid")
@@ -124,6 +169,9 @@ class ChaptersController < ApplicationController
     end
   end
 
+
+
+
   # Actions for recording user's progress
   def save_user_study_progress
     if (UserStudyProgress.find_by(user_id: current_user.id, study_material_id: params[:study_material_id]) == nil)
@@ -139,8 +187,26 @@ class ChaptersController < ApplicationController
   
     flash[:notice] = "<b>Good Job!</b> Your progress has been saved."
     redirect_to chapter_path(params[:id])
-
   end
+
+  def save_user_assessment_progress
+
+    if (UserAssessmentProgress.find_by(user_id: current_user.id, assessment_content_id: params[:assessment_content_id]) == nil)
+    # Save user's progress
+      p = UserAssessmentProgress.new user_id: current_user.id, assessment_content_id: params[:assessment_content_id], response: params[:response].index("")
+      p.save
+    else
+    # Re-save rating
+      p = UserAssessmentProgress.find_by(user_id: current_user.id, assessment_content_id: params[:assessment_content_id])
+      p.response = params[:response].index("")
+      p.save
+    end
+
+    redirect_to params[:url]
+  end
+
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.

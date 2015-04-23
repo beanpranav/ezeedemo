@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150420055113) do
+ActiveRecord::Schema.define(version: 20150423135453) do
 
   create_table "assessment_contents", force: true do |t|
     t.integer  "video_content_id"
@@ -52,7 +52,8 @@ ActiveRecord::Schema.define(version: 20150420055113) do
     t.integer  "subject_id"
     t.string   "slug"
     t.string   "status"
-    t.integer  "weightage"
+    t.integer  "weightage_min"
+    t.integer  "weightage_max"
   end
 
   add_index "chapters", ["slug"], name: "index_chapters_on_slug", unique: true

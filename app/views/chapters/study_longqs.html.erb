@@ -1,0 +1,213 @@
+  <div class="secondary-nav secondary-nav-invert">
+
+    <%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-invert pull-left">'.html_safe, chapter_path(@chapter) %></i>
+    <h2 class="font-invert"><b>Prep: <%= @chapter.name %></b></h2>
+    <h3 class="font-invert">Studied: <%= if user_signed_in? then @user_progresses.count else "0" end %> / <%= @longqs.count %></h3>
+
+  </div>
+
+	<div class="row content-container">
+
+		<div class="tab-content">
+
+			<div class="tab-pane active" id="longq-all">
+
+  			<div class="panel-green panel-title">
+					5 marks prep
+
+					<div class="modal-actions pull-right">
+						<button type="button" class="btn btn-sm btn-modal pull-right" disabled="disabled"><i class="fa fa-arrow-right"></i></button>
+			    	
+				    <button type="button" class="btn btn-sm btn-modal pull-right" disabled="disabled" style="margin-right: -7px;">All Qs</button>
+
+			    	<button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;" disabled="disabled"><i class="fa fa-arrow-left"></i></button>
+	    		</div>
+  	    </div>
+
+				<div class="assessment-container">
+					<h2 class="center"><b>5 marks Long questions</b></h2>
+					<h3 class="center">choose one to begin</h3>
+					<div class="assessment-questions-container"> 
+	      	  <% @longqs.each.with_index(1) do |assessment_content, i| %>
+		      	  <a href="#longq-<%= i %>" data-toggle="pill">
+		      	  	<% if user_signed_in? %>
+			      	  	<% progress = @user_progresses.find { |x| x["assessment_content_id"] == assessment_content.id } %>
+			      	  	<div class="question-icon-<%= if progress == nil then "default" elsif progress.response == "Completed" then "green" else "orange" end %>"><%= i %></div>
+			      	  <% else %>
+			      	  	<div class="question-icon-default"><%= i %></div>
+			      	  <% end %>
+		      	  </a>
+		      	<% end %>
+					</div>
+					<br><br>
+
+	      </div>
+
+			</div>
+			
+			<% @longqs.each.with_index(1) do |assessment_content, i| %>
+				
+				<div class="tab-pane" id="longq-<%= i %>">
+					
+					<div class="panel-green panel-title">
+						5 marks prep
+
+						<div class="modal-actions pull-right">
+
+				      <% if i == @longqs.count %>
+								<button type="button" class="btn btn-sm btn-modal pull-right" disabled="disabled"><i class="fa fa-arrow-right"></i></button>
+				    	<% else %>
+					    	<a href="#longq-<%= i+1 %>" data-toggle="pill">
+					    		<button type="button" class="btn btn-sm btn-modal pull-right"><i class="fa fa-arrow-right"></i></button>
+					    	</a>
+					    <% end %>
+
+					    <a href="#longq-all" data-toggle="pill">
+				    		<button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;">All Qs</button>
+				    	</a>
+
+				    	<% if i == 1 %>
+				      	<button type="button" class="btn btn-sm btn-modal pull-right"  style="margin-right: -7px;"disabled="disabled"><i class="fa fa-arrow-left"></i></button>
+				    	<% else %>
+					      <a href="#longq-<%= i-1 %>" data-toggle="pill">
+					    		<button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;"><i class="fa fa-arrow-left"></i></button>
+					    	</a>
+					    <% end %>
+
+
+							<% if user_signed_in? %>
+
+								<% progress = @user_progresses.find { |x| x["assessment_content_id"] == assessment_content.id } %>
+
+								<%= form_tag "/chapters/#{@chapter.id}/save_user_assessment_progress", class: "pull-right" do %>
+	    	      		
+						      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						    		<% if progress == nil %>
+						    			<button type="button" class="btn btn-sm btn-modal-green">Mark as</button>
+						    		<% elsif progress.response == "Completed" %>
+						    			<button type="button" class="btn btn-sm btn-modal">Completed</button>
+						    		<% else %>
+						    			<button type="button" class="btn btn-sm btn-modal-orange active"><%=progress.response %></button>
+						    		<% end %>
+						    	</a>
+						    	<%= hidden_field_tag :assessment_content_id, assessment_content.id %>
+						    	<%= hidden_field_tag :url, (request.original_url + "#longq-#{i}") %>
+						    	
+
+									<ul class="dropdown-menu assessment-dropdown-menu">
+						    		<% @response_options.each do |response| %>
+			    	      		<li>
+			    	      			<% if progress == nil %>
+
+			    	      				<%= button_tag(type: 'submit', name: "response[#{response}]", class: "btn btn-sm btn-block btn-link feedback-inactive") do %>
+			    	      					<%= response %>
+													<% end %>
+												
+												<% else %>
+						      				
+						      				<% if progress.response == response %>
+							      				<%= button_tag(type: 'submit', name: "response[#{response}]", class: "btn btn-sm btn-block btn-link feedback-active") do %>
+				    	      					<%= response %>
+														<% end %>
+													<% else %>
+														<%= button_tag(type: 'submit', name: "response[#{response}]", class: "btn btn-sm btn-block btn-link feedback-inactive") do %>
+				    	      					<%= response %>
+														<% end %>
+													<% end %>
+
+												<% end %>
+			    	      		</li>
+			    	      	<% end %>
+			    	      	    	      	
+	  	    	      	<li class="divider"></li>
+	  	    	      	<li class="dropdown-footer">
+	  	    	      		This reduces the study time<br>
+	  	    	      		just before your exam.
+	  	    	      	</li>
+	  				      </ul>
+
+						    <% end %>
+
+						  <% else %>
+
+					      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+					    		<button type="button" class="btn btn-sm btn-modal-red">Mark as</button>
+					    	</a>
+
+								<ul class="dropdown-menu assessment-dropdown-menu">
+					    		<li class="dropdown-footer">Create an account to<br>save your progress</li>
+                  <li class="divider"></li>
+                  <li><%= link_to "<b>Signup Now</b>".html_safe, new_user_registration_path %></li>
+                  <li><%= link_to "Login", new_user_session_path %></li>
+					      </ul>
+
+    	      	<% end %>
+
+						</div>
+					</div>
+
+					<div class="col-sm-10 col-sm-offset-1 assessment-container">
+					  
+					  <div class="assessment-question">
+					  	<div class="question-icon"><%= i %></div>
+					  	<div class="assessment-text"><b><%= assessment_content.question.html_safe %></b></div>
+					  </div>
+
+					  <b>Answer:</b>
+					  <div class="assessment-answer">
+					    <div class="answer-icon-mark">1m</div>
+					    <div class="assessment-text"><%= assessment_content.answer_a.html_safe %></div>
+					  </div>
+					  <div class="assessment-answer">
+					    <div class="answer-icon-mark">1m</div>
+					    <div class="assessment-text"><%= assessment_content.answer_b.html_safe %></div>
+					  </div>
+
+					  <% if assessment_content.answer_c.length >10 %>
+					    <div class="assessment-answer">
+					      <div class="answer-icon-mark">1m</div>
+					      <div class="assessment-text"><%= assessment_content.answer_c.html_safe %></div>
+					    </div>
+					  <% end %>
+
+					  <% if assessment_content.answer_d.length >10 %>
+					    <div class="assessment-answer">
+					      <div class="answer-icon-mark">1m</div>
+					      <div class="assessment-text"><%= assessment_content.answer_d.html_safe %></div>
+					    </div>
+					  <% end %>
+
+					  <% if assessment_content.mcq_explanation.length >10 %>
+					    <div class="assessment-answer">
+					      <div class="answer-icon-mark">1m</div>
+					      <div class="assessment-text"><%= assessment_content.mcq_explanation.html_safe %></div>
+					    </div>
+					  <% end %>
+
+				  	<br><br>
+					  <% if user_signed_in? && current_user.role == "Admin" %>
+					  	<%= link_to 'Edit Assessment', edit_assessment_content_path(assessment_content), class: "btn btn-sm btn-primary" %>
+					  <% end %>
+					</div>
+
+		    </div>
+
+			<% end %>
+
+		</div>
+	</div>
+
+<script type="text/javascript">
+	// Javascript to enable link to tab
+	var url = document.location.toString();
+	if (url.match('#')) {
+	    $('.tab-pane a[href=#'+url.split('#')[1]+']').tab('show') ;
+	    // window.location.hash = e.target.hash;
+	} 
+
+	// Change hash for page-reload
+	$('.tab-pane a').on('shown.bs.tab', function (e) {
+	    window.location.hash = e.target.hash;
+	    $('html,body').scrollTop();
+	})
+</script>

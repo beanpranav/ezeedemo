@@ -16,10 +16,11 @@ Rails.application.routes.draw do
 
   resources :chapters do
     member do
-      get :show_mcqs
-      get :show_shortqs
-      get :show_longqs
+      get :study_mcqs
+      get :study_shortqs
+      get :study_longqs
       post 'save_user_study_progress'
+      post 'save_user_assessment_progress'
     end
   end
 
