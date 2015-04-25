@@ -4,7 +4,7 @@
 
     <div class="content-list-icon-invert pull-right" style="border: 2px solid white; margin-right: 8px!important;">
     	<h3 class="font-invert center" style="font-size:12px;">correct</h3>
-    	<h2 class="font-invert center" style="font-size:24px; margin-top:-4px;"><b><%= @correct_answer_count %></b></h2>
+    	<h2 class="font-invert center" style="font-size:24px; margin-top:-4px;"><b><%= if user_signed_in? then @correct_answer_count else "0" end %></b></h2>
     </div>
     <h2 class="font-invert"><b>Prep: <%= @chapter.name %></b></h2>
     <h3 class="font-invert">Studied: <%= if user_signed_in? then @user_progresses.count else "0" end %> / <%= @mcqs.count %></h3>
@@ -19,7 +19,7 @@
 				<div class="tab-pane active" id="mcq-all">
 
 	    		<div class="panel-green panel-title">
-						2 & 3 marks prep
+						1 mark MCQ prep
 
 						<div class="modal-actions pull-right">
 							<button type="button" class="btn btn-sm btn-modal pull-right" disabled="disabled"><i class="fa fa-arrow-right"></i></button>
@@ -140,47 +140,80 @@
 								  </div>
 
 								<% else %>
-								
+										
 									<%= form_tag "/chapters/#{@chapter.id}/save_user_assessment_progress" do %>
 
 										<%= hidden_field_tag :assessment_content_id, assessment_content.id %>
 							    	<%= hidden_field_tag :url, (request.original_url + "#mcq-#{i}") %>
 										
-										<%= button_tag(type: 'submit', name: "response[A]", class: "btn btn-block mcq-feedback") do %>
-										  <div class="mcq-option">
+										<div class="mcq-option">
+										  <%= button_tag(type: 'submit', name: "response[A]", class: "btn btn-block mcq-feedback") do %>
 										    <div class="answer-icon-default">A</div>
 										    <div class="answer-text"><%= assessment_content.answer_a.html_safe %></div>
-										  </div>
-										<% end %>
+										  <% end %>
+										</div>
 
-										<%= button_tag(type: 'submit', name: "response[B]", class: "btn btn-block mcq-feedback") do %>
-										  <div class="mcq-option">
+										<div class="mcq-option">
+										  <%= button_tag(type: 'submit', name: "response[B]", class: "btn btn-block mcq-feedback") do %>
 										    <div class="answer-icon-default">B</div>
 										    <div class="answer-text"><%= assessment_content.answer_b.html_safe %></div>
-										  </div>
-										<% end %>
+										  <% end %>
+										</div>
 
-										<%= button_tag(type: 'submit', name: "response[C]", class: "btn btn-block mcq-feedback") do %>
-										  <div class="mcq-option">
-										    <div class="answer-icon-default">C</div>
+										<div class="mcq-option">
+										  <%= button_tag(type: 'submit', name: "response[C]", class: "btn btn-block mcq-feedback") do %>
+										  	<div class="answer-icon-default">C</div>
 										    <div class="answer-text"><%= assessment_content.answer_c.html_safe %></div>
-										  </div>
-									  <% end %>
+											<% end %>
+										</div>
 
-										<%= button_tag(type: 'submit', name: "response[D]", class: "btn btn-block mcq-feedback") do %>
-										  <div class="mcq-option">
+										<div class="mcq-option">
+											<%= button_tag(type: 'submit', name: "response[D]", class: "btn btn-block mcq-feedback") do %>
 										    <div class="answer-icon-default">D</div>
 										    <div class="answer-text"><%= assessment_content.answer_d.html_safe %></div>
-										  </div>
-										<% end %>
+											<% end %>
+										</div>
 
 									<% end %>
 
 								<% end %>
 
 							<% else %>
+									
+								<%= form_tag "/chapters/#{@chapter.id}/save_user_assessment_progress" do %>
 
+									<%= hidden_field_tag :assessment_content_id, assessment_content.id %>
+						    	<%= hidden_field_tag :url, (request.original_url + "#mcq-#{i}") %>
+									
+									<div class="mcq-option">
+									  <%= button_tag(type: 'submit', name: "response[A]", class: "btn btn-block mcq-feedback") do %>
+									    <div class="answer-icon-default">A</div>
+									    <div class="answer-text"><%= assessment_content.answer_a.html_safe %></div>
+									  <% end %>
+									</div>
 
+									<div class="mcq-option">
+									  <%= button_tag(type: 'submit', name: "response[B]", class: "btn btn-block mcq-feedback") do %>
+									    <div class="answer-icon-default">B</div>
+									    <div class="answer-text"><%= assessment_content.answer_b.html_safe %></div>
+									  <% end %>
+									</div>
+
+									<div class="mcq-option">
+									  <%= button_tag(type: 'submit', name: "response[C]", class: "btn btn-block mcq-feedback") do %>
+									  	<div class="answer-icon-default">C</div>
+									    <div class="answer-text"><%= assessment_content.answer_c.html_safe %></div>
+										<% end %>
+									</div>
+
+									<div class="mcq-option">
+										<%= button_tag(type: 'submit', name: "response[D]", class: "btn btn-block mcq-feedback") do %>
+									    <div class="answer-icon-default">D</div>
+									    <div class="answer-text"><%= assessment_content.answer_d.html_safe %></div>
+										<% end %>
+									</div>
+
+								<% end %>
 
 							<% end %>
 

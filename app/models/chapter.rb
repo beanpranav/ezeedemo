@@ -1,5 +1,5 @@
 class Chapter < ActiveRecord::Base
-	validates_presence_of :name, :chapterNumber, :subject_id, :term, :weightage
+	validates_presence_of :name, :chapterNumber, :subject_id, :term, :weightage_min, :weightage_max
 
 	extend FriendlyId
   friendly_id :name, use: :slugged

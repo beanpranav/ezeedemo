@@ -11,26 +11,75 @@ class ChaptersController < ApplicationController
     @concept_materials = @study_materials.select { |x| x["material_type"] == "Quick Concepts" }
     @smart_materials = @study_materials.select { |x| x["material_type"] == "Learn Smart" }
 
+    @rating_options = ["Clearly understood", "Somewhat understood", "Did not understand"]
+
+
     @all_assessments = []
     @concept_materials.each do |material| 
       if material.video_content != nil && material.video_content.assessment_contents != nil
-        @all_assessments += material.video_content.assessment_contents
+        @all_assessments += material.video_content.assessment_contents.pluck(:id, :content_type, :mcq_answer)
       end
     end
 
-    @mcqs = @all_assessments.select { |x| x["content_type"] == "MCQ" }
-    @shortqs = @all_assessments.select { |x| x["content_type"] == "ShortQ" }
-    @longqs = @all_assessments.select { |x| x["content_type"] == "LongQ" }
+    @mcqs = @all_assessments.select { |x| x[1] == "MCQ" }
+    @shortqs = @all_assessments.select { |x| x[1] == "ShortQ" }
+    @longqs = @all_assessments.select { |x| x[1] == "LongQ" }
 
-    @rating_options = ["Clearly understood", "Somewhat understood", "Did not understand"]
 
     if user_signed_in?
-      @user_progresses = []
-      @study_materials.each do |study_material|
+      @user_concept_progresses = []
+      @concept_materials.each do |study_material|
         if UserStudyProgress.where(user_id: current_user.id, study_material_id: study_material.id) != nil
-          @user_progresses += UserStudyProgress.where(user_id: current_user.id, study_material_id: study_material.id)
+          @user_concept_progresses += UserStudyProgress.where(user_id: current_user.id, study_material_id: study_material.id)
         end
       end
+
+      @user_smart_progresses = []
+      @smart_materials.each do |study_material|
+        if UserStudyProgress.where(user_id: current_user.id, study_material_id: study_material.id) != nil
+          @user_smart_progresses += UserStudyProgress.where(user_id: current_user.id, study_material_id: study_material.id)
+        end
+      end
+
+      @user_mcq_progress_count = 0
+      @user_mcq_correct_answer_count = 0
+      @mcqs.each do |mcq|
+        progress = UserAssessmentProgress.find_by(user_id: current_user.id, assessment_content_id: mcq[0])
+        if progress != nil
+          @user_mcq_progress_count += 1
+          if progress.response == mcq[2]
+            @user_mcq_correct_answer_count += 1
+          end
+        end
+      end
+
+      @user_shortq_progress_count = 0
+      @shortqs.each do |shortq|
+        progress = UserAssessmentProgress.where(user_id: current_user.id, assessment_content_id: shortq[0]).present?
+        if progress
+          @user_shortq_progress_count += 1
+        end
+      end
+
+      @user_longq_progress_count = 0
+      @longqs.each do |longq|
+        progress = UserAssessmentProgress.where(user_id: current_user.id, assessment_content_id: longq[0]).present?
+        if progress
+          @user_longq_progress_count += 1
+        end
+      end
+
+      concept_progress_ratio = @user_concept_progresses.count.to_f/@concept_materials.count
+      smart_progress_ratio = @user_smart_progresses.count.to_f/@smart_materials.count
+      mcq_progress_ratio = @user_mcq_correct_answer_count.to_f/@mcqs.count
+      mcq_studied_ratio = @user_mcq_progress_count.to_f/@mcqs.count
+      subjectiveq_progress_ratio = (@user_shortq_progress_count + @user_longq_progress_count).to_f/(@shortqs.count + @longqs.count)
+      
+      @cpi_level = current_user.cpi_calculator(smart_progress_ratio, concept_progress_ratio, mcq_progress_ratio, subjectiveq_progress_ratio)
+      # @cpi_level = current_user.cpi_calculator(1,0.5,1,1)
+
+      @chapter_studied = current_user.chapter_studied(smart_progress_ratio, concept_progress_ratio, mcq_studied_ratio, subjectiveq_progress_ratio)
+    
     end
 
   end
@@ -63,7 +112,7 @@ class ChaptersController < ApplicationController
       @user_progresses.each do |progress|
         assessment_content = @mcqs.find { |x| x["id"] == progress.assessment_content_id }
         if assessment_content.mcq_answer == progress.response
-          @correct_answer_count = @correct_answer_count+1 
+          @correct_answer_count += 1 
         end 
       end
 
@@ -191,15 +240,19 @@ class ChaptersController < ApplicationController
 
   def save_user_assessment_progress
 
-    if (UserAssessmentProgress.find_by(user_id: current_user.id, assessment_content_id: params[:assessment_content_id]) == nil)
-    # Save user's progress
-      p = UserAssessmentProgress.new user_id: current_user.id, assessment_content_id: params[:assessment_content_id], response: params[:response].index("")
-      p.save
+    if user_signed_in?
+      if (UserAssessmentProgress.find_by(user_id: current_user.id, assessment_content_id: params[:assessment_content_id]) == nil)
+      # Save user's progress
+        p = UserAssessmentProgress.new user_id: current_user.id, assessment_content_id: params[:assessment_content_id], response: params[:response].index("")
+        p.save
+      else
+      # Re-save rating
+        p = UserAssessmentProgress.find_by(user_id: current_user.id, assessment_content_id: params[:assessment_content_id])
+        p.response = params[:response].index("")
+        p.save
+      end
     else
-    # Re-save rating
-      p = UserAssessmentProgress.find_by(user_id: current_user.id, assessment_content_id: params[:assessment_content_id])
-      p.response = params[:response].index("")
-      p.save
+      flash[:notice] = '<b>Create an account</b> to explore the answers and save your progress. <br>Signup or login from <a href="/sign_up"><b>here</b></a>.' 
     end
 
     redirect_to params[:url]
@@ -216,6 +269,6 @@ class ChaptersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def chapter_params
-      params.require(:chapter).permit(:name, :chapterNumber, :term, :weightage, :subject_id, :status, :slug)
+      params.require(:chapter).permit(:name, :chapterNumber, :term, :weightage_min, :weightage_max, :subject_id, :status, :slug)
     end
 end

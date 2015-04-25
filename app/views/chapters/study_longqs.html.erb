@@ -131,7 +131,7 @@
 						  <% else %>
 
 					      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-					    		<button type="button" class="btn btn-sm btn-modal-red">Mark as</button>
+					    		<button type="button" class="btn btn-sm btn-modal-green">Mark as</button>
 					    	</a>
 
 								<ul class="dropdown-menu assessment-dropdown-menu">
@@ -184,8 +184,9 @@
 					    </div>
 					  <% end %>
 
-				  	<br><br>
+
 					  <% if user_signed_in? && current_user.role == "Admin" %>
+					  	<br><br>
 					  	<%= link_to 'Edit Assessment', edit_assessment_content_path(assessment_content), class: "btn btn-sm btn-primary" %>
 					  <% end %>
 					</div>

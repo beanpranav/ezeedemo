@@ -16,7 +16,7 @@
 				
 						<li class="content-list-item" data-toggle="modal" data-target="#show-study-material-<%= study_material.id %>">
 							<% if user_signed_in? %>
-								<i class="fa fa-2x fa-trophy content-list-icon-<%= if @user_progresses.find { |x| x["study_material_id"] == study_material.id } then "red" else "default" end %> pull-left"></i>
+								<i class="fa fa-2x fa-trophy content-list-icon-<%= if @user_concept_progresses.find { |x| x["study_material_id"] == study_material.id } then "red" else "default" end %> pull-left"></i>
 							<% else %>
 								<i class="fa fa-2x fa-trophy content-list-icon-red pull-left"></i>
 							<% end %>
@@ -40,7 +40,7 @@
   											
   											<% if user_signed_in? %>
 
-  												<% progress = @user_progresses.find { |x| x["study_material_id"] == study_material.id } %>
+  												<% progress = @user_concept_progresses.find { |x| x["study_material_id"] == study_material.id } %>
 
 
   												<%= form_tag "/chapters/#{@chapter.id}/save_user_study_progress", class: "pull-right" do %>
@@ -167,7 +167,7 @@
   											
   											<% if user_signed_in? %>
 
-  												<% progress = @user_progresses.find { |x| x["study_material_id"] == study_material.id } %>
+  												<% progress = @user_concept_progresses.find { |x| x["study_material_id"] == study_material.id } %>
 
 
   												<%= form_tag "/chapters/#{@chapter.id}/save_user_study_progress", class: "pull-right" do %>

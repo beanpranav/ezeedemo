@@ -372,7 +372,7 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
 // ASSESSMENT
 .assessment-container {
 	background-color: white;
-	padding: 50px 40px;
+	padding: 50px 40px 80px;
 	text-align: left;
 }
 .assessment-action {
@@ -395,17 +395,16 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
 }
 
 .mcq-option { margin: 5px 45px; }
-.mcq-option:hover { background-color: $secondary-bg; }
+.mcq-feedback:hover { background-color: $secondary-bg; }
 .mcq-feedback { 
 	border: 0; 
 	padding: 0; 
-	margin: -5px 0!important; 
 	text-align: left;
 	font-weight: normal;
 }
 .mcq-feedback:focus { outline: none!important; }
 .mcq-feedback:active { 
-  box-shadow: inset 0 5px 0px white;
+  box-shadow: none;
   background-color: $body-bg; 
 }
 
@@ -443,21 +442,29 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
 
 
 // PROGRESS
-.cpi-status {
+.cpi-status-0, .cpi-status-1, .cpi-status-2, .cpi-status-3, .cpi-status-4, .cpi-status-5, .cpi-primary {
 	font-size: 20px;
 	font-weight: bold;
 	margin: -5px 0 8px;
 	text-align: center;
 }
-.cpi-steps { 
+.cpi-status-0 { color: $body-border }
+.cpi-status-1 { color: $brand-red }
+.cpi-status-2 { color: $brand-orange }
+.cpi-status-3 { color: $brand-green }
+.cpi-status-4, .cpi-status-5, .cpi-primary { color: $brand-primary }
+
+.cpi-steps, .cpi-steps-big { 
 	text-align: center;
-	margin: 5px -18px;
+	margin: 5px -18px 15px;
 	padding: 0px 15px;
 	display: block;
 	height: 36px;
 	width: 230px;
 }
-.cpi-level-0, .cpi-level-1, .cpi-level-2, .cpi-level-3, .cpi-level-4, .cpi-level-lock { 
+.cpi-steps-big { height: 72px }
+
+.cpi-level-0, .cpi-level-1, .cpi-level-2, .cpi-level-3, .cpi-level-4, .cpi-level-5, .cpi-level-lock { 
 	width: 36px; 
 	height: 36px; 
 	margin-right: 3px!important; 
@@ -465,12 +472,47 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
 	background-color: $brand-primary;
 	line-height: 2em!important;
 }
-.cpi-level-4 { color: $brand-orange; outline: 2px solid $brand-orange; outline-offset: -2px; }
-.cpi-level-3 { color: $brand-green; }
-.cpi-level-2 { color: $brand-orange; }
-.cpi-level-1 { color: $brand-red; }
-.cpi-level-0 { background-color: $body-border; color: white; }
 .cpi-level-lock { background-color: $body-bg; color: $body-bg; }
+.cpi-level-0 { background-color: $body-border; color: white; }
+.cpi-level-1 { color: $brand-red; }
+.cpi-level-2 { color: $brand-orange; }
+.cpi-level-3 { color: $brand-green; }
+.cpi-level-4 { color: $brand-orange; outline: 2px solid $brand-orange; outline-offset: -2px; }
+.cpi-level-5 { color: $brand-green; outline: 2px solid $brand-green; outline-offset: -2px; }
+
+.cpi-level-0-big {
+	width: 72px; 
+	height: 72px;
+	background-color: $body-border;
+	color: white;
+	line-height: 1.75em!important;
+}
+.cpi-level-5-big { 
+	width: 72px; 
+	height: 72px;
+	background-color: $brand-primary; 
+	color: $brand-green; 
+	border: 4px solid $brand-green;
+	line-height: 1.5em !important; 
+	}
+
+.cpi-level-0-icon, .cpi-level-1-icon, .cpi-level-2-icon, .cpi-level-3-icon, .cpi-level-4-icon, .cpi-level-5-icon, .cpi-level-lock-icon { 
+	width: 52px; 
+	height: 52px; 
+	margin-right: 15px!important;
+	text-align: center; 
+	background-color: $brand-primary;
+	line-height: 1.85em!important;
+	border: 2px solid white;
+}
+.cpi-level-lock-icon { background-color: $body-bg; color: $body-bg; }
+.cpi-level-0-icon { background-color: $body-border; color: white; }
+.cpi-level-1-icon { color: $brand-red; }
+.cpi-level-2-icon { color: $brand-orange; }
+.cpi-level-3-icon { color: $brand-green; }
+.cpi-level-4-icon { color: $brand-orange; border: 2px solid $brand-orange; }
+.cpi-level-5-icon { color: $brand-green; border: 2px solid $brand-green; line-height: 1.65!important; }
+
 
 .cpi-goal {
 	font-size: 12px;
@@ -487,11 +529,11 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
 	margin-top: 18px;
 }
 // .progress-bar { box-shadow: none; }
-.progress-bar-4 { background-color: $brand-font-gray; }
-.progress-bar-3 { background-color: $brand-green; }
-.progress-bar-2 { background-color: $brand-orange; }
+.progress-bar-0 { background-color: $brand-font-gray; }
 .progress-bar-1 { background-color: $brand-red; }
-.progress-bar-0 { background-color: $body-border; }
+.progress-bar-2 { background-color: $brand-orange; }
+.progress-bar-3 { background-color: $brand-green; }
+.progress-bar-4, .progress-bar-5 { background-color: $brand-primary; }
 
 .comment-container {
 	display: block;
