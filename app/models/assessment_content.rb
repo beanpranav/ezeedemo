@@ -7,5 +7,6 @@ class AssessmentContent < ActiveRecord::Base
 	accepts_nested_attributes_for :assessment_images, allow_destroy: true
 
 	has_many :user_assessment_progresses, dependent: :destroy
-  has_many :assessment_contents, through: :user_assessment_progresses
+  has_many :users, through: :user_assessment_progresses
+  
 end

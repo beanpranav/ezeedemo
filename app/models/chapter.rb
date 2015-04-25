@@ -10,4 +10,8 @@ class Chapter < ActiveRecord::Base
 
   belongs_to :subject
   has_many :study_materials, dependent: :destroy
+
+  has_many :user_chapter_progresses, dependent: :destroy
+  has_many :users, through: :user_chapter_progresses
+
 end

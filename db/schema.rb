@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150423135453) do
+ActiveRecord::Schema.define(version: 20150425113912) do
 
   create_table "assessment_contents", force: true do |t|
     t.integer  "video_content_id"
@@ -104,6 +104,17 @@ ActiveRecord::Schema.define(version: 20150423135453) do
   end
 
   add_index "user_assessment_progresses", ["user_id"], name: "index_user_assessment_progresses_on_user_id"
+
+  create_table "user_chapter_progresses", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "chapter_id"
+    t.integer  "cpi_level"
+    t.integer  "chapter_studied"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "user_chapter_progresses", ["user_id"], name: "index_user_chapter_progresses_on_user_id"
 
   create_table "user_study_progresses", force: true do |t|
     t.integer  "user_id"

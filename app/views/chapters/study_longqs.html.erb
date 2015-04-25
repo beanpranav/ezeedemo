@@ -1,6 +1,6 @@
   <div class="secondary-nav secondary-nav-invert">
 
-    <%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-invert pull-left">'.html_safe, chapter_path(@chapter) %></i>
+    <%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-back pull-left">'.html_safe, chapter_path(@chapter) %></i>
     <h2 class="font-invert"><b>Prep: <%= @chapter.name %></b></h2>
     <h3 class="font-invert">Studied: <%= if user_signed_in? then @user_progresses.count else "0" end %> / <%= @longqs.count %></h3>
 

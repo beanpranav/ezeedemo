@@ -12,6 +12,9 @@ class User < ActiveRecord::Base
   has_many :user_assessment_progresses, dependent: :destroy
   has_many :assessment_contents, through: :user_assessment_progresses
 
+  has_many :user_chapter_progresses, dependent: :destroy
+  has_many :chapters, through: :user_chapter_progresses
+
   def first_name
   	name.split(" ")[0]
   end
@@ -58,7 +61,9 @@ class User < ActiveRecord::Base
     study_weightage_value = (smart_progress_ratio * $chapter_studied_specs[:study_weightage][:smart] + concept_progress_ratio * $chapter_studied_specs[:study_weightage][:concept]) * $chapter_studied_specs[:study_weightage][:overall] 
     assessment_weightage_value = (mcq_studied_ratio * $chapter_studied_specs[:assessment_weightage][:mcq] + subjectiveq_progress_ratio * $chapter_studied_specs[:assessment_weightage][:subjectiveq]) * $chapter_studied_specs[:assessment_weightage][:overall]
     
-    return (study_weightage_value + assessment_weightage_value).round(0)
+    unless (study_weightage_value + assessment_weightage_value).nan?
+      return (study_weightage_value + assessment_weightage_value).round(0)
+    end
   
   end
   

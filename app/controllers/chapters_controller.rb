@@ -77,9 +77,22 @@ class ChaptersController < ApplicationController
       
       @cpi_level = current_user.cpi_calculator(smart_progress_ratio, concept_progress_ratio, mcq_progress_ratio, subjectiveq_progress_ratio)
       # @cpi_level = current_user.cpi_calculator(1,0.5,1,1)
-
       @chapter_studied = current_user.chapter_studied(smart_progress_ratio, concept_progress_ratio, mcq_studied_ratio, subjectiveq_progress_ratio)
-    
+      
+      
+
+      chapter_progress = UserChapterProgress.find_by(user_id: current_user.id, chapter_id: @chapter.id)
+      if (chapter_progress == nil)
+      # Save user's progress
+        chapter_progress = UserChapterProgress.new user_id: current_user.id, chapter_id: @chapter.id, cpi_level: @cpi_level, chapter_studied: @chapter_studied
+        chapter_progress.save
+      else
+      # Re-save progress data
+        chapter_progress.cpi_level = @cpi_level 
+        chapter_progress.chapter_studied = @chapter_studied
+        chapter_progress.save
+      end
+
     end
 
   end

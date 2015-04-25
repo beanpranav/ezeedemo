@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  mathjax 'mathjax'
+
   resources :interactive_contents
 
   resources :assessment_contents

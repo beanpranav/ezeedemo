@@ -35,8 +35,13 @@
 				 </a>
 			  <div id="ProgressTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
 			    <div class="panel-body">
-						<div class="cpi-status-<%= @cpi_level %>"><%= $cpi_specs[@cpi_level][:status] %></div>
-						<div class="comment-container"><%= $cpi_specs[@cpi_level][:status_message].html_safe %></div>
+						<% if user_signed_in? %>
+							<div class="cpi-status-<%= @cpi_level %>"><%= $cpi_specs[@cpi_level][:status] %></div>
+							<div class="comment-container"><%= $cpi_specs[@cpi_level][:status_message].html_safe %></div>
+						<% else %>
+							<div class="cpi-status-0"><%= $cpi_specs[0][:status] %></div>
+							<div class="comment-container"><%= $cpi_specs[0][:status_message].html_safe %></div>
+						<% end %>
 					</div>
 			  </div>
 			</div>
@@ -53,84 +58,99 @@
 			  <div id="ProgressThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
 			    <div class="panel-body">
 
+					
+					<% if @smart_materials.count > 0 %>
 
-						<% if @cpi_level == 0 %>
-							<div class="cpi-steps-big">
-								<i class="fa fa-3x fa-trophy cpi-level-0-big"></i>
-							</div>
-						<% elsif @cpi_level == 5 %>
-							<div class="cpi-steps-big">
-								<i class="fa fa-3x fa-gamepad cpi-level-5-big"></i>
-							</div>
-						<% else %>
-							<div class="cpi-steps">
-							<% 5.times do |i| %>
-									<% if i <= @cpi_level %>
-										<% if i == 4 %>
-											<i class="fa fa-lg fa-rocket pull-left cpi-level-4"></i>
+						<% if user_signed_in? %>
+
+							<% if @cpi_level == 0 %>
+								<div class="cpi-steps-big">
+									<i class="fa fa-3x fa-trophy cpi-level-0-big"></i>
+								</div>
+							<% elsif @cpi_level == 5 %>
+								<div class="cpi-steps-big">
+									<i class="fa fa-3x fa-gamepad cpi-level-5-big"></i>
+								</div>
+							<% else %>
+								<div class="cpi-steps">
+								<% 5.times do |i| %>
+										<% if i <= @cpi_level %>
+											<% if i == 4 %>
+												<i class="fa fa-lg fa-rocket pull-left cpi-level-4"></i>
+											<% else %>
+												<i class="fa fa-lg fa-trophy pull-left cpi-level-<%= i %>"></i>
+											<% end %>
 										<% else %>
-											<i class="fa fa-lg fa-trophy pull-left cpi-level-<%= i %>"></i>
+											<i class="fa fa-lg fa-trophy pull-left cpi-level-lock"></i>
 										<% end %>
-									<% else %>
-										<i class="fa fa-lg fa-trophy pull-left cpi-level-lock"></i>
 									<% end %>
-								<% end %>
-							</div>
-						<% end %>
-						
-						
-						<% current_smart_progress_ratio = @user_smart_progresses.count*100 / (@smart_materials.count * $cpi_specs[@cpi_level][:step_goals][:smart_goal]).round(0) %>
-						<div class="cpi-goal">	
-							<div class="pull-left">Chapter Keypoints</div>
-							<div class="pull-right"><%= @user_smart_progresses.count %>/<%= (@smart_materials.count * $cpi_specs[@cpi_level][:step_goals][:smart_goal]).round(0) %></div>
-							<div class="progress">
-							  <div class="progress-bar progress-bar-<%= @cpi_level %>" role="progressbar" aria-valuenow="<%= current_smart_progress_ratio %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= current_smart_progress_ratio %>%">
-							    <span class="sr-only"><%= current_smart_progress_ratio %>% Complete</span>
-							  </div>
-							</div>
-						</div>
-
-						<% if $cpi_specs[@cpi_level][:step_goals][:concept_goal] > 0 %>
-							<% current_concept_progress_ratio = @user_concept_progresses.count*100 / (@concept_materials.count * $cpi_specs[@cpi_level][:step_goals][:concept_goal]).round(0) %>
+								</div>
+							<% end %>
+							
+							
+							<% current_smart_progress_ratio = @user_smart_progresses.count*100 / (@smart_materials.count * $cpi_specs[@cpi_level][:step_goals][:smart_goal]).round(0) %>
 							<div class="cpi-goal">	
-								<div class="pull-left">Concepts</div>
-								<div class="pull-right"><%= @user_concept_progresses.count %>/<%= (@concept_materials.count * $cpi_specs[@cpi_level][:step_goals][:concept_goal]).round(0) %></div>
+								<div class="pull-left">Chapter Keypoints</div>
+								<div class="pull-right"><%= @user_smart_progresses.count %>/<%= (@smart_materials.count * $cpi_specs[@cpi_level][:step_goals][:smart_goal]).round(0) %></div>
 								<div class="progress">
-								  <div class="progress-bar progress-bar-<%= @cpi_level %>" role="progressbar" aria-valuenow="<%= current_concept_progress_ratio %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= current_concept_progress_ratio %>%">
-								    <span class="sr-only"><%= current_concept_progress_ratio %>% Complete</span>
+								  <div class="progress-bar progress-bar-<%= @cpi_level %>" role="progressbar" aria-valuenow="<%= current_smart_progress_ratio %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= current_smart_progress_ratio %>%">
+								    <span class="sr-only"><%= current_smart_progress_ratio %>% Complete</span>
 								  </div>
 								</div>
 							</div>
-						<% end %>
 
-						<% if $cpi_specs[@cpi_level][:step_goals][:mcq_goal] > 0 %>
-							<% current_mcq_progress_ratio = @user_mcq_correct_answer_count*100 / (@mcqs.count * $cpi_specs[@cpi_level][:step_goals][:mcq_goal]).round(0) %>
-							<div class="cpi-goal">	
-								<div class="pull-left">MCQs correct</div>
-								<div class="pull-right"><%= @user_mcq_correct_answer_count %>/<%= (@mcqs.count * $cpi_specs[@cpi_level][:step_goals][:mcq_goal]).round(0) %></div>
-								<div class="progress">
-								  <div class="progress-bar progress-bar-<%= @cpi_level %>" role="progressbar" aria-valuenow="<%= current_mcq_progress_ratio %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= current_mcq_progress_ratio %>%">
-								    <span class="sr-only"><%= current_mcq_progress_ratio %>% Complete</span>
-								  </div>
+							<% if $cpi_specs[@cpi_level][:step_goals][:concept_goal] > 0 %>
+								<% current_concept_progress_ratio = @user_concept_progresses.count*100 / (@concept_materials.count * $cpi_specs[@cpi_level][:step_goals][:concept_goal]).round(0) %>
+								<div class="cpi-goal">	
+									<div class="pull-left">Concepts</div>
+									<div class="pull-right"><%= @user_concept_progresses.count %>/<%= (@concept_materials.count * $cpi_specs[@cpi_level][:step_goals][:concept_goal]).round(0) %></div>
+									<div class="progress">
+									  <div class="progress-bar progress-bar-<%= @cpi_level %>" role="progressbar" aria-valuenow="<%= current_concept_progress_ratio %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= current_concept_progress_ratio %>%">
+									    <span class="sr-only"><%= current_concept_progress_ratio %>% Complete</span>
+									  </div>
+									</div>
 								</div>
-							</div>
-						<% end %>
+							<% end %>
 
-
-						<% if $cpi_specs[@cpi_level][:step_goals][:subjectiveq_goal] > 0 %>
-							<% current_subjectiveq_progress_ratio = (@user_shortq_progress_count + @user_longq_progress_count)*100 / ((@shortqs.count + @longqs.count) * $cpi_specs[@cpi_level][:step_goals][:subjectiveq_goal]).round(0) %>
-							<div class="cpi-goal">	
-								<div class="pull-left">Subjective Qs studied</div>
-								<div class="pull-right"><%= @user_shortq_progress_count + @user_longq_progress_count %>/<%= ((@shortqs.count + @longqs.count) * $cpi_specs[@cpi_level][:step_goals][:subjectiveq_goal]).round(0) %></div>
-								<div class="progress">
-								  <div class="progress-bar progress-bar-<%= @cpi_level %>" role="progressbar" aria-valuenow="<%= current_subjectiveq_progress_ratio %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= current_subjectiveq_progress_ratio %>%">
-								    <span class="sr-only"><%= current_subjectiveq_progress_ratio %>% Complete</span>
-								  </div>
+							<% if $cpi_specs[@cpi_level][:step_goals][:mcq_goal] > 0 %>
+								<% current_mcq_progress_ratio = @user_mcq_correct_answer_count*100 / (@mcqs.count * $cpi_specs[@cpi_level][:step_goals][:mcq_goal]).round(0) %>
+								<div class="cpi-goal">	
+									<div class="pull-left">MCQs correct</div>
+									<div class="pull-right"><%= @user_mcq_correct_answer_count %>/<%= (@mcqs.count * $cpi_specs[@cpi_level][:step_goals][:mcq_goal]).round(0) %></div>
+									<div class="progress">
+									  <div class="progress-bar progress-bar-<%= @cpi_level %>" role="progressbar" aria-valuenow="<%= current_mcq_progress_ratio %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= current_mcq_progress_ratio %>%">
+									    <span class="sr-only"><%= current_mcq_progress_ratio %>% Complete</span>
+									  </div>
+									</div>
 								</div>
-							</div>
-						<% end %>
+							<% end %>
 
-						<div class="comment-container" style="margin-top:15px;"><%= $cpi_specs[@cpi_level][:step_message].html_safe %></div>
+
+							<% if $cpi_specs[@cpi_level][:step_goals][:subjectiveq_goal] > 0 %>
+								<% current_subjectiveq_progress_ratio = (@user_shortq_progress_count + @user_longq_progress_count)*100 / ((@shortqs.count + @longqs.count) * $cpi_specs[@cpi_level][:step_goals][:subjectiveq_goal]).round(0) %>
+								<div class="cpi-goal">	
+									<div class="pull-left">Subjective Qs studied</div>
+									<div class="pull-right"><%= @user_shortq_progress_count + @user_longq_progress_count %>/<%= ((@shortqs.count + @longqs.count) * $cpi_specs[@cpi_level][:step_goals][:subjectiveq_goal]).round(0) %></div>
+									<div class="progress">
+									  <div class="progress-bar progress-bar-<%= @cpi_level %>" role="progressbar" aria-valuenow="<%= current_subjectiveq_progress_ratio %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= current_subjectiveq_progress_ratio %>%">
+									    <span class="sr-only"><%= current_subjectiveq_progress_ratio %>% Complete</span>
+									  </div>
+									</div>
+								</div>
+							<% end %>
+
+							<div class="comment-container" style="margin-top:15px;"><%= $cpi_specs[@cpi_level][:step_message].html_safe %></div>
+
+						<% else %>
+							
+							<div class="comment-container" style="margin: -13px -15px 15px;">
+								Our recommendations are custom created by analyzing your progress To see next steps
+							</div>
+							<%= link_to "Signup Now", new_user_registration_path, class: "btn btn-block btn-green" %>
+
+						<% end %>
+					
+					<% end %>
 			    </div>
 			  </div>
 			</div>

@@ -49,6 +49,12 @@ gem 'friendly_id', '~> 5.0.0'
 # # In place editing like medium.com
 # gem 'medium-editor-rails'
 
+# font awesome icons
+gem 'font-awesome-sass', '~> 4.3.0'
+
+# mathjax for rendering math symbols
+gem 'mathjax-rails', '~> 2.5.1'
+
 group :development, :test do
 	# Use sqlite3 as the database for Active Record
 	gem 'sqlite3'

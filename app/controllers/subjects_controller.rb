@@ -9,42 +9,51 @@ class SubjectsController < ApplicationController
     @chapters_all = @subject.chapters.sort_by(&:chapterNumber)
     @chapters_term_1 = @chapters_all.select { |x| x["term"] == 1 }
     @chapters_term_2 = @chapters_all.select { |x| x["term"] == 2 }
-    if user_signed_in?
-      @user_progresses = UserStudyProgress.where(user_id: current_user.id)
-    end
 
-    @goals_term_1 = 0
-    @user_progresses_term_1 = []
-
+    @chapter_ids_term_1 = []
     @chapters_term_1.each do |chapter|
-      study_materials_count = chapter.study_materials.count
-      @goals_term_1 += study_materials_count
-
-      if user_signed_in? && study_materials_count != 0
-        chapter.study_materials.each do |study_material|
-          progress = @user_progresses.select { |x| x["study_material_id"] == study_material.id }
-          if progress != nil
-            @user_progresses_term_1 += progress
-          end
-        end
-      end
+      @chapter_ids_term_1 << chapter.id
     end
-
-    @goals_term_2 = 0
-    @user_progresses_term_2 = []
-
+    @chapter_ids_term_2 = []
     @chapters_term_2.each do |chapter|
-      study_materials_count = chapter.study_materials.count
-      @goals_term_2 += study_materials_count
+      @chapter_ids_term_2 << chapter.id
+    end
+    
+    if user_signed_in?
+      
+      @term_1_chapters_studied = UserChapterProgress.where(user_id: current_user.id, chapter_id: @chapter_ids_term_1)
+      @term_2_chapters_studied = UserChapterProgress.where(user_id: current_user.id, chapter_id: @chapter_ids_term_2)
 
-      if user_signed_in? && study_materials_count != 0
-        chapter.study_materials.each do |study_material|
-          progress = @user_progresses.select { |x| x["study_material_id"] == study_material.id }
-          if progress != nil
-            @user_progresses_term_2 += progress
-          end
-        end
+      term_1_weightage_total = 0
+      user_term_1_weightage = 0
+      term_2_weightage_total = 0
+      user_term_2_weightage = 0
+
+      @chapters_term_1.each_with_index do |chapter, i|
+        term_1_weightage_total += (chapter.weightage_min + chapter.weightage_max) / 2      
+        user_progress = @term_1_chapters_studied.select { |x| x["chapter_id"] == chapter.id }
+        if user_progress[0] != nil
+          chapter_studied = user_progress[0].chapter_studied
+          user_term_1_weightage += chapter_studied * (chapter.weightage_min + chapter.weightage_max) / 2 if chapter_studied != nil
+        end 
       end
+
+      @chapters_term_2.each_with_index do |chapter, i|
+        term_2_weightage_total += (chapter.weightage_min + chapter.weightage_max) / 2      
+        user_progress = @term_2_chapters_studied.select { |x| x["chapter_id"] == chapter.id }
+        if user_progress[0] != nil
+          chapter_studied = user_progress[0].chapter_studied
+          user_term_2_weightage += chapter_studied * (chapter.weightage_min + chapter.weightage_max) / 2 if chapter_studied != nil
+        end 
+      end
+
+      @term_1_studied = user_term_1_weightage/term_1_weightage_total
+      @term_2_studied = user_term_2_weightage/term_2_weightage_total
+      # @info = [@term_1_studied, user_term_1_weightage, term_1_weightage_total]
+
+    else
+      @term_1_studied = 0
+      @term_2_studied = 0
     end
 
   end

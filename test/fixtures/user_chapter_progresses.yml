@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  chapter_id: 1
+  cpi_level: 1
+  chapter_studied: 1
+
+two:
+  user_id: 1
+  chapter_id: 1
+  cpi_level: 1
+  chapter_studied: 1
