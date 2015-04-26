@@ -1,11 +1,22 @@
-<div class="content-container center center" style="padding:30px 15px;">
-	
+<div class="content-container center">
+		<div class="panel-secondary" style="margin-bottom:20px;">
+	    <div class="panel-title">
+		  	Your Term 2 Progress
+	    </div>
+		</div>
+
 	<div class="row" style="padding-bottom:40px;">
 
 		<div class="col-xs-12 col-sm-4">
+			<h2 class="font-primary" style="padding:15px;"><b>Predictive Score</b></h2>
+			<div class="spi-score-big"><%= @term_2_spi[:spi] %></div>
+			<h3 class="font-invert" style="margin-top:-25px;">out of 90</h3>
+		</div>
+
+		<div class="col-xs-12 col-sm-4">
 			<h2 class="font-primary" style="padding:15px;"><b>Subject Studied</b></h2>
-			<div class="spi-score-big-default"><%= @term_12_studied %></div>
-			<h3 class="font-primary">percent</h3>
+			<div class="spi-score-big-default"><%= @term_2_studied %></div>
+			<h3 class="font-primary" style="margin-top:-25px;">percent</h3>
 		</div>
 
 		<div class="col-xs-12 col-sm-4">
@@ -22,49 +33,53 @@
 					<i class="fa fa-lg fa-lock spi-test-lock-orange"></i>
 				<% end %>
 			</div>
-
-		</div>
-
-		<div class="col-xs-12 col-sm-4">
-			<h2 class="font-primary" style="padding:15px;"><b>Predictive Score</b></h2>
-			<div class="spi-score-big"><%= @term_2_spi[:spi] %></div>
-			<h3 class="font-primary">out of 90</h3>
 		</div>
 
 	</div>
+</div>
 
-	<div class="row">
-		<div class="panel-secondary">
-	    <div class="panel-title" style="text-align:left;">
-		  	&nbsp;&nbsp;&nbsp; Our Recommendations
+	<div class="content-container" style="height:150px;">
+		<div class="panel-secondary" style="margin-bottom:10px;">
+	    <div class="panel-title center">
+		  	Our Recommendations
 	    </div>
 		</div>
 
-		<div class="col-xs-12 col-sm-6">
-		</div>
+		<% 2.times do |i| %>
+			<div class="col-xs-12 col-sm-6">
+				<div class="spi pull-left" style="width:140px;">
+					<div class="spi-score"><%= @term_2_spi[:priortization_order][i][1].round(0) %></div>
+					<h3>increase</h3>
+				</div>
+				<% chapter = @term_2_chapters.find { |x| x.id == @term_2_spi[:priortization_order][i][0] } %>
+				<h2 style="margin: 20px 0 0 -30px;"><%= chapter.name %></h2>
+			</div>
+		<% end %>
+
 
 		<div class="col-xs-12 col-sm-6">
 		</div>
 
 	</div>
 
-</div>
+
 
 <div class="content-container">
-	<div class="panel-primary">
-    <div class="panel-title">
-	  	&nbsp;&nbsp;&nbsp; Term 1<span style="font-weight: normal;"> &nbsp;&nbsp;&nbsp;Chapterwise Performance</span>
+	<div class="panel-secondary">
+    <div class="panel-title center">
+	  	Chapterwise Performance
     </div>
 	</div>
 
 	<div class="panel-body">
 		<ul class="content-list">
 		
-			<% @term_2_spi[:contribution_order].each.with_index(1) do |chapter_contribution,i| %>
+			<% @term_1_spi[:contribution_order].each.with_index(1) do |chapter_contribution,i| %>
 		    <% chapter = @term_2_chapters.find { |x| x.id == chapter_contribution[0] } %>
 				<% progress = @user_term_2_chapters_studied.find { |x| x.chapter_id == chapter_contribution[0] } %>
 
-				<a href="<%= chapter_path(chapter) %>" class="supress-a">
+				<% if progress != nil %>
+				<a href="<%= chapter_path(chapter_contribution[0]) %>" class="supress-a">
 					<li class="content-list-item">
 				    						
 						<div class="row">
@@ -108,6 +123,8 @@
 
 					</li>
 				</a>
+				<% end %>
+				
 			<% end %>
 		</ul>
 	</div>

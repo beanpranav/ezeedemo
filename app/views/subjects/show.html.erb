@@ -28,21 +28,9 @@
 </div>
 
 <div class="row unrow">
-	<div class="col-xs-12 col-sm-3" style="padding:0px;">
-		<%= render "subjects/spi" %>
-
-		<% if user_signed_in? && current_user.role == "Admin" %>
-			<%= link_to "Add New Chapter", controller: "chapters", action: "new", subject_id: @subject.id %>
-		<% end %>
-	</div>
-
-	<div class="col-xs-12 col-sm-9">
-		<div class="content-container">
-			<div class="tab-content">
-				<div class="tab-pane" id="textbook"><%= render "subjects/textbook" %></div>
-				<div class="tab-pane active" id="term1"><%= render "subjects/term1" %></div>
-				<div class="tab-pane" id="term2"><%= render "subjects/term2" %></div>
-			</div>
-		</div>
+	<div class="tab-content">
+		<div class="tab-pane fade" id="textbook"><%= render "subjects/textbook" %></div>
+		<div class="tab-pane fade in active" id="term1"><%= render "subjects/term1" %></div>
+		<div class="tab-pane fade " id="term2"><%= render "subjects/term2" %></div>
 	</div>
 </div>

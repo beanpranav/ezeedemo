@@ -110,7 +110,7 @@ class ChaptersController < ApplicationController
       end
     end
 
-    @mcqs = @all_assessments.select { |x| x["content_type"] == "MCQ" }
+    @mcqs = @all_assessments.select { |x| x["content_type"] == "MCQ" and x["practice_level"] == "Level 1"}
 
     if user_signed_in?
       
@@ -145,7 +145,7 @@ class ChaptersController < ApplicationController
       end
     end
 
-    @shortqs = @all_assessments.select { |x| x["content_type"] == "ShortQ" }
+    @shortqs = @all_assessments.select { |x| x["content_type"] == "ShortQ" and x["practice_level"] == "Level 1" }
 
     @response_options = ["Revise again", "Completed"]
 
@@ -172,7 +172,7 @@ class ChaptersController < ApplicationController
       end
     end
 
-    @longqs = @all_assessments.select { |x| x["content_type"] == "LongQ" }
+    @longqs = @all_assessments.select { |x| x["content_type"] == "LongQ" and x["practice_level"] == "Level 1" }
 
     @response_options = ["Revise again", "Completed"]
 

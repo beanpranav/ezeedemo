@@ -1,26 +1,37 @@
-
-<div class="panel-primary">
-    <div class="panel-title">
-	   CBSE Textbook
-    </div>
+<div class="col-xs-12 col-sm-3" style="padding:0px;">
+	<% if user_signed_in? && current_user.role == "Admin" %>
+		<%= link_to "Add New Chapter", controller: "chapters", action: "new", subject_id: @subject.id %>
+	<% end %>
 </div>
 
-<div class="panel-body">
-	<ul class="content-list">
-		<% @chapters_all.each do |chapter| %>
+<div class="col-xs-12 col-sm-9">
+	<div class="content-container">
 
-			<a href="<%= chapter_path(chapter) %>" class="supress-a">
-				<li class="content-list-item">
-					<% if chapter.status == "Paid" %>
-							<i class="fa fa-2x fa-lock content-list-icon-lock pull-left"></i>
-					<% else %>
-						<i class="fa fa-2x fa-trophy content-list-icon-default pull-left"></i>
-					<% end %>
-					<h3>Chapter <%= chapter.chapterNumber%></h3>
-					<h2><%= chapter.name %></h2>
-				</li>
-			</a>
-			
-		<% end %>
-	</ul>
+		<div class="panel-primary">
+		    <div class="panel-title">
+			   CBSE Textbook
+		    </div>
+		</div>
+
+		<div class="panel-body">
+			<ul class="content-list">
+				<% @chapters_all.each do |chapter| %>
+
+					<a href="<%= chapter_path(chapter) %>" class="supress-a">
+						<li class="content-list-item">
+							<% if chapter.status == "Paid" %>
+									<i class="fa fa-2x fa-lock content-list-icon-lock pull-left"></i>
+							<% else %>
+								<i class="fa fa-2x fa-trophy content-list-icon-default pull-left"></i>
+							<% end %>
+							<h3>Chapter <%= chapter.chapterNumber%></h3>
+							<h2><%= chapter.name %></h2>
+						</li>
+					</a>
+					
+				<% end %>
+			</ul>
+		</div>
+
+	</div>
 </div>

@@ -48,7 +48,7 @@ p { line-height: 1.65; font-weight: normal; }
 
 td { text-align: left; }
 
-.font-primary { color: $brand-font!important; font-weight: bold; }
+.font-primary { color: $brand-font!important; font-weight: lighter; }
 .font-invert { color: white!important; font-weight: lighter; }
 .font-green { color: $brand-green; font-weight: lighter; }
 .font-orange { color: $brand-orange; font-weight: lighter; }
@@ -498,7 +498,7 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
 .cpi-steps-big { height: 72px }
 .spi { 
 	height: 72px;
-	font-size: 29px;
+	font-size: 25px;
 	font-weight: bold;
 	margin: 10px -18px 0;
 	text-align: center;
@@ -506,9 +506,10 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
 .spi-score { 
 	height: 42px;
 	width: 42px;
-	color: $brand-primary;
-	background-color: $body-bg;
+	color: white;
+	background-color: $brand-green;
 	margin: auto;
+	line-height: 1.6;
 }
 .spi-score-big, .spi-score-big-default {
 	height: 100px;
@@ -517,9 +518,9 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
 	background-color: $brand-green;
 	margin: auto;
 	font-size: 60px;
-  line-height: 1.55;
+  line-height: 1.4;
 }
-.spi-score-big-default { background-color: $body-bg; color: $brand-primary; }
+.spi-score-big-default { background-color: $body-bg; color: $brand-primary; border: 1px solid $brand-primary; }
 
 .spi-tests {
 	text-align: center;
