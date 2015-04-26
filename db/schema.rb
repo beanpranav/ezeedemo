@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150425113912) do
+ActiveRecord::Schema.define(version: 20150425233813) do
 
   create_table "assessment_contents", force: true do |t|
     t.integer  "video_content_id"
@@ -93,6 +93,7 @@ ActiveRecord::Schema.define(version: 20150425113912) do
     t.datetime "updated_at"
     t.string   "board"
     t.integer  "standard"
+    t.string   "slug"
   end
 
   create_table "user_assessment_progresses", force: true do |t|

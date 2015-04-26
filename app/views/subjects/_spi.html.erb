@@ -1,0 +1,102 @@
+
+<div class="content-container">
+
+	<div class="panel-group" id="accordion-progress" role="tablist" aria-multiselectable="true">
+		
+		<div class="panel panel-default">
+			<a class="collapsed supress-a" data-toggle="collapse" data-parent="#accordion-progress" href="#ProgressOne" aria-expanded="true" aria-controls="ProgressOne">
+			  <div class="panel-red" role="tab" id="headingOne">
+			    <div class="panel-title">
+			    	Mock FA
+			    	<i class="fa fa-fw fa-sort pull-right" style="margin: 3px -5px 0 0;"></i>
+			    </div>
+			  </div>
+		  </a>
+		  <div id="ProgressOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+		    <div class="panel-body center">
+					<div class="comment-container" style="margin: -13px -18px 17px;">
+						It indicates how much the chapter is<br> 
+						worth out-of-90 in your Summative<br>
+						Assessment Exam (SA 1)
+					</div>
+					
+					<div class="btn-group" role="group">
+						<%= link_to '<i class="fa fa-lock"></i>'.html_safe, "#", class: "btn btn-red active" %>
+						<%= link_to "TAKE MOCK FA", "#", class: "btn btn-red" %>
+					</div>
+
+					<div class="spi-tests">
+						<% 4.times do |i| %>
+							<i class="fa fa-lg fa-lock spi-test-lock"></i>
+						<% end %>
+					</div>
+					
+		    </div>
+		  </div>
+		</div>
+
+		<div class="panel panel-default">
+		  <a class="collapsed supress-a" data-toggle="collapse" data-parent="#accordion-progress" href="#ProgressTwo" aria-expanded="false" aria-controls="ProgressTwo">
+		  	<div class="panel-orange" role="tab" id="headingTwo">
+			    <div class="panel-title">
+			    	Mock SA
+			    	<i class="fa fa-fw fa-sort pull-right" style="margin: 3px -5px 0 0;"></i>
+			    </div>
+			  </div>
+			 </a>
+		  <div id="ProgressTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+		    <div class="panel-body center">
+					<div class="comment-container" style="margin: -13px -18px 17px;">
+						It indicates how much the chapter is<br> 
+						worth out-of-90 in your Summative<br>
+						Assessment Exam (SA 1)
+					</div>
+					
+					<div class="btn-group" role="group">
+						<%= link_to '<i class="fa fa-lock"></i>'.html_safe, "#", class: "btn btn-orange active" %>
+						<%= link_to "TAKE MOCK SA", "#", class: "btn btn-orange" %>
+					</div>
+
+					<div class="spi-tests">
+						<% 4.times do |i| %>
+							<i class="fa fa-lg fa-lock spi-test-lock"></i>
+						<% end %>
+					</div>
+				</div>
+		  </div>
+		</div>
+
+		<div class="panel panel-default">
+		  <a class="collapsed supress-a" data-toggle="collapse" data-parent="#accordion-progress" href="#ProgressThree" aria-expanded="false" aria-controls="ProgressThree">
+			  <div class="panel-green" role="tab" id="headingThree">
+			    <div class="panel-title">
+			    	Your Predictive Score
+			    	<i class="fa fa-fw fa-sort pull-right" style="margin: 3px -5px 0 0;"></i>
+			    </div>
+			  </div>
+		  </a>
+		  <div id="ProgressThree" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingThree">
+		    <div class="panel-body">
+					<% if user_signed_in? %>
+						<div class="comment-container" style="margin: -13px -18px 10px;">
+							We've crunched the numbers. See your results and our specific recommendations
+						</div>
+						<div class="spi">
+							<div class="spi-score"><%= @term_1_spi[:spi] %></div>
+							<h3>out of 90</h3>
+						</div>
+						<%= link_to "IMPROVE SCORE", improve_predictive_score_subject_path(@subject), class: "btn btn-block btn-green" %>
+
+					<% else %>
+						<div class="cpi-status-0">0</div>
+						<div class="comment-container">
+							asdfasf
+						</div>
+					<% end %>
+		    </div>
+		  </div>
+		</div>
+
+	</div>
+
+</div>

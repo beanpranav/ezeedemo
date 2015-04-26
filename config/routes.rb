@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   resources :subjects do
 	  member do
 	    get :subject_admin
+      get :improve_predictive_score
 	  end
 	end
 

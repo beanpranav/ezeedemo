@@ -1,21 +1,21 @@
 
 <div class="panel-primary">
     <div class="panel-title">
-	   	Term 2:<span style="font-weight: normal;"> <%= @chapters_term_2.count %> Chapters</span>
-	  	<div class="panel-right">studied: <%= if user_signed_in? then @term_2_studied else "0" end %>%</div>
+	   	Term 2:<span style="font-weight: normal;"> &nbsp;<%= @term_2_chapters.count %> Chapters</span>
+	  	<div class="panel-right">studied: &nbsp;<%= if user_signed_in? then @term_2_studied else "0" end %>%</div>
     </div>
 </div>
 
 <div class="panel-body">
 	<ul class="content-list">
-		<% @chapters_term_2.sort_by(&:chapterNumber).each do |chapter| %>
+		<% @term_2_chapters.sort_by(&:chapterNumber).each do |chapter| %>
 			<a href="<%= chapter_path(chapter) %>" class="supress-a">
 				<li class="content-list-item">
 					<% if chapter.status == "Paid" %>
 						<i class="fa fa-2x fa-lock cpi-level-lock-icon pull-left"></i>
 					<% else %>
 
-						<% progress = @term_2_chapters_studied.select { |x| x["chapter_id"] == chapter.id } %>
+						<% progress = @user_term_2_chapters_studied.select { |x| x["chapter_id"] == chapter.id } %>
 
 						<% if user_signed_in? %>
 							<% if progress[0].cpi_level < 4 %>

@@ -23,6 +23,8 @@ class User < ActiveRecord::Base
   	name.split(" ").last
   end
 
+
+  # Chapter Calucations
   def cpi_calculator(smart_progress_ratio, concept_progress_ratio, mcq_progress_ratio, subjectiveq_progress_ratio)
 
     if smart_progress_ratio == $cpi_specs[0][:step_goals][:smart_goal]
@@ -65,6 +67,76 @@ class User < ActiveRecord::Base
       return (study_weightage_value + assessment_weightage_value).round(0)
     end
   
+  end
+
+
+  # Subject Calculations
+  def subject_studied(term_chapters, user_term_chapters_studied)
+
+    term_weightage_total = 0
+    user_term_weightage = 0
+
+    term_chapters.each do |chapter|
+      average_chapter_weightage = (chapter.weightage_min + chapter.weightage_max) / 2
+      term_weightage_total += average_chapter_weightage      
+      user_progress = user_term_chapters_studied.select { |x| x["chapter_id"] == chapter.id }
+      if user_progress[0] != nil
+        chapter_studied = user_progress[0].chapter_studied
+        user_term_weightage += chapter_studied * average_chapter_weightage if chapter_studied != nil
+      end 
+    end
+
+    return user_term_weightage/term_weightage_total
+  end
+
+
+  def predictive_score_calculator(term_chapters, user_term_chapters_cpi, user_term_fa_scores, user_term_sa_scores)
+
+    term_weightage_total = 0
+    user_term_weightage = 0
+    term_weightage_contribution = []
+    term_weightage_priortization = []
+
+    term_chapters.sort_by(&:chapterNumber).each do |chapter|
+      
+      average_chapter_weightage = (chapter.weightage_min + chapter.weightage_max) / 2
+      term_weightage_total += average_chapter_weightage      
+      user_progress = user_term_chapters_cpi.select { |x| x["chapter_id"] == chapter.id }
+      
+      if user_progress[0] != nil
+        chapter_cpi = $cpi_specs[user_progress[0].cpi_level][:step_score] 
+        chapter_cpi_max = $cpi_specs[4][:step_score] 
+        if chapter_cpi == nil
+          term_weightage_contribution << [chapter.id, 0 * average_chapter_weightage]
+          term_weightage_priortization << [chapter.id, chapter_cpi_max * average_chapter_weightage]
+        else
+          user_term_weightage += chapter_cpi * average_chapter_weightage 
+          term_weightage_contribution << [chapter.id, (chapter_cpi) * average_chapter_weightage]
+          term_weightage_priortization << [chapter.id, (chapter_cpi_max - chapter_cpi) * average_chapter_weightage]
+        end
+      end 
+
+    end
+
+    subject_studied = user_term_weightage/term_weightage_total
+    term_weightage_contribution.each { |x| x[1] = (x[1] * $predictive_score_specs[:study_weightage] / term_weightage_total).round(2) }
+    term_weightage_contribution = term_weightage_contribution.sort_by { |x| -x[1] }
+    term_weightage_priortization.each { |x| x[1] = (x[1] * $predictive_score_specs[:study_weightage] / term_weightage_total).round(2) }
+    term_weightage_priortization = term_weightage_priortization.sort_by { |x| -x[1] }
+
+    fa_practiced = 0
+    sa_practiced = 0
+    if user_term_fa_scores.size > 0
+      fa_practiced = user_term_fa_scores.inject(:+).to_f/user_term_fa_scores.size
+    end    
+    if user_term_sa_scores.size > 0
+      sa_practiced = user_term_sa_scores.inject(:+).to_f/user_term_sa_scores.size
+    end
+    subject_practiced = fa_practiced + sa_practiced
+
+    spi = (subject_studied * $predictive_score_specs[:study_weightage]) + (subject_practiced * $predictive_score_specs[:assessment_weightage])
+    
+    return { :spi => spi.round(0), :contribution_order => term_weightage_contribution, :priortization_order => term_weightage_priortization }
   end
   
 end

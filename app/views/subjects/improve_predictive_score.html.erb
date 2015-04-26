@@ -1,0 +1,19 @@
+<div class="secondary-nav secondary-nav-invert">
+		
+	<%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-back pull-left"></i>'.html_safe, :back %>
+	<h2 class="font-invert"><b>Hacking <%= @subject.name %></b></h2>
+	<h3 class="font-invert">We've crunched the numbers. Here are your results and our specific recommendations.</h3>
+
+  <div class="secondary-nav-actions pull-right dropdown">
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#term1" aria-controls="term1" role="tab" data-toggle="tab">Term 1</a></li>
+      <li role="presentation"><a href="#term2" aria-controls="term2" role="tab" data-toggle="tab">Term 2</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="tab-content">
+  <div class="tab-pane fade in active" id="term1"><%= render "subjects/improve_term1" %></div>
+  <div class="tab-pane fade " id="term2"><%= render "subjects/improve_term2" %></div>
+</div> 

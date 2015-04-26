@@ -1,0 +1,114 @@
+<div class="content-container center center" style="padding:30px 15px;">
+	
+	<div class="row" style="padding-bottom:40px;">
+
+		<div class="col-xs-12 col-sm-4">
+			<h2 class="font-primary" style="padding:15px;"><b>Subject Studied</b></h2>
+			<div class="spi-score-big-default"><%= @term_12_studied %></div>
+			<h3 class="font-primary">percent</h3>
+		</div>
+
+		<div class="col-xs-12 col-sm-4">
+			<h2 class="font-primary" style="padding:15px 15px 7px;"><b>Mock FA & SA</b></h2>
+			
+			<div class="spi-tests">
+				<% 4.times do |i| %>
+					<i class="fa fa-lg fa-lock spi-test-lock-red"></i>
+				<% end %>
+			</div>
+
+			<div class="spi-tests">
+				<% 4.times do |i| %>
+					<i class="fa fa-lg fa-lock spi-test-lock-orange"></i>
+				<% end %>
+			</div>
+
+		</div>
+
+		<div class="col-xs-12 col-sm-4">
+			<h2 class="font-primary" style="padding:15px;"><b>Predictive Score</b></h2>
+			<div class="spi-score-big"><%= @term_2_spi[:spi] %></div>
+			<h3 class="font-primary">out of 90</h3>
+		</div>
+
+	</div>
+
+	<div class="row">
+		<div class="panel-secondary">
+	    <div class="panel-title" style="text-align:left;">
+		  	&nbsp;&nbsp;&nbsp; Our Recommendations
+	    </div>
+		</div>
+
+		<div class="col-xs-12 col-sm-6">
+		</div>
+
+		<div class="col-xs-12 col-sm-6">
+		</div>
+
+	</div>
+
+</div>
+
+<div class="content-container">
+	<div class="panel-primary">
+    <div class="panel-title">
+	  	&nbsp;&nbsp;&nbsp; Term 1<span style="font-weight: normal;"> &nbsp;&nbsp;&nbsp;Chapterwise Performance</span>
+    </div>
+	</div>
+
+	<div class="panel-body">
+		<ul class="content-list">
+		
+			<% @term_2_spi[:contribution_order].each.with_index(1) do |chapter_contribution,i| %>
+		    <% chapter = @term_2_chapters.find { |x| x.id == chapter_contribution[0] } %>
+				<% progress = @user_term_2_chapters_studied.find { |x| x.chapter_id == chapter_contribution[0] } %>
+
+				<a href="<%= chapter_path(chapter) %>" class="supress-a">
+					<li class="content-list-item">
+				    						
+						<div class="row">
+							<div class="col-xs-12 col-sm-6">
+						    <% if chapter.status == "Paid"%>
+						    	<i class="fa fa-2x fa-lock pull-left cpi-level-lock-icon pull-left"></i>
+						    <% else %>
+						    	<% if progress == nil %>
+						    		<i class="fa fa-2x fa-trophy cpi-level-0-icon pull-left"></i>
+						    	<% elsif progress.cpi_level == 4 %>
+						    		<i class="fa fa-2x fa-rocket cpi-level-4-icon pull-left"></i>
+						    	<% elsif progress.cpi_level == 5 %>
+						    		<i class="fa fa-2x fa-gamepad cpi-level-5-icon pull-left"></i>
+						    	<% else %>
+						    		<i class="fa fa-2x fa-trophy cpi-level-<%= progress.cpi_level %>-icon pull-left"></i>
+						    	<% end %>
+						    <% end %>
+
+						    <h3>Chapter <%= chapter.chapterNumber %></h3>
+								<h2><%= chapter.name %></h2>
+							</div>
+
+							<div class="col-xs-12 col-sm-6" style="padding:0;">
+								<div class="col-xs-12 col-sm-7">
+										
+									<h3>Worth ~<%= (chapter.weightage_min + chapter.weightage_max)/2 %>/90 marks</h3>
+									<div class="progress" style="height:22px; margin:7px 0 0 4px">
+									  <div class="progress-bar progress-bar-studied" role="progressbar" aria-valuenow="<%= progress.chapter_studied %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= progress.chapter_studied %>%">
+									    <span style="float:left; padding: 2px 0 2px 7px;"><%= progress.chapter_studied %>% Studied</span>
+									  </div>
+									</div>
+									
+								</div>
+								<div class="col-xs-12 col-sm-5">
+									<h3>Your Performance </h3>
+									<div class="cpi-status-<%= progress.cpi_level %>" style="text-align:left; margin: 0 0 0 6px;"><%= $cpi_specs[progress.cpi_level][:status] %></div>
+								</div>
+
+							</div>
+						</div>
+
+					</li>
+				</a>
+			<% end %>
+		</ul>
+	</div>
+</div>

@@ -29,7 +29,7 @@
 			<% end %>
 
 			<h2 class="font-invert"><b><%= @chapter.name %></b></h2>
-			<h3 class="font-invert">chapter studied: <%= if user_signed_in? then @chapter_studied else "0" end %>%</h3>
+			<h3 class="font-invert">chapter studied: &nbsp;<%= if user_signed_in? then @chapter_studied else "0" end %>%</h3>
 		</div>
 	</div>
 </div>

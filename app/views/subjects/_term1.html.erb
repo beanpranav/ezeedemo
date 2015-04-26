@@ -1,26 +1,27 @@
 
 <div class="panel-primary">
     <div class="panel-title">
-	  	Term 1:<span style="font-weight: normal;"> <%= @chapters_term_1.count %> Chapters</span>
-	  	<div class="panel-right">studied: <%= if user_signed_in? then @term_1_studied else "0" end %>%</div>
+	  	Term 1:<span style="font-weight: normal;"> &nbsp;<%= @term_1_chapters.count %> Chapters</span>
+	  	<div class="panel-right">studied: &nbsp;<%= if user_signed_in? then @term_1_studied else "0" end %>%</div>
     </div>
 </div>
 
 <div class="panel-body">
+	
 	<ul class="content-list">
-		<% @chapters_term_1.sort_by(&:chapterNumber).each do |chapter| %>
+		<% @term_1_chapters.sort_by(&:chapterNumber).each do |chapter| %>
 			<a href="<%= chapter_path(chapter) %>" class="supress-a">
 				<li class="content-list-item">
 					<% if chapter.status == "Paid" %>
 						<i class="fa fa-2x fa-lock cpi-level-lock-icon pull-left"></i>
 					<% else %>
 
-						<% progress = @term_1_chapters_studied.select { |x| x["chapter_id"] == chapter.id } %>
+						<% progress = @user_term_1_chapters_studied.find { |x| x["chapter_id"] == chapter.id } %>
 
 						<% if user_signed_in? %>
-							<% if progress[0].cpi_level < 4 %>
-								<i class="fa fa-2x fa-trophy cpi-level-<%= progress[0].cpi_level %>-icon pull-left"></i>
-							<% elsif progress[0].cpi_level == 4 %>
+							<% if progress.cpi_level < 4 %>
+								<i class="fa fa-2x fa-trophy cpi-level-<%= progress.cpi_level %>-icon pull-left"></i>
+							<% elsif progress.cpi_level == 4 %>
 								<i class="fa fa-2x fa-rocket cpi-level-4-icon pull-left"></i>
 							<% else %>
 								<i class="fa fa-2x fa-rotate-45 fa-gamepad cpi-level-5-icon pull-left"></i>
