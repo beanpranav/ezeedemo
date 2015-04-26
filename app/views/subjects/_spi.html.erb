@@ -83,7 +83,7 @@
 						</div>
 						<div class="spi">
 							<div class="spi-score"><%= @term_1_spi[:spi] %></div>
-							<h3>out of 90</h3>
+							<h3>out of <%= @term_1_weight %></h3>
 						</div>
 						<%= link_to "IMPROVE SCORE", improve_predictive_score_subject_path(@subject), class: "btn btn-block btn-green" %>
 

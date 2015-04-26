@@ -89,6 +89,16 @@ class User < ActiveRecord::Base
     return user_term_weightage/term_weightage_total
   end
 
+  def subject_weight(term_chapters)
+    
+    term_weightage_total = 0
+    term_chapters.each do |chapter|
+      term_weightage_total += (chapter.weightage_min + chapter.weightage_max) / 2
+    end
+    
+    return term_weightage_total
+  end
+
 
   def predictive_score_calculator(term_chapters, user_term_chapters_cpi, user_term_fa_scores, user_term_sa_scores)
 

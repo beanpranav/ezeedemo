@@ -22,7 +22,7 @@
         <td><%= chapter.name %></td>
         <td><%= chapter.term %></td>
         <td><%= chapter.status %></td>
-        <td><%= chapter.weightage_min %>-<%= chapter.weightage_min %></td>
+        <td><%= chapter.weightage_min %>-<%= chapter.weightage_max %></td>
         <td><%= link_to 'Show', chapter %></td>
         <td><%= link_to 'Edit', edit_chapter_path(chapter) %></td>
         <td><%= link_to 'Destroy', chapter, method: :delete, data: { confirm: 'Are you sure?' } %></td>
