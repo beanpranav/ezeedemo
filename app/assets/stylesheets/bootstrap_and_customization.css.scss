@@ -599,11 +599,16 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
   height: 36px;
   width: 230px;
 }
-.progress {
+.progress, .progress-spi {
 	height: 15px;
 	border-radius: 0;
 	box-shadow: none;
 	margin-top: 18px;
+}
+.progress-spi {
+	height:22px; 
+	margin:7px 0 0 4px;
+	background-color: $body-border;
 }
 // .progress-bar { box-shadow: none; }
 .progress-bar-0 { background-color: $brand-font-gray; }
