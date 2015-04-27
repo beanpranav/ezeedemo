@@ -35,6 +35,5 @@ Rails.application.routes.draw do
 
   root 'pages#home'
   get "common_dashboard" => "pages#common_dashboard"
-  get "report_card" => "pages#report_card"
 
 end

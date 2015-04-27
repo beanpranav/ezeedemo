@@ -12,12 +12,11 @@
 		<div class="panel-primary">
 	    <div class="panel-title">
 		  	Term 1:<span style="font-weight: normal;"> &nbsp;<%= @term_1_chapters.count %> Chapters</span>
-		  	<div class="panel-right">studied: &nbsp;<%= if user_signed_in? then @term_1_studied else "0" end %>%</div>
+		  	<div class="panel-right">Studied: &nbsp;<%= if user_signed_in? then @term_1_studied else "0" end %>%</div>
 	    </div>
 		</div>
 
 		<div class="panel-body">
-			
 			<ul class="content-list">
 				<% @term_1_chapters.sort_by(&:chapterNumber).each do |chapter| %>
 					<a href="<%= chapter_path(chapter) %>" class="supress-a">

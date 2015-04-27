@@ -15,14 +15,12 @@
 		  <div id="Progress-2-One" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
 		    <div class="panel-body center">
 					<div class="comment-container" style="margin: -13px -18px 17px;">
-						It indicates how much the chapter is
-						worth out-of-90 in your Summative
-						Assessment Exam (SA 1)
+						Complete 3 chapters to unlock your first Formative Assessment (FA) mock exam
 					</div>
 					
 					<div class="btn-group" role="group">
-						<%= link_to '<i class="fa fa-lock"></i>'.html_safe, "#", class: "btn btn-red active" %>
-						<%= link_to "TAKE MOCK FA", "#", class: "btn btn-red" %>
+						<%= link_to '<i class="fa fa-lock"></i>'.html_safe, "#", class: "btn btn-red active", disabled: "disabled" %>
+						<%= link_to "TAKE MOCK FA", "#", class: "btn btn-red active", disabled: "disabled" %>
 					</div>
 
 					<div class="spi-tests">
@@ -47,14 +45,12 @@
 		  <div id="Progress-2-Two" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
 		    <div class="panel-body center">
 					<div class="comment-container" style="margin: -13px -18px 17px;">
-						It indicates how much the chapter is
-						worth out-of-90 in your Summative
-						Assessment Exam (SA 2)
+						Complete 75% subject studies to unlock your first Summative Assessment (SA) mock exam
 					</div>
 					
 					<div class="btn-group" role="group">
-						<%= link_to '<i class="fa fa-lock"></i>'.html_safe, "#", class: "btn btn-orange active" %>
-						<%= link_to "TAKE MOCK SA", "#", class: "btn btn-orange" %>
+						<%= link_to '<i class="fa fa-lock"></i>'.html_safe, "#", class: "btn btn-orange active", disabled: "disabled" %>
+						<%= link_to "TAKE MOCK SA", "#", class: "btn btn-orange active", disabled: "disabled" %>
 					</div>
 
 					<div class="spi-tests">
@@ -88,10 +84,10 @@
 						<%= link_to "IMPROVE SCORE", improve_predictive_score_subject_path(@subject), class: "btn btn-block btn-green" %>
 
 					<% else %>
-						<div class="cpi-status-0">0</div>
-						<div class="comment-container">
-							asdfasf
+						<div class="comment-container" style="margin: -13px -15px 15px;">
+							Predictive score is custom created by analyzing your progress. To see
 						</div>
+						<%= link_to "SIGNUP NOW", new_user_registration_path, class: "btn btn-block btn-green" %>
 					<% end %>
 		    </div>
 		  </div>

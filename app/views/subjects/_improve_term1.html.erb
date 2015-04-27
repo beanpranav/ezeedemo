@@ -47,12 +47,7 @@
 
 		<% 2.times do |i| %>
 			<div class="col-xs-12 col-sm-6">
-				<div class="spi pull-left" style="width:140px;">
-					<div class="spi-score"><%= @term_1_spi[:priortization_order][i][1].round(0) %></div>
-					<h3>increase</h3>
-				</div>
-				<% chapter = @term_1_chapters.find { |x| x.id == @term_1_spi[:priortization_order][i][0] } %>
-				<h2 style="margin: 20px 0 0 -30px;"><%= chapter.name %></h2>
+				
 			</div>
 		<% end %>
 

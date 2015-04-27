@@ -7,7 +7,7 @@
 	<div class="secondary-nav secondary-nav-invert">
 		<i class="fa fa-2x fa-rocket content-list-icon-primary pull-left"></i>
 		<h2 class="font-invert"><b>Hi <%= if user_signed_in? then current_user.first_name else "there" end %>!</b></h2>
-		<h3 class="font-invert">We will help you simply your study load today ... and everyday</h3>
+		<h3 class="font-invert">We will help you simplfy your study load today ... and everyday</h3>
 	</div>
 
 	<% @subjects.each do |subject| %>
@@ -25,6 +25,10 @@
 				<div class="subject-card">
 					<h2><b><%= subject.name %></b></h2>
 					<h3><%= subject.chapters.count %> Chapters</h3>
+					<div class="dashboard-subject-info">
+						
+					</div>
+
 				</div>
 			</a>
 

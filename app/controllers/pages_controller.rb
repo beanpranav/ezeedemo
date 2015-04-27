@@ -8,8 +8,4 @@ class PagesController < ApplicationController
   	@subjects = Subject.where(standard: 10).order('id DESC')
   end
 
-  def report_card
-  	@subjects = Subject.where(standard: 10).order('id DESC')
-  end
-
 end
