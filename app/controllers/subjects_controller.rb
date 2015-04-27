@@ -21,24 +21,17 @@ class SubjectsController < ApplicationController
     
     if user_signed_in?
       
-      @term_1_weight = 0
-      @term_1_chapters.each do |chapter|
-        @term_1_weight += (chapter.weightage_min + chapter.weightage_max) / 2
-      end
-
-      @term_2_weight = 0
-      @term_2_chapters.each do |chapter|
-        @term_2_weight += (chapter.weightage_min + chapter.weightage_max) / 2
-      end
+      @term_1_weight = term_weight(@term_1_chapters)
+      @term_2_weight = term_weight(@term_2_chapters)
 
       @user_term_1_chapters_studied = UserChapterProgress.where(user_id: current_user.id, chapter_id: chapter_ids_term_1)
       @user_term_2_chapters_studied = UserChapterProgress.where(user_id: current_user.id, chapter_id: chapter_ids_term_2)
 
-      @term_1_studied = current_user.subject_studied(@term_1_chapters, @user_term_1_chapters_studied)
-      @term_2_studied = current_user.subject_studied(@term_2_chapters, @user_term_2_chapters_studied)
+      @term_1_studied = subject_studied(@term_1_chapters, @user_term_1_chapters_studied)
+      @term_2_studied = subject_studied(@term_2_chapters, @user_term_2_chapters_studied)
       
-      @term_1_spi = current_user.predictive_score_calculator(@term_1_chapters, @user_term_1_chapters_studied, [], [])
-      @term_2_spi = current_user.predictive_score_calculator(@term_2_chapters, @user_term_2_chapters_studied, [], [])
+      @term_1_spi = predictive_score_calculator(@term_1_chapters, @user_term_1_chapters_studied, [], [])
+      @term_2_spi = predictive_score_calculator(@term_2_chapters, @user_term_2_chapters_studied, [], [])
 
     else
       @term_1_studied = 0
@@ -82,11 +75,11 @@ class SubjectsController < ApplicationController
       @user_term_1_chapters_studied = UserChapterProgress.where(user_id: current_user.id, chapter_id: chapter_ids_term_1)
       @user_term_2_chapters_studied = UserChapterProgress.where(user_id: current_user.id, chapter_id: chapter_ids_term_2)
 
-      @term_1_studied = current_user.subject_studied(@term_1_chapters, @user_term_1_chapters_studied)
-      @term_2_studied = current_user.subject_studied(@term_2_chapters, @user_term_2_chapters_studied)
+      @term_1_studied = subject_studied(@term_1_chapters, @user_term_1_chapters_studied)
+      @term_2_studied = subject_studied(@term_2_chapters, @user_term_2_chapters_studied)
       
-      @term_1_spi = current_user.predictive_score_calculator(@term_1_chapters, @user_term_1_chapters_studied, [], [])
-      @term_2_spi = current_user.predictive_score_calculator(@term_2_chapters, @user_term_2_chapters_studied, [], [])
+      @term_1_spi = predictive_score_calculator(@term_1_chapters, @user_term_1_chapters_studied, [], [])
+      @term_2_spi = predictive_score_calculator(@term_2_chapters, @user_term_2_chapters_studied, [], [])
 
     else
       @term_1_studied = 0

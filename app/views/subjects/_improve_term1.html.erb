@@ -47,10 +47,14 @@
 
 		<% 2.times do |i| %>
 			<div class="col-xs-12 col-sm-6">
-				
+				<div class="spi pull-left" style="width:140px;">
+					<div class="spi-score"><%= @term_1_spi[:priortization_order][i][1].round(0) %></div>
+					<h3>increase</h3>
+				</div>
+				<% chapter = @term_1_chapters.find { |x| x.id == @term_1_spi[:priortization_order][i][0] } %>
+				<h2 style="margin: 20px 0 0 -30px;"><%= chapter.name %></h2>
 			</div>
 		<% end %>
-
 
 		<div class="col-xs-12 col-sm-6">
 		</div>
@@ -69,7 +73,7 @@
 	<div class="panel-body">
 		<ul class="content-list">
 		
-			<% @term_1_spi[:contribution_order].each.with_index(1) do |chapter_contribution,i| %>
+			<% @term_1_spi[:contribution_order].each do |chapter_contribution| %>
 		    <% chapter = @term_1_chapters.find { |x| x.id == chapter_contribution[0] } %>
 				<% progress = @user_term_1_chapters_studied.find { |x| x.chapter_id == chapter_contribution[0] } %>
 

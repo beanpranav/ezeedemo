@@ -75,9 +75,9 @@ class ChaptersController < ApplicationController
       mcq_studied_ratio = @user_mcq_progress_count.to_f/@mcqs.count
       subjectiveq_progress_ratio = (@user_shortq_progress_count + @user_longq_progress_count).to_f/(@shortqs.count + @longqs.count)
       
-      @cpi_level = current_user.cpi_calculator(smart_progress_ratio, concept_progress_ratio, mcq_progress_ratio, subjectiveq_progress_ratio)
-      # @cpi_level = current_user.cpi_calculator(1,0.5,1,1)
-      @chapter_studied = current_user.chapter_studied(smart_progress_ratio, concept_progress_ratio, mcq_studied_ratio, subjectiveq_progress_ratio)
+      @cpi_level = cpi_calculator(smart_progress_ratio, concept_progress_ratio, mcq_progress_ratio, subjectiveq_progress_ratio)
+      # @cpi_level = cpi_calculator(1,0.5,1,1)
+      @chapter_studied = chapter_studied(smart_progress_ratio, concept_progress_ratio, mcq_studied_ratio, subjectiveq_progress_ratio)
       
       
 

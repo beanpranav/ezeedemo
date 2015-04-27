@@ -74,11 +74,10 @@
 	<div class="panel-body">
 		<ul class="content-list">
 		
-			<% @term_1_spi[:contribution_order].each.with_index(1) do |chapter_contribution,i| %>
+			<% @term_2_spi[:contribution_order].each do |chapter_contribution| %>
 		    <% chapter = @term_2_chapters.find { |x| x.id == chapter_contribution[0] } %>
 				<% progress = @user_term_2_chapters_studied.find { |x| x.chapter_id == chapter_contribution[0] } %>
 
-				<% if progress != nil %>
 				<a href="<%= chapter_path(chapter_contribution[0]) %>" class="supress-a">
 					<li class="content-list-item">
 				    						
@@ -123,7 +122,6 @@
 
 					</li>
 				</a>
-				<% end %>
 				
 			<% end %>
 		</ul>
