@@ -82,8 +82,7 @@ class SubjectsController < ApplicationController
       @user_term_1_chapters_studied = UserChapterProgress.where(user_id: current_user.id, chapter_id: chapter_ids_term_1)
       @user_term_2_chapters_studied = UserChapterProgress.where(user_id: current_user.id, chapter_id: chapter_ids_term_2)
 
-      @term_1_weight = current_user.subject_weight(@term_1_chapters)
-      @term_2_weight = current_user.subject_weight(@term_2_chapters)
+
       
       @term_1_studied = current_user.subject_studied(@term_1_chapters, @user_term_1_chapters_studied)
       @term_2_studied = current_user.subject_studied(@term_2_chapters, @user_term_2_chapters_studied)
