@@ -22,102 +22,367 @@
 
 </div>
 
-<div class="content-container">
-	
-	<div class="panel-secondary">
-	  <div class="panel-title">
-		  <%= @mcqs.count %> MCQs
-	  </div>
+
+<div class="row content-container">
+
+	<div class="tab-content">
+
+		<div class="tab-pane active" id="all-qs">
+
+  		<div class="panel-secondary">
+  		  <div class="panel-title">
+  			  <%= @mcqs.count %> MCQs
+  		  </div>
+  		</div>
+
+  		<div class="panel-body">
+  			<table class="table table-condensed">
+  			  <thead>
+  			    <tr>
+  			      <th colspan="1"></th>
+  			      <th>Question</th>
+  			      <th>Level</th>
+  			      <th>By</th>
+  			      <th>Next Step</th>
+  			      <th colspan="1"></th>
+  			    </tr>
+  			  </thead>
+
+  			  <tbody>
+  			    <% @mcqs.sort_by(&:id).each.with_index(1) do |assessment_content, i| %>
+  			      <tr>
+  			        <td colspan="1"><%= i %></td>
+  			        <td><%= truncate(assessment_content.question.html_safe, length: 70) %></td>
+  			        <td><%= assessment_content.practice_level %></td>
+  			        <td class="one-line-cell"><%= assessment_content.teacher_name %></td>
+  			        <td class="one-line-cell <%= if assessment_content.next_step == "Completed" then "panel-green" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-red" end %>"><%= assessment_content.next_step %></td>
+  			        <td><a href="#mcq-<%= i %>" data-toggle="tab"><i class="fa fa-arrow-right"></a></td>
+  			      </tr>
+  			    <% end %>
+  			  </tbody>
+  			</table>
+  		</div>
+
+  		<div class="panel-secondary">
+  		  <div class="panel-title">
+  			  <%= @shortqs.count %> Short Questions
+  		  </div>
+  		</div>
+
+  		<div class="panel-body">
+  			<table class="table table-condensed">
+  			  <thead>
+  			    <tr>
+  			      <th colspan="1"></th>
+  			      <th>Question</th>
+  			      <th>Level</th>
+  			      <th>By</th>
+  			      <th>Next Step</th>
+  			      <th colspan="1"></th>
+  			    </tr>
+  			  </thead>
+
+  			  <tbody>
+  			    <% @shortqs.sort_by(&:id).each.with_index(1) do |assessment_content, i| %>
+  			      <tr>
+  			        <td colspan="1"><%= i %></td>
+  			        <td><%= truncate(assessment_content.question.html_safe, length: 70) %></td>
+  			        <td><%= assessment_content.practice_level %></td>
+  			        <td class="one-line-cell"><%= assessment_content.teacher_name %></td>
+  			        <td class="one-line-cell <%= if assessment_content.next_step == "Completed" then "panel-green" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-red" end %>"><%= assessment_content.next_step %></td>
+  			        <td><a href="#shortq-<%= i %>" data-toggle="tab"><i class="fa fa-arrow-right"></a></td>
+  			      </tr>
+  			    <% end %>
+  			  </tbody>
+  			</table>
+  		</div>
+
+  		<div class="panel-secondary">
+  		  <div class="panel-title">
+  			  <%= @longqs.count %> Long Questions
+  		  </div>
+  		</div>
+
+  		<div class="panel-body">
+  			<table class="table table-condensed">
+  			  <thead>
+  			    <tr>
+  			      <th colspan="1"></th>
+  			      <th>Question</th>
+  			      <th>Level</th>
+  			      <th>By</th>
+  			      <th>Next Step</th>
+  			      <th colspan="1"></th>
+  			    </tr>
+  			  </thead>
+
+  			  <tbody>
+  			    <% @longqs.sort_by(&:id).each.with_index(1) do |assessment_content, i| %>
+  			      <tr>
+  			        <td colspan="1"><%= i %></td>
+  			        <td><%= truncate(assessment_content.question.html_safe, length: 70) %></td>
+  			        <td><%= assessment_content.practice_level %></td>
+  			        <td class="one-line-cell"><%= assessment_content.teacher_name %></td>
+  			        <td class="one-line-cell <%= if assessment_content.next_step == "Completed" then "panel-green" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-red" end %>"><%= assessment_content.next_step %></td>
+  			        <td><a href="#longq-<%= i %>" data-toggle="tab"><i class="fa fa-arrow-right"></a></td>
+  			      </tr>
+  			    <% end %>
+  			  </tbody>
+  			</table>
+  		</div>
+
+  	</div>
+
+
+
+		<% @mcqs.each.with_index(1) do |assessment_content, i| %>
+			
+			<div class="tab-pane" id="mcq-<%= i %>">
+				
+				<div class="panel-green panel-title">
+					<%= @mcqs.count %> MCQs
+
+					<div class="modal-actions pull-right">
+
+			      <% if i == @mcqs.count %>
+							<button type="button" class="btn btn-sm btn-modal pull-right" disabled="disabled"><i class="fa fa-arrow-right"></i></button>
+			    	<% else %>
+				    	<a href="#mcq-<%= i+1 %>" data-toggle="pill">
+				    		<button type="button" class="btn btn-sm btn-modal pull-right"><i class="fa fa-arrow-right"></i></button>
+				    	</a>
+				    <% end %>
+
+				    <a href="#all-qs" data-toggle="pill">
+			    		<button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;">All Qs</button>
+			    	</a>
+
+			    	<% if i == 1 %>
+			      	<button type="button" class="btn btn-sm btn-modal pull-right"  style="margin-right: -7px;"disabled="disabled"><i class="fa fa-arrow-left"></i></button>
+			    	<% else %>
+				      <a href="#mcq-<%= i-1 %>" data-toggle="pill">
+				    		<button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;"><i class="fa fa-arrow-left"></i></button>
+				    	</a>
+				    <% end %>
+
+				    <button type="button" class="btn btn-sm btn-modal-green pull-right" disabled="disabled"><%= assessment_content.practice_level %></button>
+
+				    <% if current_user.role == "Admin" %>
+				    	<%= link_to 'Edit', edit_assessment_content_path(assessment_content), class: "btn btn-sm btn-modal-green pull-right" %>
+				    <% end %>
+			    
+			    </div>
+			  </div>
+
+
+				<div class="col-sm-10 col-sm-offset-1 assessment-container">
+				  
+				  <div class="assessment-question">
+				  	<div class="question-icon"><%= i %></div>
+				  	<div class="assessment-text"><b><%= assessment_content.question.html_safe %></b></div>
+				  </div>
+					
+					
+					<div class="mcq-option">
+				    <div class="answer-icon-<%= if assessment_content.mcq_answer == "A" then "green" else "default" end %>">A</div>
+				    <div class="answer-text"><%= assessment_content.answer_a.html_safe %></div>
+				  </div>
+				  <div class="mcq-option">
+				    <div class="answer-icon-<%= if assessment_content.mcq_answer == "B" then "green" else "default" end %>">B</div>
+				    <div class="answer-text"><%= assessment_content.answer_b.html_safe %></div>
+				  </div>
+				  <div class="mcq-option">
+				    <div class="answer-icon-<%= if assessment_content.mcq_answer == "C" then "green" else "default" end %>">C</div>
+				    <div class="answer-text"><%= assessment_content.answer_c.html_safe %></div>
+				  </div>
+				  
+				  <div class="mcq-option">
+				    <div class="answer-icon-<%= if assessment_content.mcq_answer == "D" then "green" else "default" end %>">D</div>
+				    <div class="answer-text"><%= assessment_content.answer_d.html_safe %></div>
+				  </div>
+
+					<br><br>
+					<b>Explanation:</b>
+				  <div class="assessment-answer">
+				    <div class="answer-icon-green"><%= assessment_content.mcq_answer %></div>
+				    <div class="assessment-text"><%= assessment_content.mcq_explanation.html_safe %></div>
+				  </div>
+
+				</div>
+
+	    </div>
+
+		<% end %>
+
+
+		<% @shortqs.each.with_index(1) do |assessment_content, i| %>
+			
+			<div class="tab-pane" id="shortq-<%= i %>">
+				
+				<div class="panel-green panel-title">
+					<%= @shortqs.count %> Short Qs
+
+					<div class="modal-actions pull-right">
+
+			      <% if i == @shortqs.count %>
+							<button type="button" class="btn btn-sm btn-modal pull-right" disabled="disabled"><i class="fa fa-arrow-right"></i></button>
+			    	<% else %>
+				    	<a href="#shortq-<%= i+1 %>" data-toggle="pill">
+				    		<button type="button" class="btn btn-sm btn-modal pull-right"><i class="fa fa-arrow-right"></i></button>
+				    	</a>
+				    <% end %>
+
+				    <a href="#all-qs" data-toggle="pill">
+			    		<button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;">All Qs</button>
+			    	</a>
+
+			    	<% if i == 1 %>
+			      	<button type="button" class="btn btn-sm btn-modal pull-right"  style="margin-right: -7px;"disabled="disabled"><i class="fa fa-arrow-left"></i></button>
+			    	<% else %>
+				      <a href="#shortq-<%= i-1 %>" data-toggle="pill">
+				    		<button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;"><i class="fa fa-arrow-left"></i></button>
+				    	</a>
+				    <% end %>
+
+				    <button type="button" class="btn btn-sm btn-modal-green pull-right" disabled="disabled"><%= assessment_content.practice_level %></button>
+
+				    <% if current_user.role == "Admin" %>
+				    	<%= link_to 'Edit', edit_assessment_content_path(assessment_content), class: "btn btn-sm btn-modal-green pull-right" %>
+				    <% end %>
+			    
+			    </div>
+			  </div>
+
+
+				<div class="col-sm-10 col-sm-offset-1 assessment-container">
+				  
+				  <div class="assessment-question">
+				  	<div class="question-icon"><%= i %></div>
+				  	<div class="assessment-text"><b><%= assessment_content.question.html_safe %></b></div>
+				  </div>
+					
+					<b>Answer:</b>
+				  <div class="assessment-answer">
+				    <div class="answer-icon-mark">1m</div>
+				    <div class="assessment-text"><%= assessment_content.answer_a.html_safe %></div>
+				  </div>
+				  <div class="assessment-answer">
+				    <div class="answer-icon-mark">1m</div>
+				    <div class="assessment-text"><%= assessment_content.answer_b.html_safe %></div>
+				  </div>
+
+				  <% if assessment_content.answer_c.length >10 %>
+				    <div class="assessment-answer">
+				      <div class="answer-icon-mark">1m</div>
+				      <div class="assessment-text"><%= assessment_content.answer_c.html_safe %></div>
+				    </div>
+				  <% end %>
+				  
+				</div>
+
+	    </div>
+
+		<% end %>
+
+
+		<% @longqs.each.with_index(1) do |assessment_content, i| %>
+			
+			<div class="tab-pane" id="longq-<%= i %>">
+				
+				<div class="panel-green panel-title">
+					<%= @longqs.count %> Long Qs
+
+					<div class="modal-actions pull-right">
+
+			      <% if i == @longqs.count %>
+							<button type="button" class="btn btn-sm btn-modal pull-right" disabled="disabled"><i class="fa fa-arrow-right"></i></button>
+			    	<% else %>
+				    	<a href="#longq-<%= i+1 %>" data-toggle="pill">
+				    		<button type="button" class="btn btn-sm btn-modal pull-right"><i class="fa fa-arrow-right"></i></button>
+				    	</a>
+				    <% end %>
+
+				    <a href="#all-qs" data-toggle="pill">
+			    		<button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;">All Qs</button>
+			    	</a>
+
+			    	<% if i == 1 %>
+			      	<button type="button" class="btn btn-sm btn-modal pull-right"  style="margin-right: -7px;"disabled="disabled"><i class="fa fa-arrow-left"></i></button>
+			    	<% else %>
+				      <a href="#longq-<%= i-1 %>" data-toggle="pill">
+				    		<button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;"><i class="fa fa-arrow-left"></i></button>
+				    	</a>
+				    <% end %>
+
+				    <button type="button" class="btn btn-sm btn-modal-green pull-right" disabled="disabled"><%= assessment_content.practice_level %></button>
+
+				    <% if current_user.role == "Admin" %>
+				    	<%= link_to 'Edit', edit_assessment_content_path(assessment_content), class: "btn btn-sm btn-modal-green pull-right" %>
+				    <% end %>
+			    
+			    </div>
+			  </div>
+
+
+				<div class="col-sm-10 col-sm-offset-1 assessment-container">
+				  
+				  <div class="assessment-question">
+				  	<div class="question-icon"><%= i %></div>
+				  	<div class="assessment-text"><b><%= assessment_content.question.html_safe %></b></div>
+				  </div>
+					
+					<b>Answer:</b>
+				  <div class="assessment-answer">
+				    <div class="answer-icon-mark">1m</div>
+				    <div class="assessment-text"><%= assessment_content.answer_a.html_safe %></div>
+				  </div>
+				  <div class="assessment-answer">
+				    <div class="answer-icon-mark">1m</div>
+				    <div class="assessment-text"><%= assessment_content.answer_b.html_safe %></div>
+				  </div>
+
+				  <% if assessment_content.answer_c.length >10 %>
+				    <div class="assessment-answer">
+				      <div class="answer-icon-mark">1m</div>
+				      <div class="assessment-text"><%= assessment_content.answer_c.html_safe %></div>
+				    </div>
+				  <% end %>
+
+				  <% if assessment_content.answer_d.length >10 %>
+				    <div class="assessment-answer">
+				      <div class="answer-icon-mark">1m</div>
+				      <div class="assessment-text"><%= assessment_content.answer_d.html_safe %></div>
+				    </div>
+				  <% end %>
+
+				  <% if assessment_content.mcq_explanation.length >10 %>
+				    <div class="assessment-answer">
+				      <div class="answer-icon-mark">1m</div>
+				      <div class="assessment-text"><%= assessment_content.mcq_explanation.html_safe %></div>
+				    </div>
+				  <% end %>
+
+				  <div class="assessment-text"><%= image_tag assessment_content.assessment_images.count, class: "img-responsive" %>
+				  
+				</div>
+
+	    </div>
+
+		<% end %>
+
 	</div>
-
-	<div class="panel-body">
-		<table class="table table-condensed">
-		  <thead>
-		    <tr>
-		      <th colspan="1"></th>
-		      <th>Question</th>
-		      <th>By</th>
-		      <th>Next Step</th>
-		      <th colspan="1"></th>
-		    </tr>
-		  </thead>
-
-		  <tbody>
-		    <% @mcqs.sort_by(&:id).each_with_index do |assessment_content, i| %>
-		      <tr>
-		        <td colspan="1"><%= i+1 %></td>
-		        <td><%= truncate(assessment_content.question.html_safe, length: 70) %></td>
-		        <td class="one-line-cell"><%= assessment_content.teacher_name %></td>
-		        <td class="one-line-cell <%= if assessment_content.next_step == "Completed" then "panel-green" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-red" end %>"><%= assessment_content.next_step %></td>
-		        <td><%= link_to '<i class="fa fa-arrow-right"></a>'.html_safe, edit_assessment_content_path(assessment_content) %></td>
-		      </tr>
-		    <% end %>
-		  </tbody>
-		</table>
-	</div>
-
-	<div class="panel-secondary">
-	  <div class="panel-title">
-		  <%= @shortqs.count %> Short Questions
-	  </div>
-	</div>
-
-	<div class="panel-body">
-		<table class="table table-condensed">
-		  <thead>
-		    <tr>
-		      <th colspan="1"></th>
-		      <th>Question</th>
-		      <th>By</th>
-		      <th>Next Step</th>
-		      <th colspan="1"></th>
-		    </tr>
-		  </thead>
-
-		  <tbody>
-		    <% @shortqs.sort_by(&:id).each_with_index do |assessment_content, i| %>
-		      <tr>
-		        <td colspan="1"><%= i+1 %></td>
-		        <td><%= truncate(assessment_content.question.html_safe, length: 70) %></td>
-		        <td class="one-line-cell"><%= assessment_content.teacher_name %></td>
-		        <td class="one-line-cell <%= if assessment_content.next_step == "Completed" then "panel-green" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-red" end %>"><%= assessment_content.next_step %></td>
-		        <td><%= link_to '<i class="fa fa-arrow-right"></a>'.html_safe, edit_assessment_content_path(assessment_content) %></td>
-		      </tr>
-		    <% end %>
-		  </tbody>
-		</table>
-	</div>
-
-	<div class="panel-secondary">
-	  <div class="panel-title">
-		  <%= @longqs.count %> Long Questions
-	  </div>
-	</div>
-
-	<div class="panel-body">
-		<table class="table table-condensed">
-		  <thead>
-		    <tr>
-		      <th colspan="1"></th>
-		      <th>Question</th>
-		      <th>By</th>
-		      <th>Next Step</th>
-		      <th colspan="1"></th>
-		    </tr>
-		  </thead>
-
-		  <tbody>
-		    <% @longqs.sort_by(&:id).each_with_index do |assessment_content, i| %>
-		      <tr>
-		        <td colspan="1"><%= i+1 %></td>
-		        <td><%= truncate(assessment_content.question.html_safe, length: 70) %></td>
-		        <td class="one-line-cell"><%= assessment_content.teacher_name %></td>
-		        <td class="one-line-cell <%= if assessment_content.next_step == "Completed" then "panel-green" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-red" end %>"><%= assessment_content.next_step %></td>
-		        <td><%= link_to '<i class="fa fa-arrow-right"></a>'.html_safe, edit_assessment_content_path(assessment_content) %></td>
-		      </tr>
-		    <% end %>
-		  </tbody>
-		</table>
-	</div>
-
 </div>
+
+<script type="text/javascript">
+	// Javascript to enable link to tab
+	var url = document.location.toString();
+	if (url.match('#')) {
+	    $('.tab-pane a[href=#'+url.split('#')[1]+']').tab('show') ;
+	    // window.location.hash = e.target.hash;
+	} 
+
+	// Change hash for page-reload
+	$('.tab-pane a').on('shown.bs.tab', function (e) {
+	    window.location.hash = e.target.hash;
+	    $('html,body').scrollTop();
+	})
+</script>

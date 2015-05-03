@@ -11,10 +11,12 @@ class AssessmentContentsController < ApplicationController
   def new
     @assessment_content = AssessmentContent.new(video_content_id: params[:video_content_id], content_type: params[:content_type], teacher_name: current_user.name)
     @video_content = VideoContent.find_by(id: params[:video_content_id])
+    session[:return_to] = request.referer
   end
 
   def edit
     @video_content = @assessment_content.video_content
+    session[:return_to] = request.referer
   end
 
   def create
@@ -22,7 +24,7 @@ class AssessmentContentsController < ApplicationController
 
     respond_to do |format|
       if @assessment_content.save
-        format.html { redirect_to @assessment_content, notice: 'Assessment content was successfully created.' }
+        format.html { redirect_to session.delete(:return_to), notice: 'Assessment content was successfully created.' }
       else
         format.html { render action: 'new' }
       end
@@ -35,7 +37,7 @@ class AssessmentContentsController < ApplicationController
 
     respond_to do |format|
       if @assessment_content.update(assessment_content_params)
-        format.html { redirect_to @assessment_content, notice: 'Assessment content was successfully updated.' }
+        format.html { redirect_to session.delete(:return_to), notice: 'Assessment content was successfully updated.' }
       else
         format.html { render action: 'edit' }
       end
