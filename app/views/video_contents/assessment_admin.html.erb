@@ -56,7 +56,7 @@
   			        <td><%= assessment_content.practice_level %></td>
   			        <td class="one-line-cell"><%= assessment_content.teacher_name %></td>
   			        <td class="one-line-cell <%= if assessment_content.next_step == "Completed" then "panel-green" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-red" end %>"><%= assessment_content.next_step %></td>
-  			        <td><a href="#mcq-<%= i %>" data-toggle="tab"><i class="fa fa-arrow-right"></a></td>
+  			        <td><a href="#mcq-<%= assessment_content.id %>" data-toggle="tab"><i class="fa fa-arrow-right"></a></td>
   			      </tr>
   			    <% end %>
   			  </tbody>
@@ -90,7 +90,7 @@
   			        <td><%= assessment_content.practice_level %></td>
   			        <td class="one-line-cell"><%= assessment_content.teacher_name %></td>
   			        <td class="one-line-cell <%= if assessment_content.next_step == "Completed" then "panel-green" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-red" end %>"><%= assessment_content.next_step %></td>
-  			        <td><a href="#shortq-<%= i %>" data-toggle="tab"><i class="fa fa-arrow-right"></a></td>
+  			        <td><a href="#shortq-<%= assessment_content.id %>" data-toggle="tab"><i class="fa fa-arrow-right"></a></td>
   			      </tr>
   			    <% end %>
   			  </tbody>
@@ -124,7 +124,7 @@
   			        <td><%= assessment_content.practice_level %></td>
   			        <td class="one-line-cell"><%= assessment_content.teacher_name %></td>
   			        <td class="one-line-cell <%= if assessment_content.next_step == "Completed" then "panel-green" elsif assessment_content.next_step == "Content Review-Refine" then "panel-orange" else "panel-red" end %>"><%= assessment_content.next_step %></td>
-  			        <td><a href="#longq-<%= i %>" data-toggle="tab"><i class="fa fa-arrow-right"></a></td>
+  			        <td><a href="#longq-<%= assessment_content.id %>" data-toggle="tab"><i class="fa fa-arrow-right"></a></td>
   			      </tr>
   			    <% end %>
   			  </tbody>
@@ -137,7 +137,7 @@
 
 		<% @mcqs.each.with_index(1) do |assessment_content, i| %>
 			
-			<div class="tab-pane" id="mcq-<%= i %>">
+			<div class="tab-pane" id="mcq-<%= assessment_content.id %>">
 				
 				<div class="panel-green panel-title">
 					<%= @mcqs.count %> MCQs
@@ -226,7 +226,7 @@
 
 		<% @shortqs.each.with_index(1) do |assessment_content, i| %>
 			
-			<div class="tab-pane" id="shortq-<%= i %>">
+			<div class="tab-pane" id="shortq-<%= assessment_content.id %>">
 				
 				<div class="panel-green panel-title">
 					<%= @shortqs.count %> Short Qs
@@ -310,7 +310,7 @@
 
 		<% @longqs.each.with_index(1) do |assessment_content, i| %>
 			
-			<div class="tab-pane" id="longq-<%= i %>">
+			<div class="tab-pane" id="longq-<%= assessment_content.id %>">
 				
 				<div class="panel-green panel-title">
 					<%= @longqs.count %> Long Qs
