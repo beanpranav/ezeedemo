@@ -418,6 +418,7 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
 	max-width: 176px;  // 44 x 4
 	margin: 30px auto;
 }
+.assessment-image { padding: 10px 0; }
 
 .assessment-question { margin: 0 0 25px; }
 .assessment-answer { margin: 5px 0px; background-color: $secondary-bg; }
@@ -427,7 +428,7 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
   line-height: 1.65;
 }
 
-.mcq-option { margin: 5px 45px; }
+.mcq-option { margin: 5px 47px; }
 .mcq-feedback:hover { background-color: $secondary-bg; }
 .mcq-feedback { 
 	border: 0; 

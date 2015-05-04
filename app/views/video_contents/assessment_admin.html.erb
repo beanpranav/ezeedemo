@@ -1,6 +1,6 @@
 <div class="secondary-nav secondary-nav-invert">
     
-  <%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-invert pull-left">'.html_safe, video_content_path(@video_content) %></i>
+  <%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-invert pull-left">'.html_safe, video_contents_path %></i>
   <h2 class="font-invert"><b><%= @video_content.name %></b></h2>
   <h3 class="font-invert"><%= @all_assessments.count %> Assessments</h3>
 	
@@ -175,10 +175,17 @@
 
 
 				<div class="col-sm-10 col-sm-offset-1 assessment-container">
+
+					<% images = assessment_content.assessment_images %>
+					<% question_image = images.select { |x| x.image_type == "Question Image" } %>
+					<% answer_image = images.select { |x| x.image_type == "Answer Image" } %>
 				  
 				  <div class="assessment-question">
 				  	<div class="question-icon"><%= i %></div>
-				  	<div class="assessment-text"><b><%= assessment_content.question.html_safe %></b></div>
+				  	<div class="assessment-text">
+				  		<b><%= assessment_content.question.html_safe %></b>
+				  		<%= image_tag question_image[0].image, class: "img-responsive assessment-image" if question_image.count == 1 %>
+				  	</div>
 				  </div>
 					
 					
@@ -204,7 +211,10 @@
 					<b>Explanation:</b>
 				  <div class="assessment-answer">
 				    <div class="answer-icon-green"><%= assessment_content.mcq_answer %></div>
-				    <div class="assessment-text"><%= assessment_content.mcq_explanation.html_safe %></div>
+				    <div class="assessment-text">
+				    	<%= assessment_content.mcq_explanation.html_safe %>
+				    	<%= image_tag answer_image[0].image, class: "img-responsive assessment-image" if answer_image.count == 1 %>
+				    </div>
 				  </div>
 
 				</div>
@@ -255,12 +265,26 @@
 
 				<div class="col-sm-10 col-sm-offset-1 assessment-container">
 				  
+				  <% images = assessment_content.assessment_images %>
+					<% question_image = images.select { |x| x.image_type == "Question Image" } %>
+					<% answer_image = images.select { |x| x.image_type == "Answer Image" } %>
+				  
 				  <div class="assessment-question">
 				  	<div class="question-icon"><%= i %></div>
-				  	<div class="assessment-text"><b><%= assessment_content.question.html_safe %></b></div>
+				  	<div class="assessment-text">
+				  		<b><%= assessment_content.question.html_safe %></b>
+				  		<%= image_tag question_image[0].image, class: "img-responsive assessment-image" if question_image.count == 1 %>
+				  	</div>
 				  </div>
 					
 					<b>Answer:</b>
+					<% if answer_image.count == 1 %>
+						<div class="assessment-answer">
+					    <div class="answer-icon-mark">1m</div>
+					    <%= image_tag answer_image[0].image, class: "img-responsive assessment-image" %>
+					  </div>
+					<% end %>
+
 				  <div class="assessment-answer">
 				    <div class="answer-icon-mark">1m</div>
 				    <div class="assessment-text"><%= assessment_content.answer_a.html_safe %></div>
@@ -270,7 +294,7 @@
 				    <div class="assessment-text"><%= assessment_content.answer_b.html_safe %></div>
 				  </div>
 
-				  <% if assessment_content.answer_c.length >10 %>
+				  <% if assessment_content.answer_c.length >10 and answer_image.count == 0 %>
 				    <div class="assessment-answer">
 				      <div class="answer-icon-mark">1m</div>
 				      <div class="assessment-text"><%= assessment_content.answer_c.html_safe %></div>
@@ -325,12 +349,27 @@
 
 				<div class="col-sm-10 col-sm-offset-1 assessment-container">
 				  
+				  <% images = assessment_content.assessment_images %>
+					<% question_image = images.select { |x| x.image_type == "Question Image" } %>
+					<% answer_image = images.select { |x| x.image_type == "Answer Image" } %>
+				  
 				  <div class="assessment-question">
 				  	<div class="question-icon"><%= i %></div>
-				  	<div class="assessment-text"><b><%= assessment_content.question.html_safe %></b></div>
+				  	<div class="assessment-text">
+				  		<b><%= assessment_content.question.html_safe %></b>
+				  		<%= image_tag question_image[0].image, class: "img-responsive assessment-image" if question_image.count == 1 %>
+				  	</div>
 				  </div>
 					
 					<b>Answer:</b>
+					
+					<% if answer_image.count == 1 %>
+						<div class="assessment-answer">
+					    <div class="answer-icon-mark"><%= if assessment_content.answer_c.length >10 then "2m" else "3m" end %></div>
+					    <%= image_tag answer_image[0].image, class: "img-responsive assessment-image" %>
+					  </div>
+					<% end %>
+
 				  <div class="assessment-answer">
 				    <div class="answer-icon-mark">1m</div>
 				    <div class="assessment-text"><%= assessment_content.answer_a.html_safe %></div>
@@ -347,21 +386,19 @@
 				    </div>
 				  <% end %>
 
-				  <% if assessment_content.answer_d.length >10 %>
+				  <% if assessment_content.answer_d.length >10 and answer_image.count == 0 %>
 				    <div class="assessment-answer">
 				      <div class="answer-icon-mark">1m</div>
 				      <div class="assessment-text"><%= assessment_content.answer_d.html_safe %></div>
 				    </div>
 				  <% end %>
 
-				  <% if assessment_content.mcq_explanation.length >10 %>
+				  <% if assessment_content.mcq_explanation.length >10 and answer_image.count == 0 %>
 				    <div class="assessment-answer">
 				      <div class="answer-icon-mark">1m</div>
 				      <div class="assessment-text"><%= assessment_content.mcq_explanation.html_safe %></div>
 				    </div>
 				  <% end %>
-
-				  <div class="assessment-text"><%= image_tag assessment_content.assessment_images.count, class: "img-responsive" %>
 				  
 				</div>
 
