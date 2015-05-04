@@ -1,5 +1,7 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
+  before_action :validate_admin, except: [:show, :improve_predictive_score]
+  before_action :validate_user, only: [:improve_predictive_score]
 
   def index
     @subjects = Subject.all

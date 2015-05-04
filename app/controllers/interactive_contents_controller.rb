@@ -1,5 +1,6 @@
 class InteractiveContentsController < ApplicationController
   before_action :set_interactive_content, only: [:show, :edit, :update, :destroy]
+  before_action :validate_admin
 
   def index
     @interactive_contents = InteractiveContent.all

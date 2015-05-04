@@ -11,7 +11,7 @@ class ApplicationController < ActionController::Base
 
   before_filter :configure_permitted_parameters, if: :devise_controller?
 
-  helper_method :cpi_calculator, :chapter_studied, :subject_studied, :predictive_score_calculator, :term_weight
+  helper_method :validate_admin, :cpi_calculator, :chapter_studied, :subject_studied, :predictive_score_calculator, :term_weight
 
   protected
 
@@ -28,6 +28,26 @@ class ApplicationController < ActionController::Base
   # def current_subdomain
   #   @current_subdomain = request.subdomains.first
   # end
+
+  # validation
+  def validate_admin
+    if user_signed_in?
+      unless current_user.role == "Admin"
+        flash[:notice] = '<b>Sorry!</b> You need administrative access.'.html_safe
+        redirect_to root_path
+      end
+    else
+      flash[:notice] = '<b>Sorry!</b> You need administrative access.'.html_safe
+      redirect_to root_path
+    end
+  end
+
+  def validate_user
+    unless user_signed_in?
+      flash[:notice] = '<b>Sorry!</b> You need to be logged-in to access this page.'.html_safe
+      redirect_to root_path
+    end
+  end
 
   # Chapter Calucations
   def cpi_calculator(smart_progress_ratio, concept_progress_ratio, mcq_progress_ratio, subjectiveq_progress_ratio)

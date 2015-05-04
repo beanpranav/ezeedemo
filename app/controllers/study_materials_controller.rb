@@ -1,5 +1,6 @@
 class StudyMaterialsController < ApplicationController
   before_action :set_study_material, only: [:show, :edit, :update, :destroy]
+  before_action :validate_admin
 
   def index
     @study_materials = StudyMaterial.all

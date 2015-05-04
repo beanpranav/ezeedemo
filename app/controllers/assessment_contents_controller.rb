@@ -1,5 +1,6 @@
 class AssessmentContentsController < ApplicationController
   before_action :set_assessment_content, only: [:show, :edit, :update, :destroy]
+  before_action :validate_admin
 
   def index
     @assessment_contents = AssessmentContent.all

@@ -1,5 +1,6 @@
 class VideoContentsController < ApplicationController
   before_action :set_video_content, only: [:show, :edit, :update, :destroy]
+  before_action :validate_admin
 
   def index
     @video_contents = VideoContent.all

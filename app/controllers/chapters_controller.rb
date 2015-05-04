@@ -1,5 +1,8 @@
 class ChaptersController < ApplicationController
   before_action :set_chapter, only: [:show, :edit, :update, :destroy]
+  before_action :validate_admin, only: [:index, :new, :create, :edit, :update, :destroy]
+  before_action :validate_user, only: [:save_user_study_progress, :save_user_assessment_progress]
+
 
   def index
     @chapters = Chapter.all
@@ -17,13 +20,13 @@ class ChaptersController < ApplicationController
     @all_assessments = []
     @concept_materials.each do |material| 
       if material.video_content != nil && material.video_content.assessment_contents != nil
-        @all_assessments += material.video_content.assessment_contents.pluck(:id, :content_type, :mcq_answer)
+        @all_assessments += material.video_content.assessment_contents.pluck(:id, :content_type, :mcq_answer, :practice_level)
       end
     end
 
-    @mcqs = @all_assessments.select { |x| x[1] == "MCQ" }
-    @shortqs = @all_assessments.select { |x| x[1] == "ShortQ" }
-    @longqs = @all_assessments.select { |x| x[1] == "LongQ" }
+    @mcqs = @all_assessments.select { |x| x[1] == "MCQ" and x[3] == "Level 1" }
+    @shortqs = @all_assessments.select { |x| x[1] == "ShortQ" and x[3] == "Level 1" }
+    @longqs = @all_assessments.select { |x| x[1] == "LongQ" and x[3] == "Level 1" }
 
 
     if user_signed_in?
