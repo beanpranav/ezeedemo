@@ -1,3 +1,10 @@
+<!-- Include for MathJax Render -->
+<script type="text/x-mathjax-config">
+	MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<%= mathjax_tag %>
+	
+
 <div class="secondary-nav secondary-nav-invert">
     
   <%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-invert pull-left">'.html_safe, video_contents_path %></i>

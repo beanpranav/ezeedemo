@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :content_tags
+
   mathjax 'mathjax'
 
   resources :interactive_contents
@@ -9,6 +11,8 @@ Rails.application.routes.draw do
   resources :video_contents do
     member do
       get :assessment_admin
+      post 'add_tag'
+      post 'remove_tag'
     end
   end
 

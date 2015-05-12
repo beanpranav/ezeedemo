@@ -7,6 +7,11 @@ class VideoContentsController < ApplicationController
   end
 
   def show
+    @content_tags = ContentTag.all
+    @board_tags = @content_tags.select { |x| x.tag_type == "Board" }
+    @standard_tags = @content_tags.select { |x| x.tag_type == "Standard" }
+    @topic_tags = @content_tags.select { |x| x.tag_type == "Topic" }
+    @tag_collections = [[@board_tags,"Board"], [@standard_tags,"Standard"], [@topic_tags,"Topic"]]
   end
 
   def assessment_admin
@@ -51,6 +56,22 @@ class VideoContentsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to video_contents_url }
     end
+  end
+
+  def add_tag
+    t = TaggedValue.new video_content_id: params[:video_content_id], content_tag_id: params[:content_tag_id]
+    t.save
+
+    flash[:notice] = 'Video successfully tagged'
+    redirect_to request.referer
+  end
+
+  def remove_tag
+    t = TaggedValue.find_by video_content_id: params[:video_content_id], content_tag_id: params[:content_tag_id]
+    t.delete
+
+    flash[:notice] = 'Video tag successfully removed'
+    redirect_to request.referer
   end
 
   private

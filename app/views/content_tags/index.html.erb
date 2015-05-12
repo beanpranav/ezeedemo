@@ -1,0 +1,26 @@
+<h1>Listing content_tags</h1>
+<%= link_to 'New Content tag', new_content_tag_path %>
+<br><br>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Tag name</th>
+      <th>Tag type</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @content_tags.each do |content_tag| %>
+      <tr>
+        <td><%= content_tag.tag_name %></td>
+        <td><%= content_tag.tag_type %></td>
+        <td><%= link_to 'Show', content_tag %></td>
+        <td><%= link_to 'Edit', edit_content_tag_path(content_tag) %></td>
+        <td><%= link_to 'Delete', content_tag, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

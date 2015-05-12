@@ -4,4 +4,7 @@ class VideoContent < ActiveRecord::Base
 
 	has_many :study_materials
 	has_many :assessment_contents
+
+	has_many :tagged_values, dependent: :destroy
+  has_many :content_tags, through: :tagged_values
 end

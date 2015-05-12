@@ -1,0 +1,41 @@
+<div class="dropdown pull-left">
+  <div class="dropdown-toggle btn btn-sm btn-modal-primary" data-toggle="dropdown" style="margin-top:2px;">Add <i class="fa fa-fw fa-tag"></i></div>
+  
+  <ul class="dropdown-menu pull-left" style="width: 420px;">
+		<li>
+			<% @tag_collections.each do |tag_collection| %>
+
+        <ul class="list-unstyled col-sm-4" style="padding: 0 5px;">
+        	<li class="dropdown-header"><%= tag_collection[1] %></li>
+    			<% tag_collection[0].each do |tag| %>
+		    		<% if @video_content.tagged_values.detect { |x| x.content_tag_id == tag.id } %> 
+		      		<!-- Already Tagged -->
+			        <li>
+			        	<%= form_tag "/video_contents/#{@video_content.id}/remove_tag" do %>
+				          <%= hidden_field_tag :video_content_id, @video_content.id %>
+				          <%= hidden_field_tag :content_tag_id, tag.id %>
+				          <%= submit_tag tag.tag_name, class: "btn btn-sm btn-block btn-link feedback-active" %>
+			        	<% end %>
+			        </li>
+		        <% else %> 
+		        	<!-- Not Tagged -->
+			        <li>
+				        <%= form_tag "/video_contents/#{@video_content.id}/add_tag" do %>
+				        	<%= hidden_field_tag :video_content_id, @video_content.id %>
+				        	<%= hidden_field_tag :content_tag_id, tag.id %>
+				          <%= submit_tag tag.tag_name, class: "btn btn-sm btn-block btn-link feedback-inactive" %>
+			        	<% end %>
+			        </li>
+		        <% end %>
+		    	<% end %>
+		    </ul>
+		  
+			<% end %>
+		</li>
+	</ul>
+</div>
+
+<% @video_content.tagged_values.each do |tagged_value| %>
+  <% tag = @content_tags.detect { |x| x.id == tagged_value.content_tag_id } %>
+  <div class="btn btn-sm btn-modal-green pull-left" disabled="disabled"><%= tag.tag_name %></div>
+<% end %>

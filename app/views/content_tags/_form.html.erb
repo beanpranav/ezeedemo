@@ -1,0 +1,25 @@
+<%= form_for(@content_tag) do |f| %>
+  <% if @content_tag.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@content_tag.errors.count, "error") %> prohibited this content_tag from being saved:</h2>
+
+      <ul>
+      <% @content_tag.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :tag_name %><br>
+    <%= f.text_area :tag_name %>
+  </div>
+  <div class="field">
+    <%= f.label :tag_type %><br>
+    <%= f.text_field :tag_type %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
