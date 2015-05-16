@@ -1,25 +1,19 @@
-<div class="content-container center">
+<div class="content-container">
 		<div class="panel-secondary" style="margin-bottom:20px;">
 	    <div class="panel-title">
-		  	Your Term 2 Progress
+		  	Study Progress
 	    </div>
 		</div>
 
 	<div class="row" style="padding-bottom:40px;">
 
-		<div class="col-xs-12 col-sm-4">
-			<h2 class="font-primary" style="padding:15px;"><b>Predictive Score</b></h2>
-			<div class="spi-score-big"><%= @term_2_spi[:spi] %></div>
-			<h3 class="font-invert" style="margin-top:-25px;">out of 90</h3>
-		</div>
-
-		<div class="col-xs-12 col-sm-4">
-			<h2 class="font-primary" style="padding:15px;"><b>Subject Studied</b></h2>
+		<div class="col-xs-12 col-sm-4 center">
+			<h2 class="font-primary" style="padding:15px;"><b><%= @subject.name %></b></h2>
 			<div class="spi-score-big-default"><%= @term_2_studied %></div>
-			<h3 class="font-primary" style="margin-top:-25px;">percent</h3>
+			<h3 class="font-primary" style="margin-top:-25px;">% studied</h3>
 		</div>
 
-		<div class="col-xs-12 col-sm-4">
+		<div class="col-xs-12 col-sm-8">
 			<h2 class="font-primary" style="padding:15px 15px 7px;"><b>Mock FA & SA</b></h2>
 			
 			<div class="spi-tests">
@@ -38,30 +32,36 @@
 	</div>
 </div>
 
-	<div class="content-container" style="height:150px;">
-		<div class="panel-secondary" style="margin-bottom:10px;">
-	    <div class="panel-title center">
-		  	Our Recommendations
+	<div class="content-container">
+		<div class="panel-secondary" style="margin-bottom:20px;">
+	    <div class="panel-title">
+		  	Exam Prep
 	    </div>
 		</div>
 
-		<% 2.times do |i| %>
-			<div class="col-xs-12 col-sm-6">
-				<div class="spi pull-left" style="width:140px;">
-					<div class="spi-score"><%= @term_2_spi[:priortization_order][i][1].round(0) %></div>
-					<h3>increase</h3>
-				</div>
-				<% chapter = @term_2_chapters.find { |x| x.id == @term_2_spi[:priortization_order][i][0] } %>
-				<h2 style="margin: 20px 0 0 -30px;"><%= chapter.name %></h2>
+		<div class="row" style="padding-bottom:25px;">
+			<div class="col-xs-12 col-sm-4 center">
+				<h2 class="font-primary" style="padding:15px;"><b>Your Predictive Score</b></h2>
+				<div class="spi-score-big"><%= @term_2_spi[:spi] %></div>
+				<h3 class="font-invert" style="margin-top:-25px;">out of 90</h3>
 			</div>
-		<% end %>
 
-
-		<div class="col-xs-12 col-sm-6">
+			<div class="col-xs-12 col-sm-8">
+				<h2 class="font-primary" style="padding:15px;"><b>Our recommendation is to focus on</b></h2>
+				<% 2.times do |i| %>
+					<% unless @term_2_spi[:priortization_order][i][1].round(0) == 0 %>
+						<div>
+							<div class="spi" style="width:160px; height:58px; margin-top:0;">
+								<div class="spi-score" style="width:72px;">+ <%= @term_2_spi[:priortization_order][i][1].round(0) %></div>
+							</div>
+							<% chapter = @term_2_chapters.find { |x| x.id == @term_2_spi[:priortization_order][i][0] } %>
+							<h2 style="margin: -48px 0 24px 110px;">Ch <%= chapter.chapterNumber %>: <%= chapter.name %></h2>
+						</div>
+					<% end %>	
+				<% end %>
+			</div>
 		</div>
-
 	</div>
-
 
 
 <div class="content-container">
