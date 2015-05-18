@@ -1,6 +1,6 @@
 <div class="secondary-nav secondary-nav-invert center">
   <h2 class="font-invert"><b>Summative Assessment - <%= params[:term] %></b></h2>
-  <h3 class="font-invert"><%= @subject.standard %>th <%= @subject.board %>: <%= @subject.name %></h3>
+  <h3 class="font-invert"><%= @subject.name %>: Mock Test <%= params[:attempt] %></h3>
 </div>
 
 <div class="content-container row">
@@ -9,7 +9,7 @@
 		<p class="pull-left"><b>Time allowed:</b> 3 hours</p>
 		<p class="pull-right"><b>Maximum Marks:</b> 90</p>
 
-		<div style="padding:45px 0 25px;">
+		<div style="padding:45px 0 10px;">
 			<b>General Instructions:</b>
 			<ol style="margin-top:10px;">
 				<%= $mock_sa_specs["#{@subject.name.downcase}"][:instructions].html_safe %>

@@ -11,20 +11,22 @@
     </div>
   <% end %>
 
-  <% if params[:action] == "new" %>
-    <%= f.hidden_field :user_id %>
-    <%= f.hidden_field :subject_id %>
-    <%= f.hidden_field :term %>
-    <%= f.hidden_field :attempt %>
-    <%= f.hidden_field :score %>
-    <div class="actions center">
-      <%= f.submit "BEGIN MOCK SA", class:"btn btn-block btn-green" %>
-    </div>
-  <% else %>
-    <%= f.label :score %>
-    <%= f.number_field :score %>
-    <div class="actions cwnter">
-      <%= f.submit "SUBMIT MOCK SA SCORE", class:"btn btn-block btn-green" %>
-    </div>
-  <% end %>
+  <div class="center">
+    <% if params[:action] == "new" %>
+      <%= f.hidden_field :user_id %>
+      <%= f.hidden_field :subject_id %>
+      <%= f.hidden_field :term %>
+      <%= f.hidden_field :attempt %>
+      <%= f.hidden_field :score %>
+      <div class="assessment-sections-container">
+        <%= f.submit "BEGIN MOCK SA", class:"btn btn-block btn-green", style:"width:250px;" %>
+      </div>
+    <% else %>
+      <div class="assessment-sections-container">
+        <%= f.label :score, "My Score (out of 90)" %><br>
+        <%= f.number_field :score, class: "form-control" %>
+        <%= f.submit "SUBMIT MOCK SA SCORE", class:"btn btn-green", style:"width:250px;" %>
+      </div>
+    <% end %>
+  </div>
 <% end %>

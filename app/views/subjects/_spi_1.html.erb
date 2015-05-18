@@ -21,7 +21,7 @@
 						
 						<div class="spi-tests">
 							<% 4.times do |i| %>
-								<i class="fa fa-lg fa-lock spi-test-lock"></i>
+								<i class="fa fa-lg fa-rocket spi-test-lock"></i>
 							<% end %>
 						</div>
 
@@ -55,6 +55,7 @@
 								<% if sa.score == -1 %>
 								<!-- not yet completed -->
 									<i class="fa fa-lg spi-test-lock"><b><%= link_to "?", assessment_mock_sa_path(sa), class: "supress-a" %></b></i>
+									<% @user_term_1_mock_sas_in_progress = 1 %>
 								<% elsif sa.score == 0 %>
 								<!-- completed, not scored -->
 									<i class="fa fa-lg spi-test-lock-orange"><b><%= link_to "?", assessment_mock_sa_path(sa), class: "supress-a", style: "color:white" %></b></i>
@@ -64,7 +65,7 @@
 								<% end %>
 							<% end %>
 							<% (4-@user_term_1_mock_sas.count).times do |i| %>
-								<i class="fa fa-lg fa-lock spi-test-lock"></i>
+								<i class="fa fa-lg fa-rocket spi-test-lock"></i>
 							<% end %>
 						</div>
 
@@ -74,7 +75,11 @@
 								<%= link_to "TAKE MOCK SA", "#", class: "btn btn-orange active", disabled: "disabled" %>
 							</div>
 						<% else %>
-							<%= link_to "TAKE MOCK SA #{@user_term_1_mock_sas.count+1}", { controller: "assessment_mock_sas", action: "new", subject_id: @subject.id, user_id: current_user.id, term: 1, attempt: @user_term_1_mock_sas.count+1, score: -1 }, class: "btn btn-orange btn-block" %>
+							<% if @user_term_1_mock_sas_in_progress == 0 %>
+								<%= link_to "TAKE MOCK SA #{@user_term_1_mock_sas.count+1}", { controller: "assessment_mock_sas", action: "new", subject_id: @subject.id, user_id: current_user.id, term: 1, attempt: @user_term_1_mock_sas.count+1, score: -1 }, class: "btn btn-orange btn-block" %>
+							<% else %>
+								<button class="btn btn-orange btn-block active" disabled="disabled"> MOCK SA <%= @user_term_1_mock_sas.count %> IN PROGRESS</button>
+							<% end %>
 						<% end %>
 
 				</div>

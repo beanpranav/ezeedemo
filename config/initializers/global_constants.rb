@@ -62,12 +62,12 @@ $mock_sa_specs = {
 											<li>Questions 19 to 24 in section A are five marks questions. These are to be answered in about 70 words each.</li>
 											<li>Questions 25 to 27 in section B are 2 marks questions and Questions 28 to 36 are multiple choice questions based on practical skills. Each question of multiple choice questions is a one mark question. You are to select one most appropriate response out of the four provided to you.</li>",
 								:paper_pattern => {
-											"Section A - 1 mark questions" => {:marks => 1, :practical_skills => false, :count => 3, :question_no => 1 },
-											"Section A - 2 marks questions" => {:marks => 2, :practical_skills => false, :count => 3, :question_no => 4 },
-											"Section A - 3 marks questions" => {:marks => 3, :practical_skills => false, :count => 12, :question_no => 7 },
-											"Section A - 5 marks questions" => {:marks => 5, :practical_skills => false, :count => 6, :question_no => 19 },
-											"Section B - 2 marks MCQs" => {:marks => 2, :practical_skills => true, :count => 3, :question_no => 25 },
-											"Section B - 1 mark MCQs" => {:marks => 1, :practical_skills => true, :count => 19, :question_no => 28 }
+											"Section A - 1 mark each" => {:marks => 1, :practical_skills => false, :count => 3, :question_no => 1 },
+											"Section A - 2 marks each" => {:marks => 2, :practical_skills => false, :count => 3, :question_no => 4 },
+											"Section A - 3 marks each" => {:marks => 3, :practical_skills => false, :count => 12, :question_no => 7 },
+											"Section A - 5 marks each" => {:marks => 5, :practical_skills => false, :count => 6, :question_no => 19 },
+											"Section B - 2 marks each" => {:marks => 2, :practical_skills => true, :count => 3, :question_no => 25 },
+											"Section B - 1 mark each" => {:marks => 1, :practical_skills => true, :count => 19, :question_no => 28 }
 							}
 	},
 	"maths" => {
@@ -79,10 +79,10 @@ $mock_sa_specs = {
 											<li>Questions 21 to 31 in section D are four marks questions.</li>
 											<li>There is no overall choice in the question paper. Use of calculators is not permitted.</li>",
 							:paper_pattern => {
-											"Section A - 1 mark MCQs" => {:marks => 1, :practical_skills => false, :count => 4, :question_no => 1 },
-											"Section B - 2 marks questions" => {:marks => 2, :practical_skills => false, :count => 6, :question_no => 5 },
-											"Section C - 3 marks questions" => {:marks => 3, :practical_skills => false, :count => 10, :question_no => 11 },
-											"Section D - 4 marks questions" => {:marks => 4, :practical_skills => false, :count => 11, :question_no => 21 }
+											"Section A - 1 mark each" => {:marks => 1, :practical_skills => false, :count => 4, :question_no => 1 },
+											"Section B - 2 marks each" => {:marks => 2, :practical_skills => false, :count => 6, :question_no => 5 },
+											"Section C - 3 marks each" => {:marks => 3, :practical_skills => false, :count => 10, :question_no => 11 },
+											"Section D - 4 marks each" => {:marks => 4, :practical_skills => false, :count => 11, :question_no => 21 }
 							}
 	}
 }

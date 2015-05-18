@@ -7,6 +7,17 @@ class AssessmentMockSasController < ApplicationController
 
   def show
     @subject = Subject.find_by(id: @assessment_mock_sa.subject_id)
+    
+    @paper_sections = $mock_sa_specs["#{@subject.name.downcase}"][:paper_pattern].keys
+    @paper_section_specs = $mock_sa_specs["#{@subject.name.downcase}"][:paper_pattern].values
+
+    @all_assessments = @assessment_mock_sa.assessment_contents
+    @sections= []
+    
+    @paper_section_specs.each_with_index do |section,i|
+      @sections[i] = @all_assessments.select { |x| x.marks == section[:marks] and x.practical_skills == section[:practical_skills] }
+    end
+
   end
 
   def new
@@ -15,6 +26,7 @@ class AssessmentMockSasController < ApplicationController
   end
 
   def edit
+    @subject = Subject.find_by(id: @assessment_mock_sa.subject_id)
   end
 
   def create

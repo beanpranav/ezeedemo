@@ -337,6 +337,8 @@ td { text-align: left; }
 .btn-red { color: $brand-red; border: 2px solid $brand-red; }
 .btn-red:hover, .btn-red:focus, .btn-red.active { background-color: $brand-red; color: white; box-shadow: none; }
 .btn-disabled { color: $body-border; border: 2px solid $body-bg; }
+.btn-secondary { color: $brand-primary; }
+.btn-secondary.active { border: 2px solid $brand-primary; }
 
 .btn-sm { padding: 4px 9px; }
 .btn-modal, .btn-modal-red, .btn-modal-orange, .btn-modal-green { 
@@ -419,6 +421,11 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
 	padding: 50px 40px 80px;
 	text-align: left;
 }
+.assessment-container-item {
+	padding: 0 0 40px; 
+	margin: 0 0 40px; 
+	border-bottom:1px solid $body-border;
+}
 .assessment-action {
 	padding: 2px 2px 4px;
 	border-bottom: 1px dotted $body-border;
@@ -428,6 +435,11 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
 .assessment-questions-container {
 	max-width: 176px;  // 44 x 4
 	margin: 30px auto;
+}
+.assessment-sections-container {
+	max-width: 250px;
+	margin: 30px auto 10px;
+	line-height: 2em;
 }
 .assessment-image { padding: 10px 0; }
 

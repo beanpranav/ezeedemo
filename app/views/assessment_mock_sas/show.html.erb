@@ -1,37 +1,273 @@
 <div class="secondary-nav secondary-nav-invert center">
+  <% if @assessment_mock_sa.score >= 0 %>
+    <%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-back pull-left"></i>'.html_safe, subject_path(@subject) %></i>
+    <div class="content-list-icon-invert pull-right" style="border: 2px solid white; margin-right: 8px!important;">
+      <h3 class="font-invert center" style="font-size:12px;">score</h3>
+      <h2 class="font-invert center" style="font-size:24px; margin-top:-4px;"><b><%= if @assessment_mock_sa.score > 0 then @assessment_mock_sa.score else "?" end %></b></h2>
+    </div>
+  <% end %>
   <h2 class="font-invert"><b>Summative Assessment - <%= @assessment_mock_sa.term %></b></h2>
   <h3 class="font-invert"><%= @subject.name %>: Mock Test <%= @assessment_mock_sa.attempt %></h3>
 </div>
 
-<div class="content-container row">
-  <div class="col-sm-10 col-sm-offset-1 assessment-container">
+<div class="row content-container">
 
-    <p>
-      <strong>User:</strong>
-      <%= @assessment_mock_sa.user_id %>
-    </p>
+  <div class="tab-content">
 
-    <p>
-      <strong>Subject:</strong>
-      <%= @assessment_mock_sa.subject_id %>
-    </p>
+    <div class="tab-pane active" id="section-all">
 
-    <p>
-      <strong>Term:</strong>
-      <%= @assessment_mock_sa.term %>
-    </p>
+      <div class="panel-secondary panel-title">
+        Mock Test <%= @assessment_mock_sa.attempt %>
 
-    <p>
-      <strong>Attempt:</strong>
-      <%= @assessment_mock_sa.attempt %>
-    </p>
+        <div class="modal-actions pull-right">
+          <button type="button" class="btn btn-sm btn-modal pull-right" disabled="disabled"><i class="fa fa-arrow-right"></i></button>
+          
+          <button type="button" class="btn btn-sm btn-modal pull-right" disabled="disabled" style="margin-right: -7px;">All Sections</button>
 
-    <p>
-      <strong>Score:</strong>
-      <%= @assessment_mock_sa.score %>
-    </p>
+          <button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;" disabled="disabled"><i class="fa fa-arrow-left"></i></button>
+        </div>
+      </div>
 
-    <%= @assessment_mock_sa.user_mock_sa_assessment_contents.count %>
+      <div class="assessment-container">
+        <h2 class="center">
+          <b>
+          <% if @assessment_mock_sa.score < 0 %>
+            Questions
+          <% else %>
+            Answer Key
+          <% end %>
+          </b>
+        </h2>
+        <h3 class="center">choose a section to begin</h3>
+        <div class="assessment-sections-container center"> 
+          <% @paper_sections.each.with_index(1) do |section, i| %>
+            <a href="#section-<%= i %>" data-toggle="tab">
+              <%= @paper_sections[i-1] %><br>
+            </a>
+          <% end %>
+          <br><br>
+          <% if @assessment_mock_sa.score < 0 %>
+            <%= link_to "I'M DONE, SUBMIT TEST", "#", class: "btn btn-block btn-green" %>
+          <% elsif @assessment_mock_sa.score == 0 %>
+            <%= link_to "INPUT TEST MARKS",edit_assessment_mock_sa_path(@assessment_mock_sa), class: "btn btn-block btn-green" %>
+          <% else %>
+            <%= link_to "SCORE: #{@assessment_mock_sa.score}", edit_assessment_mock_sa_path(@assessment_mock_sa), class: "btn btn-block btn-green active" %>
+          <% end %> 
+        </div>          
+      </div>
+
+    </div>
+    
+    <% @paper_sections.each.with_index(1) do |section, i| %>
+      
+      <div class="tab-pane" id="section-<%= i %>">
+        
+        <div class="panel-secondary panel-title">
+          <%= @paper_sections[i-1] %>
+
+          <div class="modal-actions pull-right">
+
+            <% if i == @paper_sections.count %>
+              <button type="button" class="btn btn-sm btn-modal pull-right" disabled="disabled"><i class="fa fa-arrow-right"></i></button>
+            <% else %>
+              <a href="#section-<%= i+1 %>" data-toggle="pill">
+                <button type="button" class="btn btn-sm btn-modal pull-right"><i class="fa fa-arrow-right"></i></button>
+              </a>
+            <% end %>
+
+            <a href="#section-all" data-toggle="pill">
+              <button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;">All Sections</button>
+            </a>
+
+            <% if i == 1 %>
+              <button type="button" class="btn btn-sm btn-modal pull-right"  style="margin-right: -7px;"disabled="disabled"><i class="fa fa-arrow-left"></i></button>
+            <% else %>
+              <a href="#section-<%= i-1 %>" data-toggle="pill">
+                <button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;"><i class="fa fa-arrow-left"></i></button>
+              </a>
+            <% end %>
+          
+          </div>
+        </div>
+
+
+        <div class="col-sm-10 col-sm-offset-1 assessment-container">
+
+          <% @sections[i-1].each_with_index do |assessment_content,j| %>
+            
+            <% images = assessment_content.assessment_images %>
+            <% question_image = images.select { |x| x.image_type == "Question Image" } %>
+            <% answer_image = images.select { |x| x.image_type == "Answer Image" } %>
+
+            <% if @assessment_mock_sa.score < 0 %>
+              
+              <div class="assessment-question">
+                <div class="question-icon"><%= @paper_section_specs[i-1][:question_no]+j %></div>
+                <div class="assessment-text">
+                  <b><%= assessment_content.question.html_safe %></b>
+                  <%= image_tag question_image[0].image, class: "img-responsive assessment-image" if question_image.count == 1 %>
+                </div>
+
+              </div>
+
+              <% if assessment_content.content_type == "MCQ" %>
+                
+                <div style="margin: 0 0 50px;">
+                  <div class="mcq-option">
+                    <div class="answer-icon-default">A</div>
+                    <div class="answer-text"><%= assessment_content.answer_a.html_safe %></div>
+                  </div>
+                  <div class="mcq-option">
+                    <div class="answer-icon-default">B</div>
+                    <div class="answer-text"><%= assessment_content.answer_b.html_safe %></div>
+                  </div>
+                  <div class="mcq-option">
+                    <div class="answer-icon-default">C</div>
+                    <div class="answer-text"><%= assessment_content.answer_c.html_safe %></div>
+                  </div>
+                  <div class="mcq-option">
+                    <div class="answer-icon-default">D</div>
+                    <div class="answer-text"><%= assessment_content.answer_d.html_safe %></div>
+                  </div>
+                </div>
+
+               <% end %>
+
+            <% else %>
+              
+              <a class="btn btn-sm btn-green pull-left" style="margin:0 0 0 -40px; padding: 4px 5px;" data-toggle="collapse" href="#<%= @paper_section_specs[i-1][:question_no]+j %>" aria-expanded="false" aria-controls="<%= @paper_section_specs[i-1][:question_no]+j %>"><%= assessment_content.marks %>m</a>
+              
+              <div class="assessment-question">
+                <div class="question-icon"><%= @paper_section_specs[i-1][:question_no]+j %></div>
+                <div class="assessment-text">
+                  <b><%= assessment_content.question.html_safe %></b>
+                  <%= image_tag question_image[0].image, class: "img-responsive assessment-image" if question_image.count == 1 %>
+                </div>
+              </div>
+
+              <div class="collapse assessment-container-item" id="<%= @paper_section_specs[i-1][:question_no]+j %>">
+                
+                <% if assessment_content.content_type == "MCQ" %>
+                  
+                  <div class="mcq-option">
+                    <div class="answer-icon-<%= if assessment_content.mcq_answer == "A" then "green" else "default" end %>">A</div>
+                    <div class="answer-text"><%= assessment_content.answer_a.html_safe %></div>
+                  </div>
+                  <div class="mcq-option">
+                    <div class="answer-icon-<%= if assessment_content.mcq_answer == "B" then "green" else "default" end %>">B</div>
+                    <div class="answer-text"><%= assessment_content.answer_b.html_safe %></div>
+                  </div>
+                  <div class="mcq-option">
+                    <div class="answer-icon-<%= if assessment_content.mcq_answer == "C" then "green" else "default" end %>">C</div>
+                    <div class="answer-text"><%= assessment_content.answer_c.html_safe %></div>
+                  </div>
+                  <div class="mcq-option">
+                    <div class="answer-icon-<%= if assessment_content.mcq_answer == "D" then "green" else "default" end %>">D</div>
+                    <div class="answer-text"><%= assessment_content.answer_d.html_safe %></div>
+                  </div>
+
+                  <br><br>
+                  <b>Explanation:</b>
+                  <div class="assessment-answer">
+                    <div class="answer-icon-mark"><%= assessment_content.marks %>m</div>
+                    <div class="assessment-text">
+                      <%= assessment_content.mcq_explanation.html_safe %>
+                      <%= image_tag answer_image[0].image, class: "img-responsive assessment-image" if answer_image.count == 1 %>
+                    </div>
+                  </div>
+
+                <% elsif assessment_content.content_type == "ShortQ" %>
+                  
+                  <b>Answer:</b>
+                  <% if answer_image.count == 1 %>
+                    <div class="assessment-answer">
+                      <div class="answer-icon-mark">1m</div>
+                      <%= image_tag answer_image[0].image, class: "img-responsive assessment-image" %>
+                    </div>
+                  <% end %>
+                  <div class="assessment-answer">
+                    <div class="answer-icon-mark">1m</div>
+                    <div class="assessment-text"><%= assessment_content.answer_a.html_safe %></div>
+                  </div>
+                  <div class="assessment-answer">
+                    <div class="answer-icon-mark">1m</div>
+                    <div class="assessment-text"><%= assessment_content.answer_b.html_safe %></div>
+                  </div>
+
+                  <% if assessment_content.answer_c.length >10 %>
+                    <div class="assessment-answer">
+                      <div class="answer-icon-mark">1m</div>
+                      <div class="assessment-text"><%= assessment_content.answer_c.html_safe %></div>
+                    </div>
+                  <% end %>
+
+                <% else %>
+
+                  <b>Answer:</b>
+                  <% if answer_image.count == 1 %>
+                    <div class="assessment-answer">
+                      <div class="answer-icon-mark">1m</div>
+                      <%= image_tag answer_image[0].image, class: "img-responsive assessment-image" %>
+                    </div>
+                  <% end %>
+                  <div class="assessment-answer">
+                    <div class="answer-icon-mark">1m</div>
+                    <div class="assessment-text"><%= assessment_content.answer_a.html_safe %></div>
+                  </div>
+                  <div class="assessment-answer">
+                    <div class="answer-icon-mark">1m</div>
+                    <div class="assessment-text"><%= assessment_content.answer_b.html_safe %></div>
+                  </div>
+
+                  <% if assessment_content.answer_c.length >10 %>
+                    <div class="assessment-answer">
+                      <div class="answer-icon-mark">1m</div>
+                      <div class="assessment-text"><%= assessment_content.answer_c.html_safe %></div>
+                    </div>
+                  <% end %>
+
+                  <% if assessment_content.answer_d.length >10 %>
+                    <div class="assessment-answer">
+                      <div class="answer-icon-mark">1m</div>
+                      <div class="assessment-text"><%= assessment_content.answer_d.html_safe %></div>
+                    </div>
+                  <% end %>
+
+                  <% if assessment_content.mcq_explanation.length >10 %>
+                    <div class="assessment-answer">
+                      <div class="answer-icon-mark">1m</div>
+                      <div class="assessment-text"><%= assessment_content.mcq_explanation.html_safe %></div>
+                    </div>
+                  <% end %>
+
+                <% end %>
+
+               </div>
+
+            <% end %>
+
+          <% end %>
+
+        </div>
+
+      </div>
+
+    <% end %>
 
   </div>
 </div>
+
+<script type="text/javascript">
+  // Javascript to enable link to tab
+  var url = document.location.toString();
+  if (url.match('#')) {
+      $('.tab-pane a[href=#'+url.split('#')[1]+']').tab('show') ;
+      // window.location.hash = e.target.hash;
+  } 
+
+  // Change hash for page-reload
+  $('.tab-pane a').on('shown.bs.tab', function (e) {
+      window.location.hash = e.target.hash;
+      $('html,body').scrollTop();
+  })
+</script>
