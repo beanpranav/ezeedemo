@@ -10,7 +10,7 @@ class AssessmentContentsController < ApplicationController
   end
 
   def new
-    @assessment_content = AssessmentContent.new(video_content_id: params[:video_content_id], content_type: params[:content_type], teacher_name: current_user.name)
+    @assessment_content = AssessmentContent.new(video_content_id: params[:video_content_id], content_type: params[:content_type], teacher_name: current_user.name, marks: 1, practical_skills: false)
     @video_content = VideoContent.find_by(id: params[:video_content_id])
     session[:return_to] = request.referer
   end
@@ -22,6 +22,7 @@ class AssessmentContentsController < ApplicationController
 
   def create
     @assessment_content = AssessmentContent.new(assessment_content_params)
+    # raise params
 
     respond_to do |format|
       if @assessment_content.save
@@ -60,6 +61,6 @@ class AssessmentContentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def assessment_content_params
-      params.require(:assessment_content).permit(:video_content_id, :content_type, :question, :answer_a, :answer_b, :answer_c, :answer_d, :mcq_answer, :mcq_explanation, :practice_level, :teacher_name, :next_step, assessment_images_attributes: [:id, :image_type, :image, :_destroy])
+      params.require(:assessment_content).permit(:video_content_id, :content_type, :question, :answer_a, :answer_b, :answer_c, :answer_d, :mcq_answer, :mcq_explanation, :practice_level, :practical_skills, :marks, :teacher_name, :next_step, assessment_images_attributes: [:id, :image_type, :image, :_destroy])
     end
 end

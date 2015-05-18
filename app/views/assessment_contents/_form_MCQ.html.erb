@@ -20,9 +20,15 @@
   <%= f.hidden_field :video_content_id %>
   <%= f.hidden_field :content_type %>
   <%= f.hidden_field :teacher_name %>
+  <%= f.hidden_field :marks %>
 
   <p class="form-radio"><b>Question:</b><p>
   <p><%= f.text_area :question, placeholder: "Question", rows: "3", class: "form-control" %></p>
+  <br>
+  <p class="form-radio">
+    <b>Marks:</b> &nbsp; &nbsp;
+    <%= f.radio_button(:marks, 1) %> 1 mark &nbsp; &nbsp;
+  <p>
 
   <p class="form-radio"><b>Answer Options:</b><p>
   <p><%= f.text_area :answer_a, placeholder: "Option A", rows: "1", class: "form-control" %></p>
@@ -50,12 +56,16 @@
 
   <div class="row">
     <div class="col-sm-4">
+      <p class="form-radio"><b>Is Practical Skills Question:</b></p>
       <p class="form-radio"><b>Belongs to Practice Group:</b></p>
       <p class="form-radio"><b>Submitted by:</b></p>
       <p class="form-radio"><b>Next Step:</b>
       </p>
     </div>
     <div class="col-sm-8">
+      <p class="form-radio">
+        <%= f.check_box :practical_skills %> YES &nbsp; &nbsp; <em>(required for SCIENCE questions only)</em>
+      </p>
       <p class="form-radio">
         <%= f.radio_button(:practice_level, "Level 1") %> Level 1 &nbsp; &nbsp;
         <%= f.radio_button(:practice_level, "Level 2") %> Level 2 &nbsp; &nbsp;

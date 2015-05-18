@@ -19,15 +19,15 @@
 							Complete 3 chapters to unlock your first Formative Assessment (FA) mock exam
 						</div>
 						
-						<div class="btn-group" role="group">
-							<%= link_to '<i class="fa fa-lock"></i>'.html_safe, "#", class: "btn btn-red active", disabled: "disabled" %>
-							<%= link_to "TAKE MOCK FA", "#", class: "btn btn-red active", disabled: "disabled" %>
-						</div>
-
 						<div class="spi-tests">
 							<% 4.times do |i| %>
 								<i class="fa fa-lg fa-lock spi-test-lock"></i>
 							<% end %>
+						</div>
+
+						<div class="btn-group" role="group">
+							<%= link_to '<i class="fa fa-lock"></i>'.html_safe, "#", class: "btn btn-red active", disabled: "disabled" %>
+							<%= link_to "TAKE MOCK FA", "#", class: "btn btn-red active", disabled: "disabled" %>
 						</div>
 					
 		    </div>
@@ -43,23 +43,39 @@
 			    </div>
 			  </div>
 			 </a>
-		  <div id="ProgressTwo" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingTwo">
+		  <div id="ProgressTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
 		    <div class="panel-body center">
 
 						<div class="comment-container" style="margin: -13px -18px 17px;">
 							Complete 75% subject studies to unlock your first Summative Assessment (SA) mock exam
 						</div>
-						
-						<div class="btn-group" role="group">
-							<%= link_to '<i class="fa fa-lock"></i>'.html_safe, "#", class: "btn btn-orange active", disabled: "disabled" %>
-							<%= link_to "TAKE MOCK SA", "#", class: "btn btn-orange active", disabled: "disabled" %>
-						</div>
 
 						<div class="spi-tests">
-							<% 4.times do |i| %>
+							<% @user_term_1_mock_sas.each do |sa| %>
+								<% if sa.score == -1 %>
+								<!-- not yet completed -->
+									<i class="fa fa-lg spi-test-lock"><b><%= link_to "?", assessment_mock_sa_path(sa), class: "supress-a" %></b></i>
+								<% elsif sa.score == 0 %>
+								<!-- completed, not scored -->
+									<i class="fa fa-lg spi-test-lock-orange"><b><%= link_to "?", assessment_mock_sa_path(sa), class: "supress-a", style: "color:white" %></b></i>
+								<% else %>
+								<!-- scored -->
+									<i class="fa fa-lg spi-test-lock-orange"><b><%= link_to sa.score, assessment_mock_sa_path(sa), class: "supress-a", style: "color:white" %></b></i>
+								<% end %>
+							<% end %>
+							<% (4-@user_term_1_mock_sas.count).times do |i| %>
 								<i class="fa fa-lg fa-lock spi-test-lock"></i>
 							<% end %>
 						</div>
+
+						<% if false %>
+							<div class="btn-group" role="group">
+								<%= link_to '<i class="fa fa-lock"></i>'.html_safe, "#", class: "btn btn-orange active", disabled: "disabled" %>
+								<%= link_to "TAKE MOCK SA", "#", class: "btn btn-orange active", disabled: "disabled" %>
+							</div>
+						<% else %>
+							<%= link_to "TAKE MOCK SA #{@user_term_1_mock_sas.count+1}", { controller: "assessment_mock_sas", action: "new", subject_id: @subject.id, user_id: current_user.id, term: 1, attempt: @user_term_1_mock_sas.count+1, score: -1 }, class: "btn btn-orange btn-block" %>
+						<% end %>
 
 				</div>
 		  </div>

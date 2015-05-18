@@ -11,18 +11,22 @@
       <th>Type</th>
       <th>Question</th>
       <th>Teacher</th>
+      <th>Marks</th>
+      <th>Prac?</th>
       <th colspan="1"></th>
     </tr>
   </thead>
   
 
   <tbody>
-    <% @assessment_contents.each do |assessment_content| %>
+    <% @assessment_contents.sort_by(&:marks).each do |assessment_content| %>
       <tr>
         <td><%= assessment_content.video_content_id %></td>
         <td><%= assessment_content.content_type %></td>
         <td><%= link_to assessment_content.question, assessment_content %><%=  %></td>
         <td><%= assessment_content.teacher_name %></td>
+        <td><%= assessment_content.marks %></td>
+        <td><%= assessment_content.practical_skills %></td>
         <td><%= link_to 'Delete', assessment_content, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150512080118) do
+ActiveRecord::Schema.define(version: 20150517154904) do
 
   create_table "assessment_contents", force: true do |t|
     t.integer  "video_content_id"
@@ -28,6 +28,8 @@ ActiveRecord::Schema.define(version: 20150512080118) do
     t.text     "mcq_explanation"
     t.string   "next_step"
     t.string   "practice_level"
+    t.boolean  "practical_skills", default: false
+    t.integer  "marks"
   end
 
   create_table "assessment_images", force: true do |t|
@@ -42,6 +44,16 @@ ActiveRecord::Schema.define(version: 20150512080118) do
   end
 
   add_index "assessment_images", ["assessment_content_id"], name: "index_assessment_images_on_assessment_content_id"
+
+  create_table "assessment_mock_sas", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "subject_id"
+    t.string   "term"
+    t.integer  "attempt"
+    t.integer  "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "chapters", force: true do |t|
     t.string   "name"
@@ -132,6 +144,14 @@ ActiveRecord::Schema.define(version: 20150512080118) do
   end
 
   add_index "user_chapter_progresses", ["user_id"], name: "index_user_chapter_progresses_on_user_id"
+
+  create_table "user_mock_sa_assessment_contents", force: true do |t|
+    t.integer  "assessment_mock_sa_id"
+    t.integer  "assessment_content_id"
+    t.integer  "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_study_progresses", force: true do |t|
     t.integer  "user_id"

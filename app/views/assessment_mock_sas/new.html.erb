@@ -1,0 +1,25 @@
+<div class="secondary-nav secondary-nav-invert center">
+  <h2 class="font-invert"><b>Summative Assessment - <%= params[:term] %></b></h2>
+  <h3 class="font-invert"><%= @subject.standard %>th <%= @subject.board %>: <%= @subject.name %></h3>
+</div>
+
+<div class="content-container row">
+	<div class="col-sm-10 col-sm-offset-1 assessment-container">
+
+		<p class="pull-left"><b>Time allowed:</b> 3 hours</p>
+		<p class="pull-right"><b>Maximum Marks:</b> 90</p>
+
+		<div style="padding:45px 0 25px;">
+			<b>General Instructions:</b>
+			<ol style="margin-top:10px;">
+				<%= $mock_sa_specs["#{@subject.name.downcase}"][:instructions].html_safe %>
+			</ol>
+		</div>
+
+		<%= render 'form' %>
+		
+		<p class="center">
+			<%= link_to 'Cancel', :back %>
+		</p>
+	</div>
+</div>

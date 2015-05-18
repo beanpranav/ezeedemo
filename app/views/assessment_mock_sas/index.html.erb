@@ -1,0 +1,30 @@
+<h1>All Mock SA Tests</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Subject</th>
+      <th>Term</th>
+      <th>Attempt</th>
+      <th>Score</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assessment_mock_sas.each do |assessment_mock_sa| %>
+      <tr>
+        <td><%= assessment_mock_sa.user_id %></td>
+        <td><%= assessment_mock_sa.subject_id %></td>
+        <td><%= assessment_mock_sa.term %></td>
+        <td><%= assessment_mock_sa.attempt %></td>
+        <td><%= assessment_mock_sa.score %></td>
+        <td><%= link_to 'Show', assessment_mock_sa %></td>
+        <td><%= link_to 'Edit', edit_assessment_mock_sa_path(assessment_mock_sa) %></td>
+        <td><%= link_to 'Destroy', assessment_mock_sa, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

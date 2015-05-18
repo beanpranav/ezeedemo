@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  resources :assessment_mock_sas
+
   resources :content_tags
 
   mathjax 'mathjax'

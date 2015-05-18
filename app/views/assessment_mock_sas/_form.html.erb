@@ -1,0 +1,30 @@
+<%= form_for(@assessment_mock_sa) do |f| %>
+  <% if @assessment_mock_sa.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@assessment_mock_sa.errors.count, "error") %> prohibited this assessment_mock_sa from being saved:</h2>
+
+      <ul>
+      <% @assessment_mock_sa.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if params[:action] == "new" %>
+    <%= f.hidden_field :user_id %>
+    <%= f.hidden_field :subject_id %>
+    <%= f.hidden_field :term %>
+    <%= f.hidden_field :attempt %>
+    <%= f.hidden_field :score %>
+    <div class="actions center">
+      <%= f.submit "BEGIN MOCK SA", class:"btn btn-block btn-green" %>
+    </div>
+  <% else %>
+    <%= f.label :score %>
+    <%= f.number_field :score %>
+    <div class="actions cwnter">
+      <%= f.submit "SUBMIT MOCK SA SCORE", class:"btn btn-block btn-green" %>
+    </div>
+  <% end %>
+<% end %>

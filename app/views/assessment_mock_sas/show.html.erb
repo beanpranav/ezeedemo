@@ -1,0 +1,37 @@
+<div class="secondary-nav secondary-nav-invert center">
+  <h2 class="font-invert"><b>Summative Assessment - <%= @assessment_mock_sa.term %></b></h2>
+  <h3 class="font-invert"><%= @subject.name %>: Mock Test <%= @assessment_mock_sa.attempt %></h3>
+</div>
+
+<div class="content-container row">
+  <div class="col-sm-10 col-sm-offset-1 assessment-container">
+
+    <p>
+      <strong>User:</strong>
+      <%= @assessment_mock_sa.user_id %>
+    </p>
+
+    <p>
+      <strong>Subject:</strong>
+      <%= @assessment_mock_sa.subject_id %>
+    </p>
+
+    <p>
+      <strong>Term:</strong>
+      <%= @assessment_mock_sa.term %>
+    </p>
+
+    <p>
+      <strong>Attempt:</strong>
+      <%= @assessment_mock_sa.attempt %>
+    </p>
+
+    <p>
+      <strong>Score:</strong>
+      <%= @assessment_mock_sa.score %>
+    </p>
+
+    <%= @assessment_mock_sa.user_mock_sa_assessment_contents.count %>
+
+  </div>
+</div>
