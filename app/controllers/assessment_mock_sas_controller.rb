@@ -20,6 +20,14 @@ class AssessmentMockSasController < ApplicationController
 
   end
 
+  def submit_test
+    test = AssessmentMockSa.find(params[:assessment_mock_sa_id])
+    test.score = 0
+    test.save
+    flash[:notice] = "<b>Good Job!</b> Your progress has been saved. <br>The Answer Key is now available, check it and input your score below."
+    redirect_to request.referrer
+  end
+
   def new
     @assessment_mock_sa = AssessmentMockSa.new(user_id: params[:user_id], subject_id: params[:subject_id], term: params[:term], attempt: params[:attempt], score: params[:score])
     @subject = Subject.find_by(id: params[:subject_id])
@@ -66,7 +74,7 @@ class AssessmentMockSasController < ApplicationController
   def update
     respond_to do |format|
       if @assessment_mock_sa.update(assessment_mock_sa_params)
-        format.html { redirect_to @assessment_mock_sa, notice: 'Assessment mock sa was successfully updated.' }
+        format.html { redirect_to @assessment_mock_sa, notice: '<b>Your score was successfully saved.</b> See the impact on your predictive score.' }
       else
         format.html { render action: 'edit' }
       end

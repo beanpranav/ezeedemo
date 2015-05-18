@@ -1,3 +1,10 @@
+<!-- Include for MathJax Render -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<%= mathjax_tag %>
+  
+
 <div class="secondary-nav secondary-nav-invert center">
   <% if @assessment_mock_sa.score >= 0 %>
     <%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-back pull-left"></i>'.html_safe, subject_path(@subject) %></i>
@@ -47,9 +54,14 @@
           <% end %>
           <br><br>
           <% if @assessment_mock_sa.score < 0 %>
-            <%= link_to "I'M DONE, SUBMIT TEST", "#", class: "btn btn-block btn-green" %>
+            <%= form_tag "/assessment_mock_sas/#{@assessment_mock_sa.id}/submit_test" do %>
+              <%= hidden_field_tag :assessment_mock_sa_id, @assessment_mock_sa.id %>
+              <%= button_tag(type: 'submit', class: "btn btn-block btn-green") do %>
+                I'M DONE, SUBMIT TEST
+              <% end %>
+            <% end %>
           <% elsif @assessment_mock_sa.score == 0 %>
-            <%= link_to "INPUT TEST MARKS",edit_assessment_mock_sa_path(@assessment_mock_sa), class: "btn btn-block btn-green" %>
+            <%= link_to "INPUT TEST MARKS", edit_assessment_mock_sa_path(@assessment_mock_sa), class: "btn btn-block btn-green" %>
           <% else %>
             <%= link_to "SCORE: #{@assessment_mock_sa.score}", edit_assessment_mock_sa_path(@assessment_mock_sa), class: "btn btn-block btn-green active" %>
           <% end %> 

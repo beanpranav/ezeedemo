@@ -1,6 +1,10 @@
 Rails.application.routes.draw do
 
-  resources :assessment_mock_sas
+  resources :assessment_mock_sas do
+    member do
+      post :submit_test
+    end
+  end
 
   resources :content_tags
 
