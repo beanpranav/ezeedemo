@@ -32,8 +32,8 @@ class SubjectsController < ApplicationController
       @term_1_studied = subject_studied(@term_1_chapters, @user_term_1_chapters_studied)
       @term_2_studied = subject_studied(@term_2_chapters, @user_term_2_chapters_studied)
 
-      @user_term_1_mock_sas = AssessmentMockSa.where(user_id: current_user.id, subject_id: @subject.id, term: 1)
-      @user_term_2_mock_sas = AssessmentMockSa.where(user_id: current_user.id, subject_id: @subject.id, term: 2)
+      @user_term_1_mock_sas = AssessmentMockSa.where(user_id: current_user.id, subject_id: @subject.id, term: "1")
+      @user_term_2_mock_sas = AssessmentMockSa.where(user_id: current_user.id, subject_id: @subject.id, term: "2")
       
       @term_1_spi = predictive_score_calculator(@term_1_chapters, @user_term_1_chapters_studied, [], [])
       @term_2_spi = predictive_score_calculator(@term_2_chapters, @user_term_2_chapters_studied, [], [])
