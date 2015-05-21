@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  assessment_mock_fa_id: 1
+  assessment_content_id: 1
+  response: MyString
+
+two:
+  assessment_mock_fa_id: 1
+  assessment_content_id: 1
+  response: MyString

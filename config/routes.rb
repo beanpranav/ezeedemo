@@ -1,5 +1,12 @@
 Rails.application.routes.draw do
 
+  resources :assessment_mock_fas do
+    member do
+      post :submit_test
+      post :save_user_fa_progress
+    end
+  end
+
   resources :assessment_mock_sas do
     member do
       post :submit_test

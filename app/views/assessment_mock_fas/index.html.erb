@@ -1,0 +1,30 @@
+<h1>All Mock FA Tests</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Subject</th>
+      <th>Term</th>
+      <th>Attempt</th>
+      <th>Score</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @assessment_mock_fas.each do |assessment_mock_fa| %>
+      <tr>
+        <td><%= assessment_mock_fa.user_id %></td>
+        <td><%= assessment_mock_fa.subject_id %></td>
+        <td><%= assessment_mock_fa.term %></td>
+        <td><%= assessment_mock_fa.attempt %></td>
+        <td><%= assessment_mock_fa.score %></td>
+        <td><%= link_to 'Show', assessment_mock_fa %></td>
+        <td><%= link_to 'Edit', edit_assessment_mock_fa_path(assessment_mock_fa) %></td>
+        <td><%= link_to 'Destroy', assessment_mock_fa, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

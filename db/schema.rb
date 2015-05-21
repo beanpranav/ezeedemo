@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150517154904) do
+ActiveRecord::Schema.define(version: 20150519134832) do
 
   create_table "assessment_contents", force: true do |t|
     t.integer  "video_content_id"
@@ -44,6 +44,16 @@ ActiveRecord::Schema.define(version: 20150517154904) do
   end
 
   add_index "assessment_images", ["assessment_content_id"], name: "index_assessment_images_on_assessment_content_id"
+
+  create_table "assessment_mock_fas", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "subject_id"
+    t.integer  "term"
+    t.integer  "attempt"
+    t.integer  "score"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "assessment_mock_sas", force: true do |t|
     t.integer  "user_id"
@@ -144,6 +154,14 @@ ActiveRecord::Schema.define(version: 20150517154904) do
   end
 
   add_index "user_chapter_progresses", ["user_id"], name: "index_user_chapter_progresses_on_user_id"
+
+  create_table "user_mock_fa_assessment_contents", force: true do |t|
+    t.integer  "assessment_mock_fa_id"
+    t.integer  "assessment_content_id"
+    t.string   "response"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "user_mock_sa_assessment_contents", force: true do |t|
     t.integer  "assessment_mock_sa_id"

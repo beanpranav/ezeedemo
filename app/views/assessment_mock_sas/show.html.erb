@@ -49,7 +49,7 @@
         <div class="assessment-sections-container center"> 
           <% @paper_sections.each.with_index(1) do |section, i| %>
             <a href="#section-<%= i %>" data-toggle="tab">
-              <%= @paper_sections[i-1] %><br>
+              <div class="btn btn-block btn-secondary"><%= @paper_sections[i-1] %></div>
             </a>
           <% end %>
           <br><br>
@@ -63,7 +63,7 @@
           <% elsif @assessment_mock_sa.score == 0 %>
             <%= link_to "INPUT TEST MARKS", edit_assessment_mock_sa_path(@assessment_mock_sa), class: "btn btn-block btn-green" %>
           <% else %>
-            <%= link_to "SCORE: #{@assessment_mock_sa.score}", edit_assessment_mock_sa_path(@assessment_mock_sa), class: "btn btn-block btn-green active" %>
+            <%= link_to "SCORE: #{@assessment_mock_sa.score} / 90", edit_assessment_mock_sa_path(@assessment_mock_sa), class: "btn btn-block btn-green active" %>
           <% end %> 
         </div>          
       </div>

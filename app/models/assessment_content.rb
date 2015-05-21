@@ -12,4 +12,7 @@ class AssessmentContent < ActiveRecord::Base
   has_many :user_mock_sa_assessment_contents, dependent: :destroy
   has_many :assessment_mock_sas, through: :user_mock_sa_assessment_contents
   
+  has_many :user_mock_fa_assessment_contents, dependent: :destroy
+  has_many :assessment_mock_fas, through: :user_mock_fa_assessment_contents
+  
 end

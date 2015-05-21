@@ -1,0 +1,245 @@
+<!-- Include for MathJax Render -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}});
+</script>
+<%= mathjax_tag %>
+  
+
+<div class="secondary-nav secondary-nav-invert center">
+  <% if @assessment_mock_fa.score >= 0 %>
+    <%= link_to '<i class="fa fa-2x fa-arrow-left content-list-icon-back pull-left"></i>'.html_safe, subject_path(@subject) %></i>
+    <div class="content-list-icon-invert pull-right" style="border: 2px solid white; margin-right: 8px!important;">
+      <h3 class="font-invert center" style="font-size:12px;">score</h3>
+      <h2 class="font-invert center" style="font-size:24px; margin-top:-4px;"><b><%= @assessment_mock_fa.score %></b></h2>
+    </div>
+  <% end %>
+  <h2 class="font-invert"><b>Formative Assessment - <%= 2*@assessment_mock_fa.term-1 %></b></h2>
+  <h3 class="font-invert"><%= @subject.name %>: Mock Test <%= @assessment_mock_fa.attempt %></h3>
+</div>
+
+<div class="row content-container">
+
+  <div class="tab-content">
+
+    <div class="tab-pane active" id="question-all">
+
+      <div class="panel-secondary panel-title">
+        Mock Test <%= @assessment_mock_fa.attempt %>
+
+        <div class="modal-actions pull-right">
+          <button type="button" class="btn btn-sm btn-modal pull-right" disabled="disabled"><i class="fa fa-arrow-right"></i></button>
+          
+          <button type="button" class="btn btn-sm btn-modal pull-right" disabled="disabled" style="margin-right: -7px;">All Qs</button>
+
+          <button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;" disabled="disabled"><i class="fa fa-arrow-left"></i></button>
+        </div>
+      </div>
+
+      <div class="assessment-container">
+
+        <% if @assessment_mock_fa.score < 0 %>
+          
+          <h2 class="center"><b>Questions</b></h2>
+          <h3 class="center">choose a question to begin</h3>
+          <div class="assessment-sections-container center" style="line-height:1.43;"> 
+            <div style="height:145px; padding:0 15px">
+              <% @all_assessments.each.with_index(1) do |assessment_content, i| %>
+                <a href="#question-<%= i %>" data-toggle="tab">
+                  <% progress = @user_progresses.find { |x| x["assessment_content_id"] == assessment_content.id } %>
+                  <div class="question-icon-<%= if progress.response == "" then "default" else "green" end %>"><%= i %></div>
+                </a>
+              <% end %>
+            </div>
+            <br><br>
+            <%= form_tag "/assessment_mock_fas/#{@assessment_mock_fa.id}/submit_test" do %>
+              <%= hidden_field_tag :assessment_mock_fa_id, @assessment_mock_fa.id %>
+              <%= button_tag(type: 'submit', class: "btn btn-block btn-green") do %>
+                I'M DONE, SUBMIT TEST
+              <% end %>
+            <% end %>
+          </div>     
+
+        <% else %>
+          
+          <h2 class="center"><b>Answer Key</b></h2>
+          <h3 class="center">choose a question to see details</h3>
+          <div class="assessment-sections-container center" style="line-height:1.43;">
+            <div style="height:145px; padding:0 15px">
+              <% @all_assessments.each.with_index(1) do |assessment_content, i| %>
+                <a href="#question-<%= i %>" data-toggle="tab">
+                  <% progress = @user_progresses.find { |x| x["assessment_content_id"] == assessment_content.id } %>
+                  <div class="question-icon-<%= if progress.response == "" then "default" elsif progress.response == assessment_content.mcq_answer then "green" else "red" end %>"><%= i %></div>
+                </a>
+              <% end %>
+            </div>
+            <br><br>
+            <div class="btn btn-block btn-green active">SCORE: <%= @assessment_mock_fa.score %>  / 15</div>
+          </div>     
+
+        <% end %>
+
+      </div>
+
+    </div>
+        
+    <% @all_assessments.each.with_index(1) do |assessment_content, i| %>
+      
+      <div class="tab-pane" id="question-<%= i %>">
+        
+        <div class="panel-secondary panel-title">
+          Mock Test <%= @assessment_mock_fa.attempt %>
+
+          <div class="modal-actions pull-right">
+
+            <% if i == @all_assessments.count %>
+              <button type="button" class="btn btn-sm btn-modal pull-right" disabled="disabled"><i class="fa fa-arrow-right"></i></button>
+            <% else %>
+              <a href="#question-<%= i+1 %>" data-toggle="pill">
+                <button type="button" class="btn btn-sm btn-modal pull-right"><i class="fa fa-arrow-right"></i></button>
+              </a>
+            <% end %>
+
+            <a href="#question-all" data-toggle="pill">
+              <button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;">All Qs</button>
+            </a>
+
+            <% if i == 1 %>
+              <button type="button" class="btn btn-sm btn-modal pull-right"  style="margin-right: -7px;"disabled="disabled"><i class="fa fa-arrow-left"></i></button>
+            <% else %>
+              <a href="#question-<%= i-1 %>" data-toggle="pill">
+                <button type="button" class="btn btn-sm btn-modal pull-right" style="margin-right: -7px;"><i class="fa fa-arrow-left"></i></button>
+              </a>
+            <% end %>
+
+            <% if @assessment_mock_fa.score < 0 %>
+              <% progress = @user_progresses.find { |x| x["assessment_content_id"] == assessment_content.id } %>
+              <% if progress.response == "" %>
+                <button type="button" class="btn btn-sm btn-modal active" disabled="disabled">Not attempted</button>
+              <% else %>
+                <button type="button" class="btn btn-sm btn-modal">Attempted</button>
+              <% end %>
+            <% else %>
+              <% progress = @user_progresses.find { |x| x["assessment_content_id"] == assessment_content.id } %>
+              <% if progress.response == "" %>
+                <button type="button" class="btn btn-sm btn-modal" disabled="disabled">Not attempted</button>
+              <% elsif progress.response == assessment_content.mcq_answer %>
+                <button type="button" class="btn btn-sm btn-modal-green active">Correct</button>
+              <% else %>
+                <button type="button" class="btn btn-sm btn-modal-red active">Wrong</button>
+              <% end %>
+            <% end %>
+          
+          </div>
+        </div>
+
+
+        <div class="col-sm-10 col-sm-offset-1 assessment-container">
+          
+          <% images = assessment_content.assessment_images %>
+          <% question_image = images.select { |x| x.image_type == "Question Image" } %>
+          <% answer_image = images.select { |x| x.image_type == "Answer Image" } %>
+
+          <div class="assessment-question">
+            <div class="question-icon"><%= i %></div>
+            <div class="assessment-text">
+              <b><%= assessment_content.question.html_safe %></b>
+              <%= image_tag question_image[0].image, class: "img-responsive assessment-image" if question_image.count == 1 %>
+            </div>
+          </div>
+          
+          <% if @assessment_mock_fa.score < 0 %>
+
+            <% progress = @user_progresses.find { |x| x["assessment_content_id"] == assessment_content.id } %>
+                
+            <%= form_tag "/assessment_mock_fas/#{@assessment_mock_fa.id}/save_user_fa_progress" do %>
+
+              <%= hidden_field_tag :assessment_mock_fa_id, @assessment_mock_fa.id %>
+              <%= hidden_field_tag :assessment_content_id, assessment_content.id %>
+              <%= hidden_field_tag :url, (request.original_url + "#question-#{i}") %>
+              
+              <div class="mcq-option">
+                <%= button_tag(type: 'submit', name: "response[A]", class: "btn btn-block mcq-feedback") do %>
+                  <div class="answer-icon-<%= if progress.response == "A" then "green" else "default" end %>">A</div>
+                  <div class="answer-text"><%= assessment_content.answer_a.html_safe %></div>
+                <% end %>
+              </div>
+
+              <div class="mcq-option">
+                <%= button_tag(type: 'submit', name: "response[B]", class: "btn btn-block mcq-feedback") do %>
+                  <div class="answer-icon-<%= if progress.response == "B" then "green" else "default" end %>">B</div>
+                  <div class="answer-text"><%= assessment_content.answer_b.html_safe %></div>
+                <% end %>
+              </div>
+
+              <div class="mcq-option">
+                <%= button_tag(type: 'submit', name: "response[C]", class: "btn btn-block mcq-feedback") do %>
+                  <div class="answer-icon-<%= if progress.response == "C" then "green" else "default" end %>">C</div>
+                  <div class="answer-text"><%= assessment_content.answer_c.html_safe %></div>
+                <% end %>
+              </div>
+
+              <div class="mcq-option">
+                <%= button_tag(type: 'submit', name: "response[D]", class: "btn btn-block mcq-feedback") do %>
+                  <div class="answer-icon-<%= if progress.response == "D" then "green" else "default" end %>">D</div>
+                  <div class="answer-text"><%= assessment_content.answer_d.html_safe %></div>
+                <% end %>
+              </div>
+
+            <% end %>
+
+          <% else %>
+            
+            <% progress = @user_progresses.find { |x| x["assessment_content_id"] == assessment_content.id } %>
+            <div class="mcq-option">
+              <div class="answer-icon-<%= if assessment_content.mcq_answer == "A" then "green" elsif progress.response == "A" then "red" else "default" end %>">A</div>
+              <div class="answer-text"><%= assessment_content.answer_a.html_safe %></div>
+            </div>
+            <div class="mcq-option">
+              <div class="answer-icon-<%= if assessment_content.mcq_answer == "B" then "green" elsif progress.response == "B" then "red" else "default" end %>">B</div>
+              <div class="answer-text"><%= assessment_content.answer_b.html_safe %></div>
+            </div>
+            <div class="mcq-option">
+              <div class="answer-icon-<%= if assessment_content.mcq_answer == "C" then "green" elsif progress.response == "C" then "red" else "default" end %>">C</div>
+              <div class="answer-text"><%= assessment_content.answer_c.html_safe %></div>
+            </div>
+            <div class="mcq-option">
+              <div class="answer-icon-<%= if assessment_content.mcq_answer == "D" then "green" elsif progress.response == "D" then "red" else "default" end %>">D</div>
+              <div class="answer-text"><%= assessment_content.answer_d.html_safe %></div>
+            </div>
+
+            <br><br>
+            <b>Explanation:</b>
+            <div class="assessment-answer">
+              <div class="answer-icon-green"><%= assessment_content.mcq_answer %></div>
+              <div class="assessment-text">
+                <%= assessment_content.mcq_explanation.html_safe %>
+                <%= image_tag question_image[0].image, class: "img-responsive assessment-image" if question_image.count == 1 %>
+              </div>
+            </div>
+
+          <% end %>
+
+        </div>
+
+      </div>
+
+    <% end %>
+
+  </div>
+</div>
+
+
+<script type="text/javascript">
+  // Javascript to enable link to tab
+  var url = document.location.toString();
+  if (url.match('#')) {
+      $('.tab-pane a[href=#'+url.split('#')[1]+']').tab('show') ;
+      // window.location.hash = e.target.hash;
+  } 
+
+  // Change hash for page-reload
+  $('.tab-pane a').on('shown.bs.tab', function (e) {
+      window.location.hash = e.target.hash;
+      $('html,body').scrollTop();
+  })
+</script>

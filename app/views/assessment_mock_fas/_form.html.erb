@@ -1,0 +1,46 @@
+<%= form_for(@assessment_mock_fa) do |f| %>
+  <% if @assessment_mock_fa.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@assessment_mock_fa.errors.count, "error") %> prohibited this assessment_mock_fa from being saved:</h2>
+
+      <ul>
+      <% @assessment_mock_fa.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <% if params[:action] == "new" %>
+      <%= f.hidden_field :user_id %>
+      <%= f.hidden_field :subject_id %>
+      <%= f.hidden_field :term %>
+      <%= f.hidden_field :attempt %>
+      <%= f.hidden_field :score %>
+
+      <div style="padding:45px 0 10px;">
+        <b>Select upto 3 chapters to be included:</b>
+        <ul style="margin-top:10px; list-style-type: none; -webkit-padding-start: 20px;">
+          <% @term_chapters.each do |chapter| %>
+          <li>
+            <%= check_box_tag 'chapter_ids[]', chapter.id %>&nbsp;
+            <%= chapter.name %>
+          </li>
+          <% end %>
+        </ul>
+        
+      </div>
+          
+      <div class="assessment-sections-container">
+        <%= f.submit "BEGIN MOCK FA", class:"btn btn-block btn-green", style:"width:250px;" %>
+      </div>
+    <% else %>
+<!--       <div class="assessment-sections-container">
+        <%= f.label :score, "My Score (out of 15)" %><br>
+        <%= f.number_field :score, class: "form-control" %>
+        <%= f.submit "SUBMIT MOCK FA SCORE", class:"btn btn-green", style:"width:250px;" %>
+      </div> -->
+    <% end %>
+  </div>
+<% end %>

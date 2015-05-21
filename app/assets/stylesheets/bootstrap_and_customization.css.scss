@@ -337,8 +337,8 @@ td { text-align: left; }
 .btn-red { color: $brand-red; border: 2px solid $brand-red; }
 .btn-red:hover, .btn-red:focus, .btn-red.active { background-color: $brand-red; color: white; box-shadow: none; }
 .btn-disabled { color: $body-border; border: 2px solid $body-bg; }
-.btn-secondary { color: $brand-primary; }
-.btn-secondary.active { border: 2px solid $brand-primary; }
+.btn-secondary { color: white; background-color: $brand-font-gray; }
+.btn-secondary:hover, .btn-secondary:focus, .btn-secondary.active { background-color: $brand-primary; color: white; }
 
 .btn-sm { padding: 4px 9px; }
 .btn-modal, .btn-modal-red, .btn-modal-orange, .btn-modal-green { 
@@ -349,6 +349,7 @@ td { text-align: left; }
 }
 .btn-modal { background-color: transparent; color: white; }
 .btn-modal:hover, .btn-modal:focus { color: white; }
+.btn-modal.active { background-color: white;	color: $brand-font-gray; box-shadow: none; }
 .btn-modal-primary { background-color: white;	color: $brand-primary; }
 .btn-modal-primary:hover, .btn-modal-primary:focus { color: white; background-color: $brand-primary; }
 .btn-modal-red { background-color: white;	color: $brand-red; }
@@ -356,7 +357,7 @@ td { text-align: left; }
 .btn-modal-orange { background-color: white;	color: $brand-orange; }
 .btn-modal-orange:hover, .btn-modal-orange:focus, .btn-modal-orange.active { color: white; background-color: $brand-orange; box-shadow: none; }
 .btn-modal-green { background-color: white;	color: $brand-green; }
-.btn-modal-green:hover, .btn-modal-green:focus { color: white; background-color: $brand-green }
+.btn-modal-green:hover, .btn-modal-green:focus, .btn-modal-green.active { color: white; background-color: $brand-green; box-shadow: none; }
 .btn-modal:hover, .btn-modal:focus, .btn-modal-red:hover, .btn-modal-red:focus, .btn-modal-orange:hover, .btn-modal-orange:focus, .btn-modal-green:hover, .btn-modal-green:focus { 
 	outline: 5px auto white!important; 
 	outline-offset: -2px;
@@ -483,19 +484,20 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
 .answer-icon-mark { background-color: $brand-green; font-size: 90%; text-align: left; line-height: 1.6; }
 .question-icon { background-color: $brand-primary; }
 
-.question-icon-default, .question-icon-green, .question-icon-orange, .question-icon-red {
+.question-icon-default, .question-icon-green, .question-icon-orange, .question-icon-red, .question-icon-primary {
 	padding: 5px; 
 	min-width: 30px;
 	min-height: 30px;
 	text-align: center;
 	margin: 7px;
 	float: left;
-	background-color: $body-border;
+	background-color: $brand-font-gray;
 	color: white;
 }
 .question-icon-green { background-color: $brand-green; }
 .question-icon-orange { background-color: $brand-orange; }
 .question-icon-red { background-color: $brand-red; }
+.question-icon-primary { background-color: $brand-primary; }
 
 
 // PROGRESS
