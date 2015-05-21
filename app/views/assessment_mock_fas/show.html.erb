@@ -82,7 +82,7 @@
 
     </div>
         
-    <% @all_assessments.sort_by(&:assessment_content_id).each.with_index(1) do |assessment_content, i| %>
+    <% @all_assessments.sort_by(&:id).each.with_index(1) do |assessment_content, i| %>
       
       <div class="tab-pane" id="question-<%= i %>">
         
