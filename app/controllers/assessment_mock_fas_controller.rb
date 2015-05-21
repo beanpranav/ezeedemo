@@ -58,7 +58,7 @@ class AssessmentMockFasController < ApplicationController
       redirect_to :back
     else
       @subject = Subject.find_by(id: @assessment_mock_fa.subject_id)
-      @term_chapters = @subject.chapters.where(@assessment_mock_fa.term).sort_by(&:chapterNumber)
+      @term_chapters = @subject.chapters.where(term: @assessment_mock_fa.term).sort_by(&:chapterNumber)
       
       @all_assessments = []
       params[:chapter_ids].each do |chapter_id|
