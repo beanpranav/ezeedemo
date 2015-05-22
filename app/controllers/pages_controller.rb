@@ -23,4 +23,9 @@ class PagesController < ApplicationController
   	@subjects = Subject.where(standard: 10).order('id DESC')
   end
 
+  def user_admin_dashboard
+  	@users = User.all
+  	@free_users = @users.select { |x| x.term_1_payment = 0 or x.term_2_payment = 0 }
+  	@paid_users = @users.select { |x| x.term_1_payment > 0 or x.term_2_payment > 0 }
+  end
 end

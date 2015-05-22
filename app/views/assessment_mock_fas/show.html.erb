@@ -43,7 +43,7 @@
           <h3 class="center">choose a question to begin</h3>
           <div class="assessment-sections-container center" style="line-height:1.43;"> 
             <div style="height:145px; padding:0 15px">
-              <% @all_assessments.each.with_index(1) do |assessment_content, i| %>
+              <% @all_assessments.sort_by(&:id).each.with_index(1) do |assessment_content, i| %>
                 <a href="#question-<%= i %>" data-toggle="tab">
                   <% progress = @user_progresses.find { |x| x["assessment_content_id"] == assessment_content.id } %>
                   <div class="question-icon-<%= if progress.response == "" then "default" else "green" end %>"><%= i %></div>
@@ -65,7 +65,7 @@
           <h3 class="center">choose a question to see details</h3>
           <div class="assessment-sections-container center" style="line-height:1.43;">
             <div style="height:145px; padding:0 15px">
-              <% @all_assessments.each.with_index(1) do |assessment_content, i| %>
+              <% @all_assessments.sort_by(&:id).each.with_index(1) do |assessment_content, i| %>
                 <a href="#question-<%= i %>" data-toggle="tab">
                   <% progress = @user_progresses.find { |x| x["assessment_content_id"] == assessment_content.id } %>
                   <div class="question-icon-<%= if progress.response == "" then "default" elsif progress.response == assessment_content.mcq_answer then "green" else "red" end %>"><%= i %></div>

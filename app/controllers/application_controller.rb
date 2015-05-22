@@ -116,7 +116,7 @@ class ApplicationController < ActionController::Base
 
 
 
-  def predictive_score_calculator(term_chapters, user_term_chapters_cpi, user_term_fa_scores, user_term_sa_scores)
+  def predictive_score_calculator(term_chapters, user_term_chapters_cpi, user_term_fas, user_term_sas)
 
     term_weightage_total = 0
     user_term_weightage = 0
@@ -145,24 +145,32 @@ class ApplicationController < ActionController::Base
     end
 
     subject_studied = user_term_weightage/term_weightage_total
-    term_weightage_contribution.each { |x| x[1] = (x[1] * $predictive_score_specs[:study_weightage] / term_weightage_total).round(2) }
+    term_weightage_contribution.each { |x| x[1] = (x[1] * $predictive_score_specs[user_term_sas.count][:study_weightage] / term_weightage_total).round(2) }
     term_weightage_contribution = term_weightage_contribution.sort_by { |x| -x[1] }
-    term_weightage_priortization.each { |x| x[1] = (x[1] * $predictive_score_specs[:study_weightage] / term_weightage_total).round(2) }
+    term_weightage_priortization.each { |x| x[1] = (x[1] * $predictive_score_specs[user_term_sas.count][:study_weightage] / term_weightage_total).round(2) }
     term_weightage_priortization = term_weightage_priortization.sort_by { |x| -x[1] }
 
     fa_practiced = 0
-    sa_practiced = 0
-    if user_term_fa_scores.size > 0
-      fa_practiced = user_term_fa_scores.inject(:+).to_f/user_term_fa_scores.size
-    end    
-    if user_term_sa_scores.size > 0
-      sa_practiced = user_term_sa_scores.inject(:+).to_f/user_term_sa_scores.size
-    end
-    subject_practiced = fa_practiced + sa_practiced
+    if user_term_fas.count > 0
+      user_term_fas.each do |fa|
+        fa_practiced += fa.score if fa.score >= 0
+      end
+      fa_practiced = fa_practiced.to_f/user_term_fas.count
+    end 
+    fa_score = fa_practiced*100/15
 
-    spi = (subject_studied * $predictive_score_specs[:study_weightage]) + (subject_practiced * $predictive_score_specs[:assessment_weightage])
+    sa_practiced = 0
+    if user_term_sas.count > 0
+      user_term_sas.each do |sa|
+        sa_practiced += sa.score if sa.score >= 0
+      end
+      sa_practiced = sa_practiced.to_f/user_term_sas.count
+    end 
+    sa_score = sa_practiced*100/90
+
+    spi = (subject_studied * $predictive_score_specs[user_term_sas.count][:study_weightage]) + (fa_score * $predictive_score_specs[user_term_sas.count][:fa_weightage]) + (sa_score * $predictive_score_specs[user_term_sas.count][:sa_weightage])
     
-    return { :spi => spi.round(0), :contribution_order => term_weightage_contribution, :priortization_order => term_weightage_priortization }
+    return { :spi => spi.round(0), :contribution_order => term_weightage_contribution, :priortization_order => term_weightage_priortization, :fa_average => fa_practiced.round(1), :sa_average => sa_practiced.round(1) }
   end
 
 

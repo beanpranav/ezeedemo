@@ -563,8 +563,8 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
 	line-height: 2em!important;
 	text-align: center;
 }
-.spi-test-lock-orange { background-color: $brand-orange; color: white; opacity: 0.8; }
-.spi-test-lock-red { background-color: $brand-red; color: white; opacity: 0.8; }
+.spi-test-lock-orange { background-color: $brand-orange; color: white; }
+.spi-test-lock-red { background-color: $brand-red; color: white; }
 
 .cpi-level-0, .cpi-level-1, .cpi-level-2, .cpi-level-3, .cpi-level-4, .cpi-level-5, .cpi-level-lock { 
 	width: 36px; 

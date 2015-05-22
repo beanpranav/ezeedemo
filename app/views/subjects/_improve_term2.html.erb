@@ -1,9 +1,9 @@
 <div class="content-container">
-		<div class="panel-secondary" style="margin-bottom:20px;">
-	    <div class="panel-title">
-		  	Study Progress
-	    </div>
-		</div>
+	<div class="panel-secondary" style="margin-bottom:20px;">
+    <div class="panel-title">
+	  	Study Progress
+    </div>
+	</div>
 
 	<div class="row" style="padding-bottom:40px;">
 
@@ -13,55 +13,83 @@
 			<h3 class="font-primary" style="margin-top:-25px;">% studied</h3>
 		</div>
 
-		<div class="col-xs-12 col-sm-8">
-			<h2 class="font-primary" style="padding:15px 15px 7px;"><b>Mock FA & SA</b></h2>
+		<div class="col-xs-12 col-sm-4 center">
+			<h2 class="font-primary" style="padding:15px;"><b>Mock FA Tests</b></h2>
 			
-			<div class="spi-tests">
-				<% 4.times do |i| %>
-					<i class="fa fa-lg fa-lock spi-test-lock-red"></i>
+			<div class="spi-tests" style="padding-top:10px;">
+				<% @user_term_2_mock_fas.sort_by(&:attempt).each do |fa| %>
+					<% if fa.score == -1 %>
+					<!-- not yet completed -->
+						<i class="fa fa-lg spi-test-lock"><b><%= link_to "?", assessment_mock_fa_path(fa), class: "supress-a" %></b></i>
+						<% @user_term_2_mock_fas_in_progress = 1 %>
+					<% else %>
+					<!-- scored -->
+						<i class="fa fa-lg spi-test-lock-red"><b><%= link_to fa.score, assessment_mock_fa_path(fa), class: "supress-a", style: "color:white" %></b></i>
+					<% end %>
+				<% end %>
+				<% (4-@user_term_2_mock_fas.count).times do |i| %>
+					<i class="fa fa-lg fa-rocket spi-test-lock"></i>
 				<% end %>
 			</div>
 
-			<div class="spi-tests">
-				<% 4.times do |i| %>
-					<i class="fa fa-lg fa-lock spi-test-lock-orange"></i>
+			<button class="btn btn-red btn-block active" style="width:166px; margin: -5px auto 0;">AVERAGE: &nbsp;<%= @term_2_spi[:fa_average] %> / 15</button>
+		</div>
+
+		<div class="col-xs-12 col-sm-4 center">
+			<h2 class="font-primary" style="padding:15px;"><b>Mock SA Tests</b></h2>
+			
+			<div class="spi-tests" style="padding-top:10px;">
+				<% @user_term_2_mock_sas.sort_by(&:attempt).each do |sa| %>
+					<% if sa.score == -1 %>
+					<!-- not yet completed -->
+						<i class="fa fa-lg spi-test-lock"><b><%= link_to "?", assessment_mock_sa_path(sa), class: "supress-a" %></b></i>
+						<% @user_term_2_mock_sas_in_progress = 1 %>
+					<% else %>
+					<!-- scored -->
+						<i class="fa fa-lg spi-test-lock-orange"><b><%= link_to sa.score, assessment_mock_sa_path(sa), class: "supress-a", style: "color:white" %></b></i>
+					<% end %>
+				<% end %>
+				<% (4-@user_term_2_mock_sas.count).times do |i| %>
+					<i class="fa fa-lg fa-rocket spi-test-lock"></i>
 				<% end %>
 			</div>
+
+			<button class="btn btn-orange btn-block active" style="width:166px; margin: -5px auto 0;">AVERAGE: &nbsp;<%= @term_2_spi[:sa_average] %> / 90</button>
 		</div>
 
 	</div>
 </div>
 
-	<div class="content-container">
-		<div class="panel-secondary" style="margin-bottom:20px;">
-	    <div class="panel-title">
-		  	Exam Prep
-	    </div>
+<div class="content-container" style="height:264px;">
+	<div class="panel-secondary" style="margin-bottom:20px;">
+    <div class="panel-title">
+	  	Exam Prep
+    </div>
+	</div>
+
+	<div class="row" style="padding-bottom:25px;">
+		<div class="col-xs-12 col-sm-4 center">
+			<h2 class="font-primary" style="padding:15px;"><b>Your Predictive Score</b></h2>
+			<div class="spi-score-big"><%= @term_2_spi[:spi] %></div>
+			<h3 class="font-invert" style="margin-top:-25px;">out of 90</h3>
 		</div>
 
-		<div class="row" style="padding-bottom:25px;">
-			<div class="col-xs-12 col-sm-4 center">
-				<h2 class="font-primary" style="padding:15px;"><b>Your Predictive Score</b></h2>
-				<div class="spi-score-big"><%= @term_2_spi[:spi] %></div>
-				<h3 class="font-invert" style="margin-top:-25px;">out of 90</h3>
-			</div>
-
-			<div class="col-xs-12 col-sm-8">
-				<h2 class="font-primary" style="padding:15px;"><b>Our recommendation is to focus on</b></h2>
-				<% 2.times do |i| %>
-					<% unless @term_2_spi[:priortization_order][i][1].round(0) == 0 %>
-						<div>
-							<div class="spi" style="width:160px; height:58px; margin-top:0;">
-								<div class="spi-score" style="width:72px;">+ <%= @term_2_spi[:priortization_order][i][1].round(0) %></div>
-							</div>
-							<% chapter = @term_2_chapters.find { |x| x.id == @term_2_spi[:priortization_order][i][0] } %>
-							<h2 style="margin: -48px 0 24px 110px;">Ch <%= chapter.chapterNumber %>: <%= chapter.name %></h2>
+		<div class="col-xs-12 col-sm-8">
+			<h2 class="font-primary" style="padding:15px;"><b>Our recommendation is to focus on</b></h2>
+			<% 2.times do |i| %>
+				<% unless @term_2_spi[:priortization_order][i][1].round(0) == 0 %>
+					<div>
+						<div class="spi" style="width:160px; height:58px; margin-top:0;">
+							<div class="spi-score" style="width:72px;">+ <%= @term_2_spi[:priortization_order][i][1].round(0) %></div>
 						</div>
-					<% end %>	
-				<% end %>
-			</div>
+						<% chapter = @term_2_chapters.find { |x| x.id == @term_2_spi[:priortization_order][i][0] } %>
+						<h2 style="margin: -48px 0 24px 110px;">Ch <%= chapter.chapterNumber %>: <%= chapter.name %></h2>
+					</div>
+				<% end %>	
+			<% end %>
 		</div>
 	</div>
+</div>
 
 
 <div class="content-container">

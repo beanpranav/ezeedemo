@@ -1,5 +1,7 @@
 class AssessmentMockSasController < ApplicationController
   before_action :set_assessment_mock_sa, only: [:show, :edit, :update, :destroy]
+  before_action :validate_admin, only: [:index, :destroy]
+  before_action :validate_user, only: [:show, :new, :create, :edit, :update, :submit_test]
 
   def index
     @assessment_mock_sas = AssessmentMockSa.all

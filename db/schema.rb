@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150519134832) do
+ActiveRecord::Schema.define(version: 20150522105402) do
 
   create_table "assessment_contents", force: true do |t|
     t.integer  "video_content_id"
@@ -198,6 +198,8 @@ ActiveRecord::Schema.define(version: 20150519134832) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "name"
+    t.integer  "term_1_payment",         default: 0
+    t.integer  "term_2_payment",         default: 0
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true

@@ -49,7 +49,13 @@ $chapter_studied_specs = {
 													:assessment_weightage => { :overall => 60 , :mcq => 0.4, :subjectiveq => 0.6 }
 												}
 
-$predictive_score_specs = { :study_weightage => 0.6, :assessment_weightage => 0.4 }
+$predictive_score_specs = { 
+														0 => { :study_weightage => 0.6, :fa_weightage => 0.1, :sa_weightage => 0.3 },
+														1 => { :study_weightage => 0.5, :fa_weightage => 0.1, :sa_weightage => 0.4 },
+														2 => { :study_weightage => 0.4, :fa_weightage => 0.1, :sa_weightage => 0.5 },
+														3 => { :study_weightage => 0.3, :fa_weightage => 0.1, :sa_weightage => 0.6 },
+														4 => { :study_weightage => 0.2, :fa_weightage => 0.1, :sa_weightage => 0.7 }
+													}
 
 
 $mock_sa_specs = { 

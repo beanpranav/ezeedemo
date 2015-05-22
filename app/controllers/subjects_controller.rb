@@ -44,8 +44,8 @@ class SubjectsController < ApplicationController
       @user_term_1_mock_sas_in_progress = 0
       @user_term_2_mock_sas_in_progress = 0
       
-      @term_1_spi = predictive_score_calculator(@term_1_chapters, @user_term_1_chapters_studied, [], [])
-      @term_2_spi = predictive_score_calculator(@term_2_chapters, @user_term_2_chapters_studied, [], [])
+      @term_1_spi = predictive_score_calculator(@term_1_chapters, @user_term_1_chapters_studied, @user_term_1_mock_fas, @user_term_1_mock_sas)
+      @term_2_spi = predictive_score_calculator(@term_2_chapters, @user_term_2_chapters_studied, @user_term_2_mock_fas, @user_term_2_mock_sas)
 
     else
       @term_1_studied = 0
@@ -99,15 +99,36 @@ class SubjectsController < ApplicationController
 
       @term_1_studied = subject_studied(@term_1_chapters, @user_term_1_chapters_studied)
       @term_2_studied = subject_studied(@term_2_chapters, @user_term_2_chapters_studied)
+
+      @user_term_1_mock_fas = AssessmentMockFa.where(user_id: current_user.id, subject_id: @subject.id, term: 1)
+      @user_term_2_mock_fas = AssessmentMockFa.where(user_id: current_user.id, subject_id: @subject.id, term: 2)
       
-      @term_1_spi = predictive_score_calculator(@term_1_chapters, @user_term_1_chapters_studied, [], [])
-      @term_2_spi = predictive_score_calculator(@term_2_chapters, @user_term_2_chapters_studied, [], [])
+      @user_term_1_mock_fas_in_progress = 0
+      @user_term_2_mock_fas_in_progress = 0
+
+      @user_term_1_mock_sas = AssessmentMockSa.where(user_id: current_user.id, subject_id: @subject.id, term: "1")
+      @user_term_2_mock_sas = AssessmentMockSa.where(user_id: current_user.id, subject_id: @subject.id, term: "2")
+      
+      @user_term_1_mock_sas_in_progress = 0
+      @user_term_2_mock_sas_in_progress = 0
+      
+      @term_1_spi = predictive_score_calculator(@term_1_chapters, @user_term_1_chapters_studied, @user_term_1_mock_fas, @user_term_1_mock_sas)
+      @term_2_spi = predictive_score_calculator(@term_2_chapters, @user_term_2_chapters_studied, @user_term_2_mock_fas, @user_term_2_mock_sas)
+
 
     else
       @term_1_studied = 0
       @term_2_studied = 0
       @term_1_spi = 0
       @term_2_spi = 0
+      @user_term_1_mock_fas = 0
+      @user_term_2_mock_fas = 0
+      @user_term_1_mock_fas_in_progress = 0
+      @user_term_2_mock_fas_in_progress = 0
+      @user_term_1_mock_sas = 0
+      @user_term_2_mock_sas = 0
+      @user_term_1_mock_sas_in_progress = 0
+      @user_term_2_mock_sas_in_progress = 0
     end
   end
 

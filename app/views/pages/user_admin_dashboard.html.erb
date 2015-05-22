@@ -1,0 +1,95 @@
+<div class="secondary-nav secondary-nav-invert">
+  <i class="fa fa-2x fa-laptop content-list-icon-primary pull-left"></i>
+  <h2 class="font-invert"><b>Ezee Users Dashboard</b></h2>
+  <h3 class="font-invert"><%= current_user.name %></h3>
+
+  <div class="secondary-nav-actions pull-right dropdown">
+    <ul class="nav nav-tabs" role="tablist">
+      <li role="presentation" class="active"><a href="#free" aria-controls="term1" role="tab" data-toggle="tab">Free [<%= @free_users.count %>]</a></li>
+      <li role="presentation"><a href="#paid" aria-controls="term2" role="tab" data-toggle="tab">Paid [<%= @paid_users.count %>]</a></li>
+    </ul>
+  </div>
+
+</div>
+
+<div class="content-container">
+	<div class="tab-content">
+		
+		<div class="tab-pane fade in active" id="free">
+
+			<div class="panel panel-default">
+			  <div class="panel-secondary">
+			    <div class="panel-title">Free Users [<%= @free_users.count %>]</div>
+			  </div>
+
+			  <div class="panel-body">
+			    <table class="table table-hover" style="margin-bottom: 0px">
+			      <thead>
+			        <tr>
+			          <th colspan="1"></th>
+			          <th>Name</th>
+			          <th>Email</th>
+			          <th>Mobile</th>
+			          <th>Last Activity [#]</th>
+			          <th>Status</th>
+			        </tr>
+			      </thead>
+
+			      <tbody>
+			        <% @free_users.sort_by(&:id).each.with_index(1) do |user,i| %>
+				        <tr>
+				        	<td><%= i %></td>
+				        	<td><% if user.role == "Admin" %><em>-- <%= user.name %> --</em><% else %><%= user.name %><% end %></td>
+				          <td><%= user.email %></td>
+				          <td><%= user.phone_number %></td>
+				          <td><%= user.last_sign_in_at.strftime("%d %b %Y") %> [<%= user.sign_in_count %>]</td>
+				          <td><%= user.status %></td>
+				        </tr>
+			        <% end %>
+			      </tbody>
+			    </table>
+			  </div>
+			</div>
+
+		</div>
+
+		<div class="tab-pane fade " id="paid">
+			
+			<div class="panel panel-default">
+			  <div class="panel-secondary">
+			    <div class="panel-title">Paid Users [<%= @paid_users.count %>]</div>
+			  </div>
+
+			  <div class="panel-body">
+			    <table class="table table-hover" style="margin-bottom: 0px">
+			      <thead>
+			        <tr>
+			          <th colspan="1"></th>
+			          <th>Name</th>
+			          <th>Contact</th>
+			          <th>Activity</th>
+			          <th>Term Payment</th>
+			          <th>Status</th>
+			        </tr>
+			      </thead>
+
+			      <tbody>
+			        <% @paid_users.sort_by(&:id).each.with_index(1) do |user,i| %>
+				        <tr>
+				        	<td><%= i %></td>
+				        	<td><% if user.role == "Admin" %><em>-- <%= user.name %> --</em><% else %><%= user.name %><% end %></td>
+				          <td><%= user.email %><br><%= user.phone_number %></td>
+				          <td><em>Last login:</em> <%= user.last_sign_in_at %><br><em>Login count:</em> <%= user.sign_in_count %></td>
+				          <td><em>[1]</em> Rs. <%= user.term_1_payment %><br><em>[2]</em> Rs. <%= user.term_2_payment %></td>
+				          <td><%= user.status %></td>
+				        </tr>
+			        <% end %>
+			      </tbody>
+			    </table>
+			  </div>
+			</div>
+
+		</div>
+
+	</div>
+</div>

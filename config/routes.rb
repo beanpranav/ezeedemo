@@ -52,5 +52,6 @@ Rails.application.routes.draw do
 
   root 'pages#home'
   get "common_dashboard" => "pages#common_dashboard"
+  get "user_admin_dashboard" => "pages#user_admin_dashboard"
 
 end
