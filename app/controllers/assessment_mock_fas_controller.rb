@@ -41,6 +41,7 @@ class AssessmentMockFasController < ApplicationController
   end
 
   def new
+    @user_term_payment = [current_user.term_1_payment, current_user.term_2_payment]
     @assessment_mock_fa = AssessmentMockFa.new(user_id: params[:user_id], subject_id: params[:subject_id], term: params[:term], attempt: params[:attempt], score: params[:score])
     @subject = Subject.find_by(id: params[:subject_id])
     @term_chapters = @subject.chapters.where(term: params[:term]).sort_by(&:chapterNumber)

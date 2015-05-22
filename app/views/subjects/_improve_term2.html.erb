@@ -111,7 +111,7 @@
 				    						
 						<div class="row">
 							<div class="col-xs-12 col-sm-6">
-						    <% if chapter.status == "Paid"%>
+						    <% if chapter.status == "Paid" and @user_term_payment[chapter.term-1] == 0 %>
 						    	<i class="fa fa-2x fa-lock pull-left cpi-level-lock-icon pull-left"></i>
 						    <% else %>
 						    	<% if progress == nil %>

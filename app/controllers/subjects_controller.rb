@@ -22,6 +22,8 @@ class SubjectsController < ApplicationController
     end
     
     if user_signed_in?
+
+      @user_term_payment = [current_user.term_1_payment, current_user.term_2_payment]
       
       @term_1_weight = term_weight(@term_1_chapters)
       @term_2_weight = term_weight(@term_2_chapters)
@@ -48,6 +50,7 @@ class SubjectsController < ApplicationController
       @term_2_spi = predictive_score_calculator(@term_2_chapters, @user_term_2_chapters_studied, @user_term_2_mock_fas, @user_term_2_mock_sas)
 
     else
+      @user_term_payment = [0,0]
       @term_1_studied = 0
       @term_2_studied = 0
       @term_1_spi = 0
@@ -94,6 +97,8 @@ class SubjectsController < ApplicationController
     
     if user_signed_in?
       
+      @user_term_payment = [current_user.term_1_payment, current_user.term_2_payment]
+      
       @user_term_1_chapters_studied = UserChapterProgress.where(user_id: current_user.id, chapter_id: chapter_ids_term_1)
       @user_term_2_chapters_studied = UserChapterProgress.where(user_id: current_user.id, chapter_id: chapter_ids_term_2)
 
@@ -117,6 +122,7 @@ class SubjectsController < ApplicationController
 
 
     else
+      @user_term_payment = [0,0]
       @term_1_studied = 0
       @term_2_studied = 0
       @term_1_spi = 0

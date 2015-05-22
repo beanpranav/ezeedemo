@@ -435,6 +435,7 @@ select:focus { box-shadow: inset 0px 0px 2px $body-border; outline: 0; }
 
 .assessment-questions-container {
 	max-width: 176px;  // 44 x 4
+	height: 176px;
 	margin: 30px auto;
 }
 .assessment-sections-container {

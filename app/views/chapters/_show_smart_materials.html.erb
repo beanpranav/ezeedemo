@@ -2,7 +2,7 @@
 
 	<% @smart_materials.each do |study_material| %>
 
-			<% if @chapter.status == "Paid" %>
+			<% if @chapter.status == "Paid" and @user_term_payment[@chapter.term-1] == 0 %>
 				
 				<li class="content-list-item-lock">
 					<i class="fa fa-2x fa-lock content-list-icon-orange pull-left"></i>

@@ -2,7 +2,7 @@
 		
 		<% @concept_materials.each do |study_material| %>
 
-				<% if @chapter.status == "Paid" %>
+				<% if @chapter.status == "Paid" and @user_term_payment[@chapter.term-1] == 0 %>
 				<!-- lock paid chapters -->
 					
 					<li class="content-list-item-lock">

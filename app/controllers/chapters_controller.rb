@@ -10,6 +10,8 @@ class ChaptersController < ApplicationController
 
   def show
 
+    @user_term_payment = [0,0]
+
     @study_materials = @chapter.study_materials.sort_by(&:material_no)
     @concept_materials = @study_materials.select { |x| x["material_type"] == "Quick Concepts" }
     @smart_materials = @study_materials.select { |x| x["material_type"] == "Learn Smart" }
@@ -30,6 +32,9 @@ class ChaptersController < ApplicationController
 
 
     if user_signed_in?
+
+      @user_term_payment = [current_user.term_1_payment, current_user.term_2_payment]
+
       @user_concept_progresses = []
       @concept_materials.each do |study_material|
         if UserStudyProgress.where(user_id: current_user.id, study_material_id: study_material.id) != nil
