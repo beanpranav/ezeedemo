@@ -27,5 +27,6 @@ class PagesController < ApplicationController
   	@users = User.all
   	@free_users = @users.select { |x| x.term_1_payment = 0 or x.term_2_payment = 0 }
   	@paid_users = @users.select { |x| x.term_1_payment > 0 or x.term_2_payment > 0 }
+  	@today = Time.new.yday
   end
 end

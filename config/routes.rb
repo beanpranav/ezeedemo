@@ -30,7 +30,10 @@ Rails.application.routes.draw do
   end
 
   devise_for :users
-  
+  devise_scope :users do
+    post 'user_status_update', :controller => 'application'
+  end
+
   resources :study_materials
 
   resources :chapters do

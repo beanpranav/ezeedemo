@@ -13,6 +13,13 @@ class ApplicationController < ActionController::Base
 
   helper_method :validate_admin, :cpi_calculator, :chapter_studied, :subject_studied, :predictive_score_calculator, :term_weight
 
+  def user_status_update
+    u = User.find(params[:user_id].index(""))
+    u.status = params[:status]
+    u.save
+    redirect_to :back
+  end
+
   protected
 
   # for allowing :name as a strong parameter while signup and account update.
@@ -21,7 +28,7 @@ class ApplicationController < ActionController::Base
       u.permit(:name, :email, :password, :phone_number, :role, :status)
     end
     devise_parameter_sanitizer.for(:account_update) do |u|
-      u.permit(:name, :email, :password, :phone_number, :role, :status, :current_password)
+      u.permit(:name, :email, :password, :phone_number, :role, :status, :current_password, :term_1_payment, :term_2_payment)
     end
   end
 

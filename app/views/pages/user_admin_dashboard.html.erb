@@ -30,7 +30,7 @@
 			          <th>Name</th>
 			          <th>Email</th>
 			          <th>Mobile</th>
-			          <th>Last Activity [#]</th>
+			          <th>[Logins] Last login</th>
 			          <th>Status</th>
 			        </tr>
 			      </thead>
@@ -42,8 +42,14 @@
 				        	<td><% if user.role == "Admin" %><em>-- <%= user.name %> --</em><% else %><%= user.name %><% end %></td>
 				          <td><%= user.email %></td>
 				          <td><%= user.phone_number %></td>
-				          <td><%= user.last_sign_in_at.strftime("%d %b %Y") %> [<%= user.sign_in_count %>]</td>
-				          <td><%= user.status %></td>
+				          <td>[<%= user.sign_in_count %>] <%= @today - user.last_sign_in_at.yday %> days ago</td>
+				          <td>
+				          	<%= form_tag "/user_status_update" do %>
+				          		<%= text_field_tag :status, user.status %>
+				          		<%= hidden_field :user_id, user.id %>
+				          		<%= button_tag(type: 'submit', name: "SAVE", class: "btn btn-sm btn-secondary", style: "  margin: -2px 0 0 -4px; padding: 3px 8px") do %>SAVE<% end %>
+				          	<% end %>
+				          </td>
 				        </tr>
 			        <% end %>
 			      </tbody>
@@ -66,9 +72,9 @@
 			        <tr>
 			          <th colspan="1"></th>
 			          <th>Name</th>
-			          <th>Contact</th>
-			          <th>Activity</th>
-			          <th>Term Payment</th>
+			          <th>Email</th>
+			          <th>Mobile</th>
+			          <th colspan="2">Term Payment</th>
 			          <th>Status</th>
 			        </tr>
 			      </thead>
@@ -78,9 +84,10 @@
 				        <tr>
 				        	<td><%= i %></td>
 				        	<td><% if user.role == "Admin" %><em>-- <%= user.name %> --</em><% else %><%= user.name %><% end %></td>
-				          <td><%= user.email %><br><%= user.phone_number %></td>
-				          <td><em>Last login:</em> <%= user.last_sign_in_at %><br><em>Login count:</em> <%= user.sign_in_count %></td>
-				          <td><em>[1]</em> Rs. <%= user.term_1_payment %><br><em>[2]</em> Rs. <%= user.term_2_payment %></td>
+				          <td><%= user.email %></td>
+				          <td><%= user.phone_number %></td>
+				          <td>[1] Rs. <%= user.term_1_payment %> </td>
+				          <td>[2] Rs. <%= user.term_2_payment %></td>
 				          <td><%= user.status %></td>
 				        </tr>
 			        <% end %>
