@@ -20,22 +20,28 @@
 						</div>
 						
 						<div class="spi-tests">
-							<% @user_term_1_mock_fas.sort_by(&:attempt).each do |fa| %>
-								<% if fa.score == -1 %>
-								<!-- not yet completed -->
-									<i class="fa fa-lg spi-test-lock"><b><%= link_to "?", assessment_mock_fa_path(fa), class: "supress-a" %></b></i>
-									<% @user_term_1_mock_fas_in_progress = 1 %>
-								<% else %>
-								<!-- scored -->
-									<i class="fa fa-lg spi-test-lock-red"><b><%= link_to fa.score, assessment_mock_fa_path(fa), class: "supress-a", style: "color:white" %></b></i>
+							<% if user_signed_in? %>
+								<% @user_term_1_mock_fas.sort_by(&:attempt).each do |fa| %>
+									<% if fa.score == -1 %>
+									<!-- not yet completed -->
+										<i class="fa fa-lg spi-test-lock"><b><%= link_to "?", assessment_mock_fa_path(fa), class: "supress-a" %></b></i>
+										<% @user_term_1_mock_fas_in_progress = 1 %>
+									<% else %>
+									<!-- scored -->
+										<i class="fa fa-lg spi-test-lock-red"><b><%= link_to fa.score, assessment_mock_fa_path(fa), class: "supress-a", style: "color:white" %></b></i>
+									<% end %>
 								<% end %>
-							<% end %>
-							<% (4-@user_term_1_mock_fas.count).times do |i| %>
-								<i class="fa fa-lg fa-rocket spi-test-lock"></i>
+								<% (4-@user_term_1_mock_fas.count).times do |i| %>
+									<i class="fa fa-lg fa-rocket spi-test-lock"></i>
+								<% end %>
+							<% else %>
+								<% 4.times do |i| %>
+									<i class="fa fa-lg fa-rocket spi-test-lock"></i>
+								<% end %>
 							<% end %>
 						</div>
 
-						<% if false %>
+						<% if !user_signed_in? %>
 							<div class="btn-group" role="group">
 								<%= link_to '<i class="fa fa-lock"></i>'.html_safe, "#", class: "btn btn-red active", disabled: "disabled" %>
 								<%= link_to "TAKE MOCK FA", "#", class: "btn btn-red active", disabled: "disabled" %>
@@ -74,25 +80,31 @@
 						</div>
 
 						<div class="spi-tests">
-							<% @user_term_1_mock_sas.sort_by(&:attempt).each do |sa| %>
-								<% if sa.score == -1 %>
-								<!-- not yet completed -->
-									<i class="fa fa-lg spi-test-lock"><b><%= link_to "?", assessment_mock_sa_path(sa), class: "supress-a" %></b></i>
-									<% @user_term_1_mock_sas_in_progress = 1 %>
-								<% elsif sa.score == 0 %>
-								<!-- completed, not scored -->
-									<i class="fa fa-lg spi-test-lock-orange"><b><%= link_to "?", assessment_mock_sa_path(sa), class: "supress-a", style: "color:white" %></b></i>
-								<% else %>
-								<!-- scored -->
-									<i class="fa fa-lg spi-test-lock-orange"><b><%= link_to sa.score, assessment_mock_sa_path(sa), class: "supress-a", style: "color:white" %></b></i>
+							<% if user_signed_in? %>
+								<% @user_term_1_mock_sas.sort_by(&:attempt).each do |sa| %>
+									<% if sa.score == -1 %>
+									<!-- not yet completed -->
+										<i class="fa fa-lg spi-test-lock"><b><%= link_to "?", assessment_mock_sa_path(sa), class: "supress-a" %></b></i>
+										<% @user_term_1_mock_sas_in_progress = 1 %>
+									<% elsif sa.score == 0 %>
+									<!-- completed, not scored -->
+										<i class="fa fa-lg spi-test-lock-orange"><b><%= link_to "?", assessment_mock_sa_path(sa), class: "supress-a", style: "color:white" %></b></i>
+									<% else %>
+									<!-- scored -->
+										<i class="fa fa-lg spi-test-lock-orange"><b><%= link_to sa.score, assessment_mock_sa_path(sa), class: "supress-a", style: "color:white" %></b></i>
+									<% end %>
 								<% end %>
-							<% end %>
-							<% (4-@user_term_1_mock_sas.count).times do |i| %>
-								<i class="fa fa-lg fa-rocket spi-test-lock"></i>
+								<% (4-@user_term_1_mock_sas.count).times do |i| %>
+									<i class="fa fa-lg fa-rocket spi-test-lock"></i>
+								<% end %>
+							<% else %>
+								<% 4.times do |i| %>
+									<i class="fa fa-lg fa-rocket spi-test-lock"></i>
+								<% end %>
 							<% end %>
 						</div>
 
-						<% if false %>
+						<% if !user_signed_in? %>
 							<div class="btn-group" role="group">
 								<%= link_to '<i class="fa fa-lock"></i>'.html_safe, "#", class: "btn btn-orange active", disabled: "disabled" %>
 								<%= link_to "TAKE MOCK SA", "#", class: "btn btn-orange active", disabled: "disabled" %>

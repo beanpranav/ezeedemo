@@ -42,7 +42,7 @@
 				        	<td><% if user.role == "Admin" %><em>-- <%= user.name %> --</em><% else %><%= user.name %><% end %></td>
 				          <td><%= user.email %></td>
 				          <td><%= user.phone_number %></td>
-				          <td>[<%= user.sign_in_count %>] <%= @today - user.last_sign_in_at.yday %> days ago</td>
+				          <td>[<%= user.sign_in_count %>] <%= @today - user.last_sign_in_at.yday %> days</td>
 				          <td>
 				          	<%= form_tag "/user_status_update" do %>
 				          		<%= text_field_tag :status, user.status %>
