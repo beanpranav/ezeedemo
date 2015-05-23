@@ -37,6 +37,7 @@
 <div class="row unrow">
 	<div class="col-xs-12 col-sm-3" style="padding:0px;">
 		<%= render "chapters/cpi" %>
+		<%= render "pages/demo_cta" if @user_term_payment[@chapter.term-1] == 0 %>
 
 		<% if user_signed_in? && current_user.role == "Admin" %>
 	    <%= link_to "Edit Chapter", edit_chapter_path(@chapter) %><br>
