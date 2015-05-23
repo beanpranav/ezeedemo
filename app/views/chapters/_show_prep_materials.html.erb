@@ -18,7 +18,7 @@
 			<li class="content-list-item-lock">
 				<i class="fa fa-2x fa-lock content-list-icon-green pull-left"></i>
 				<h3>Studied: 0 / <%= @longqs.count %></h3>
-				<h2>5 marks: Subjective Long Qs</h2>
+				<h2>4 & 5 marks: Subjective Long Qs</h2>
 			</li>
 
 		<% elsif user_signed_in? %>
@@ -43,35 +43,29 @@
 				<li class="content-list-item">
 					<i class="fa fa-2x fa-trophy content-list-icon-<%= if @user_longq_progress_count == @longqs.count then "green" else "default" end %> pull-left"></i>
 					<h3>Studied: <%= @user_longq_progress_count %> / <%= @longqs.count %></h3>
-					<h2>5 marks: Subjective Long Qs</h2>
+					<h2>4 & 5 marks: Subjective Long Qs</h2>
 				</li>
 			</a>
 		
 		<% else %>
 
-			<a href="<%= study_mcqs_chapter_path(@chapter) %>" class="supress-a">
-				<li class="content-list-item">
-					<i class="fa fa-2x fa-trophy content-list-icon-green pull-left"></i>
-					<h3>Studied: 0 / <%= @mcqs.count %>, Correct: 0</h3>
-					<h2>1 mark: MCQs</h2>
-				</li>
-			</a>
+			<li class="content-list-item-lock">
+				<i class="fa fa-2x fa-lock content-list-icon-green pull-left"></i>
+				<h3>Studied: 0 / <%= @mcqs.count %>, Correct: 0</h3>
+				<h2>1 mark: MCQs</h2>
+			</li>
 
-			<a href="<%= study_shortqs_chapter_path(@chapter) %>" class="supress-a">
-				<li class="content-list-item">
-					<i class="fa fa-2x fa-trophy content-list-icon-green pull-left"></i>
-					<h3>Studied: 0 / <%= @mcqs.count %></h3>
-					<h2>2 & 3 marks: Subjective Short Qs</h2>
-				</li>
-			</a>
+			<li class="content-list-item-lock">
+				<i class="fa fa-2x fa-lock content-list-icon-green pull-left"></i>
+				<h3>Studied: 0 / <%= @shortqs.count %></h3>
+				<h2>2 & 3 marks: Subjective Short Qs</h2>
+			</li>
 
-			<a href="<%= study_longqs_chapter_path(@chapter) %>" class="supress-a">
-				<li class="content-list-item">
-					<i class="fa fa-2x fa-trophy content-list-icon-green pull-left"></i>
-					<h3>Studied: 0 / <%= @longqs.count %></h3>
-					<h2>5 marks: Subjective Long Qs</h2>
-				</li>
-			</a>
+			<li class="content-list-item-lock">
+				<i class="fa fa-2x fa-lock content-list-icon-green pull-left"></i>
+				<h3>Studied: 0 / <%= @longqs.count %></h3>
+				<h2>4 & 5 marks: Subjective Long Qs</h2>
+			</li>
 
 		<% end %>
 			

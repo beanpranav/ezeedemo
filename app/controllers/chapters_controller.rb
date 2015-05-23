@@ -1,7 +1,7 @@
 class ChaptersController < ApplicationController
   before_action :set_chapter, only: [:show, :edit, :update, :destroy]
   before_action :validate_admin, only: [:index, :new, :create, :edit, :update, :destroy]
-  before_action :validate_user, only: [:save_user_study_progress, :save_user_assessment_progress]
+  before_action :validate_user, only: [:study_mcqs, :study_shortqs, :study_longqs, :save_user_study_progress, :save_user_assessment_progress]
 
 
   def index

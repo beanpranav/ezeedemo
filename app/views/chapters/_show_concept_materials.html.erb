@@ -1,252 +1,255 @@
-	<ul class="content-list">
-		
-		<% @concept_materials.each do |study_material| %>
+<ul class="content-list">
+	
+	<% @concept_materials.each do |study_material| %>
 
-				<% if @chapter.status == "Paid" and @user_term_payment[@chapter.term-1] == 0 %>
-				<!-- lock paid chapters -->
-					
-					<li class="content-list-item-lock">
-						<i class="fa fa-2x fa-lock content-list-icon-red pull-left"></i>
-						<h3><%= if study_material.video_content != nil then study_material.video_content.video_duration else "***MISSING***" end %> min video <%= "& 3D model" if study_material.interactive_content_id? %></h3>
-						<h2><%= study_material.name %></h2>
-					</li>
-
+			<% if @chapter.status == "Paid" and @user_term_payment[@chapter.term-1] == 0 %>
+			<!-- lock paid chapters -->
+				<li class="content-list-item-lock">
+					<i class="fa fa-2x fa-lock content-list-icon-red pull-left"></i>
+					<h3><%= if study_material.video_content != nil then study_material.video_content.video_duration else "***MISSING***" end %> min video <%= "& 3D model" if study_material.interactive_content_id? %></h3>
+					<h2><%= study_material.name %></h2>
+				</li>
+        
+			<% else %>
+			<!-- Display Free chapters -->
+			
+				<% if user_signed_in? %>
+          <li class="content-list-item" data-toggle="modal" data-target="#show-study-material-<%= study_material.id %>">
+						<i class="fa fa-2x fa-trophy content-list-icon-<%= if @user_concept_progresses.find { |x| x["study_material_id"] == study_material.id } then "red" else "default" end %> pull-left"></i>
+            <h3><%= if study_material.video_content != nil then study_material.video_content.video_duration else "***MISSING***" end %> min video <%= "with 3D model" if study_material.interactive_content_id? %></h3>
+            <h2><%= study_material.name %></h2>
+          </li>
 				<% else %>
-				<!-- Display Free chapters -->
-				
-						<li class="content-list-item" data-toggle="modal" data-target="#show-study-material-<%= study_material.id %>">
-							<% if user_signed_in? %>
-								<i class="fa fa-2x fa-trophy content-list-icon-<%= if @user_concept_progresses.find { |x| x["study_material_id"] == study_material.id } then "red" else "default" end %> pull-left"></i>
-							<% else %>
-								<i class="fa fa-2x fa-trophy content-list-icon-red pull-left"></i>
-							<% end %>
-							<h3><%= if study_material.video_content != nil then study_material.video_content.video_duration else "***MISSING***" end %> min video <%= "with 3D model" if study_material.interactive_content_id? %></h3>
-							<h2><%= study_material.name %></h2>
-						</li>
+					<li class="content-list-item-lock">
+            <i class="fa fa-2x fa-lock content-list-icon-red pull-left"></i>
+            <h3><%= if study_material.video_content != nil then study_material.video_content.video_duration else "***MISSING***" end %> min video <%= "& 3D model" if study_material.interactive_content_id? %></h3>
+            <h2><%= study_material.name %></h2>
+          </li>
+				<% end %>
+					
+				<!-- Modal -->
+				<% if study_material.interactive_content_id? %>
+				<!-- Show both video and interactive content -->
+		    	
+		    	<div class="modal" id="show-study-material-<%= study_material.id %>" tabindex="-1" role="dialog" aria-hidden="true">
+		    	  <div class="modal-dialog">
+		    	    <div class="modal-content">
+		    	      
+		    	      <div class="panel-red panel-title">
+		    	      	<%= study_material.name %>
 
-						<% if study_material.interactive_content_id? %>
-						<!-- Show both video and interactive content -->
-				    	
-				    	<div class="modal" id="show-study-material-<%= study_material.id %>" tabindex="-1" role="dialog" aria-hidden="true">
-				    	  <div class="modal-dialog">
-				    	    <div class="modal-content">
-				    	      
-				    	      <div class="panel-red panel-title">
-				    	      	<%= study_material.name %>
+		    	      	<div class="modal-actions pull-right">
+			    	      	
+			    	      	<button type="button" class="btn btn-sm btn-modal pull-right" data-dismiss="modal"><i class="fa fa-times"></i></button>
+										
+										<% if user_signed_in? %>
 
-  			    	      	<div class="modal-actions pull-right">
-  				    	      	
-  				    	      	<button type="button" class="btn btn-sm btn-modal pull-right" data-dismiss="modal"><i class="fa fa-times"></i></button>
-  											
-  											<% if user_signed_in? %>
-
-  												<% progress = @user_concept_progresses.find { |x| x["study_material_id"] == study_material.id } %>
+											<% progress = @user_concept_progresses.find { |x| x["study_material_id"] == study_material.id } %>
 
 
-  												<%= form_tag "/chapters/#{@chapter.id}/save_user_study_progress", class: "pull-right" do %>
-  					    	      		
-  										      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-  										    		<% if progress == nil %>
-  										    			<button type="button" class="btn btn-sm btn-modal-red">Mark as Complete</button>
-  										    		<% else %>
-  										    			<button type="button" class="btn btn-sm btn-modal">Completed</button> 
-  										    		<% end %>
-  										    	</a>
-  										    	<%= hidden_field_tag :study_material_id, study_material.id %>
+											<%= form_tag "/chapters/#{@chapter.id}/save_user_study_progress", class: "pull-right" do %>
+				    	      		
+									      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									    		<% if progress == nil %>
+									    			<button type="button" class="btn btn-sm btn-modal-red">Mark as Complete</button>
+									    		<% else %>
+									    			<button type="button" class="btn btn-sm btn-modal">Completed</button> 
+									    		<% end %>
+									    	</a>
+									    	<%= hidden_field_tag :study_material_id, study_material.id %>
 
-  													<ul class="dropdown-menu modal-dropdown-menu">
-  										    		<% @rating_options.each do |rating| %>
-  		  				    	      		<li>
-  		  				    	      			<% if progress == nil %>
+												<ul class="dropdown-menu modal-dropdown-menu">
+									    		<% @rating_options.each do |rating| %>
+	  				    	      		<li>
+	  				    	      			<% if progress == nil %>
 
-  		  				    	      				<%= button_tag(type: 'submit', name: "rating[#{rating}]", class: "btn btn-sm btn-block btn-link feedback-inactive") do %>
-  		  				    	      					<%= rating %>
-  																	<% end %>
-  																
-  																<% else %>
-  										      				
-  										      				<% if progress.rating == rating %>
-  											      				<%= button_tag(type: 'submit', name: "rating[#{rating}]", class: "btn btn-sm btn-block btn-link feedback-active") do %>
-  			  				    	      					<%= rating %>
-  																		<% end %>
-  																	<% else %>
-  																		<%= button_tag(type: 'submit', name: "rating[#{rating}]", class: "btn btn-sm btn-block btn-link feedback-inactive") do %>
-  			  				    	      					<%= rating %>
-  																		<% end %>
-  																	<% end %>
+	  				    	      				<%= button_tag(type: 'submit', name: "rating[#{rating}]", class: "btn btn-sm btn-block btn-link feedback-inactive") do %>
+	  				    	      					<%= rating %>
+																<% end %>
+															
+															<% else %>
+									      				
+									      				<% if progress.rating == rating %>
+										      				<%= button_tag(type: 'submit', name: "rating[#{rating}]", class: "btn btn-sm btn-block btn-link feedback-active") do %>
+		  				    	      					<%= rating %>
+																	<% end %>
+																<% else %>
+																	<%= button_tag(type: 'submit', name: "rating[#{rating}]", class: "btn btn-sm btn-block btn-link feedback-inactive") do %>
+		  				    	      					<%= rating %>
+																	<% end %>
+																<% end %>
 
-  																<% end %>
-  		  				    	      		</li>
-  		  				    	      	<% end %>
-  		  				    	      	<li class="divider"></li>
-  		  				    	      	<li class="dropdown-footer">
-  		  				    	      		Your feedback helps us focus<br>
-  		  				    	      		on improving the most difficult <br>
-  		  				    	      		concepts for everyone. Thanks!
-  		  				    	      	</li>
-  										      </ul>
+															<% end %>
+	  				    	      		</li>
+	  				    	      	<% end %>
+	  				    	      	<li class="divider"></li>
+	  				    	      	<li class="dropdown-footer">
+	  				    	      		Your feedback helps us focus<br>
+	  				    	      		on improving the most difficult <br>
+	  				    	      		concepts for everyone. Thanks!
+	  				    	      	</li>
+									      </ul>
 
-  										    <% end %>
+									    <% end %>
 
-  										  <% else %>
+									  <% else %>
 
-  									      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-  									    		<button type="button" class="btn btn-sm btn-modal-red">Mark as Complete</button>
-  									    	</a>
+								      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								    		<button type="button" class="btn btn-sm btn-modal-red">Mark as Complete</button>
+								    	</a>
 
-  												<ul class="dropdown-menu modal-dropdown-menu">
-  									    		<li class="dropdown-footer">Create an account to<br>save your progress</li>
-                            <li class="divider"></li>
-                            <li><%= link_to "<b>Signup Now</b>".html_safe, new_user_registration_path %></li>
-                            <li><%= link_to "Login", new_user_session_path %></li>
-  									      </ul>
+											<ul class="dropdown-menu modal-dropdown-menu">
+								    		<li class="dropdown-footer">Create an account to<br>save your progress</li>
+                        <li class="divider"></li>
+                        <li><%= link_to "<b>Signup Now</b>".html_safe, new_user_registration_path %></li>
+                        <li><%= link_to "Login", new_user_session_path %></li>
+								      </ul>
 
-  				    	      	<% end %>	
-  				    	      </div>
+			    	      	<% end %>	
+			    	      </div>
 
-				    	      </div>
+		    	      </div>
 
-				    	      <div class="modal-body">
-				    	      	<div class="row">
-					    	      	<div class="col-sm-12 col-md-6">  
-					    	      		<div class="videoWrapper">
-					    	      			<%= if study_material.video_content != nil then study_material.video_content.content.html_safe else "***MISSING***" end %>
-					    	      		</div>
-					    	      	</div>
-					    	      	<div class="col-sm-12 col-md-6">  
-					    	      		<div class="videoWrapper">
-					    	      			<!-- Div ID for setting 3D Interactive -->
-					    	      			<div id="rotateContent-<%= study_material.interactive_content_id %>">
-															<button class="btn btn-block btn-primary" onclick="getScale()">
-																Click to Show 3D Model 
-															</button>
-														</div>
-					    	      		</div>
-					    	      	</div>
-					    	      </div>
-				    	      </div>
+		    	      <div class="modal-body">
+		    	      	<div class="row">
+			    	      	<div class="col-sm-12 col-md-6">  
+			    	      		<div class="videoWrapper">
+			    	      			<%= if study_material.video_content != nil then study_material.video_content.content.html_safe else "***MISSING***" end %>
+			    	      		</div>
+			    	      	</div>
+			    	      	<div class="col-sm-12 col-md-6">  
+			    	      		<div class="videoWrapper">
+			    	      			<!-- Div ID for setting 3D Interactive -->
+			    	      			<div id="rotateContent-<%= study_material.interactive_content_id %>">
+													<button class="btn btn-block btn-primary" onclick="getScale()">
+														Click to Show 3D Model 
+													</button>
+												</div>
+			    	      		</div>
+			    	      	</div>
+			    	      </div>
+		    	      </div>
 
-				    	    </div>
-				    	  </div>
-				    	</div>
+		    	    </div>
+		    	  </div>
+		    	</div>
 
-				    	<script type="text/javascript">
-				    		function getScale(){
+		    	<script type="text/javascript">
+		    		function getScale(){
 
-				    			var div = document.getElementById("rotateContent-<%= study_material.interactive_content_id %>");
-			    				var height = div.offsetHeight;
-			    				var width = div.offsetWidth;
+		    			var div = document.getElementById("rotateContent-<%= study_material.interactive_content_id %>");
+	    				var height = div.offsetHeight;
+	    				var width = div.offsetWidth;
 
-			    				if (typeof(RotateTool) == 'undefined') {
-			    					alert('rotate.js not loaded!');
-			    				} 
-			    				else {
-			    					var jsParams    = {};
-			    					jsParams.path   = "<%= study_material.interactive_content.content.url.gsub(/original.*$/,'original/').gsub(/http:/,'https:') %>";
-			    					jsParams.target = "rotateContent-<%= study_material.interactive_content_id %>";
-			    					jsParams.targetWidth  = width;
-			    					jsParams.targetHeight = height;
-			    					RotateTool.add(jsParams);
-			    				}
-		    				}
-				    	</script>
+	    				if (typeof(RotateTool) == 'undefined') {
+	    					alert('rotate.js not loaded!');
+	    				} 
+	    				else {
+	    					var jsParams    = {};
+	    					jsParams.path   = "<%= study_material.interactive_content.content.url.gsub(/original.*$/,'original/').gsub(/http:/,'https:') %>";
+	    					jsParams.target = "rotateContent-<%= study_material.interactive_content_id %>";
+	    					jsParams.targetWidth  = width;
+	    					jsParams.targetHeight = height;
+	    					RotateTool.add(jsParams);
+	    				}
+    				}
+		    	</script>
 
-			    	<% else %>
-			    	<!-- Show only video content -->
+	    	<% else %>
+	    	<!-- Show only video content -->
 
-				    	<div class="row col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 modal" id="show-study-material-<%= study_material.id %>" tabindex="-1" role="dialog" aria-hidden="true">
-				    	  <div class="modal-dialog">
-				    	    <div class="modal-content">
-				    	      
-				    	      <div class="panel-red panel-title">
-				    	      	<%= study_material.name %>
-	    	    	      	
-	    	    	      	<div class="modal-actions pull-right">
-  				    	      	
-  				    	      	<button type="button" class="btn btn-sm btn-modal pull-right" data-dismiss="modal"><i class="fa fa-times"></i></button>
-  											
-  											<% if user_signed_in? %>
+		    	<div class="row col-sm-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2 modal" id="show-study-material-<%= study_material.id %>" tabindex="-1" role="dialog" aria-hidden="true">
+		    	  <div class="modal-dialog">
+		    	    <div class="modal-content">
+		    	      
+		    	      <div class="panel-red panel-title">
+		    	      	<%= study_material.name %>
+  	    	      	
+  	    	      	<div class="modal-actions pull-right">
+			    	      	
+			    	      	<button type="button" class="btn btn-sm btn-modal pull-right" data-dismiss="modal"><i class="fa fa-times"></i></button>
+										
+										<% if user_signed_in? %>
 
-  												<% progress = @user_concept_progresses.find { |x| x["study_material_id"] == study_material.id } %>
+											<% progress = @user_concept_progresses.find { |x| x["study_material_id"] == study_material.id } %>
 
 
-  												<%= form_tag "/chapters/#{@chapter.id}/save_user_study_progress", class: "pull-right" do %>
-  					    	      		
-  										      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-  										    		<% if progress == nil %>
-  										    			<button type="button" class="btn btn-sm btn-modal-red">Mark as Complete</button>
-  										    		<% else %>
-  										    			<button type="button" class="btn btn-sm btn-modal">Completed</button> 
-  										    		<% end %>
-  										    	</a>
-  										    	<%= hidden_field_tag :study_material_id, study_material.id %>
+											<%= form_tag "/chapters/#{@chapter.id}/save_user_study_progress", class: "pull-right" do %>
+				    	      		
+									      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									    		<% if progress == nil %>
+									    			<button type="button" class="btn btn-sm btn-modal-red">Mark as Complete</button>
+									    		<% else %>
+									    			<button type="button" class="btn btn-sm btn-modal">Completed</button> 
+									    		<% end %>
+									    	</a>
+									    	<%= hidden_field_tag :study_material_id, study_material.id %>
 
-  													<ul class="dropdown-menu modal-dropdown-menu">
-  										    		<% @rating_options.each do |rating| %>
-  		  				    	      		<li>
-  		  				    	      			<% if progress == nil %>
+												<ul class="dropdown-menu modal-dropdown-menu">
+									    		<% @rating_options.each do |rating| %>
+	  				    	      		<li>
+	  				    	      			<% if progress == nil %>
 
-  		  				    	      				<%= button_tag(type: 'submit', name: "rating[#{rating}]", class: "btn btn-sm btn-block btn-link feedback-inactive") do %>
-  		  				    	      					<%= rating %>
-  																	<% end %>
-  																
-  																<% else %>
-  										      				
-  										      				<% if progress.rating == rating %>
-  											      				<%= button_tag(type: 'submit', name: "rating[#{rating}]", class: "btn btn-sm btn-block btn-link feedback-active") do %>
-  			  				    	      					<%= rating %>
-  																		<% end %>
-  																	<% else %>
-  																		<%= button_tag(type: 'submit', name: "rating[#{rating}]", class: "btn btn-sm btn-block btn-link feedback-inactive") do %>
-  			  				    	      					<%= rating %>
-  																		<% end %>
-  																	<% end %>
+	  				    	      				<%= button_tag(type: 'submit', name: "rating[#{rating}]", class: "btn btn-sm btn-block btn-link feedback-inactive") do %>
+	  				    	      					<%= rating %>
+																<% end %>
+															
+															<% else %>
+									      				
+									      				<% if progress.rating == rating %>
+										      				<%= button_tag(type: 'submit', name: "rating[#{rating}]", class: "btn btn-sm btn-block btn-link feedback-active") do %>
+		  				    	      					<%= rating %>
+																	<% end %>
+																<% else %>
+																	<%= button_tag(type: 'submit', name: "rating[#{rating}]", class: "btn btn-sm btn-block btn-link feedback-inactive") do %>
+		  				    	      					<%= rating %>
+																	<% end %>
+																<% end %>
 
-  																<% end %>
-  		  				    	      		</li>
-  		  				    	      	<% end %>
-  		  				    	      	<li class="divider"></li>
-  		  				    	      	<li class="dropdown-footer">
-  		  				    	      		Your feedback helps us focus<br>
-  		  				    	      		on improving the most difficult <br>
-  		  				    	      		concepts for everyone. Thanks!
-  		  				    	      	</li>
-  										      </ul>
+															<% end %>
+	  				    	      		</li>
+	  				    	      	<% end %>
+	  				    	      	<li class="divider"></li>
+	  				    	      	<li class="dropdown-footer">
+	  				    	      		Your feedback helps us focus<br>
+	  				    	      		on improving the most difficult <br>
+	  				    	      		concepts for everyone. Thanks!
+	  				    	      	</li>
+									      </ul>
 
-  										    <% end %>
+									    <% end %>
 
-  										  <% else %>
+									  <% else %>
 
-  									      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-  									    		<button type="button" class="btn btn-sm btn-modal-red">Mark as Complete</button>
-  									    	</a>
+								      <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+								    		<button type="button" class="btn btn-sm btn-modal-red">Mark as Complete</button>
+								    	</a>
 
-  												<ul class="dropdown-menu modal-dropdown-menu">
-                            <li class="dropdown-footer">Create an account to<br>save your progress</li>
-                            <li class="divider"></li>
-                            <li><%= link_to "<b>Signup Now</b>".html_safe, new_user_registration_path %></li>
-                            <li><%= link_to "Login", new_user_session_path %></li>
-                          </ul>
+											<ul class="dropdown-menu modal-dropdown-menu">
+                        <li class="dropdown-footer">Create an account to<br>save your progress</li>
+                        <li class="divider"></li>
+                        <li><%= link_to "<b>Signup Now</b>".html_safe, new_user_registration_path %></li>
+                        <li><%= link_to "Login", new_user_session_path %></li>
+                      </ul>
 
-  				    	      	<% end %>	
-  				    	      </div>
+			    	      	<% end %>	
+			    	      </div>
 
-				    	      </div>
+		    	      </div>
 
-				    	      <div class="modal-body">
-											<div class="videoWrapper">
-												<%= if study_material.video_content != nil then study_material.video_content.content.html_safe else "***MISSING***" end %>
-											</div>
-				    	      </div>
+		    	      <div class="modal-body">
+									<div class="videoWrapper">
+										<%= if study_material.video_content != nil then study_material.video_content.content.html_safe else "***MISSING***" end %>
+									</div>
+		    	      </div>
 
-				    	    </div>
-				    	  </div>
-				    	</div>
+		    	    </div>
+		    	  </div>
+		    	</div>
 
-						<% end %> <!-- If Interactive -->
+				<% end %> <!-- If Interactive -->
 
-				<% end %> <!-- If Paid -->
-
-		<% end %>
-	</ul>
+			<% end %> <!-- If Paid -->
+	<% end %>
+</ul>
 
