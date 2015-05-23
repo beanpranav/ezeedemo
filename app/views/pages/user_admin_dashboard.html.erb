@@ -36,7 +36,7 @@
 			      </thead>
 
 			      <tbody>
-			        <% @free_users.sort_by(&:id).each.with_index(1) do |user,i| %>
+			        <% @free_users.sort_by(&:sign_in_count).each.with_index(1) do |user,i| %>
 				        <tr>
 				        	<td><%= i %></td>
 				        	<td><% if user.role == "Admin" %><em>-- <%= user.name %> --</em><% else %><%= user.name %><% end %></td>
@@ -80,7 +80,7 @@
 			      </thead>
 
 			      <tbody>
-			        <% @paid_users.sort_by(&:id).each.with_index(1) do |user,i| %>
+			        <% @paid_users.sort_by(&:term_2_payment).each.with_index(1) do |user,i| %>
 				        <tr>
 				        	<td><%= i %></td>
 				        	<td><% if user.role == "Admin" %><em>-- <%= user.name %> --</em><% else %><%= user.name %><% end %></td>
