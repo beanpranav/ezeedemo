@@ -16,7 +16,7 @@
 		    <div class="panel-body center">
 
 						<div class="comment-container" style="margin: -13px -18px 17px;">
-							Complete 3 chapters to unlock your first Formative Assessment (FA) mock exam
+							We recommend completing 2 chapters before your first Formative Assessment (FA) mock exam
 						</div>
 						
 						<div class="spi-tests">
@@ -76,7 +76,7 @@
 		    <div class="panel-body center">
 
 						<div class="comment-container" style="margin: -13px -18px 17px;">
-							Complete 75% subject studies to unlock your first Summative Assessment (SA) mock exam
+							We recommend completing 75% studies before your first Summative Assessment (SA) mock exam
 						</div>
 
 						<div class="spi-tests">
@@ -104,7 +104,7 @@
 							<% end %>
 						</div>
 
-						<% if !user_signed_in? %>
+						<% if !user_signed_in? or @user_term_payment[0] == 0 %>
 							<div class="btn-group" role="group">
 								<%= link_to '<i class="fa fa-lock"></i>'.html_safe, "#", class: "btn btn-orange active", disabled: "disabled" %>
 								<%= link_to "TAKE MOCK SA", "#", class: "btn btn-orange active", disabled: "disabled" %>
@@ -130,7 +130,7 @@
 		  <a class="collapsed supress-a" data-toggle="collapse" data-parent="#accordion-progress" href="#ProgressThree" aria-expanded="false" aria-controls="ProgressThree">
 			  <div class="panel-green" role="tab" id="headingThree">
 			    <div class="panel-title">
-			    	Your Predictive Score
+			    	My Predictive Score
 			    	<i class="fa fa-fw fa-sort pull-right" style="margin: 3px -5px 0 0;"></i>
 			    </div>
 			  </div>
@@ -139,14 +139,14 @@
 		    <div class="panel-body">
 					
 					<% if user_signed_in? %>
-						<div class="comment-container" style="margin: -13px -18px 10px;">
+						<div class="comment-container" style="margin: -13px -18px 18px;">
 							We've crunched the numbers. See your results and our specific recommendations
 						</div>
 						<div class="spi">
 							<div class="spi-score"><%= @term_1_spi[:spi] %></div>
 							<h3>out of <%= @term_1_weight %></h3>
 						</div>
-						<%= link_to "IMPROVE SCORE", improve_predictive_score_subject_path(@subject), class: "btn btn-block btn-green" %>
+						<%= link_to "HACKER PAGE", improve_predictive_score_subject_path(@subject), class: "btn btn-block btn-green" %>
 
 					<% else %>
 						<div class="comment-container" style="margin: -13px -15px 15px;">

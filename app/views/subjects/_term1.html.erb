@@ -1,5 +1,28 @@
 <div class="col-xs-12 col-sm-3" style="padding:0px;">
-	<%= render "subjects/spi_1" %>
+	<% if user_signed_in? %>
+		<%= render "subjects/spi_1" %>
+	<% else %>
+		<div class="content-container">
+			<div class="panel-red panel-title" style="margin-bottom:2px">
+				Mock FA
+				<i class="fa fa-fw fa-sort pull-right" style="margin: 3px -5px 0 0;"></i>
+			</div>
+			<div class="panel-orange panel-title" style="margin-bottom:2px">
+				Mock SA
+				<i class="fa fa-fw fa-sort pull-right" style="margin: 3px -5px 0 0;"></i>
+			</div>
+			<div class="panel-green panel-title">
+				My Predictive Score
+				<i class="fa fa-fw fa-sort pull-right" style="margin: 3px -5px 0 0;"></i>
+			</div>
+			<div class="panel-body">
+				<div class="comment-container" style="margin: -13px -15px 15px;">
+					Advanced features like "Predictive Score" are custom created by analyzing your progress. To see
+				</div>
+				<%= link_to "JOIN NOW", new_user_registration_path, class: "btn btn-block btn-green" %>
+			</div>
+		</div>
+	<% end %>
 
 	<% if user_signed_in? && current_user.role == "Admin" %>
 		<%= link_to "Add New Chapter", controller: "chapters", action: "new", subject_id: @subject.id %>

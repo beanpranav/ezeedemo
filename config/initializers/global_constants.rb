@@ -1,46 +1,46 @@
 $cpi_specs = { 
-	0 => {
-				:status => "NOT STARTED", 
-				:status_message => "Chapter Preparedness Index (CPI) indicates that you are likely to score around 0%",
-				:step_score => 0,
-				:step_goals => { :smart_goal => 1, :concept_goal => 0, :mcq_goal => 0, :subjectiveq_goal => 0 },
-				:step_message => "Our recommended next steps<br> to take your CPI to the next level"
-				},
-	1 => {
-				:status => "JUST BEGUN", 
-				:status_message => "Chapter Preparedness Index (CPI) indicates that you are likely to score around 10%",
-				:step_score => 10,
-				:step_goals => { :smart_goal => 1, :concept_goal => 0.5, :mcq_goal => 0, :subjectiveq_goal => 0 },
-				:step_message => "Our recommended next steps to take your CPI to the next level"
-				},
-	2 => {
-				:status => "WEAK", 
-				:status_message => "Chapter Preparedness Index (CPI) indicates that you are likely to score around 30%",
-				:step_score => 30,
-				:step_goals => { :smart_goal => 1, :concept_goal => 1, :mcq_goal => 0.25, :subjectiveq_goal => 0.5 },
-				:step_message => "Our recommended next steps to take your CPI to the next level"
-				},
-	3 => {
-				:status => "MODERATE", 
-				:status_message => "Chapter Preparedness Index (CPI) indicates that you are likely to score around 50%",
-				:step_score => 50,
-				:step_goals => { :smart_goal => 1, :concept_goal => 1, :mcq_goal => 0.75, :subjectiveq_goal => 1 },
-				:step_message => "Our recommended next steps to take your CPI to the next level"
-				},
-	4 => {
-				:status => "STRONG", 
-				:status_message => "Chapter Preparedness Index (CPI) indicates that you are likely to score around 75%",
-				:step_score => 75,
-				:step_goals => { :smart_goal => 1, :concept_goal => 1, :mcq_goal => 1, :subjectiveq_goal => 1 },
-				:step_message => "Our recommended next steps to take your CPI to the next level"
-				},
-	5 => {
-				:status => "JEDI MASTER", 
-				:status_message => "Chapter Preparedness Index (CPI) indicates that you are likely to score around 90%",
-				:step_score => 90,
-				:step_goals => { :smart_goal => 1, :concept_goal => 1, :mcq_goal => 1, :subjectiveq_goal => 1 },
-				:step_message => "Our recommended next steps to take your CPI to the next level"
-				}
+    0 => {
+                :status => "NOT STARTED", 
+                :status_message => "Chapter Preparedness Index (CPI) indicates that you still have to start the chapter",
+                :step_score => 0,
+                :step_goals => { :smart_goal => 1, :concept_goal => 0, :mcq_goal => 0, :subjectiveq_goal => 0 },
+                :step_message => "Our recommended next step is to start with Visual Notes for this chapter to get an overview"
+                },
+    1 => {
+                :status => "JUST BEGUN", 
+                :status_message => "Chapter Preparedness Index (CPI) indicates that you have started learning this chapter, good job!",
+                :step_score => 10,
+                :step_goals => { :smart_goal => 1, :concept_goal => 0.5, :mcq_goal => 0, :subjectiveq_goal => 0 },
+                :step_message => "Our recommended next steps you can focus on going through concept videos"
+                },
+    2 => {
+                :status => "WEAK", 
+                :status_message => "Chapter Preparedness Index (CPI) indicates that you are likely to score atleast 30%, keep moving!",
+                :step_score => 30,
+                :step_goals => { :smart_goal => 1, :concept_goal => 1, :mcq_goal => 0.25, :subjectiveq_goal => 0.5 },
+                :step_message => "Our recommended next steps to take your CPI to the next level is to complete the concept videos and start with the Q&A prep"
+                },
+    3 => {
+                :status => "MODERATE", 
+                :status_message => "Chapter Preparedness Index (CPI) indicates that you are likely to score around 50%, keep moving!",
+                :step_score => 50,
+                :step_goals => { :smart_goal => 1, :concept_goal => 1, :mcq_goal => 0.75, :subjectiveq_goal => 1 },
+                :step_message => "Our recommended next steps is to focus on improving MCQ score and become Strong in this chapter "
+                },
+    4 => {
+                :status => "STRONG", 
+                :status_message => "Chapter Preparedness Index (CPI) indicates that you are likely to score around 75%, well prepared!",
+                :step_score => 75,
+                :step_goals => { :smart_goal => 1, :concept_goal => 1, :mcq_goal => 1, :subjectiveq_goal => 1 },
+                :step_message => "Our recommended next steps is to improve your exam preparedness by taking Mock FAs and Mock SAs"
+                },
+    5 => {
+                :status => "JEDI MASTER", 
+                :status_message => "Chapter Preparedness Index (CPI) indicates that you have prepared this chapter to almost perfection and likely to score around 90%",
+                :step_score => 90,
+                :step_goals => { :smart_goal => 1, :concept_goal => 1, :mcq_goal => 1, :subjectiveq_goal => 1 },
+                :step_message => "Next steps? Are you kidding me - You are the Jedi Master!"
+                }
 }
 
 

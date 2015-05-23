@@ -1,24 +1,42 @@
 <div class="content-container">
-	<div class="panel-green">
+	
+	<% if user_signed_in? %>
+		<div class="panel-green">
 	    <div class="panel-title">
-		   What's inside?
+		  	Take Control!
 	    </div>
-	</div>
-	<div class="panel-body">
-		<h2><b>For 10th CBSE</b></h2>
-		<h3 style="line-height: 1.65em;">
-			2 Subjects<br>
-			32 Chapters<br>
-			225 Goals<br>
-			- 135 Videos<br>
-			- 29 3D-Models<br>
-			- 37 Visual Notes<br>
-			- 1000+ Questions<br>
-		</h3>
-		<% if user_signed_in? %>
-			<%= link_to "UPGRADE NOW", "#", class: "btn btn-block btn-green" %>
-		<% else %>
-			<%= link_to "SIGNUP NOW", new_user_registration_path, class: "btn btn-block btn-green" %>
-		<% end %>
-	</div>
+		</div>
+
+		<div class="panel-body center">
+			<div class="comment-container" style="margin: -13px -15px 17px;">
+				150+ Videos, 60+ 3D Models & Visual Notes, 1500+ Q&As
+			</div>
+			<h3>Maths & Science</h3>
+			<h2 class="font-green" style="margin-bottom:16px;">31 chapters</h2>
+			<h3>Hacker Approach</h3>
+			<h2 class="font-green" style="margin-bottom:20px;">Stepped Learing<br>Predictive Score</h2>
+
+			<%= link_to "UPGRADE NOW", "#", class: "btn btn-block btn-green active" %>
+		</div>
+
+	<% else %>
+		<div class="panel-green">
+	    <div class="panel-title">
+		  	Try our FREE ...
+	    </div>
+		</div>
+
+		<div class="panel-body center">
+			<div class="comment-container" style="margin: -13px -15px 17px;">
+				Videos, 3D Models, Visual Notes, MCQs and Subjective Qs for
+			</div>
+			<h3>Maths & Science</h3>
+			<h2 class="font-green" style="margin-bottom:16px;">Two complete chapters each</h2>
+			<h3>Maths & Science</h3>
+			<h2 class="font-green" style="margin-bottom:20px;">Mock FAs</h2>
+			
+			<%= link_to "JOIN NOW", new_user_registration_path, class: "btn btn-block btn-green active" %>
+		</div>
+	
+	<% end %>
 </div>

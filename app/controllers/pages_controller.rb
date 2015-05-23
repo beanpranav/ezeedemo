@@ -31,6 +31,8 @@ class PagesController < ApplicationController
   	@free_users = free_users.sort_by { |x| @today - x.last_sign_in_at.yday }
   	
   	@paid_users = @users.select { |x| x.term_1_payment > 0 or x.term_2_payment > 0 }
-  	
+  end
+
+  def pricing
   end
 end

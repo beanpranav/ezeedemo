@@ -34,7 +34,7 @@
                 <% end %>
                 <li class="divider"></li>
               <% end %>
-              <li><%= link_to "My Dashboard", root_path %></li>
+              <li><%= link_to "My Subjects", root_path %></li>
               <!-- <li class="divider"></li> -->
               <li><%= link_to "Profile Settings", edit_user_registration_path %></li>
               <!-- <li><%= link_to "Upgrade", "#" %></li> -->
@@ -47,7 +47,7 @@
         <% else %>
 
           <li><%= link_to "Login", new_user_session_path %></li>
-          <li><%= link_to "<b>Signup</b>".html_safe, new_user_registration_path %></li>
+          <li><%= link_to "<b>Join</b>".html_safe, new_user_registration_path %></li>
           
         <% end %>
 
