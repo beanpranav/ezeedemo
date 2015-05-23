@@ -1,11 +1,11 @@
 <div class="content-container" style="min-height: 70px;">
 	<% if user_signed_in? %>
 		<div class="panel-body center">
-			<%= link_to "UPGRADE NOW", "#", class: "btn btn-block btn-green active" %>
+			<%= link_to "UPGRADE NOW", pricing_path, class: "btn btn-block btn-green active" %>
 		</div>
 	<% else %>
 		<div class="panel-body center">
-			<%= link_to "JOIN NOW", new_user_registration_path, class: "btn btn-block btn-green active" %>
+			<%= link_to "UNLOCK NOW", new_user_registration_path, class: "btn btn-block btn-green active" %>
 		</div>
 	<% end %>
 </div>

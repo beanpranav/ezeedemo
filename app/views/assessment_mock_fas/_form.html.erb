@@ -24,9 +24,9 @@
         <ul style="margin-top:10px; list-style-type: none; -webkit-padding-start: 20px;">
           <% @term_chapters.each do |chapter| %>
             <% if chapter.status == "Paid" and @user_term_payment[params[:term].to_i-1] == 0 %>
-              <li><%= check_box_tag 'chapter_ids[]', chapter.id, false, disabled: true %>&nbsp;&nbsp;<%= chapter.name %> <em>(locked)</em></li>
+              <li><%= check_box_tag 'chapter_ids[]', chapter.id, false, disabled: true %>&nbsp;&nbsp;<%= chapter.name %></li>
             <% else %>
-              <li><%= check_box_tag 'chapter_ids[]', chapter.id %>&nbsp;&nbsp;<%= chapter.name %></li>
+              <li><%= check_box_tag 'chapter_ids[]', chapter.id, true %>&nbsp;&nbsp;<%= chapter.name %></li>
             <% end %>
           <% end %>
         </ul>
