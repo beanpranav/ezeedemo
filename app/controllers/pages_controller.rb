@@ -25,8 +25,12 @@ class PagesController < ApplicationController
 
   def user_admin_dashboard
   	@users = User.all
-  	@free_users = @users.select { |x| x.term_1_payment == 0 and x.term_2_payment == 0 }
-  	@paid_users = @users.select { |x| x.term_1_payment > 0 or x.term_2_payment > 0 }
   	@today = Time.new.yday
+
+  	free_users = @users.select { |x| x.term_1_payment == 0 and x.term_2_payment == 0 }
+  	@free_users = free_users.sort_by { |x| @today - x.last_sign_in_at.yday }
+  	
+  	@paid_users = @users.select { |x| x.term_1_payment > 0 or x.term_2_payment > 0 }
+  	
   end
 end

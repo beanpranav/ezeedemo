@@ -70,7 +70,7 @@
               </p>
 
               <p class="pull-right">
-                <%= link_to "Delete Interactive", interactive_content, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-red" %>
+                <%= link_to "Delete Interactive", interactive_content, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-sm btn-red" if current_user.name == "Pranav Gupta" %>
                 <%= link_to "Go to Interactive", edit_interactive_content_path(interactive_content), class: "btn btn-sm btn-green" %>
               </p>
             </div>

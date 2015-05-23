@@ -29,7 +29,9 @@
                 <li><%= link_to "Admin Dashboard", subjects_path %></li>
                 <li><%= link_to "Ezee Videos", video_contents_path %></li>
                 <li><%= link_to "Ezee Interactives", interactive_contents_path %></li>
-                <li><%= link_to "Ezee Users", user_admin_dashboard_path %></li>
+                <% if current_user.name == "Pranav Gupta" or current_user.name == "Archi Gupta" %>
+                  <li><%= link_to "Ezee Users", user_admin_dashboard_path %></li>
+                <% end %>
                 <li class="divider"></li>
               <% end %>
               <li><%= link_to "My Dashboard", root_path %></li>
