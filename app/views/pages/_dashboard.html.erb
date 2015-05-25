@@ -19,7 +19,7 @@
 
 <div class="row unrow">
 	<div class="col-xs-12 col-sm-3" style="padding:0px;">
-		<%= render "pages/demo_info" %>
+		<%= render "pages/demo_info" if @user_term_payment[0] == 0 or @user_term_payment[1] == 0 %>
 	</div>
 
 	<div class="col-xs-12 col-sm-9">
@@ -39,3 +39,4 @@
 		<% end %>
 	</div>
 </div>
+

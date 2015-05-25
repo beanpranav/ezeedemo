@@ -57,5 +57,6 @@ Rails.application.routes.draw do
   get "common_dashboard" => "pages#common_dashboard"
   get "user_admin_dashboard" => "pages#user_admin_dashboard"
   get "pricing" => "pages#pricing"
+  get "thank_you" => "pages#thank_you"
 
 end

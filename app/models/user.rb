@@ -22,5 +22,9 @@ class User < ActiveRecord::Base
   def last_name
   	name.split(" ").last
   end
+
+  def params_name
+    name.gsub(' ', '+')
+  end
   
 end

@@ -1,5 +1,5 @@
 <div class="col-xs-12 col-sm-3" style="padding:0px;">
-	<%= render "pages/demo_cta" if @user_term_payment[0] == 0 or @user_term_payment[1] == 0 %>
+	<%= render "pages/demo_cta" if @user_term_payment[0] == 0 and @user_term_payment[1] == 0 %>
 	<% if user_signed_in? && current_user.role == "Admin" %>
 		<%= link_to "Add New Chapter", controller: "chapters", action: "new", subject_id: @subject.id %>
 	<% end %>
