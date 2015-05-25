@@ -34,7 +34,7 @@ class ApplicationController < ActionController::Base
 
   def instamojo_read_payment(payment_id)
     require 'open-uri'
-    JSON.parse open("https://www.instamojo.com/api/1.1/payments/#{payment_id}/", "X-API-KEY" => "8ec2d67f8ae5af4547d24e0fbc2662d0", "X-Auth-Token" => "8970a39ec039e83365f5e79e8b65c561").read
+    JSON.parse open("https://www.instamojo.com/api/1.1/payments/#{payment_id}/", "X-API-KEY" => ENV['INSTAMOJO_KEY'], "X-Auth-Token" => ENV['INSTAMOJO_TOKEN']).read
   end
 
   # def current_subdomain

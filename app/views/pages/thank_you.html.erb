@@ -1,4 +1,36 @@
-<%= @payment_info %><br><br>
+<div class="col-sm-6 col-sm-offset-3 center">
+	
+	<div class="content-container">
+		
+		<div class="panel-primary">
+		    <div class="panel-title">
+			  	Upgrade Successful!
+		    </div>
+		</div>
 
-Rs. <%= current_user.term_1_payment %><br>
-Rs. <%= current_user.term_2_payment %>
+		<div class="panel-body form-container">
+
+				<image src="/images/home-icon-2.png" style="height:40px; margin-bottom:7px;">
+				<p>Study Fast. &nbsp; Learn Smart. &nbsp; Score Better.</p>
+				<br>
+				
+				<p>
+					<b><%= current_user.first_name %>!</b> <br>
+					You've been successfully upgraded for<br>
+				</p>
+				<h2 class="font-green">
+					<b><%= if current_user.term_1_payment > 0 then "Term 1" end %></b>
+					<b><%= if current_user.term_2_payment > 0 then "Term 2" end %></b>
+					<b><%= if current_user.term_1_payment > 0 and current_user.term_2_payment > 0 then "Full Year" end %></b>
+					<b class="font-red"><%= if current_user.term_1_payment == 0 and current_user.term_2_payment == 0 then "Something went wrong! <br>Contact us with your PAYMENT ID details (from the payment confirmation email you recieved).".html_safe end %></b>
+				</h2>
+
+				<p style="padding:25px 0 15px 0;">Thank you for choosing us.</p>
+
+	      <p><%= link_to "NOW LET'S BEGIN", root_path, class: "btn btn-block btn-green" %></p>
+
+		</div>
+
+	</div>
+
+</div>
