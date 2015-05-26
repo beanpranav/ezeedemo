@@ -26,9 +26,9 @@
 				
 				<tr>
 	        <td style="padding:15px 10px;"><b>Study Material</b><br>Videos, 3Ds & Visual Notes<br>MCQs, Short Qs & Long Qs</td>
-	        <td class="center" style="padding:15px 10px 10px;"><br><%= @science_free_study_material + @maths_free_study_material %><br><%= @science_free_assessments + @maths_free_assessments %></td>
-	        <td class="center" style="padding:15px 10px 10px;"><br><%= @science_term_1_study_material + @maths_term_1_study_material %><br><%= @science_term_1_assessments + @maths_term_1_assessments %></td>
-	        <td class="center" style="padding:15px 10px 10px;"><br><%= @science_study_material + @maths_study_material %><br><%= @science_assessments + @maths_assessments %></td>
+	        <td class="center" style="padding:15px 10px 10px;"><br><%= @science_free_study_material + @maths_free_study_material %><br><%= ((@science_free_assessments + @maths_free_assessments)/10).round*10 %>+</td>
+	        <td class="center" style="padding:15px 10px 10px;"><br><%= @science_term_1_study_material + @maths_term_1_study_material %><br><%= ((@science_term_1_assessments + @maths_term_1_assessments)/10).round*10 %>+</td>
+	        <td class="center" style="padding:15px 10px 10px;"><br><%= @science_study_material + @maths_study_material %><br><%= ((@science_assessments + @maths_assessments)/10).round*10 %>+</td>
 	      </tr>
 
 	      <tr>
@@ -54,15 +54,15 @@
 	        	<% end %>
 	        </td>
 	        <td class="font-green center" style="padding:15px 20px 10px;">
-	        	<b class="cpi-status-3">Rs. <%= @payment_term_1 %>/-</b><br>
+	        	<b class="cpi-status-3">Rs. <%= @payment_term_1.round %>/-</b><br>
 	        	<a href="https://www.instamojo.com/AlokGupta/cbsehacker-term-1-package/?data_readonly=data_name&data_readonly=data_email&data_name=<%= current_user.params_name %>&data_email=<%= current_user.email %>&data_phone=<%= current_user.phone_number %>" rel="im-checkout" data-behavior="remote" data-style="flat" data-text="UPGRADE" data-token="ebc9b001a20eef00a5351ee0cb2c2787"></a><script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script>
 	        	<% if false %>
-	        		<b class="cpi-status-3">Rs. <%= @payment_term_2 %>/-</b><br>
+	        		<b class="cpi-status-3">Rs. <%= @payment_term_2.round %>/-</b><br>
 							<a href="https://www.instamojo.com/AlokGupta/cbsehacker-term-2-package/?data_readonly=data_name&data_readonly=data_email&data_name=<%= current_user.params_name %>&data_email=<%= current_user.email %>&data_phone=<%= current_user.phone_number %>" rel="im-checkout" data-behavior="remote" data-style="flat" data-text="TERM 2 UPGRADE" data-token="ebc9b001a20eef00a5351ee0cb2c2787"></a><script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script>
 						<% end %>
 	        </td>
 	        <td class="center" style="padding:15px 20px 10px;">
-	        	<b class="cpi-status-3">Rs. <%= @payment_full %>/-</b><br>
+	        	<b class="cpi-status-3">Rs. <%= @payment_full.round %>/-</b><br>
 		        <a href="https://www.instamojo.com/AlokGupta/cbsehacker-full-package/?data_readonly=data_name&data_readonly=data_email&data_name=<%= current_user.params_name %>&data_email=<%= current_user.email %>&data_phone=<%= current_user.phone_number %>" rel="im-checkout" data-behavior="remote" data-style="flat" data-text="UPGRADE" data-token="ebc9b001a20eef00a5351ee0cb2c2787"></a><script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script>
 		      </td>
 	      </tr>
