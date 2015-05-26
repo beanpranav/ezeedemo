@@ -142,7 +142,9 @@
 							We've crunched the numbers. See your results and our specific recommendations
 						</div>
 						<div class="spi">
-							<div class="spi-score"><%= @term_1_spi[:spi] %></div>
+							<div class="spi-score">
+								<%= if @user_term_payment[0] == 0 then "-" else @term_1_spi[:spi] end %>
+							</div>
 							<h3>out of <%= @term_1_weight %></h3>
 						</div>
 						<%= link_to "HACKER PAGE", improve_predictive_score_subject_path(@subject), class: "btn btn-block btn-green" %>

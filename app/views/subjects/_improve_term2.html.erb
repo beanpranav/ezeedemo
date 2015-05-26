@@ -63,14 +63,17 @@
 <div class="content-container" style="height:264px;">
 	<div class="panel-secondary" style="margin-bottom:20px;">
     <div class="panel-title">
-	  	Exam Prep
+	  	Exam Prep 
+	  	<% if @user_term_payment[1] == 0 %>
+	  		<%= link_to "Upgrade to see", pricing_path, class: "btn btn-sm btn-modal pull-right", style: "margin-top: -5px;" %>
+	  	<% end %>
     </div>
 	</div>
 
 	<div class="row" style="padding-bottom:25px;">
 		<div class="col-xs-12 col-sm-4 center">
 			<h2 class="font-primary" style="padding:15px;"><b>My Predictive Score</b></h2>
-			<div class="spi-score-big"><%= @term_2_spi[:spi] %></div>
+			<div class="spi-score-big"><%= if @user_term_payment[1] == 0 then "-" else @term_2_spi[:spi] end %></div>
 			<h3 class="font-invert" style="margin-top:-25px;">out of 90</h3>
 		</div>
 
@@ -83,7 +86,7 @@
 							<div class="spi-score" style="width:72px;">+ <%= @term_2_spi[:priortization_order][i][1].round(0) %></div>
 						</div>
 						<% chapter = @term_2_chapters.find { |x| x.id == @term_2_spi[:priortization_order][i][0] } %>
-						<h2 style="margin: -48px 0 24px 110px;">Ch <%= chapter.chapterNumber %>: <%= chapter.name %></h2>
+						<h2 style="margin: -48px 0 24px 110px;">Ch <%= if @user_term_payment[1] == 0 then "-" else chapter.chapterNumber end %>: <%= if @user_term_payment[1] == 0 then "-" else chapter.name end %></h2>
 					</div>
 				<% end %>	
 			<% end %>

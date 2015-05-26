@@ -39,9 +39,9 @@ class PagesController < ApplicationController
 
   def pricing
     if Rails.env == 'development'
-      @payment_term_1 = 2000.00
-      @payment_term_2 = 2000.00
-      @payment_full = 3000.00
+      @payment_term_1 = "2000.00".to_i
+      @payment_term_2 = "2000.00".to_i
+      @payment_full = "3000.00".to_i
     else
       @payment_term_1 = instamojo_read_link("cbsehacker-term-1-package")["link"]["base_price"].to_i
       @payment_term_2 = instamojo_read_link("cbsehacker-term-2-package")["link"]["base_price"].to_i
