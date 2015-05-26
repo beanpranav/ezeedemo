@@ -43,9 +43,9 @@ class PagesController < ApplicationController
       @payment_term_2 = 2000.00
       @payment_full = 3000.00
     else
-      @payment_term_1 = instamojo_read_link("cbsehacker-term-1-package")["link"]["base_price"]
-      @payment_term_2 = instamojo_read_link("cbsehacker-term-2-package")["link"]["base_price"]
-      @payment_full = instamojo_read_link("cbsehacker-full-package")["link"]["base_price"]
+      @payment_term_1 = instamojo_read_link("cbsehacker-term-1-package")["link"]["base_price"].to_i
+      @payment_term_2 = instamojo_read_link("cbsehacker-term-2-package")["link"]["base_price"].to_i
+      @payment_full = instamojo_read_link("cbsehacker-full-package")["link"]["base_price"].to_i
       
     end
 
