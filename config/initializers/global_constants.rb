@@ -92,3 +92,27 @@ $mock_sa_specs = {
 							}
 	}
 }
+
+$pricing_faqs = {
+    0 => {  :question => "How does your pricing compare with other solutions? Is it worth it?",
+            :answer => "Alternative solutions may offer less price as compared to CBSE Hacker but they provide base content only and is of no value beyond study material already available. Just google study material and you will find a lot of the same content online - for free. CBSE Hacker on other hand does not focus on quantity, it provides smart learning techniques blended in the well defined, quality content to give students the winning edge. <em>The difference between them and us is the same as that between a textbook and a tutor teaching from that textbook.</em> And because we are online we can do what tutions can do at less than half their price."
+        },
+    1 => {  :question => "I'm already paying for tutions - Why do I need this?",
+            :answer => "Your parents have put you in the best tutions and they make sure that you work 10 times as hard by giving you more content and more tests. At the end of the day, what you learn is based on your own self-study and to need be able to smartly manage so much work within minimum time. You need someone to tell you exactly what is the right thing study for YOU - <em>that is what we do for you.</em>"
+        },
+    2 => {  :question => "Do you provide a guarantee with your product? What if I doesn't work for me?",
+            :answer => "Yes. We have money back policy. If you follow the system, you will 100% experience improvement in school results within first few months.  We are so confident in the efforts of our team and learning experts that we offer have <em>a 60-Day return policy</em>. If you don’t benefit from our method of simplification then call us and we will return your investment."
+        },
+    3 => {  :question => "What are my payment options?",
+            :answer => "You can pay using your Credit Card or Debit Card or even through <em>NetBanking</em>"
+        },
+    4 => {  :question => "What happens if I don’t upgrade?",
+            :answer => "Upgrade only if CBSE Hacker is right for you. If not, there’s no need to cancel anything. <em>We don't want to burden you anymore.</em> Your account remains active and your progress remains intact in case you decide to study or upgrade at a later time."
+        },
+    5 => {  :question => "Do you provide a volume discount for bulk licenses?",
+            :answer => "Yes. We do work with schools, tutions and dealers on a case-by-case basis and combine our techniques with content customized to their needs. Please write us at <a href=\"mailto:info@ezeelearning.com\" class=\"font-green\">info@ezeelearning.com</a> or call us at <em>992-291-5273</em> to setup a meeting."
+        },
+    6 => {  :question => "I have more questions. Who do I ask?",
+            :answer => "Write us at <a href=\"mailto:info@ezeelearning.com\" class=\"font-green\">info@ezeelearning.com</a> or call us at <em>992-291-5273</em>. We’d be happy to chat with you."
+        }
+} 

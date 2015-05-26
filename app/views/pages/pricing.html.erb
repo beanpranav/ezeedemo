@@ -1,13 +1,92 @@
-
-<a href="https://www.instamojo.com/AlokGupta/cbsehacker-term-1-package/?data_readonly=data_name&data_readonly=data_email&data_name=<%= current_user.params_name %>&data_email=<%= current_user.email %>&data_phone=<%= current_user.phone_number %>" rel="im-checkout" data-behavior="remote" data-style="flat" data-text="TERM 1 UPGRADE" data-token="ebc9b001a20eef00a5351ee0cb2c2787"></a><script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script>
-
-
-<a href="https://www.instamojo.com/AlokGupta/cbsehacker-term-2-package/?data_readonly=data_name&data_readonly=data_email&data_name=<%= current_user.params_name %>&data_email=<%= current_user.email %>&data_phone=<%= current_user.phone_number %>" rel="im-checkout" data-behavior="remote" data-style="flat" data-text="TERM 2 UPGRADE" data-token="ebc9b001a20eef00a5351ee0cb2c2787"></a><script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script>
-
-
-<a href="https://www.instamojo.com/AlokGupta/cbsehacker-full-package/?data_readonly=data_name&data_readonly=data_email&data_name=<%= current_user.params_name %>&data_email=<%= current_user.email %>&data_phone=<%= current_user.phone_number %>" rel="im-checkout" data-behavior="remote" data-style="flat" data-text="FULL UPGRADE" data-token="ebc9b001a20eef00a5351ee0cb2c2787"></a><script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script>
+<div class="secondary-nav secondary-nav-invert center">
+	<h2 class="font-invert"><b>Upgrade and Take Control</b></h2>
+	<h3 class="font-invert">Experience simplified studying and improved grades, starting today!</h3>
+</div>
 
 
-<% if current_user.role == "Admin" %>
-	<a href="https://www.instamojo.com/AlokGupta/aaaaa/?data_readonly=data_name&data_readonly=data_email&data_name=<%= current_user.params_name %>&data_email=<%= current_user.email %>&data_phone=<%= current_user.phone_number %>" rel="im-checkout" data-behavior="remote" data-style="flat" data-text="UPGRADE 0" data-token="ebc9b001a20eef00a5351ee0cb2c2787"></a><script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script>
-<% end %>
+<div class="home-nav center">
+	<div class= "row">
+		<table class="table" style="margin-bottom:-10px;">
+		  <thead>
+		    <tr class="font-green" style="padding:15px 0">
+		      <th class="col-md-3" style="padding:15px 10px 10px;"></th>
+		      <th class="col-md-3 center" style="padding:15px 10px 10px;"><h2 class="cpi-status-3">Free Learner</h2><h3>for FA 1</h3></th>
+		      <th class="col-md-3 center" style="padding:15px 10px 10px;"><h2 class="cpi-status-3">Term Success</h2><h3>for Term 1</h3></th>
+		      <th class="col-md-3 center" style="padding:15px 10px 10px;"><h2 class="cpi-status-3">Success Bundle</h2><h3>for Full Year</h3></th>
+		    </tr>
+		  </thead>
+
+		  <tbody>
+	      <tr>
+	        <td style="padding:15px 10px;"><b>Chapters</b><br><%= @science.name %><br><%= @maths.name %></td>
+	        <td class="center" style="padding:15px 10px 10px;"><br><%= @science_free.count %><br><%= @maths_free.count %></td>
+	        <td class="center" style="padding:15px 10px 10px;"><br><%= @science_term_1.count %><br><%= @maths_term_1.count %></td>
+	        <td class="center" style="padding:15px 10px 10px;"><br><%= @science_chapters.count %><br><%= @maths_chapters.count %></td>
+	      </tr>
+				
+				<tr>
+	        <td style="padding:15px 10px;"><b>Study Material</b><br>Videos, 3Ds & Visual Notes<br>MCQs, Short Qs & Long Qs</td>
+	        <td class="center" style="padding:15px 10px 10px;"><br><%= @science_free_study_material + @maths_free_study_material %><br><%= @science_free_assessments + @maths_free_assessments %></td>
+	        <td class="center" style="padding:15px 10px 10px;"><br><%= @science_term_1_study_material + @maths_term_1_study_material %><br><%= @science_term_1_assessments + @maths_term_1_assessments %></td>
+	        <td class="center" style="padding:15px 10px 10px;"><br><%= @science_study_material + @maths_study_material %><br><%= @science_assessments + @maths_assessments %></td>
+	      </tr>
+
+	      <tr>
+	        <td style="padding:15px 10px 10px;"><b>Mock Tests</b><br>Formative Assessments (FA)<br>Summative Assessments (SA)</td>
+	        <td class="center" style="padding:15px 10px 10px;"><br><i class="fa fa-check"></i><br></td>
+	        <td class="center" style="padding:15px 10px 10px;"><br><i class="fa fa-check"></i><br><i class="fa fa-check"></i></td>
+	        <td class="center" style="padding:15px 10px 10px;"><br><i class="fa fa-check"></i><br><i class="fa fa-check"></i></td>
+	      </tr>
+
+	      <tr>
+	        <td style="padding:15px 10px;"><b>Hacker Approach</b><br>Stepped Learning<br>Your Predictive Score<br>Our Recommendations</td>
+	        <td class="center" style="padding:15px 10px 10px;"><br><i class="fa fa-check"></i><br><br></td>
+	        <td class="center" style="padding:15px 10px 10px;"><br><i class="fa fa-check"></i><br><i class="fa fa-check"></i><br><i class="fa fa-check"></i></td>
+	        <td class="center" style="padding:15px 10px 10px;"><br><i class="fa fa-check"></i><br><i class="fa fa-check"></i><br><i class="fa fa-check"></i></td>
+	      </tr>
+
+	      <tr>
+	        <td style="padding:15px 10px;"><b>Price</b><br></td>
+	        <td class="font-green center" style="padding:15px 10px 10px;">
+	        	<b class="cpi-status-3">FREE</b><br>
+	        	<% if false %>
+	        		<a href="https://www.instamojo.com/AlokGupta/aaaaa/?data_readonly=data_name&data_readonly=data_email&data_name=<%= current_user.params_name %>&data_email=<%= current_user.email %>&data_phone=<%= current_user.phone_number %>" rel="im-checkout" data-behavior="remote" data-style="flat" data-text="0" data-token="ebc9b001a20eef00a5351ee0cb2c2787"></a><script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script>
+	        	<% end %>
+	        </td>
+	        <td class="font-green center" style="padding:15px 20px 10px;">
+	        	<b class="cpi-status-3">Rs. <%= @payment_term_1 %>/-</b><br>
+	        	<a href="https://www.instamojo.com/AlokGupta/cbsehacker-term-1-package/?data_readonly=data_name&data_readonly=data_email&data_name=<%= current_user.params_name %>&data_email=<%= current_user.email %>&data_phone=<%= current_user.phone_number %>" rel="im-checkout" data-behavior="remote" data-style="flat" data-text="UPGRADE" data-token="ebc9b001a20eef00a5351ee0cb2c2787"></a><script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script>
+	        	<% if false %>
+	        		<b class="cpi-status-3">Rs. <%= @payment_term_2 %>/-</b><br>
+							<a href="https://www.instamojo.com/AlokGupta/cbsehacker-term-2-package/?data_readonly=data_name&data_readonly=data_email&data_name=<%= current_user.params_name %>&data_email=<%= current_user.email %>&data_phone=<%= current_user.phone_number %>" rel="im-checkout" data-behavior="remote" data-style="flat" data-text="TERM 2 UPGRADE" data-token="ebc9b001a20eef00a5351ee0cb2c2787"></a><script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script>
+						<% end %>
+	        </td>
+	        <td class="center" style="padding:15px 20px 10px;">
+	        	<b class="cpi-status-3">Rs. <%= @payment_full %>/-</b><br>
+		        <a href="https://www.instamojo.com/AlokGupta/cbsehacker-full-package/?data_readonly=data_name&data_readonly=data_email&data_name=<%= current_user.params_name %>&data_email=<%= current_user.email %>&data_phone=<%= current_user.phone_number %>" rel="im-checkout" data-behavior="remote" data-style="flat" data-text="UPGRADE" data-token="ebc9b001a20eef00a5351ee0cb2c2787"></a><script src="https://d2xwmjc4uy2hr5.cloudfront.net/im-embed/im-embed.min.js"></script>
+		      </td>
+	      </tr>
+		  </tbody>
+		</table>
+	</div>
+</div>
+
+<div class="home-nav">
+	<div class= "row">
+		<h1 class="center"><b>Questions? We’re here to help.</b></h1>
+		
+		<ol style="margin:40px 0 0;">
+			<% $pricing_faqs.values.each do |faq| %>
+				<li>
+					<b><%= faq[:question]%></b><br>
+					<%= faq[:answer].html_safe %>
+				</li><br>
+			<% end %>
+		</ol>
+
+	</div>
+</div>
+
+
+
+

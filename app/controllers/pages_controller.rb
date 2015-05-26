@@ -38,6 +38,123 @@ class PagesController < ApplicationController
   end
 
   def pricing
+    if Rails.env == 'development'
+      @payment_term_1 = 2000
+      @payment_term_2 = 2000
+      @payment_full = 3000
+    else
+      @payment_term_1 = instamojo_read_link("cbsehacker-term-1-package")["link"]["base_price"]
+      @payment_term_2 = instamojo_read_link("cbsehacker-term-2-package")["link"]["base_price"]
+      @payment_full = instamojo_read_link("cbsehacker-full-package")["link"]["base_price"]
+      
+    end
+
+    @science = Subject.find_by(standard: 10, name: "Science")
+    @maths = Subject.find_by(standard: 10, name: "Maths")
+
+    @science_chapters = @science.chapters
+    @science_free = @science_chapters.select { |x| x.status == "Free" }
+    @science_term_1 = @science_chapters.select { |x| x.term == 1 }
+    @science_term_2 = @science_chapters.select { |x| x.term == 2 }
+
+    @science_study_material = 0
+    @science_assessments = 0
+    @science_chapters.each do |chapter|
+      @science_study_material += chapter.study_materials.count
+      @concept_materials = chapter.study_materials.select { |x| x["material_type"] == "Quick Concepts" }
+      @concept_materials.each do |material| 
+        if material.video_content != nil && material.video_content.assessment_contents != nil
+          @science_assessments += material.video_content.assessment_contents.count
+        end
+      end
+    end
+
+    @science_free_study_material = 0
+    @science_free_assessments = 0
+    @science_free.each do |chapter|
+      @science_free_study_material += chapter.study_materials.count
+      @concept_materials.each do |material| 
+        if material.video_content != nil && material.video_content.assessment_contents != nil
+          @science_free_assessments += material.video_content.assessment_contents.count
+        end
+      end
+    end
+
+    @science_term_1_study_material = 0
+    @science_term_1_assessments = 0
+    @science_term_1.each do |chapter|
+      @science_term_1_study_material += chapter.study_materials.count
+      @concept_materials.each do |material| 
+        if material.video_content != nil && material.video_content.assessment_contents != nil
+          @science_term_1_assessments += material.video_content.assessment_contents.count
+        end
+      end
+    end
+
+    @science_term_2_study_material = 0
+    @science_term_2_assessments = 0
+    @science_term_2.each do |chapter|
+      @science_term_2_study_material += chapter.study_materials.count
+      @concept_materials.each do |material| 
+        if material.video_content != nil && material.video_content.assessment_contents != nil
+          @science_term_2_assessments += material.video_content.assessment_contents.count
+        end
+      end
+    end
+
+    @maths_chapters = @maths.chapters
+    @maths_free = @maths_chapters.select { |x| x.status == "Free" }
+    @maths_term_1 = @maths_chapters.select { |x| x.term == 1 }
+    @maths_term_2 = @maths_chapters.select { |x| x.term == 2 }
+
+    @maths_study_material = 0
+    @maths_assessments = 0
+    @maths_chapters.each do |chapter|
+      @maths_study_material += chapter.study_materials.count
+      @concept_materials = chapter.study_materials.select { |x| x["material_type"] == "Quick Concepts" }
+      @concept_materials.each do |material| 
+        if material.video_content != nil && material.video_content.assessment_contents != nil
+          @maths_assessments += material.video_content.assessment_contents.count
+        end
+      end
+    end
+
+    @maths_free_study_material = 0
+    @maths_free_assessments = 0
+    @maths_free.each do |chapter|
+      @maths_free_study_material += chapter.study_materials.count
+      @concept_materials = chapter.study_materials.select { |x| x["material_type"] == "Quick Concepts" }
+      @concept_materials.each do |material| 
+        if material.video_content != nil && material.video_content.assessment_contents != nil
+          @maths_free_assessments += material.video_content.assessment_contents.count
+        end
+      end
+    end
+
+    @maths_term_1_study_material = 0
+    @maths_term_1_assessments = 0
+    @maths_term_1.each do |chapter|
+      @maths_term_1_study_material += chapter.study_materials.count
+      @concept_materials = chapter.study_materials.select { |x| x["material_type"] == "Quick Concepts" }
+      @concept_materials.each do |material| 
+        if material.video_content != nil && material.video_content.assessment_contents != nil
+          @maths_term_1_assessments += material.video_content.assessment_contents.count
+        end
+      end
+    end
+
+    @maths_term_2_study_material = 0
+    @maths_term_2_assessments = 0
+    @maths_term_2.each do |chapter|
+      @maths_term_2_study_material += chapter.study_materials.count
+      @concept_materials = chapter.study_materials.select { |x| x["material_type"] == "Quick Concepts" }
+      @concept_materials.each do |material| 
+        if material.video_content != nil && material.video_content.assessment_contents != nil
+          @maths_term_2_assessments += material.video_content.assessment_contents.count
+        end
+      end
+    end
+
   end
 
   def thank_you

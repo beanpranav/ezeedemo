@@ -37,6 +37,11 @@ class ApplicationController < ActionController::Base
     JSON.parse open("https://www.instamojo.com/api/1.1/payments/#{payment_id}/", "X-API-KEY" => ENV['INSTAMOJO_KEY'], "X-Auth-Token" => ENV['INSTAMOJO_TOKEN']).read
   end
 
+  def instamojo_read_link(link_slug)
+    require 'open-uri'
+    JSON.parse open("https://www.instamojo.com/api/1.1/links/#{link_slug}/", "X-API-KEY" => ENV['INSTAMOJO_KEY'], "X-Auth-Token" => ENV['INSTAMOJO_TOKEN']).read
+  end
+
   # def current_subdomain
   #   @current_subdomain = request.subdomains.first
   # end
